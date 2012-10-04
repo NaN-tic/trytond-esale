@@ -1,0 +1,257 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "error:sale.shop:"
+msgid "Threre are not orders to export"
+msgstr "No hay pedidos para exportar"
+
+msgctxt "error:sale.shop:"
+msgid "Threre are not orders to import"
+msgstr "No hay pedidos a importar"
+
+msgctxt "field:sale.shop,esale_available:"
+msgid "eSale Shop"
+msgstr "Tienda eSale"
+
+msgctxt "field:sale.shop,esale_countrys:"
+msgid "Countries"
+msgstr "Países"
+
+msgctxt "field:sale.shop,esale_delivery_product:"
+msgid "Delivery Product"
+msgstr "Producto entrega"
+
+msgctxt "field:sale.shop,esale_discount_product:"
+msgid "Discount Product"
+msgstr "Producto descuento"
+
+msgctxt "field:sale.shop,esale_from_orders:"
+msgid "From Orders"
+msgstr "Desde pedidos"
+
+msgctxt "field:sale.shop,esale_get_party_by_vat:"
+msgid "Get Party by Vat"
+msgstr "Buscar tercero por CIF/NIF"
+
+msgctxt "field:sale.shop,esale_lang:"
+msgid "Default language"
+msgstr "Idioma defecto"
+
+msgctxt "field:sale.shop,esale_langs:"
+msgid "Langs"
+msgstr "Idiomas"
+
+msgctxt "field:sale.shop,esale_last_status_orders:"
+msgid "Last Status Orders"
+msgstr "Últimos estados pedidos"
+
+msgctxt "field:sale.shop,esale_log:"
+msgid "Log"
+msgstr "Log"
+
+msgctxt "field:sale.shop,esale_price:"
+msgid "Price"
+msgstr "Precio"
+
+msgctxt "field:sale.shop,esale_scheduler:"
+msgid "Scheduler"
+msgstr "Planificador de tareas"
+
+msgctxt "field:sale.shop,esale_shop_app:"
+msgid "Shop APP"
+msgstr "APP Tienda"
+
+msgctxt "field:sale.shop,esale_tax_include:"
+msgid "Tax Include"
+msgstr "Impuestos incluidos"
+
+msgctxt "field:sale.shop,esale_to_orders:"
+msgid "To Orders"
+msgstr "A pedidos"
+
+msgctxt "field:sale.shop,esale_uom_product:"
+msgid "Default UOM"
+msgstr "UdM por defecto"
+
+msgctxt "field:sale.shop-country.country,country:"
+msgid "Country"
+msgstr "País"
+
+msgctxt "field:sale.shop-country.country,create_date:"
+msgid "Create Date"
+msgstr "Fecha de creación"
+
+msgctxt "field:sale.shop-country.country,create_uid:"
+msgid "Create User"
+msgstr "Usuario de creación"
+
+msgctxt "field:sale.shop-country.country,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:sale.shop-country.country,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:sale.shop-country.country,shop:"
+msgid "Shop"
+msgstr "Tienda"
+
+msgctxt "field:sale.shop-country.country,write_date:"
+msgid "Write Date"
+msgstr "Fecha modificación"
+
+msgctxt "field:sale.shop-country.country,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
+msgctxt "field:sale.shop-ir.lang,create_date:"
+msgid "Create Date"
+msgstr "Fecha de creación"
+
+msgctxt "field:sale.shop-ir.lang,create_uid:"
+msgid "Create User"
+msgstr "Usuario de creación"
+
+msgctxt "field:sale.shop-ir.lang,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:sale.shop-ir.lang,lang:"
+msgid "Lang"
+msgstr "Idioma"
+
+msgctxt "field:sale.shop-ir.lang,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:sale.shop-ir.lang,shop:"
+msgid "Shop"
+msgstr "Tienda"
+
+msgctxt "field:sale.shop-ir.lang,write_date:"
+msgid "Write Date"
+msgstr "Fecha modificación"
+
+msgctxt "field:sale.shop-ir.lang,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
+msgctxt "help:sale.shop,esale_available:"
+msgid "This is e-commerce shop."
+msgstr "Es una tienda e-commerce"
+
+msgctxt "help:sale.shop,esale_from_orders:"
+msgid "This date is last import (filter)"
+msgstr "Esta fecha es la última importación (filtro)"
+
+msgctxt "help:sale.shop,esale_get_party_by_vat:"
+msgid "If there is another party with same vat, not create party"
+msgstr "Si existe un tercero con el mismo CIF/NIF, no crea ningún tercero"
+
+msgctxt "help:sale.shop,esale_lang:"
+msgid "Default language shop. If not select, use lang user"
+msgstr ""
+"Idioma defecto de la tienda. Si no lo selecciona, se usa el idioma del "
+"usuario"
+
+msgctxt "help:sale.shop,esale_last_status_orders:"
+msgid "This date is last export (filter)"
+msgstr "Esta fecha es la última exportación (filtro)"
+
+msgctxt "help:sale.shop,esale_log:"
+msgid "Days from delete logs to past"
+msgstr "Dias para eliminar logs antiguos"
+
+msgctxt "help:sale.shop,esale_scheduler:"
+msgid "Active by crons (import/export)"
+msgstr "Activo en la planificación (importar/exportar)"
+
+msgctxt "help:sale.shop,esale_to_orders:"
+msgid "This date is to import (filter)"
+msgstr "Esta fecha es para importar (filtro)"
+
+msgctxt "model:sale.shop-country.country,name:"
+msgid "Shop - Country"
+msgstr "Tienda - Pais"
+
+msgctxt "model:sale.shop-ir.lang,name:"
+msgid "Shop - Lang"
+msgstr "Tienda - Idioma"
+
+msgctxt "selection:sale.shop,esale_log:"
+msgid "01 Day"
+msgstr "01 días"
+
+msgctxt "selection:sale.shop,esale_log:"
+msgid "03 Days"
+msgstr "03 días"
+
+msgctxt "selection:sale.shop,esale_log:"
+msgid "05 Days"
+msgstr "05 días"
+
+msgctxt "selection:sale.shop,esale_log:"
+msgid "07 Days"
+msgstr "07 días"
+
+msgctxt "selection:sale.shop,esale_log:"
+msgid "15 Days"
+msgstr "15 días"
+
+msgctxt "selection:sale.shop,esale_log:"
+msgid "30 Days"
+msgstr "30 días"
+
+msgctxt "selection:sale.shop,esale_log:"
+msgid "60 Days"
+msgstr "60 días"
+
+msgctxt "selection:sale.shop,esale_log:"
+msgid "90 Days"
+msgstr "90 días"
+
+msgctxt "selection:sale.shop,esale_price:"
+msgid "Pricelist"
+msgstr "Tarifa"
+
+msgctxt "selection:sale.shop,esale_price:"
+msgid "Sale Price"
+msgstr "Precio venta"
+
+msgctxt "view:sale.shop:"
+msgid "Actions"
+msgstr "Acciones"
+
+msgctxt "view:sale.shop:"
+msgid "Configuration"
+msgstr "Configuración"
+
+msgctxt "view:sale.shop:"
+msgid "Countries"
+msgstr "Paises"
+
+msgctxt "view:sale.shop:"
+msgid "Export Status"
+msgstr "Exportar estado"
+
+msgctxt "view:sale.shop:"
+msgid "General"
+msgstr "General"
+
+msgctxt "view:sale.shop:"
+msgid "Import Orders"
+msgstr "Importar pedidos"
+
+msgctxt "view:sale.shop:"
+msgid "Langs"
+msgstr "Idiomas"
+
+msgctxt "view:sale.shop:"
+msgid "Orders"
+msgstr "Pedidos"
+
+msgctxt "view:sale.shop:"
+msgid "eSale"
+msgstr "eSale"
