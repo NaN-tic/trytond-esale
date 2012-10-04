@@ -51,6 +51,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                                         <field name="esale_scheduler"/>
                                         <label name="esale_log"/>
                                         <field name="esale_log"/>
+                                        <label name="esale_request_group"/>
+                                        <field name="esale_request_group"/>
                                     </page>
                                     <page string="Countries" id="contries">
                                         <field name="esale_countrys"/>

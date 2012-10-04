@@ -73,6 +73,8 @@ class SaleShop(ModelSQL, ModelView):
             ('60','60 Days'),
             ('90','90 Days'),
     ], 'Log', help='Days from delete logs to past')
+    esale_request_group = fields.Many2One('res.group', 'Group', required=True, 
+        help='Group Users to notification')
 
     def __init__(self):
         super(SaleShop, self).__init__()
