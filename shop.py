@@ -129,14 +129,12 @@ class SaleShop(ModelSQL, ModelView):
         :param shop: Obj
         """
         self.raise_user_error('orders_not_import')
-        return True
 
     def export_status_tryton(self, shop):
         """Export Status Orders to Tryton e-Sale don't available
         :param shop: Obj
         """
         self.raise_user_error('orders_not_export')
-        return True
 
 SaleShop()
 
