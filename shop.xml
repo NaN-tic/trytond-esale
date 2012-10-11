@@ -21,12 +21,12 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                                 <page string="Actions" id="actions" states="{'invisible': Not(Bool(Eval('esale_available')))}">
                                     <notebook>
                                         <page string="Orders" id="orders" col="6">
-                                            <button name="import_orders" string="Import Orders" type="object"/>
+                                            <button name="import_orders" string="Import Orders"/>
                                             <label name="esale_from_orders"/>
                                             <field name="esale_from_orders"/>
                                             <label name="esale_to_orders"/>
                                             <field name="esale_to_orders"/><newline/>
-                                            <button name="export_status" string="Export Status" type="object"/>
+                                            <button name="export_status" string="Export Status"/>
                                             <label name="esale_last_status_orders"/>
                                             <field name="esale_last_status_orders"/>
                                         </page>
