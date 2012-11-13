@@ -33,14 +33,14 @@ setup(name='trytonzz_esale',
     author='Zikzakmedia SL',
     author_email='zikzak@zikzakmedia.com',
     url='http://www.zikzakmedia.com',
-    download_url="https://bitbucket.org/zikzakmedia/trytonzz-esale",
-    package_dir={'trytonzz.modules.esale': '.'},
+    download_url="https://bitbucket.org/zikzakmedia/trytond-esale",
+    package_dir={'trytond.modules.esale': '.'},
     packages=[
-        'trytonzz.modules.esale',
-        'trytonzz.modules.esale.tests',
+        'trytond.modules.esale',
+        'trytond.modules.esale.tests',
     ],
     package_data={
-        'trytonzz.modules.esale': info.get('xml', []) \
+        'trytond.modules.esale': info.get('xml', []) \
             + ['tryton.cfg', 'locale/*.po'],
     },
     classifiers=[
@@ -63,9 +63,9 @@ setup(name='trytonzz_esale',
     install_requires=requires,
     zip_safe=False,
     entry_points="""
-    [trytonzz.modules]
-    esale = trytonzz.modules.esale
+    [trytond.modules]
+    esale = trytond.modules.esale
     """,
     test_suite='tests',
-    test_loader='trytonzz.test_loader:Loader',
+    test_loader='trytond.test_loader:Loader',
 )
