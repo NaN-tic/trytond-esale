@@ -12,7 +12,7 @@ proceder el uso de la tienda de comercio electrónico consulte la documentación
 de roles y usuarios de multi tiendas.
 
 La configuración de la tienda electrónica se realizará a través del menú 
-|menu_sale_shop|\ .
+|menu_sale_shop|.
 
 
 .. |menu_sale_shop| tryref:: sale_shop.menu_sale_shop/complete_name
@@ -27,34 +27,38 @@ electrónico, aparecerá una nueva pestaña con la información/configuración. 
 medida que vaya instalando módulos las opciones van incrementando en esta
 sección.
 
-* **Acciones**: Dispondrá de botones para la importación/exportación de datos
+* Acciones: Dispondrá de botones para la importación/exportación de datos
   de Tryton a la tienda electrónica
+
   * Pedidos
-* **Configuración**: Configuración de la tienda
-  * **General**:
-   * Impuestos incluidos
-   * Buscar tercero por CIF/NIF. Si el cliente está ya dado de alta en Tryton,
-     no lo va a crear (busca por CIF/NIF)
-   * Producto entrega
-   * Producto descuento
-   * Precio: Precio venta o por tarifa
-   * Planificador de tareas. Los crons de esta tienda se activarán (importación
-     pedidos, exportar stoc...)
-   * Limpieza de logs: Días anterior de eliminación de los logs de los pedidos,
-     productos,...
-  * **Países**: Países que se permite la venta de esta tienda.
-  * **Idiomas**: Idiomas que se dispone esta tienda y idioma por defecto
+  
+* Configuración: Configuración de la tienda
+
+  * General: Configuraciones generales
+  
+    * Impuestos incluidos
+    * Buscar tercero por CIF/NIF. Si el cliente está ya dado de alta en Tryton,
+      no lo va a crear (busca por CIF/NIF)
+    * Producto entrega
+    * Producto descuento
+    * Precio: Precio venta o por tarifa
+    * Planificador de tareas. Los crons de esta tienda se activarán (importación
+      pedidos, exportar stoc...)
+    * Limpieza de logs: Días anterior de eliminación de los logs de los pedidos,
+      productos,...
+
+  * Países: Países que se permite la venta de esta tienda.
+  * Idiomas: Idiomas que se dispone esta tienda y idioma por defecto
 
 En el caso que disponga de una tienda **Tryton eSale** deberá instalar los
 módulos `Producto eSale <../esale_product/index.html>`_ y
 `Venta eSale <../esale_sale/index.html>`_ para la gestión de los productos y
 configuración del servidor web.
 
-
 .. note:: Las tiendas **Tryton eSale** no necesitan descargar los pedidos ya
           que se generan insitu en el mismo ERP. Para procesar los pedidos de
           venta acceda a |menu_sale_form|.
 
-.. |menu_sale_form| tryref:: sale.act_sale_form/complete_name
+.. |menu_sale_form| tryref:: sale.menu_sale_form/complete_name
 
 .. figure:: images/tryton-esale.png
