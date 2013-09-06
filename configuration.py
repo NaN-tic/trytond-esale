@@ -19,3 +19,11 @@ class Configuration:
         required=True)
     sale_request_group = fields.Many2One('res.group', 'Default Group Users',
         required=True)
+    sale_warehouse = fields.Many2One('stock.location', 'Default Warehouse',
+        required=True)
+    sale_payment = fields.Many2One('account.payment.type', 'Default Payment',
+        required=True)
+    sale_payment_term = fields.Many2One('account.invoice.payment_term',
+        'Payment Term', required=True)
+    sale_price_list = fields.Many2One('product.price_list', 'Default Price List',
+        required=True)
