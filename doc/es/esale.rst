@@ -21,10 +21,14 @@ La configuración de la tienda electrónica se realizará a través del menú
 
 .. |menu_sale_shop| tryref:: sale_shop.menu_sale_shop/complete_name
 
-.. note:: Manualmente sólo podrá crear tiendas **Tryton eSale**. Para crear y
-          activar tiendas externas tipo Magento, Prestashop, etc... consulte la
-          documentación de cada módulo concreto
-          (`Magento <../magento/index.html>`_).
+.. note:: Manualmente no podrá crear tiendas. Para crear y activar tiendas externas 
+          tipo Magento, Prestashop, etc... consulte la documentación de cada módulo
+          concreto (`Magento <../magento/index.html>`_).
+
+.. note:: Antes de sincronizar los parámetros de una tienda externa a Tryton,
+          asegúrese que en la configuración de ventas disponga de valores por
+          defecto para que se usen estos cuando se generen las nuevas tiendas
+          (producto entrega, producto descuento, unidad medida,...).
 
 Al establecer que una tienda esté disponible como canal de comercio
 electrónico, aparecerá una nueva pestaña con la información/configuración. A

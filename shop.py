@@ -105,13 +105,33 @@ class SaleShop:
         return Pool().get('res.user')(Transaction().user).language.id
 
     @staticmethod
-    def default_esale_shop_app():
-        return 'tryton'
+    def default_esale_delivery_product():
+        Config = Pool().get('sale.configuration')
+        config = Config(1)
+        return config.sale_delivery_product and config.sale_delivery_product.id or None
+
+    @staticmethod
+    def default_esale_discount_product():
+        Config = Pool().get('sale.configuration')
+        config = Config(1)
+        return config.sale_discount_product and config.sale_discount_product.id or None
+
+    @staticmethod
+    def default_esale_uom_product():
+        Config = Pool().get('sale.configuration')
+        config = Config(1)
+        return config.sale_uom_product and config.sale_uom_product.id or None
+
+    @staticmethod
+    def default_esale_request_group():
+        Config = Pool().get('sale.configuration')
+        config = Config(1)
+        return config.sale_request_group and config.sale_request_group.id or None
 
     @classmethod
     def get_shop_app(cls):
-        '''Get Shop APP (tryton, magento, prestashop,...)'''
-        res = [('tryton','Tryton')]
+        '''Get Shop APP (magento, prestashop,...)'''
+        res = [('','')]
         return res
 
     @classmethod
@@ -134,14 +154,14 @@ class SaleShop:
             export_status = getattr(shop, 'export_status_%s' % shop.esale_shop_app)
             export_status(shop)
 
-    def import_orders_tryton(self, shop):
-        """Import Orders from Tryton e-Sale don't available
+    def import_orders_(self, shop):
+        """Import Orders whitout app don't available
         :param shop: Obj
         """
         self.raise_user_error('orders_not_import')
 
-    def export_status_tryton(self, shop):
-        """Export Status Orders to Tryton e-Sale don't available
+    def export_status_(self, shop):
+        """Export Status Orders whitout app don't available
         :param shop: Obj
         """
         self.raise_user_error('orders_not_export')
