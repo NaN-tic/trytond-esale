@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!-- This file is part esale module for Tryton.
+The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
+<data>
+    <xpath expr="/form/notebook" position="inside">
+        <page string="eSale" col="4" id="esale">
+            <label name="esale_available"/>
+            <field name="esale_available"/>
+            <label name="esale_shop_app"/>
+            <field name="esale_shop_app"/>
+            <notebook>
+                <page string="Actions" id="actions" states="{'invisible': Not(Bool(Eval('esale_available')))}">
+                    <notebook>
+                        <page string="Orders" id="orders" col="6">
+                            <button name="import_orders" string="Import Orders"/>
+                            <label name="esale_from_orders"/>
+                            <field name="esale_from_orders"/>
+                            <label name="esale_to_orders"/>
+                            <field name="esale_to_orders"/><newline/>
+                            <button name="export_status" string="Export Status"/>
+                            <label name="esale_last_status_orders"/>
+                            <field name="esale_last_status_orders"/>
+                        </page>
+                    </notebook>
+                </page>
+                <page string="Configuration" id="configuration" states="{'invisible': Not(Bool(Eval('esale_available')))}">
+                    <notebook>
+                    <page string="General" id="general">
+                        <label name="esale_tax_include"/>
+                        <field name="esale_tax_include"/>
+                        <label name="esale_get_party_by_vat"/>
+                        <field name="esale_get_party_by_vat"/>
+                        <label name="esale_delivery_product"/>
+                        <field name="esale_delivery_product"/>
+                        <label name="esale_discount_product"/>
+                        <field name="esale_discount_product"/>
+                        <label name="esale_uom_product"/>
+                        <field name="esale_uom_product"/>
+                        <label name="esale_price"/>
+                        <field name="esale_price"/>
+                        <label name="esale_scheduler"/>
+                        <field name="esale_scheduler"/>
+                        <label name="esale_log"/>
+                        <field name="esale_log"/>
+                        <label name="esale_request_group"/>
+                        <field name="esale_request_group"/>
+                    </page>
+                    <page string="Countries" id="contries">
+                        <field name="esale_countrys"/>
+                    </page>
+                    <page string="Langs" id="langs" col="2">
+                        <label name="esale_lang"/>
+                        <field name="esale_lang"/>
+                        <separator name="esale_langs" colspan="2"/>
+                        <field name="esale_langs" colspan="2"/>
+                    </page>
+                    </notebook>
+                </page>
+            </notebook>
+        </page>
+    </xpath>
+</data>
