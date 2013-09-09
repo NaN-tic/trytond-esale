@@ -95,6 +95,15 @@ class SaleShop:
                 'export_status': {},
                 })
 
+
+    @staticmethod
+    def default_esale_ext_reference():
+        return True
+
+    @staticmethod
+    def default_esale_get_party_by_vat():
+        return True
+
     @staticmethod
     def default_esale_price():
         return 'pricelist'
