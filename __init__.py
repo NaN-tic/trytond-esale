@@ -2,8 +2,9 @@
 #The COPYRIGHT file at the top level of this repository contains 
 #the full copyright notices and license terms.
 from trytond.pool import Pool
-from .shop import *
 from .configuration import *
+from .shop import *
+from .sale import *
 
 def register():
     Pool.register(
@@ -11,4 +12,5 @@ def register():
         SaleShop,
         SaleShopCountry,
         SaleShopLang,
+        Sale,
         module='esale', type_='model')
