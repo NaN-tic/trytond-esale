@@ -7,6 +7,7 @@ from trytond.transaction import Transaction
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Eval
 
+import time
 import logging
 import threading
 
@@ -127,6 +128,25 @@ class SaleShop:
         Config = Pool().get('sale.configuration')
         config = Config(1)
         return config.sale_request_group and config.sale_request_group.id or None
+
+    @staticmethod
+    def datetime_to_gmtime(date):
+        '''
+        Convert UTC timezone
+        :param date: datetime
+        :return str (yyyy-mm-dd hh:mm:ss)  
+        '''
+        return time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(time.mktime(
+            time.strptime(date, "%Y-%m-%d %H:%M:%S"))))
+
+    @staticmethod
+    def datetime_to_str(date):
+        '''
+        Convert datetime to str
+        :param date: datetime
+        :return str (yyyy-mm-dd hh:mm:ss)  
+        '''
+        return date.strftime("%Y-%m-%d %H:%M:%S")
 
     @classmethod
     def get_shop_app(cls):
