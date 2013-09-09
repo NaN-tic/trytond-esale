@@ -29,6 +29,8 @@ class SaleShop:
     esale_ext_reference = fields.Boolean('External Reference',
         help='Use external reference (Increment) in sale name')
     esale_tax_include = fields.Boolean('Tax Include')
+    esale_prefix_zip = fields.Boolean('Country Prefix Zip', 
+        help='Add country prefix: prefix+zip')
     esale_get_party_by_vat = fields.Boolean('Get Party by Vat',
         help='If there is another party with same vat, not create party')
     esale_scheduler = fields.Boolean('Scheduler',
@@ -102,6 +104,10 @@ class SaleShop:
 
     @staticmethod
     def default_esale_get_party_by_vat():
+        return True
+
+    @staticmethod
+    def default_esale_prefix_zip():
         return True
 
     @staticmethod

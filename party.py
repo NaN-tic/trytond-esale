@@ -2,7 +2,16 @@
 #The COPYRIGHT file at the top level of this repository contains 
 #the full copyright notices and license terms.
 from trytond.model import fields
-from trytond.pool import PoolMeta
+from trytond.pool import Pool, PoolMeta
+
+import logging
+
+try:
+    import vatnumber
+    HAS_VATNUMBER = True
+except ImportError:
+    logging.getLogger('esale').warning(
+            'Unable to import vatnumber. VAT number validation disabled.')
 
 __all__ = ['Party']
 __metaclass__ = PoolMeta
@@ -12,3 +21,51 @@ class Party:
     'Party'
     __name__ = 'party.party'
     esale_email = fields.Char('E-Mail')
+
+    @classmethod
+    def esale_create_party(self, shop, values):
+        '''
+        Create Party
+        :param shop: obj
+        :param values: dict
+        return party object
+        '''
+        pool = Pool()
+        Party = pool.get('party.party')
+        
+        #Validate VAT
+        if values.get('vat_country') and values.get('vat_number') and HAS_VATNUMBER:
+            vat_number = values.get('vat_number')
+            vat_country = values.get('vat_country')
+
+            vatnumber = '%s%s' % (vat_country.upper(), vat_number)
+            print vatnumber
+            if not vatnumber.check_vat(vatnumber):
+                del values['vat_country']
+        else:
+            del values['vat_country']
+
+        #Search party by vat + esale email
+        party = None
+        if shop.esale_get_party_by_vat and values.get('vat_number') and \
+                    values.get('vat_country'):
+            parties = Party.search([
+                ('vat_country', '=', values.get('vat_country')),
+                ('vat_number', '=', values.get('vat_number')),
+                ])
+            if parties:
+                party = parties[0]
+
+        if not party:
+            parties = Party.search([
+                ('esale_email', '=', values.get('esale_email')),
+                ])
+            if parties:
+                party = parties[0]
+
+        if not party:
+            values['addresses'] = None
+            party = Party.create([values])[0]
+            logging.getLogger('magento party').info(
+                'Magento website %s. Create party ID %s.' % (shop.name, party.id))
+        return party

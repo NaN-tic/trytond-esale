@@ -30,6 +30,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                         <field name="esale_ext_reference"/>
                         <label name="esale_tax_include"/>
                         <field name="esale_tax_include"/>
+                        <label name="esale_prefix_zip"/>
+                        <field name="esale_prefix_zip"/>
                         <label name="esale_get_party_by_vat"/>
                         <field name="esale_get_party_by_vat"/>
                         <label name="esale_delivery_product"/>

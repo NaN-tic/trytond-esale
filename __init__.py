@@ -4,6 +4,7 @@
 from trytond.pool import Pool
 from .configuration import *
 from .party import *
+from .address import *
 from .shop import *
 from .sale import *
 
@@ -11,6 +12,7 @@ def register():
     Pool.register(
         Configuration,
         Party,
+        Address,
         SaleShop,
         SaleShopCountry,
         SaleShopLang,
