@@ -12,3 +12,10 @@ class Sale:
     'Sale'
     __name__ = 'sale.sale'
     reference_external = fields.Char('External Reference', readonly=True, select=True)
+    status_history_external = fields.Text('Status history', readonly=True)
+
+    def create_external_order(self, values):
+        '''
+        Create external order in sale
+        '''
+        print "aqui"

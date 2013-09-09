@@ -6,6 +6,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <page string="eSale" col="4" id="esale" states="{'invisible': ~Eval('reference_external')}">
             <label name="reference_external"/>
             <field name="reference_external"/>
+            <separator name="status_history_external" colspan="4"/>
+            <field name="status_history_external" colspan="4"/>
         </page>
     </xpath>
 </data>
