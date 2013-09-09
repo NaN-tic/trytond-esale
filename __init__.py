@@ -3,12 +3,14 @@
 #the full copyright notices and license terms.
 from trytond.pool import Pool
 from .configuration import *
+from .party import *
 from .shop import *
 from .sale import *
 
 def register():
     Pool.register(
         Configuration,
+        Party,
         SaleShop,
         SaleShopCountry,
         SaleShopLang,
