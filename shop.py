@@ -26,6 +26,8 @@ class SaleShop:
         states={
             'required': Eval('esale_available', True),
         }, readonly=True)
+    esale_ext_reference = fields.Boolean('External Reference',
+        help='Use external reference (Increment) in sale name')
     esale_tax_include = fields.Boolean('Tax Include')
     esale_get_party_by_vat = fields.Boolean('Get Party by Vat',
         help='If there is another party with same vat, not create party')
