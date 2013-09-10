@@ -95,7 +95,7 @@ class Sale:
         line = Line()
         line.party = party
         line.sale = sale
-        lines = Line.get_esale_lines(sale, line, lines_values)
+        lines = Line.esale_dict2lines(sale, line, lines_values)
 
         #Carrier + delivery line
         carriers = Carrier.search([
@@ -117,7 +117,7 @@ class Sale:
             'unit_price': sale_values.get('base_shipping_amount', 0),
             'note': sale_values.get('shipping_note'),
             }]
-        shipment_line = Line.get_esale_lines(sale, line, shipment_values)[0]
+        shipment_line = Line.esale_dict2lines(sale, line, shipment_values)[0]
         shipment_line['shipment_cost'] = sale_values.get('base_shipping_amount', 0)
         del sale_values['shipping_cost']
         del sale_values['shipping_note']
@@ -143,7 +143,7 @@ class SaleLine:
     __name__ = 'sale.line'
 
     @classmethod
-    def get_esale_lines(self, sale, line, values):
+    def esale_dict2lines(self, sale, line, values):
         '''
         Return list sale lines
         :param sale: obj
