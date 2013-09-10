@@ -18,4 +18,5 @@ def register():
         SaleShopLang,
         Sale,
         SaleLine,
+        eSalePayment,
         module='esale', type_='model')

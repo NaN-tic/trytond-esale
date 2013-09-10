@@ -16,7 +16,6 @@ __metaclass__ = PoolMeta
 
 class SaleShop:
     __name__ = 'sale.shop'
-
     esale_available = fields.Boolean('eSale Shop',
         states={
             'readonly': Eval('esale_available', True),
@@ -88,6 +87,7 @@ class SaleShop:
         states={
             'required': Eval('esale_available', True),
         }, help='Default currency shop.')
+    esale_payments = fields.One2Many('esale.payment', 'shop', 'Payments')
 
     @classmethod
     def __setup__(cls):

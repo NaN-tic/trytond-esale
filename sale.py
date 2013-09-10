@@ -1,13 +1,13 @@
 #This file is part esale module for Tryton.
 #The COPYRIGHT file at the top level of this repository contains 
 #the full copyright notices and license terms.
-from trytond.model import fields
+from trytond.model import fields, ModelSQL, ModelView
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 
 import logging
 
-__all__ = ['Sale', 'SaleLine']
+__all__ = ['Sale', 'SaleLine', 'eSalePayment']
 __metaclass__ = PoolMeta
 
 
@@ -35,7 +35,7 @@ class Sale:
         Party = pool.get('party.party')
         Address = pool.get('party.address')
         Carrier = pool.get('carrier')
-        PaymentType = pool.get('account.payment.type')
+        eSalePayment = pool.get('esale.payment')
         Product = pool.get('product.product')
         Currency = Pool().get('currency.currency')
 
@@ -74,15 +74,12 @@ class Sale:
 
         #Payment
         if sale_values.get('payment'):
-            payments = PaymentType.search([
+            payments = eSalePayment.search([
                 ('code', '=', sale_values.get('payment')),
                 ])
             if payments:
-                sale_values['payment_type'] = payments[0]
-            else:
-                del sale_values['payment']
-        else:
-            del sale_values['payment']
+                sale_values['payment_type'] = payments[0].payment_type
+        del sale_values['payment']
 
         #Status
         status = sale_values.get('status')
@@ -200,3 +197,13 @@ class SaleLine:
                 del l['product']
             lines.append(l)
         return lines
+
+
+class eSalePayment(ModelSQL, ModelView):
+    'eSale Payment'
+    __name__ = 'esale.payment'
+    _rec_name = 'code'
+    code = fields.Char('Code', required=True)
+    payment_type = fields.Many2One('account.payment.type', 'Payment Type',
+        required=True)
+    shop = fields.Many2One('sale.shop', 'Sale Shop', required=True)
