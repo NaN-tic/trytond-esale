@@ -2,7 +2,7 @@
 <!-- This file is part esale module for Tryton.
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <data>
-    <xpath expr="/form/notebook" position="inside">
+    <xpath expr="/form/notebook/page[@id=&quot;general&quot;]" position="before">
         <page string="eSale" col="4" id="esale">
             <label name="esale_available"/>
             <field name="esale_available"/>
