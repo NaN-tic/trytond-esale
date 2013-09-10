@@ -72,15 +72,6 @@ class Sale:
         else:
             sale_values['currency'] = shop.esale_currency.id
 
-        #Carrier
-        carriers = Carrier.search([
-            ('code', '=', sale_values.get('carrier')),
-            ])
-        if carriers:
-            sale_values['carrier'] = carriers[0]
-        else:
-            del sale_values['carrier']
-
         #Payment
         if sale_values.get('payment'):
             payments = PaymentType.search([
@@ -105,6 +96,32 @@ class Sale:
         line.party = party
         line.sale = sale
         lines = Line.get_esale_lines(sale, line, lines_values)
+
+        #Carrier + delivery line
+        carriers = Carrier.search([
+            ('code', '=', sale_values.get('carrier')),
+            ])
+        if carriers:
+            carrier = carriers[0]
+            sale_values['carrier'] = carrier
+            product_delivery = carrier.carrier_product
+            shipment_description = carrier.rec_name
+        else:
+            del sale_values['carrier']
+            product_delivery = shop.esale_delivery_product
+            shipment_description = product_delivery.name
+        lines.append({
+            'product': product_delivery,
+            'unit': product_delivery.default_uom,
+            'quantity': 1,
+            'description': shipment_description,
+            'unit_price': sale_values.get('base_shipping_amount', 0),
+            'shipment_cost': sale_values.get('base_shipping_amount', 0),
+            'note': sale_values.get('shipping_note'),
+            })
+        del sale_values['shipping_cost']
+        del sale_values['shipping_description']
+
         sale_values['lines'] = [('create', lines)]
 
         #Default sale values
