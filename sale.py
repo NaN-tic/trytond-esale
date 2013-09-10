@@ -77,6 +77,7 @@ class Sale:
         if sale_values.get('payment'):
             payments = eSalePayment.search([
                 ('code', '=', sale_values.get('payment')),
+                ('shop', '=', shop.id),
                 ])
             if payments:
                 sale_values['payment_type'] = payments[0].payment_type
