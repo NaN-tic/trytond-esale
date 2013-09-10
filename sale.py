@@ -122,8 +122,22 @@ class Sale:
         del sale_values['shipping_cost']
         del sale_values['shipping_note']
 
+        #discount line
+        discount_line = None
+        if sale_values.get('discount') != 0.0000:
+            discount_values = [{
+                'product': shop.esale_discount_product.code or shop.esale_discount_product.name,
+                'quantity': 1,
+                'description': shop.esale_discount_product.name,
+                'unit_price': sale_values.get('discount', 0),
+                }]
+            discount_line = Line.esale_dict2lines(sale, line, discount_values)[0]
+        del sale_values['discount']
+
         #Add lines
         lines.append(shipment_line)
+        if discount_line:
+            lines.append(discount_line)
         sale_values['lines'] = [('create', lines)]
 
         #Default sale values
