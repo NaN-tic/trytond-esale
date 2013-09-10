@@ -18,8 +18,8 @@ class Sale:
     status_history = fields.Text('Status history', readonly=True)
 
     @classmethod
-    def create_external_order(self, shop, sale_values, lines_values, party_values, 
-                        invoice_values, shipment_values):
+    def create_external_order(self, shop, sale_values, lines_values,
+            extralines_values, party_values, invoice_values, shipment_values):
         '''
         Create external order in sale
         :param shop: obj
@@ -134,10 +134,17 @@ class Sale:
             discount_line = Line.esale_dict2lines(sale, line, discount_values)[0]
         del sale_values['discount']
 
+        extralines = None
+        if extralines_values:
+            extralines = Line.esale_dict2lines(sale, line, extralines_values)
+
         #Add lines
         lines.append(shipment_line)
         if discount_line:
             lines.append(discount_line)
+        if extralines:
+            lines = lines.copy()
+            lines = lines + extralines
         sale_values['lines'] = [('create', lines)]
 
         #Default sale values
