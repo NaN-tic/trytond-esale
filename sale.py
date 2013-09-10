@@ -5,7 +5,9 @@ from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 
-__all__ = ['Sale']
+import logging
+
+__all__ = ['Sale', 'SaleLine']
 __metaclass__ = PoolMeta
 
 
@@ -13,7 +15,7 @@ class Sale:
     'Sale'
     __name__ = 'sale.sale'
     reference_external = fields.Char('External Reference', readonly=True, select=True)
-    status_history_external = fields.Text('Status history', readonly=True)
+    status_history = fields.Text('Status history', readonly=True)
 
     @classmethod
     def create_external_order(self, shop, sale_values, lines_values, party_values, 
@@ -32,13 +34,16 @@ class Sale:
         Line = pool.get('sale.line')
         Party = pool.get('party.party')
         Address = pool.get('party.address')
+        Carrier = pool.get('carrier')
+        PaymentType = pool.get('account.payment.type')
+        Product = pool.get('product.product')
+        Currency = Pool().get('currency.currency')
 
-        #Order reference
-        if shop.esale_ext_reference:
-            sale_values['reference'] = sale_values.get('reference_external')
-
+        #Create party
         party = Party.esale_create_party(shop, party_values)
 
+        #Create address
+        invoice_address = None
         if not ((invoice_values.get('street') == shipment_values.get('street')) and \
                 (invoice_values.get('zip') == shipment_values.get('zip'))):
             invoice_address = Address.esale_create_address(shop, party, 
@@ -49,3 +54,108 @@ class Sale:
             shipment_address = Address.esale_create_address(shop, party,
                 shipment_values)
 
+        #Party - Address
+        sale_values['party'] = party
+        sale_values['invoice_address'] = invoice_address or shipment_address
+        sale_values['shipment_address'] = shipment_address
+
+        #Order reference
+        if shop.esale_ext_reference:
+            sale_values['reference'] = sale_values.get('reference_external')
+
+        #Currency
+        currencies = Currency.search([
+            ('code', '=', sale_values.get('currency')),
+            ])
+        if currencies:
+            sale_values['currency'] = currencies[0].id
+        else:
+            sale_values['currency'] = shop.esale_currency.id
+
+        #Carrier
+        carriers = Carrier.search([
+            ('code', '=', sale_values.get('carrier')),
+            ])
+        if carriers:
+            sale_values['carrier'] = carriers[0]
+        else:
+            del sale_values['carrier']
+
+        #Payment
+        if sale_values.get('payment'):
+            payments = PaymentType.search([
+                ('code', '=', sale_values.get('payment')),
+                ])
+            if payments:
+                sale_values['payment_type'] = payments[0]
+            else:
+                del sale_values['payment']
+        else:
+            del sale_values['payment']
+
+        #Status
+        status = sale_values.get('status')
+        del sale_values['status']
+
+        #Lines
+        sale = Sale()
+        sale.party = party
+        sale.currency = sale_values.get('currency')
+        line = Line()
+        line.party = party
+        line.sale = sale
+        lines = Line.get_esale_lines(sale, line, lines_values)
+        sale_values['lines'] = [('create', lines)]
+
+        #Default sale values
+        sale_fields = Sale.fields_get()
+        for k, v in Sale.default_get(sale_fields, with_rec_name=False).iteritems():
+            if k not in sale_values:
+                sale_values[k] = v
+
+        #Create Sale
+        sale = Sale.create([sale_values])[0]
+        logging.getLogger('magento sale').info(
+            'Magento %s. Create order %s.' % (shop.name, sale.reference_external))
+
+
+class SaleLine:
+    'Sale Line'
+    __name__ = 'sale.line'
+
+    @classmethod
+    def get_esale_lines(self, sale, line, values):
+        '''
+        Return list sale lines
+        :param sale: obj
+        :param line: obj
+        :param values: dict
+        return list
+        '''
+        Product = Pool().get('product.product')
+
+        lines = []
+        for l in values:
+            products = Product.search([
+                ('code', '=', l.get('product')),
+                ])
+            if products:
+                product = products[0]
+                l['product'] = product
+
+                line.product = product
+                line.unit = product.default_uom
+                line.quantity = l['quantity']
+                line.description = product.name
+                product_values = line.on_change_product()
+
+                l['taxes'] = [('add', product_values.get('taxes'))]
+                l['unit'] = product.default_uom
+
+                for k, v in product_values.iteritems():
+                    if k not in l:
+                        l[k] = v
+            else:
+                del l['product']
+            lines.append(l)
+        return lines

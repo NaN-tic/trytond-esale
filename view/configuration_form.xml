@@ -19,5 +19,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <field name="sale_payment_term"/>
         <label name="sale_price_list"/>
         <field name="sale_price_list"/>
+        <label name="sale_currency"/>
+        <field name="sale_currency"/>
     </xpath>
 </data>

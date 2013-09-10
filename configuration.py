@@ -27,3 +27,5 @@ class Configuration:
         'Payment Term', required=True)
     sale_price_list = fields.Many2One('product.price_list', 'Default Price List',
         required=True)
+    sale_currency = fields.Many2One('currency.currency', 'Currency',
+        required=True)

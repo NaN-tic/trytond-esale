@@ -17,4 +17,5 @@ def register():
         SaleShopCountry,
         SaleShopLang,
         Sale,
+        SaleLine,
         module='esale', type_='model')

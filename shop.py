@@ -84,6 +84,10 @@ class SaleShop:
         states={
             'required': Eval('esale_available', True),
         }, help='Group Users to notification')
+    esale_currency = fields.Many2One('currency.currency', 'Default currency',
+        states={
+            'required': Eval('esale_available', True),
+        }, help='Default currency shop.')
 
     @classmethod
     def __setup__(cls):
