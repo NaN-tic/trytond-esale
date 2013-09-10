@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- This file is part esale module for Tryton.
+The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
+<form string="eSale Payment" col="6">
+    <label name="code"/>
+    <field name="code"/>
+    <label name="shop"/>
+    <field name="shop"/>
+    <label name="invoice_method"/>
+    <field name="invoice_method"/>
+    <label name="shipment_method"/>
+    <field name="shipment_method"/>
+    <label name="confirm"/>
+    <field name="confirm"/>
+    <label name="cancel"/>
+    <field name="cancel"/>
+</form>

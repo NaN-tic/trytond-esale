@@ -19,4 +19,5 @@ def register():
         Sale,
         SaleLine,
         eSalePayment,
+        eSaleStatus,
         module='esale', type_='model')

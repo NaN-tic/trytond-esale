@@ -88,6 +88,7 @@ class SaleShop:
             'required': Eval('esale_available', True),
         }, help='Default currency shop.')
     esale_payments = fields.One2Many('esale.payment', 'shop', 'Payments')
+    esale_status = fields.One2Many('esale.status', 'shop', 'Status')
 
     @classmethod
     def __setup__(cls):
