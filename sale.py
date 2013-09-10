@@ -110,18 +110,20 @@ class Sale:
             del sale_values['carrier']
             product_delivery = shop.esale_delivery_product
             shipment_description = product_delivery.name
-        lines.append({
-            'product': product_delivery,
-            'unit': product_delivery.default_uom,
+        shipment_values = [{
+            'product': product_delivery.code or product_delivery.name,
             'quantity': 1,
             'description': shipment_description,
             'unit_price': sale_values.get('base_shipping_amount', 0),
-            'shipment_cost': sale_values.get('base_shipping_amount', 0),
             'note': sale_values.get('shipping_note'),
-            })
+            }]
+        shipment_line = Line.get_esale_lines(sale, line, shipment_values)[0]
+        shipment_line['shipment_cost'] = sale_values.get('base_shipping_amount', 0)
         del sale_values['shipping_cost']
-        del sale_values['shipping_description']
+        del sale_values['shipping_note']
 
+        #Add lines
+        lines.append(shipment_line)
         sale_values['lines'] = [('create', lines)]
 
         #Default sale values
@@ -153,7 +155,8 @@ class SaleLine:
 
         lines = []
         for l in values:
-            products = Product.search([
+            products = Product.search(['OR',
+                ('name', '=', l.get('product')),
                 ('code', '=', l.get('product')),
                 ])
             if products:
