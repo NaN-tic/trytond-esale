@@ -32,15 +32,14 @@ class Party:
         '''
         pool = Pool()
         Party = pool.get('party.party')
-        
+
         #Validate VAT
         if values.get('vat_country') and values.get('vat_number') and HAS_VATNUMBER:
             vat_number = values.get('vat_number')
             vat_country = values.get('vat_country')
 
-            vatnumber = '%s%s' % (vat_country.upper(), vat_number)
-            print vatnumber
-            if not vatnumber.check_vat(vatnumber):
+            vat_number = '%s%s' % (vat_country.upper(), vat_number)
+            if not vatnumber.check_vat(vat_number):
                 del values['vat_country']
         else:
             del values['vat_country']
