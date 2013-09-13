@@ -75,20 +75,6 @@ class SaleShop:
         help='This date is to import (filter)')
     esale_last_status_orders = fields.DateTime('Last Status Orders', 
         help='This date is last export (filter)')
-    esale_log = fields.Selection([
-        ('1','01 Day'),
-        ('3','03 Days'),
-        ('5','05 Days'),
-        ('7','07 Days'),
-        ('15','15 Days'),
-        ('30','30 Days'),
-        ('60','60 Days'),
-        ('90','90 Days'),
-    ], 'Log', help='Days from delete logs to past')
-    esale_request_group = fields.Many2One('res.group', 'Group',
-        states={
-            'required': Eval('esale_available', True),
-        }, help='Group Users to notification')
     esale_currency = fields.Many2One('currency.currency', 'Default currency',
         states={
             'required': Eval('esale_available', True),
