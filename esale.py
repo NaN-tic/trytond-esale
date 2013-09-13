@@ -4,8 +4,15 @@
 from trytond.model import fields, ModelSQL, ModelView
 from trytond.pool import PoolMeta
 
-__all__ = ['eSalePayment', 'eSaleStatus']
+__all__ = ['eSalePayment', 'eSaleStatus', 'eSaleSate']
 __metaclass__ = PoolMeta
+
+SALE_STATES = [
+    ('paid', 'Paid'),
+    ('shipment', 'Delivery'),
+    ('paid-shipment', 'Paid/Delivery'),
+    ('cancel', 'Cancel'),
+    ]
 
 
 class eSalePayment(ModelSQL, ModelView):
@@ -38,3 +45,15 @@ class eSaleStatus(ModelSQL, ModelView):
         help='Sale change state draft to confirmed')
     cancel = fields.Boolean('Cancel',
         help='Sale change state draft to cancel.')
+
+
+class eSaleSate(ModelSQL, ModelView):
+    'eSale State'
+    __name__ = 'esale.state'
+    _rec_name = 'state'
+    state = fields.Selection(SALE_STATES, 'Sale State', required=True)
+    code = fields.Char('State APP Code', required=True,
+        help='State APP code. Code state in your APP')
+    notify = fields.Boolean('Notify',
+        help='Active APP notification customer')
+    shop = fields.Many2One('sale.shop', 'Sale Shop', required=True)

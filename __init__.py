@@ -21,4 +21,5 @@ def register():
         SaleLine,
         eSalePayment,
         eSaleStatus,
+        eSaleSate,
         module='esale', type_='model')
