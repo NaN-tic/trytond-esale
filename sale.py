@@ -101,7 +101,6 @@ class Sale:
                 sale_values['state'] = 'confirmed'
             if sale_status.cancel:
                 sale_values['state'] = 'cancel'
-        del sale_values['status']
 
         #Lines
         sale = Sale()
