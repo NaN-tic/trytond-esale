@@ -30,6 +30,9 @@ La configuración de la tienda electrónica se realizará a través del menú
           defecto para que se usen estos cuando se generen las nuevas tiendas
           (producto entrega, producto descuento, unidad medida,...).
 
+.. note:: Si trabaja en multimoneda o su tienda trabaja en otra moneda diferente
+          de la compañía, recuerde de añadir las tasas de cambio actuales.
+
 Al establecer que una tienda esté disponible como canal de comercio
 electrónico, aparecerá una nueva pestaña con la información/configuración. A
 medida que vaya instalando módulos las opciones van incrementando en esta
