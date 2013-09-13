@@ -100,6 +100,7 @@ class Sale:
 
         #Lines
         sale = Sale()
+        sale.shop = shop
         sale.party = party
         sale.currency = sale_values.get('currency')
         line = Line()
@@ -184,30 +185,38 @@ class SaleLine:
         '''
         Product = Pool().get('product.product')
 
+        def default_create_product(shop, code):
+            return None
+
         lines = []
         for l in values:
+            code = l.get('product')
             products = Product.search(['OR',
-                ('name', '=', l.get('product')),
-                ('code', '=', l.get('product')),
+                ('name', '=', code),
+                ('code', '=', code),
                 ])
             if products:
                 product = products[0]
-                l['product'] = product
-
-                line.product = product
-                line.unit = product.default_uom
-                line.quantity = l['quantity']
-                line.description = product.name
-                product_values = line.on_change_product()
-
-                l['taxes'] = [('add', product_values.get('taxes'))]
-                l['unit'] = product.default_uom
-
-                for k, v in product_values.iteritems():
-                    if k not in l:
-                        l[k] = v
             else:
-                del l['product']
+                product_esale = getattr(Product, 
+                    'create_product_%s' % sale.shop.esale_shop_app,
+                    default_create_product)
+                product = product_esale(sale.shop, code)
+
+            l['product'] = product
+
+            line.product = product
+            line.unit = product.default_uom
+            line.quantity = l['quantity']
+            line.description = product.name
+            product_values = line.on_change_product()
+
+            l['taxes'] = [('add', product_values.get('taxes'))]
+            l['unit'] = product.default_uom
+
+            for k, v in product_values.iteritems():
+                if k not in l:
+                    l[k] = v
             lines.append(l)
         return lines
 

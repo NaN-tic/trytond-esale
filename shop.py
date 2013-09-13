@@ -51,6 +51,12 @@ class SaleShop:
             'required': Eval('esale_available', True),
         },
     )
+    esale_category = fields.Many2One('product.category', 'Default Category', 
+        states={
+            'required': Eval('esale_available', True),
+        }, help='Default Category Product when create a new product. In this '
+        'category, select an Account Revenue and an Account Expense'
+    )
     esale_lang = fields.Many2One('ir.lang', 'Default language',
         states={
             'required': Eval('esale_available', True),
