@@ -3,6 +3,7 @@
 #the full copyright notices and license terms.
 from trytond.pool import Pool
 from .configuration import *
+from .esale import *
 from .party import *
 from .address import *
 from .shop import *
