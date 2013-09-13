@@ -209,20 +209,22 @@ class SaleLine:
                     default_create_product)
                 product = product_esale(sale.shop, code)
 
-            l['product'] = product
+            if product: #Find product
+                l['product'] = product
+                line.product = product
+                line.unit = product.default_uom
+                line.quantity = l['quantity']
+                line.description = product.name
+                product_values = line.on_change_product()
 
-            line.product = product
-            line.unit = product.default_uom
-            line.quantity = l['quantity']
-            line.description = product.name
-            product_values = line.on_change_product()
-
-            if product_values.get('taxes'):
-                l['taxes'] = [('add', product_values.get('taxes'))]
-            l['unit'] = product.default_uom
-
-            for k, v in product_values.iteritems():
-                if k not in l:
-                    l[k] = v
+                if product_values.get('taxes'):
+                    l['taxes'] = [('add', product_values.get('taxes'))]
+                l['unit'] = product.default_uom
+                for k, v in product_values.iteritems():
+                    if k not in l:
+                        l[k] = v
+            else: #Not product
+                del l['product']
+                l['unit'] = sale.shop.esale_uom_product
             lines.append(l)
         return lines
