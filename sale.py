@@ -130,12 +130,11 @@ class Sale:
             'product': product_delivery.code or product_delivery.name,
             'quantity': 1,
             'description': shipment_description,
-            'unit_price': sale_values.get('base_shipping_amount', 0),
+            'unit_price': sale_values.get('shipping_price', 0),
             'note': sale_values.get('shipping_note'),
             }]
         shipment_line = Line.esale_dict2lines(sale, line, shipment_values)[0]
-        shipment_line['shipment_cost'] = sale_values.get('base_shipping_amount', 0)
-        del sale_values['shipping_cost']
+        del sale_values['shipping_price']
         del sale_values['shipping_note']
 
         #discount line
