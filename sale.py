@@ -42,8 +42,9 @@ class Sale:
         Product = pool.get('product.product')
         Currency = Pool().get('currency.currency')
 
-        #~ #Shop
+        #Default Sale values
         sale_values['shop'] = shop
+        sale_values['warehouse'] = shop.warehouse
 
         #Create party
         party = Party.esale_create_party(shop, party_values)
