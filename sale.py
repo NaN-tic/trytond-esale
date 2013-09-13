@@ -15,6 +15,8 @@ class Sale:
     'Sale'
     __name__ = 'sale.sale'
     reference_external = fields.Char('External Reference', readonly=True, select=True)
+    status = fields.Char('Status', readonly=True,
+        help='Last status import/export to e-commerce APP')
     status_history = fields.Text('Status history', readonly=True)
 
     @classmethod
@@ -39,6 +41,9 @@ class Sale:
         eSaleStatus = pool.get('esale.status')
         Product = pool.get('product.product')
         Currency = Pool().get('currency.currency')
+
+        #~ #Shop
+        sale_values['shop'] = shop
 
         #Create party
         party = Party.esale_create_party(shop, party_values)
@@ -165,6 +170,7 @@ class Sale:
                 sale_values[k] = v
 
         #Create Sale
+        Transaction().cursor.commit() #TODO: Add because get error when save order: could not serialize access due to concurrent update
         sale = Sale.create([sale_values])[0]
         logging.getLogger('magento sale').info(
             'Magento %s. Create order %s.' % (shop.name, sale.reference_external))
@@ -211,7 +217,8 @@ class SaleLine:
             line.description = product.name
             product_values = line.on_change_product()
 
-            l['taxes'] = [('add', product_values.get('taxes'))]
+            if product_values.get('taxes'):
+                l['taxes'] = [('add', product_values.get('taxes'))]
             l['unit'] = product.default_uom
 
             for k, v in product_values.iteritems():

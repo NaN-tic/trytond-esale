@@ -18,8 +18,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                             <label name="esale_to_orders"/>
                             <field name="esale_to_orders"/><newline/>
                             <button name="export_state" string="Export State"/>
-                            <label name="esale_last_status_orders"/>
-                            <field name="esale_last_status_orders"/>
+                            <label name="esale_last_state_orders"/>
+                            <field name="esale_last_state_orders"/>
                         </page>
                     </notebook>
                 </page>
@@ -64,8 +64,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                     <page string="Status" id="status" col="2">
                         <field name="esale_status"/>
                     </page>
-                    <page string="State" id="state" col="2">
-                        <field name="esale_state"/>
+                    <page string="States" id="states" col="2">
+                        <field name="esale_states"/>
                     </page>
                     </notebook>
                 </page>

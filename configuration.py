@@ -29,3 +29,5 @@ class Configuration:
         required=True)
     sale_currency = fields.Many2One('currency.currency', 'Currency',
         required=True)
+    sale_category = fields.Many2One('product.category', 'Product Category',
+        required=True)

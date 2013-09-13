@@ -73,7 +73,7 @@ class SaleShop:
         help='This date is last import (filter)')
     esale_to_orders = fields.DateTime('To Orders', 
         help='This date is to import (filter)')
-    esale_last_status_orders = fields.DateTime('Last Status Orders', 
+    esale_last_state_orders = fields.DateTime('Last State Orders', 
         help='This date is last export (filter)')
     esale_currency = fields.Many2One('currency.currency', 'Default currency',
         states={
@@ -81,7 +81,7 @@ class SaleShop:
         }, help='Default currency shop.')
     esale_payments = fields.One2Many('esale.payment', 'shop', 'Payments')
     esale_status = fields.One2Many('esale.status', 'shop', 'Status')
-    esale_state = fields.One2Many('esale.state', 'shop', 'State')
+    esale_states = fields.One2Many('esale.state', 'shop', 'State')
 
     @classmethod
     def __setup__(cls):
@@ -167,6 +167,33 @@ class SaleShop:
         '''Get Shop APP (magento, prestashop,...)'''
         res = [('','')]
         return res
+
+    @classmethod
+    def get_sales_from_date(self, shop, date):
+        '''Get Sales from a date to export
+        :param shop: obj
+        :param date: datetime
+        retun list
+        '''
+        pool = Pool()
+        Sale = pool.get('sale.sale')
+        Move = pool.get('stock.move')
+
+        # Sale might not get updated for state changes in the related shipments.
+        # So first get the moves for outgoing shipments which are executed after
+        # last import time.
+        moves = Move.search([
+            ('write_date', '>=', date),
+            ('sale.shop', '=', shop.id),
+            ('shipment', 'like', 'stock.shipment.out%')
+        ])
+        sales_to_export = Sale.search(['OR', [
+            ('write_date', '>=', date),
+            ('shop', '=', shop.id),
+        ], [
+            ('id', 'in', map(int, [m.sale for m in moves]))
+        ]])
+        return sales_to_export
 
     @classmethod
     @ModelView.button
