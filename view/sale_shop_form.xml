@@ -17,7 +17,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                             <field name="esale_from_orders"/>
                             <label name="esale_to_orders"/>
                             <field name="esale_to_orders"/><newline/>
-                            <button name="export_status" string="Export Status"/>
+                            <button name="export_state" string="Export State"/>
                             <label name="esale_last_status_orders"/>
                             <field name="esale_last_status_orders"/>
                         </page>
