@@ -30,7 +30,7 @@ class Address:
         countries = Country.search(['OR',
             ('name', 'like', values.get('country')),
             ('code', '=', values.get('country').upper()),
-            ])
+            ], limit=1)
 
         zip = values.get('zip')
         if shop.esale_prefix_zip and countries:
@@ -38,7 +38,7 @@ class Address:
         addresses = Address.search([
             ('street', '=', values.get('street')),
             ('zip', '=', zip),
-            ])
+            ], limit=1)
         if addresses:
             address = addresses[0]
 

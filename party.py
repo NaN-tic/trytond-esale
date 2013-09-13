@@ -51,14 +51,14 @@ class Party:
             parties = Party.search([
                 ('vat_country', '=', values.get('vat_country')),
                 ('vat_number', '=', values.get('vat_number')),
-                ])
+                ], limit=1)
             if parties:
                 party = parties[0]
 
         if not party:
             parties = Party.search([
                 ('esale_email', '=', values.get('esale_email')),
-                ])
+                ], limit=1)
             if parties:
                 party = parties[0]
 

@@ -73,7 +73,7 @@ class Sale:
         #Currency
         currencies = Currency.search([
             ('code', '=', sale_values.get('currency')),
-            ])
+            ], limit=1)
         if currencies:
             sale_values['currency'] = currencies[0].id
         else:
@@ -84,7 +84,7 @@ class Sale:
             payments = eSalePayment.search([
                 ('code', '=', sale_values.get('payment')),
                 ('shop', '=', shop.id),
-                ])
+                ], limit=1)
             if payments:
                 sale_values['payment_type'] = payments[0].payment_type
         del sale_values['payment']
@@ -93,7 +93,7 @@ class Sale:
         status = eSaleStatus.search([
             ('code', '=', sale_values.get('status')),
             ('shop', '=', shop.id),
-            ])
+            ], limit=1)
         if status:
             sale_status = status[0]
             sale_values['invoice_method'] = sale_status.invoice_method
@@ -116,7 +116,7 @@ class Sale:
         #Carrier + delivery line
         carriers = Carrier.search([
             ('code', '=', sale_values.get('carrier')),
-            ])
+            ], limit=1)
         if carriers:
             carrier = carriers[0]
             sale_values['carrier'] = carrier
@@ -200,7 +200,7 @@ class SaleLine:
             products = Product.search(['OR',
                 ('name', '=', code),
                 ('code', '=', code),
-                ])
+                ], limit=1)
             if products:
                 product = products[0]
             else:
