@@ -17,8 +17,6 @@ class Configuration:
         required=True)
     sale_uom_product = fields.Many2One('product.uom', 'Default UOM',
         required=True)
-    sale_request_group = fields.Many2One('res.group', 'Default Group Users',
-        required=True)
     sale_warehouse = fields.Many2One('stock.location', 'Default Warehouse',
         required=True)
     sale_payment = fields.Many2One('account.payment.type', 'Default Payment',

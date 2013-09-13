@@ -138,12 +138,6 @@ class SaleShop:
         return config.sale_uom_product and config.sale_uom_product.id or None
 
     @staticmethod
-    def default_esale_request_group():
-        Config = Pool().get('sale.configuration')
-        config = Config(1)
-        return config.sale_request_group and config.sale_request_group.id or None
-
-    @staticmethod
     def datetime_to_gmtime(date):
         '''
         Convert UTC timezone
