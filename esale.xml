@@ -3,6 +3,28 @@
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <tryton>
     <data>
+        <record model="ir.ui.view" id="esale_payment_view_form">
+            <field name="model">esale.payment</field>
+            <field name="type">form</field>
+            <field name="name">esale_payment_form</field>
+        </record>
+        <record model="ir.ui.view" id="esale_payment_view_tree">
+            <field name="model">esale.payment</field>
+            <field name="type">tree</field>
+            <field name="name">esale_payment_tree</field>
+        </record>
+
+        <record model="ir.ui.view" id="esale_status_view_form">
+            <field name="model">esale.status</field>
+            <field name="type">form</field>
+            <field name="name">esale_status_form</field>
+        </record>
+        <record model="ir.ui.view" id="esale_status_view_tree">
+            <field name="model">esale.status</field>
+            <field name="type">tree</field>
+            <field name="name">esale_status_tree</field>
+        </record>
+
         <record model="ir.ui.view" id="esale_state_view_form">
             <field name="model">esale.state</field>
             <field name="type">form</field>
