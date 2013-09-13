@@ -81,6 +81,7 @@ class SaleShop:
         }, help='Default currency shop.')
     esale_payments = fields.One2Many('esale.payment', 'shop', 'Payments')
     esale_status = fields.One2Many('esale.status', 'shop', 'Status')
+    esale_state = fields.One2Many('esale.state', 'shop', 'State')
 
     @classmethod
     def __setup__(cls):
@@ -91,7 +92,7 @@ class SaleShop:
         })
         cls._buttons.update({
                 'import_orders': {},
-                'export_status': {},
+                'export_state': {},
                 })
 
     @staticmethod
@@ -179,13 +180,13 @@ class SaleShop:
 
     @classmethod
     @ModelView.button
-    def export_status(self, shops):
+    def export_state(self, shops):
         """
         Export Orders to External APP
         """
         for shop in shops:
-            export_status = getattr(shop, 'export_status_%s' % shop.esale_shop_app)
-            export_status(shop)
+            export_state = getattr(shop, 'export_state_%s' % shop.esale_shop_app)
+            export_state(shop)
 
     def import_orders_(self, shop):
         """Import Orders whitout app don't available
@@ -193,8 +194,8 @@ class SaleShop:
         """
         self.raise_user_error('orders_not_import')
 
-    def export_status_(self, shop):
-        """Export Status Orders whitout app don't available
+    def export_state_(self, shop):
+        """Export State Sale whitout app don't available
         :param shop: Obj
         """
         self.raise_user_error('orders_not_export')
