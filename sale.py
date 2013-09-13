@@ -173,7 +173,7 @@ class Sale:
         Transaction().cursor.commit() #TODO: Add because get error when save order: could not serialize access due to concurrent update
         sale = Sale.create([sale_values])[0]
         logging.getLogger('magento sale').info(
-            'Magento %s. Create order %s.' % (shop.name, sale.reference_external))
+            'Magento %s. Create order %s' % (shop.name, sale.reference_external))
 
 
 class SaleLine:

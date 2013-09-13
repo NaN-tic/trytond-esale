@@ -83,7 +83,7 @@ class Address:
 
             address = Address.create([values])[0]
             logging.getLogger('magento address').info(
-                'Magento website %s. Create address ID %s.' % (shop.name, address.id))
+                'Magento website %s. Create address ID %s' % (shop.name, address.id))
 
             for contact in address_contacts:
                 ContactMechanism.create([{
