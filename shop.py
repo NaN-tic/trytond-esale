@@ -1,7 +1,6 @@
 #This file is part esale module for Tryton.
 #The COPYRIGHT file at the top level of this repository contains 
 #the full copyright notices and license terms.
-
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.transaction import Transaction
 from trytond.pool import Pool, PoolMeta
@@ -13,6 +12,7 @@ import threading
 
 __all__ = ['SaleShop', 'SaleShopCountry', 'SaleShopLang']
 __metaclass__ = PoolMeta
+
 
 class SaleShop:
     __name__ = 'sale.shop'
@@ -93,7 +93,6 @@ class SaleShop:
                 'import_orders': {},
                 'export_status': {},
                 })
-
 
     @staticmethod
     def default_esale_ext_reference():
