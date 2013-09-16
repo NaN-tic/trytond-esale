@@ -8,6 +8,7 @@ from .party import *
 from .address import *
 from .shop import *
 from .sale import *
+from .product import *
 
 def register():
     Pool.register(
@@ -22,4 +23,6 @@ def register():
         eSalePayment,
         eSaleStatus,
         eSaleSate,
+        Template,
+        TemplateSaleShop,
         module='esale', type_='model')
