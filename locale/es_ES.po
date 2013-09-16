@@ -10,13 +10,241 @@ msgctxt "error:sale.shop:"
 msgid "Threre are not orders to import"
 msgstr "No hay pedidos a importar"
 
+msgctxt "field:esale.payment,code:"
+msgid "Code"
+msgstr "Código"
+
+msgctxt "field:esale.payment,create_date:"
+msgid "Create Date"
+msgstr "Fecha de creación"
+
+msgctxt "field:esale.payment,create_uid:"
+msgid "Create User"
+msgstr "Usuario de creación"
+
+msgctxt "field:esale.payment,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:esale.payment,payment_type:"
+msgid "Payment Type"
+msgstr "Tipo de pago"
+
+msgctxt "field:esale.payment,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:esale.payment,shop:"
+msgid "Sale Shop"
+msgstr "Tienda"
+
+msgctxt "field:esale.payment,write_date:"
+msgid "Write Date"
+msgstr "Fecha modificación"
+
+msgctxt "field:esale.payment,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
+msgctxt "field:esale.state,code:"
+msgid "State APP Code"
+msgstr "Código estado APP"
+
+msgctxt "field:esale.state,create_date:"
+msgid "Create Date"
+msgstr "Fecha de creación"
+
+msgctxt "field:esale.state,create_uid:"
+msgid "Create User"
+msgstr "Usuario de creación"
+
+msgctxt "field:esale.state,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:esale.state,notify:"
+msgid "Notify"
+msgstr "Notificar"
+
+msgctxt "field:esale.state,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:esale.state,shop:"
+msgid "Sale Shop"
+msgstr "Tienda"
+
+msgctxt "field:esale.state,state:"
+msgid "Sale State"
+msgstr "Estado de la venta"
+
+msgctxt "field:esale.state,write_date:"
+msgid "Write Date"
+msgstr "Fecha modificación"
+
+msgctxt "field:esale.state,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
+msgctxt "field:esale.status,cancel:"
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgctxt "field:esale.status,code:"
+msgid "Code"
+msgstr "Código"
+
+msgctxt "field:esale.status,confirm:"
+msgid "Confirm"
+msgstr "Confirmar"
+
+msgctxt "field:esale.status,create_date:"
+msgid "Create Date"
+msgstr "Fecha de creación"
+
+msgctxt "field:esale.status,create_uid:"
+msgid "Create User"
+msgstr "Usuario de creación"
+
+msgctxt "field:esale.status,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:esale.status,invoice_method:"
+msgid "Sale Invoice Method"
+msgstr "Política de facturación"
+
+msgctxt "field:esale.status,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:esale.status,shipment_method:"
+msgid "Sale Shipment Method"
+msgstr "Política de envío"
+
+msgctxt "field:esale.status,shop:"
+msgid "Sale Shop"
+msgstr "Tienda"
+
+msgctxt "field:esale.status,write_date:"
+msgid "Write Date"
+msgstr "Fecha modificación"
+
+msgctxt "field:esale.status,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
+msgctxt "field:party.party,esale_email:"
+msgid "E-Mail"
+msgstr "Correo electrónico"
+
+msgctxt "field:product.template,esale_active:"
+msgid "Active"
+msgstr "Activo"
+
+msgctxt "field:product.template,esale_available:"
+msgid "Available eSale"
+msgstr "Disponible a eSale"
+
+msgctxt "field:product.template,esale_saleshops:"
+msgid "Websites"
+msgstr "Tiendas"
+
+msgctxt "field:product.template-sale.shop,create_date:"
+msgid "Create Date"
+msgstr "Fecha de creación"
+
+msgctxt "field:product.template-sale.shop,create_uid:"
+msgid "Create User"
+msgstr "Usuario de creación"
+
+msgctxt "field:product.template-sale.shop,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:product.template-sale.shop,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:product.template-sale.shop,shop:"
+msgid "Shop"
+msgstr "Tienda"
+
+msgctxt "field:product.template-sale.shop,template:"
+msgid "Template"
+msgstr "Plantilla"
+
+msgctxt "field:product.template-sale.shop,write_date:"
+msgid "Write Date"
+msgstr "Fecha modificación"
+
+msgctxt "field:product.template-sale.shop,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
+msgctxt "field:sale.configuration,sale_category:"
+msgid "Product Category"
+msgstr "Categoría producto"
+
+msgctxt "field:sale.configuration,sale_currency:"
+msgid "Currency"
+msgstr "Moneda"
+
+msgctxt "field:sale.configuration,sale_delivery_product:"
+msgid "Delivery Product"
+msgstr "Producto entrega"
+
+msgctxt "field:sale.configuration,sale_discount_product:"
+msgid "Discount Product"
+msgstr "Producto descuento"
+
+msgctxt "field:sale.configuration,sale_payment:"
+msgid "Default Payment"
+msgstr "Pago por defecto"
+
+msgctxt "field:sale.configuration,sale_payment_term:"
+msgid "Payment Term"
+msgstr "Plazos de pago"
+
+msgctxt "field:sale.configuration,sale_price_list:"
+msgid "Default Price List"
+msgstr "Producto por defecto"
+
+msgctxt "field:sale.configuration,sale_uom_product:"
+msgid "Default UOM"
+msgstr "UdM por defecto"
+
+msgctxt "field:sale.configuration,sale_warehouse:"
+msgid "Default Warehouse"
+msgstr "Almacén por defecto"
+
+msgctxt "field:sale.sale,reference_external:"
+msgid "External Reference"
+msgstr "Referencia externa"
+
+msgctxt "field:sale.sale,status:"
+msgid "Status"
+msgstr "Estados"
+
+msgctxt "field:sale.sale,status_history:"
+msgid "Status history"
+msgstr "Historial de estados"
+
 msgctxt "field:sale.shop,esale_available:"
 msgid "eSale Shop"
 msgstr "Tienda eSale"
 
+msgctxt "field:sale.shop,esale_category:"
+msgid "Default Category"
+msgstr "Categoría por defecto"
+
 msgctxt "field:sale.shop,esale_countrys:"
 msgid "Countries"
 msgstr "Países"
+
+msgctxt "field:sale.shop,esale_currency:"
+msgid "Default currency"
+msgstr "Moneda por defecto"
 
 msgctxt "field:sale.shop,esale_delivery_product:"
 msgid "Delivery Product"
@@ -25,6 +253,10 @@ msgstr "Producto entrega"
 msgctxt "field:sale.shop,esale_discount_product:"
 msgid "Discount Product"
 msgstr "Producto descuento"
+
+msgctxt "field:sale.shop,esale_ext_reference:"
+msgid "External Reference"
+msgstr "Referencia externa"
 
 msgctxt "field:sale.shop,esale_from_orders:"
 msgid "From Orders"
@@ -42,6 +274,10 @@ msgctxt "field:sale.shop,esale_langs:"
 msgid "Langs"
 msgstr "Idiomas"
 
+msgctxt "field:sale.shop,esale_last_state_orders:"
+msgid "Last State Orders"
+msgstr "Últimos estado de pedido"
+
 msgctxt "field:sale.shop,esale_last_status_orders:"
 msgid "Last Status Orders"
 msgstr "Últimos estados pedidos"
@@ -49,6 +285,14 @@ msgstr "Últimos estados pedidos"
 msgctxt "field:sale.shop,esale_log:"
 msgid "Log"
 msgstr "Log"
+
+msgctxt "field:sale.shop,esale_payments:"
+msgid "Payments"
+msgstr "Pagos"
+
+msgctxt "field:sale.shop,esale_prefix_zip:"
+msgid "Country Prefix Zip"
+msgstr "Prefijo código postal"
 
 msgctxt "field:sale.shop,esale_price:"
 msgid "Price"
@@ -61,6 +305,14 @@ msgstr "Planificador de tareas"
 msgctxt "field:sale.shop,esale_shop_app:"
 msgid "Shop APP"
 msgstr "APP Tienda"
+
+msgctxt "field:sale.shop,esale_states:"
+msgid "State"
+msgstr "Estado"
+
+msgctxt "field:sale.shop,esale_status:"
+msgid "Status"
+msgstr "Estados"
 
 msgctxt "field:sale.shop,esale_tax_include:"
 msgid "Tax Include"
@@ -138,9 +390,61 @@ msgctxt "field:sale.shop-ir.lang,write_uid:"
 msgid "Write User"
 msgstr "Usuario modificación"
 
+msgctxt "help:esale.state,code:"
+msgid "State APP code. Code state in your APP"
+msgstr "Código del estado APP"
+
+msgctxt "help:esale.state,notify:"
+msgid "Active APP notification customer"
+msgstr "Activa la notificación del cliente"
+
+msgctxt "help:esale.status,cancel:"
+msgid "Sale change state draft to cancel."
+msgstr "El pedido de venta pasa de borrador a cancelado"
+
+msgctxt "help:esale.status,confirm:"
+msgid "Sale change state draft to confirmed"
+msgstr "El pedido de venta pasa de borrador a confirmado"
+
+msgctxt "help:product.template,esale_active:"
+msgid "If check this, this product can shop it"
+msgstr "Si esta marcado, este producto se puede comprar"
+
+msgctxt "help:product.template,esale_available:"
+msgid ""
+"This product are available in your e-commerce. If you need not publish this "
+"product (despublish), unmark Active field in eSale section."
+msgstr ""
+"Este producto estará disponible en su comercio electrónico. Si no lo desea, "
+"desactiva."
+
+msgctxt "help:product.template,esale_saleshops:"
+msgid "Select shops will be available this product"
+msgstr "Selecciona las tiendas que estará disponible este producto"
+
+msgctxt "help:sale.sale,status:"
+msgid "Last status import/export to e-commerce APP"
+msgstr "Último estado importación/exportació e-commerce APP"
+
 msgctxt "help:sale.shop,esale_available:"
 msgid "This is e-commerce shop."
 msgstr "Es una tienda e-commerce"
+
+msgctxt "help:sale.shop,esale_category:"
+msgid ""
+"Default Category Product when create a new product. In this category, select"
+" an Account Revenue and an Account Expense"
+msgstr ""
+"Categoría por defecto cuando se crea un nuevo producto. En esta categoría "
+"selecciona una cuenta a cobrar y pagar por defecto."
+
+msgctxt "help:sale.shop,esale_currency:"
+msgid "Default currency shop."
+msgstr "Moneda por defecto a la tienda"
+
+msgctxt "help:sale.shop,esale_ext_reference:"
+msgid "Use external reference (Increment) in sale name"
+msgstr "Usar la numeració del pedido de su comercio electrónico"
 
 msgctxt "help:sale.shop,esale_from_orders:"
 msgid "This date is last import (filter)"
@@ -156,6 +460,10 @@ msgstr ""
 "Idioma defecto de la tienda. Si no lo selecciona, se usa el idioma del "
 "usuario"
 
+msgctxt "help:sale.shop,esale_last_state_orders:"
+msgid "This date is last export (filter)"
+msgstr "La fecha de la última exportación (filtro)"
+
 msgctxt "help:sale.shop,esale_last_status_orders:"
 msgid "This date is last export (filter)"
 msgstr "Esta fecha es la última exportación (filtro)"
@@ -163,6 +471,10 @@ msgstr "Esta fecha es la última exportación (filtro)"
 msgctxt "help:sale.shop,esale_log:"
 msgid "Days from delete logs to past"
 msgstr "Dias para eliminar logs antiguos"
+
+msgctxt "help:sale.shop,esale_prefix_zip:"
+msgid "Add country prefix: prefix+zip"
+msgstr "Añadir prefijo del código: prefijo+código postal"
 
 msgctxt "help:sale.shop,esale_scheduler:"
 msgid "Active by crons (import/export)"
@@ -172,6 +484,38 @@ msgctxt "help:sale.shop,esale_to_orders:"
 msgid "This date is to import (filter)"
 msgstr "Esta fecha es para importar (filtro)"
 
+msgctxt "model:esale.payment,name:"
+msgid "eSale Payment"
+msgstr "Pago eSale"
+
+msgctxt "model:esale.state,name:"
+msgid "eSale State"
+msgstr "Estado eSale"
+
+msgctxt "model:esale.status,name:"
+msgid "eSale Status"
+msgstr "Estado eSale"
+
+msgctxt "model:ir.cron,name:cron_esale_export_state"
+msgid "eSale - Export State"
+msgstr "eSale - Exportar estado"
+
+msgctxt "model:ir.cron,name:cron_esale_import_order"
+msgid "eSale - Import Orders"
+msgstr "eSale - Importar pedidos"
+
+msgctxt "model:product.template-sale.shop,name:"
+msgid "Product - Shop"
+msgstr "Producto - Tienda"
+
+msgctxt "model:res.group,name:group_esale"
+msgid "eSale"
+msgstr "eSale"
+
+msgctxt "model:res.user,name:user_esale"
+msgid "Cron eSale"
+msgstr "Cron eSale"
+
 msgctxt "model:sale.shop-country.country,name:"
 msgid "Shop - Country"
 msgstr "Tienda - Pais"
@@ -179,6 +523,46 @@ msgstr "Tienda - Pais"
 msgctxt "model:sale.shop-ir.lang,name:"
 msgid "Shop - Lang"
 msgstr "Tienda - Idioma"
+
+msgctxt "selection:esale.state,state:"
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgctxt "selection:esale.state,state:"
+msgid "Delivery"
+msgstr "Envío"
+
+msgctxt "selection:esale.state,state:"
+msgid "Paid"
+msgstr "Pagado"
+
+msgctxt "selection:esale.state,state:"
+msgid "Paid/Delivery"
+msgstr "Pagado/Entregado"
+
+msgctxt "selection:esale.status,invoice_method:"
+msgid "Manual"
+msgstr "Manual"
+
+msgctxt "selection:esale.status,invoice_method:"
+msgid "On Order Processed"
+msgstr "Al procesar el pedido"
+
+msgctxt "selection:esale.status,invoice_method:"
+msgid "On Shipment Sent"
+msgstr "Al enviar"
+
+msgctxt "selection:esale.status,shipment_method:"
+msgid "Manual"
+msgstr "Manual"
+
+msgctxt "selection:esale.status,shipment_method:"
+msgid "On Invoice Paid"
+msgstr "Al pagar la factura"
+
+msgctxt "selection:esale.status,shipment_method:"
+msgid "On Order Processed"
+msgstr "Al procesar el pedido"
 
 msgctxt "selection:sale.shop,esale_log:"
 msgid "01 Day"
@@ -230,7 +614,11 @@ msgstr "Configuración"
 
 msgctxt "view:sale.shop:"
 msgid "Countries"
-msgstr "Paises"
+msgstr "Países"
+
+msgctxt "view:sale.shop:"
+msgid "Export State"
+msgstr "Exportar estado"
 
 msgctxt "view:sale.shop:"
 msgid "Export Status"
@@ -255,3 +643,7 @@ msgstr "Pedidos"
 msgctxt "view:sale.shop:"
 msgid "eSale"
 msgstr "eSale"
+
+msgctxt "view:sale.shop:"
+msgid "Status"
+msgstr "Estados"
