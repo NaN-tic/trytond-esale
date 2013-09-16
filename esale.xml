@@ -3,6 +3,57 @@
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <tryton>
     <data>
+        <!-- Groups -->
+        <record model="res.group" id="group_esale">
+            <field name="name">eSale</field>
+        </record>
+        <record model="res.user-res.group" id="user_admin_group_esale">
+            <field name="user" ref="res.user_admin"/>
+            <field name="group" ref="group_esale"/>
+        </record>
+
+        <!-- esale.user -->
+        <record model="res.user" id="user_esale">
+            <field name="login">user_cron_internal_esale</field>
+            <field name="name">Cron eSale</field>
+            <field name="signature"></field>
+            <field name="active" eval="False"/>
+        </record>
+        <record model="res.user-res.group" id="user_esale_admin_group">
+            <field name="user" ref="user_esale"/>
+            <field name="group" ref="group_esale"/>
+        </record>
+        <record model="res.user-res.group" id="user_esale_sale_admin_group">
+            <field name="user" ref="user_esale"/>
+            <field name="group" ref="sale.group_sale_admin"/>
+        </record>
+
+        <!-- esale.cron -->
+        <record model="ir.cron" id="cron_esale_import_order">
+            <field name="name">eSale - Import Orders</field>
+            <field name="request_user" ref="res.user_admin"/>
+            <field name="user" ref="user_esale"/>
+            <field name="active" eval="True"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="number_calls">-1</field>
+            <field name="repeat_missed" eval="False"/>
+            <field name="model">sale.shop</field>
+            <field name="function">import_cron_orders</field>
+        </record>
+        <record model="ir.cron" id="cron_esale_export_state">
+            <field name="name">eSale - Export State</field>
+            <field name="request_user" ref="res.user_admin"/>
+            <field name="user" ref="user_esale"/>
+            <field name="active" eval="True"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="number_calls">-1</field>
+            <field name="repeat_missed" eval="False"/>
+            <field name="model">sale.shop</field>
+            <field name="function">export_cron_state</field>
+        </record>
+        <!-- views -->
         <record model="ir.ui.view" id="esale_payment_view_form">
             <field name="model">esale.payment</field>
             <field name="type">form</field>

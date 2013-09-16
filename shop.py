@@ -200,6 +200,18 @@ class SaleShop:
             import_order(shop)
 
     @classmethod
+    def import_cron_orders(cls):
+        """
+        Cron import orders:
+        """
+        shops = cls.search([
+            ('esale_available', '=', True),
+            ('esale_scheduler', '=', True),
+            ])
+        cls.import_orders(shops)
+        return True
+
+    @classmethod
     @ModelView.button
     def export_state(self, shops):
         """
@@ -208,6 +220,18 @@ class SaleShop:
         for shop in shops:
             export_state = getattr(shop, 'export_state_%s' % shop.esale_shop_app)
             export_state(shop)
+
+    @classmethod
+    def export_cron_state(cls):
+        """
+        Cron export state:
+        """
+        shops = cls.search([
+            ('esale_available', '=', True),
+            ('esale_scheduler', '=', True),
+            ])
+        cls.export_state(shops)
+        return True
 
     def import_orders_(self, shop):
         """Import Orders whitout app don't available
