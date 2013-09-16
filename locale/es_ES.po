@@ -647,3 +647,7 @@ msgstr "eSale"
 msgctxt "view:sale.shop:"
 msgid "Status"
 msgstr "Estados"
+
+msgctxt "view:sale.shop:"
+msgid "States"
+msgstr "Estats"
