@@ -36,6 +36,7 @@ class Address:
         if shop.esale_prefix_zip and countries:
             zip = '%s%s' % (countries[0].code, values.get('zip'))
         addresses = Address.search([
+            ('party', '=', party),
             ('street', '=', values.get('street')),
             ('zip', '=', zip),
             ], limit=1)
