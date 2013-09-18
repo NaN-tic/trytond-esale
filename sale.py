@@ -133,6 +133,7 @@ class Sale:
             'description': shipment_description,
             'unit_price': sale_values.get('shipping_price', 0),
             'note': sale_values.get('shipping_note'),
+            'shipment_cost': sale_values.get('shipping_price', 0),
             }]
         shipment_line = Line.esale_dict2lines(sale, line, shipment_values)[0]
         del sale_values['shipping_price']
