@@ -10,6 +10,42 @@ msgctxt "error:sale.shop:"
 msgid "Threre are not orders to import"
 msgstr "No hay pedidos a importar"
 
+msgctxt "field:esale.carrier,carrier:"
+msgid "Carrier"
+msgstr "Transportista"
+
+msgctxt "field:esale.carrier,code:"
+msgid "Code"
+msgstr "Código"
+
+msgctxt "field:esale.carrier,create_date:"
+msgid "Create Date"
+msgstr "Fecha de creación"
+
+msgctxt "field:esale.carrier,create_uid:"
+msgid "Create User"
+msgstr "Usuario de creación"
+
+msgctxt "field:esale.carrier,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:esale.carrier,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:esale.carrier,shop:"
+msgid "Sale Shop"
+msgstr "Tienda"
+
+msgctxt "field:esale.carrier,write_date:"
+msgid "Write Date"
+msgstr "Fecha modificación"
+
+msgctxt "field:esale.carrier,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
 msgctxt "field:esale.payment,code:"
 msgid "Code"
 msgstr "Código"
@@ -233,6 +269,10 @@ msgstr "Historial de estados"
 msgctxt "field:sale.shop,esale_available:"
 msgid "eSale Shop"
 msgstr "Tienda eSale"
+
+msgctxt "field:sale.shop,esale_carriers:"
+msgid "Carriers"
+msgstr "Transportistas"
 
 msgctxt "field:sale.shop,esale_category:"
 msgid "Default Category"
@@ -484,17 +524,21 @@ msgctxt "help:sale.shop,esale_to_orders:"
 msgid "This date is to import (filter)"
 msgstr "Esta fecha es para importar (filtro)"
 
+msgctxt "model:esale.carrier,name:"
+msgid "eSale Carrier"
+msgstr "eSale Transportista"
+
 msgctxt "model:esale.payment,name:"
 msgid "eSale Payment"
-msgstr "Pago eSale"
+msgstr "eSale Tipos de pago"
 
 msgctxt "model:esale.state,name:"
 msgid "eSale State"
-msgstr "Estado eSale"
+msgstr "eSale Estado "
 
 msgctxt "model:esale.status,name:"
 msgid "eSale Status"
-msgstr "Estado eSale"
+msgstr "eSale Estados"
 
 msgctxt "model:ir.cron,name:cron_esale_export_state"
 msgid "eSale - Export State"
@@ -564,38 +608,6 @@ msgctxt "selection:esale.status,shipment_method:"
 msgid "On Order Processed"
 msgstr "Al procesar el pedido"
 
-msgctxt "selection:sale.shop,esale_log:"
-msgid "01 Day"
-msgstr "01 días"
-
-msgctxt "selection:sale.shop,esale_log:"
-msgid "03 Days"
-msgstr "03 días"
-
-msgctxt "selection:sale.shop,esale_log:"
-msgid "05 Days"
-msgstr "05 días"
-
-msgctxt "selection:sale.shop,esale_log:"
-msgid "07 Days"
-msgstr "07 días"
-
-msgctxt "selection:sale.shop,esale_log:"
-msgid "15 Days"
-msgstr "15 días"
-
-msgctxt "selection:sale.shop,esale_log:"
-msgid "30 Days"
-msgstr "30 días"
-
-msgctxt "selection:sale.shop,esale_log:"
-msgid "60 Days"
-msgstr "60 días"
-
-msgctxt "selection:sale.shop,esale_log:"
-msgid "90 Days"
-msgstr "90 días"
-
 msgctxt "selection:sale.shop,esale_price:"
 msgid "Pricelist"
 msgstr "Tarifa"
@@ -641,13 +653,13 @@ msgid "Orders"
 msgstr "Pedidos"
 
 msgctxt "view:sale.shop:"
-msgid "eSale"
-msgstr "eSale"
+msgid "States"
+msgstr "Estats"
 
 msgctxt "view:sale.shop:"
 msgid "Status"
 msgstr "Estados"
 
 msgctxt "view:sale.shop:"
-msgid "States"
-msgstr "Estats"
+msgid "eSale"
+msgstr "eSale"
