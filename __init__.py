@@ -20,6 +20,7 @@ def register():
         SaleShopLang,
         Sale,
         SaleLine,
+        eSaleCarrier,
         eSalePayment,
         eSaleStatus,
         eSaleSate,

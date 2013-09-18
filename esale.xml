@@ -53,7 +53,19 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="model">sale.shop</field>
             <field name="function">export_cron_state</field>
         </record>
+
         <!-- views -->
+        <record model="ir.ui.view" id="esale_carrier_view_form">
+            <field name="model">esale.carrier</field>
+            <field name="type">form</field>
+            <field name="name">esale_carrier_form</field>
+        </record>
+        <record model="ir.ui.view" id="esale_carrier_view_tree">
+            <field name="model">esale.carrier</field>
+            <field name="type">tree</field>
+            <field name="name">esale_carrier_tree</field>
+        </record>
+
         <record model="ir.ui.view" id="esale_payment_view_form">
             <field name="model">esale.payment</field>
             <field name="type">form</field>

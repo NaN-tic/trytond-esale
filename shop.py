@@ -79,6 +79,7 @@ class SaleShop:
         states={
             'required': Eval('esale_available', True),
         }, help='Default currency shop.')
+    esale_carriers = fields.One2Many('esale.carrier', 'shop', 'Carriers')
     esale_payments = fields.One2Many('esale.payment', 'shop', 'Payments')
     esale_status = fields.One2Many('esale.status', 'shop', 'Status')
     esale_states = fields.One2Many('esale.state', 'shop', 'State')

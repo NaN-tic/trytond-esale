@@ -4,7 +4,7 @@
 from trytond.model import fields, ModelSQL, ModelView
 from trytond.pool import PoolMeta
 
-__all__ = ['eSalePayment', 'eSaleStatus', 'eSaleSate']
+__all__ = ['eSaleCarrier', 'eSalePayment', 'eSaleStatus', 'eSaleSate']
 __metaclass__ = PoolMeta
 
 SALE_STATES = [
@@ -13,6 +13,15 @@ SALE_STATES = [
     ('paid-shipment', 'Paid/Delivery'),
     ('cancel', 'Cancel'),
     ]
+
+
+class eSaleCarrier(ModelSQL, ModelView):
+    'eSale Carrier'
+    __name__ = 'esale.carrier'
+    _rec_name = 'code'
+    code = fields.Char('Code', required=True)
+    carrier = fields.Many2One('carrier', 'Carrier', required=True)
+    shop = fields.Many2One('sale.shop', 'Sale Shop', required=True)
 
 
 class eSalePayment(ModelSQL, ModelView):
