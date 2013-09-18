@@ -36,7 +36,7 @@ class Sale:
         Line = pool.get('sale.line')
         Party = pool.get('party.party')
         Address = pool.get('party.address')
-        Carrier = pool.get('carrier')
+        eSaleCarrier = pool.get('esale.carrier')
         eSalePayment = pool.get('esale.payment')
         eSaleStatus = pool.get('esale.status')
         Product = pool.get('product.product')
@@ -114,11 +114,12 @@ class Sale:
         lines = Line.esale_dict2lines(sale, line, lines_values)
 
         #Carrier + delivery line
-        carriers = Carrier.search([
+        carriers = eSaleCarrier.search([
             ('code', '=', sale_values.get('carrier')),
+            ('shop', '=', shop.id),
             ], limit=1)
         if carriers:
-            carrier = carriers[0]
+            carrier = carriers[0].carrier
             sale_values['carrier'] = carrier
             product_delivery = carrier.carrier_product
             shipment_description = carrier.rec_name
