@@ -31,6 +31,10 @@ class Template:
             ],
             help='Select shops will be available this product')
 
+    @staticmethod
+    def default_esale_saleshops():
+        Shop = Pool().get('sale.shop')
+        return [p.id for p in Shop.search([('esale_available','=',True)])]
 
     @classmethod
     def create_esale_product(self, shop, tvals, pvals):
