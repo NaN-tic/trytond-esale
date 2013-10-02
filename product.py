@@ -15,25 +15,12 @@ __metaclass__ = PoolMeta
 class Template:
     "Product Template"
     __name__ = 'product.template'
-    esale_available = fields.Boolean('Available eSale',
-            states={
-                'readonly': Eval('esale_available', True),
-            },
-            help='This product are available in your e-commerce. ' \
-            'If you need not publish this product (despublish), ' \
-            'unmark Active field in eSale section.')
-    esale_active = fields.Boolean('Active',
-            help='If check this, this product can shop it')
     esale_saleshops = fields.Many2Many('product.template-sale.shop', 
             'template', 'shop', 'Websites',
             domain=[
                 ('esale_available', '=', True)
             ],
             help='Select shops will be available this product')
-
-    @staticmethod
-    def default_esale_active():
-        return True
 
     @staticmethod
     def default_esale_saleshops():
