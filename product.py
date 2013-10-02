@@ -5,6 +5,7 @@ from trytond.model import fields, ModelSQL
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Eval
 from trytond.transaction import Transaction
+from trytond.modules.product_esale.tools import slugify
 
 import logging
 
@@ -36,6 +37,7 @@ class Template:
         :param pvals: dict product values
         return obj
         '''
+        shops = None
         Template = Pool().get('product.template')
 
         #Default values
@@ -47,10 +49,12 @@ class Template:
         tvals['sale_uom'] = shop.esale_uom_product
         tvals['account_category'] = True
         tvals['products'] = [('create', [pvals])]
+        if not tvals.get('esale_slug'):
+            tvals['esale_slug'] = slugify(tvals.get('name'))
 
         if tvals.get('esale_saleshops'):
             shops = tvals.get('esale_saleshops')
-            del tvals['esale_saleshops']
+        tvals['esale_saleshops'] = []
 
         template = Template.create([tvals])[0]
         Transaction().cursor.commit()
