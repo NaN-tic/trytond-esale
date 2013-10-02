@@ -3,6 +3,10 @@ msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 msgctxt "error:sale.shop:"
+msgid "Select a shop in preferences user"
+msgstr "Selecciona una botiga en les preferencies del usuari"
+
+msgctxt "error:sale.shop:"
 msgid "Threre are not orders to export"
 msgstr "No hi han comandes a exportar"
 
