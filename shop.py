@@ -7,8 +7,6 @@ from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Eval
 
 import time
-import logging
-import threading
 
 __all__ = ['SaleShop', 'SaleShopCountry', 'SaleShopLang']
 __metaclass__ = PoolMeta

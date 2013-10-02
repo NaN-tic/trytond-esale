@@ -1,7 +1,7 @@
 #This file is part esale module for Tryton.
 #The COPYRIGHT file at the top level of this repository contains 
 #the full copyright notices and license terms.
-from trytond.model import fields, ModelSQL, ModelView
+from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 
@@ -12,7 +12,6 @@ __metaclass__ = PoolMeta
 
 
 class Sale:
-    'Sale'
     __name__ = 'sale.sale'
     reference_external = fields.Char('External Reference', readonly=True, select=True)
     status = fields.Char('Status', readonly=True,
@@ -39,7 +38,6 @@ class Sale:
         eSaleCarrier = pool.get('esale.carrier')
         eSalePayment = pool.get('esale.payment')
         eSaleStatus = pool.get('esale.status')
-        Product = pool.get('product.product')
         Currency = Pool().get('currency.currency')
 
         #Default Sale values

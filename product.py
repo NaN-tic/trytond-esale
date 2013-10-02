@@ -3,7 +3,6 @@
 #the full copyright notices and license terms.
 from trytond.model import fields, ModelSQL
 from trytond.pool import Pool, PoolMeta
-from trytond.pyson import Eval
 from trytond.transaction import Transaction
 from trytond.modules.product_esale.tools import slugify
 
@@ -14,7 +13,6 @@ __metaclass__ = PoolMeta
 
 
 class Template:
-    "Product Template"
     __name__ = 'product.template'
     esale_saleshops = fields.Many2Many('product.template-sale.shop', 
             'template', 'shop', 'Websites',
