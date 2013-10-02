@@ -244,7 +244,7 @@ msgstr "Termini de pagament"
 
 msgctxt "field:sale.configuration,sale_price_list:"
 msgid "Default Price List"
-msgstr "Tarifa de venta per defecte"
+msgstr "Tarifa de venda per defecte"
 
 msgctxt "field:sale.configuration,sale_uom_product:"
 msgid "Default UOM"
@@ -614,7 +614,7 @@ msgstr "Tarifa"
 
 msgctxt "selection:sale.shop,esale_price:"
 msgid "Sale Price"
-msgstr "Preu venta"
+msgstr "Preu venda"
 
 msgctxt "view:sale.shop:"
 msgid "Actions"
