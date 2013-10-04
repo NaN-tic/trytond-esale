@@ -58,8 +58,8 @@ class Template:
         Transaction().cursor.commit()
         if shops:
             Template.write([template], {'esale_saleshops': shops})
-        logging.getLogger('magento sale').info(
-            'Magento %s. Create product %s' % (shop.name, pvals['code']))
+        logging.getLogger('esale').info(
+            'Shop %s. Create product %s' % (shop.name, pvals['code']))
         return template.products[0]
 
 

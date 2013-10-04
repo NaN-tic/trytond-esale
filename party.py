@@ -65,6 +65,6 @@ class Party:
         if not party:
             values['addresses'] = None
             party = Party.create([values])[0]
-            logging.getLogger('magento party').info(
-                'Magento website %s. Create party ID %s' % (shop.name, party.id))
+            logging.getLogger('eSale').info(
+                'Shop %s. Create party ID %s' % (shop.name, party.id))
         return party
