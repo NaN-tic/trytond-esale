@@ -96,10 +96,6 @@ class Sale:
             sale_status = status[0]
             sale_values['invoice_method'] = sale_status.invoice_method
             sale_values['shipment_method'] = sale_status.shipment_method
-            if sale_status.confirm:
-                sale_values['state'] = 'confirmed'
-            if sale_status.cancel:
-                sale_values['state'] = 'cancel'
 
         #Lines
         sale = Sale()
@@ -172,8 +168,18 @@ class Sale:
         Transaction().cursor.commit() #TODO: Add because get error when save order: could not serialize access due to concurrent update
         sale = Sale.create([sale_values])[0]
         logging.getLogger('esale').info(
-            'Shop %s. Create order %s' % (shop.name, sale.reference_external))
+            'Shop %s. Create sale %s' % (shop.name, sale.reference_external))
 
+        if status:
+            if sale_status.confirm:
+                Sale.quote([sale])
+                Sale.confirm([sale])
+                logging.getLogger('esale').info(
+                    'Confirm sale %s' % (sale.reference_external))
+            if sale_status.cancel:
+                Sale.cancel([sale])
+                logging.getLogger('esale').info(
+                    'Cancel sale %s' % (sale.reference_external))
 
 class SaleLine:
     'Sale Line'
