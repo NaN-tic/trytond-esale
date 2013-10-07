@@ -17,7 +17,7 @@ from trytond.tests.test_tryton import test_view, test_depends
 
 class eSaleTestCase(unittest.TestCase):
     '''
-    Test Helloword module.
+    Test eSale module.
     '''
 
     def setUp(self):
