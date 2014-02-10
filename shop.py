@@ -37,24 +37,20 @@ class SaleShop:
     esale_delivery_product = fields.Many2One('product.product', 'Delivery Product',
         states={
             'required': Eval('esale_available', True),
-        },
-    )
+        },)
     esale_discount_product = fields.Many2One('product.product', 'Discount Product',
         states={
             'required': Eval('esale_available', True),
-        },
-    )
+        },)
     esale_uom_product = fields.Many2One('product.uom', 'Default UOM', 
         states={
             'required': Eval('esale_available', True),
-        },
-    )
+        },)
     esale_category = fields.Many2One('product.category', 'Default Category', 
         states={
             'required': Eval('esale_available', True),
         }, help='Default Category Product when create a new product. In this '
-        'category, select an Account Revenue and an Account Expense'
-    )
+        'category, select an Account Revenue and an Account Expense',)
     esale_lang = fields.Many2One('ir.lang', 'Default language',
         states={
             'required': Eval('esale_available', True),
@@ -64,7 +60,7 @@ class SaleShop:
     esale_price = fields.Selection([
             ('saleprice','Sale Price'),
             ('pricelist','Pricelist'),
-    ], 'Price', states={
+            ], 'Price', states={
                 'required': Eval('esale_available', True),
             },)
     esale_from_orders = fields.DateTime('From Orders', 
