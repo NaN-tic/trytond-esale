@@ -4,15 +4,15 @@ msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 msgctxt "error:sale.shop:"
 msgid "Select a shop in preferences user"
-msgstr "Selecciona una tienda en las preferencias del usuario"
+msgstr "Seleccione una tienda en las preferencias del usuario."
 
 msgctxt "error:sale.shop:"
 msgid "Threre are not orders to export"
-msgstr "No hay pedidos para exportar"
+msgstr "No hay pedidos para exportar."
 
 msgctxt "error:sale.shop:"
 msgid "Threre are not orders to import"
-msgstr "No hay pedidos a importar"
+msgstr "No hay pedidos a importar."
 
 msgctxt "field:esale.carrier,carrier:"
 msgid "Carrier"
@@ -24,11 +24,11 @@ msgstr "Código"
 
 msgctxt "field:esale.carrier,create_date:"
 msgid "Create Date"
-msgstr "Fecha de creación"
+msgstr "Fecha creación"
 
 msgctxt "field:esale.carrier,create_uid:"
 msgid "Create User"
-msgstr "Usuario de creación"
+msgstr "Usuario creación"
 
 msgctxt "field:esale.carrier,id:"
 msgid "ID"
@@ -56,11 +56,11 @@ msgstr "Código"
 
 msgctxt "field:esale.payment,create_date:"
 msgid "Create Date"
-msgstr "Fecha de creación"
+msgstr "Fecha creación"
 
 msgctxt "field:esale.payment,create_uid:"
 msgid "Create User"
-msgstr "Usuario de creación"
+msgstr "Usuario creación"
 
 msgctxt "field:esale.payment,id:"
 msgid "ID"
@@ -92,11 +92,11 @@ msgstr "Código estado APP"
 
 msgctxt "field:esale.state,create_date:"
 msgid "Create Date"
-msgstr "Fecha de creación"
+msgstr "Fecha creación"
 
 msgctxt "field:esale.state,create_uid:"
 msgid "Create User"
-msgstr "Usuario de creación"
+msgstr "Usuario creación"
 
 msgctxt "field:esale.state,id:"
 msgid "ID"
@@ -140,11 +140,11 @@ msgstr "Confirmar"
 
 msgctxt "field:esale.status,create_date:"
 msgid "Create Date"
-msgstr "Fecha de creación"
+msgstr "Fecha creación"
 
 msgctxt "field:esale.status,create_uid:"
 msgid "Create User"
-msgstr "Usuario de creación"
+msgstr "Usuario creación"
 
 msgctxt "field:esale.status,id:"
 msgid "ID"
@@ -184,7 +184,7 @@ msgstr "Activo"
 
 msgctxt "field:product.template,esale_available:"
 msgid "Available eSale"
-msgstr "Disponible a eSale"
+msgstr "Disponible en eSale"
 
 msgctxt "field:product.template,esale_saleshops:"
 msgid "Websites"
@@ -192,11 +192,11 @@ msgstr "Tiendas"
 
 msgctxt "field:product.template-sale.shop,create_date:"
 msgid "Create Date"
-msgstr "Fecha de creación"
+msgstr "Fecha creación"
 
 msgctxt "field:product.template-sale.shop,create_uid:"
 msgid "Create User"
-msgstr "Usuario de creación"
+msgstr "Usuario creación"
 
 msgctxt "field:product.template-sale.shop,id:"
 msgid "ID"
@@ -232,7 +232,7 @@ msgstr "Moneda"
 
 msgctxt "field:sale.configuration,sale_delivery_product:"
 msgid "Delivery Product"
-msgstr "Producto entrega"
+msgstr "Producto envío"
 
 msgctxt "field:sale.configuration,sale_discount_product:"
 msgid "Discount Product"
@@ -292,7 +292,7 @@ msgstr "Moneda por defecto"
 
 msgctxt "field:sale.shop,esale_delivery_product:"
 msgid "Delivery Product"
-msgstr "Producto entrega"
+msgstr "Producto envío"
 
 msgctxt "field:sale.shop,esale_discount_product:"
 msgid "Discount Product"
@@ -312,7 +312,7 @@ msgstr "Buscar tercero por CIF/NIF"
 
 msgctxt "field:sale.shop,esale_lang:"
 msgid "Default language"
-msgstr "Idioma defecto"
+msgstr "Idioma por defecto"
 
 msgctxt "field:sale.shop,esale_langs:"
 msgid "Langs"
@@ -320,7 +320,7 @@ msgstr "Idiomas"
 
 msgctxt "field:sale.shop,esale_last_state_orders:"
 msgid "Last State Orders"
-msgstr "Últimos estado de pedido"
+msgstr "Últimos estados de los pedidos"
 
 msgctxt "field:sale.shop,esale_last_status_orders:"
 msgid "Last Status Orders"
@@ -376,11 +376,11 @@ msgstr "País"
 
 msgctxt "field:sale.shop-country.country,create_date:"
 msgid "Create Date"
-msgstr "Fecha de creación"
+msgstr "Fecha creación"
 
 msgctxt "field:sale.shop-country.country,create_uid:"
 msgid "Create User"
-msgstr "Usuario de creación"
+msgstr "Usuario creación"
 
 msgctxt "field:sale.shop-country.country,id:"
 msgid "ID"
@@ -404,11 +404,11 @@ msgstr "Usuario modificación"
 
 msgctxt "field:sale.shop-ir.lang,create_date:"
 msgid "Create Date"
-msgstr "Fecha de creación"
+msgstr "Fecha creación"
 
 msgctxt "field:sale.shop-ir.lang,create_uid:"
 msgid "Create User"
-msgstr "Usuario de creación"
+msgstr "Usuario creación"
 
 msgctxt "field:sale.shop-ir.lang,id:"
 msgid "ID"
@@ -436,23 +436,23 @@ msgstr "Usuario modificación"
 
 msgctxt "help:esale.state,code:"
 msgid "State APP code. Code state in your APP"
-msgstr "Código del estado APP"
+msgstr "Código del estado APP."
 
 msgctxt "help:esale.state,notify:"
 msgid "Active APP notification customer"
-msgstr "Activa la notificación del cliente"
+msgstr "Activa la notificación del cliente."
 
 msgctxt "help:esale.status,cancel:"
 msgid "Sale change state draft to cancel."
-msgstr "El pedido de venta pasa de borrador a cancelado"
+msgstr "El pedido de venta cambia de borrador a cancelado."
 
 msgctxt "help:esale.status,confirm:"
 msgid "Sale change state draft to confirmed"
-msgstr "El pedido de venta pasa de borrador a confirmado"
+msgstr "El pedido de venta cambia de borrador a confirmado."
 
 msgctxt "help:product.template,esale_active:"
 msgid "If check this, this product can shop it"
-msgstr "Si esta marcado, este producto se puede comprar"
+msgstr "Si está marcado, este producto se puede comprar."
 
 msgctxt "help:product.template,esale_available:"
 msgid ""
@@ -460,19 +460,19 @@ msgid ""
 "product (despublish), unmark Active field in eSale section."
 msgstr ""
 "Este producto estará disponible en su comercio electrónico. Si no lo desea, "
-"desactiva."
+"desactívelo."
 
 msgctxt "help:product.template,esale_saleshops:"
 msgid "Select shops will be available this product"
-msgstr "Selecciona las tiendas que estará disponible este producto"
+msgstr "Seleccione las tiendas donde estará disponible este producto."
 
 msgctxt "help:sale.sale,status:"
 msgid "Last status import/export to e-commerce APP"
-msgstr "Último estado importación/exportació e-commerce APP"
+msgstr "Último estado importación/exportación e-commerce APP."
 
 msgctxt "help:sale.shop,esale_available:"
 msgid "This is e-commerce shop."
-msgstr "Es una tienda e-commerce"
+msgstr "Es una tienda e-commerce."
 
 msgctxt "help:sale.shop,esale_category:"
 msgid ""
@@ -480,53 +480,53 @@ msgid ""
 " an Account Revenue and an Account Expense"
 msgstr ""
 "Categoría por defecto cuando se crea un nuevo producto. En esta categoría "
-"selecciona una cuenta a cobrar y pagar por defecto."
+"seleccione una cuenta a cobrar y pagar por defecto."
 
 msgctxt "help:sale.shop,esale_currency:"
 msgid "Default currency shop."
-msgstr "Moneda por defecto a la tienda"
+msgstr "Moneda por defecto en la tienda."
 
 msgctxt "help:sale.shop,esale_ext_reference:"
 msgid "Use external reference (Increment) in sale name"
-msgstr "Usar la numeració del pedido de su comercio electrónico"
+msgstr "Usar la numeración del pedido de su comercio electrónico."
 
 msgctxt "help:sale.shop,esale_from_orders:"
 msgid "This date is last import (filter)"
-msgstr "Esta fecha es la última importación (filtro)"
+msgstr "Esta fecha es la última importación (filtro)."
 
 msgctxt "help:sale.shop,esale_get_party_by_vat:"
 msgid "If there is another party with same vat, not create party"
-msgstr "Si existe un tercero con el mismo CIF/NIF, no crea ningún tercero"
+msgstr "Si existe un tercero con el mismo CIF/NIF, no crea ningún tercero."
 
 msgctxt "help:sale.shop,esale_lang:"
 msgid "Default language shop. If not select, use lang user"
 msgstr ""
-"Idioma defecto de la tienda. Si no lo selecciona, se usa el idioma del "
-"usuario"
+"Idioma por defecto de la tienda. Si no lo selecciona, se usa el idioma del "
+"usuario."
 
 msgctxt "help:sale.shop,esale_last_state_orders:"
 msgid "This date is last export (filter)"
-msgstr "La fecha de la última exportación (filtro)"
+msgstr "Esta es la fecha de la última exportación (filtro)."
 
 msgctxt "help:sale.shop,esale_last_status_orders:"
 msgid "This date is last export (filter)"
-msgstr "Esta fecha es la última exportación (filtro)"
+msgstr "Esta es la fecha de la última exportación (filtro)."
 
 msgctxt "help:sale.shop,esale_log:"
 msgid "Days from delete logs to past"
-msgstr "Dias para eliminar logs antiguos"
+msgstr "Días para eliminar logs antiguos."
 
 msgctxt "help:sale.shop,esale_prefix_zip:"
 msgid "Add country prefix: prefix+zip"
-msgstr "Añadir prefijo del código: prefijo+código postal"
+msgstr "Añadir prefijo del código: prefijo+código postal."
 
 msgctxt "help:sale.shop,esale_scheduler:"
 msgid "Active by crons (import/export)"
-msgstr "Activo en la planificación (importar/exportar)"
+msgstr "Activo en la planificación (importar/exportar)."
 
 msgctxt "help:sale.shop,esale_to_orders:"
 msgid "This date is to import (filter)"
-msgstr "Esta fecha es para importar (filtro)"
+msgstr "Esta fecha es para importar (filtro)."
 
 msgctxt "model:esale.carrier,name:"
 msgid "eSale Carrier"
@@ -586,7 +586,7 @@ msgstr "Pagado"
 
 msgctxt "selection:esale.state,state:"
 msgid "Paid/Delivery"
-msgstr "Pagado/Entregado"
+msgstr "Pagado/Enviado"
 
 msgctxt "selection:esale.status,invoice_method:"
 msgid "Manual"
@@ -658,7 +658,7 @@ msgstr "Pedidos"
 
 msgctxt "view:sale.shop:"
 msgid "States"
-msgstr "Estats"
+msgstr "Estados"
 
 msgctxt "view:sale.shop:"
 msgid "Status"
