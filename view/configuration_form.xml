@@ -13,8 +13,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <field name="sale_category"/>
         <label name="sale_warehouse"/>
         <field name="sale_warehouse"/>
-        <label name="sale_payment"/>
-        <field name="sale_payment"/>
+        <label name="sale_payment_type"/>
+        <field name="sale_payment_type"/>
         <label name="sale_payment_term"/>
         <field name="sale_payment_term"/>
         <label name="sale_price_list"/>

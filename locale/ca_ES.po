@@ -238,13 +238,13 @@ msgctxt "field:sale.configuration,sale_discount_product:"
 msgid "Discount Product"
 msgstr "Producte descompte"
 
-msgctxt "field:sale.configuration,sale_payment:"
-msgid "Default Payment"
-msgstr "Pagament per defecte"
+msgctxt "field:sale.configuration,sale_payment_type:"
+msgid "Default Payment Type"
+msgstr "Tipus de pagament per defecte"
 
 msgctxt "field:sale.configuration,sale_payment_term:"
-msgid "Payment Term"
-msgstr "Termini de pagament"
+msgid "Default Payment Term"
+msgstr "Termini de pagament per defecte"
 
 msgctxt "field:sale.configuration,sale_price_list:"
 msgid "Default Price List"
