@@ -334,10 +334,6 @@ msgctxt "field:sale.shop,esale_payments:"
 msgid "Payments"
 msgstr "Pagaments"
 
-msgctxt "field:sale.shop,esale_prefix_zip:"
-msgid "Country Prefix Zip"
-msgstr "Prefix codi postal"
-
 msgctxt "field:sale.shop,esale_price:"
 msgid "Price"
 msgstr "Preu"
@@ -515,10 +511,6 @@ msgstr "Aquesta és la data de l'última exportació (filtre)."
 msgctxt "help:sale.shop,esale_log:"
 msgid "Days from delete logs to past"
 msgstr "Dies per eliminar logs antics."
-
-msgctxt "help:sale.shop,esale_prefix_zip:"
-msgid "Add country prefix: prefix+zip"
-msgstr "Afegeix el país al prefix: prefix+codi postal."
 
 msgctxt "help:sale.shop,esale_scheduler:"
 msgid "Active by crons (import/export)"
