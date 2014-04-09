@@ -24,11 +24,11 @@ class Sale:
         '''
         Create external order in sale
         :param shop: obj
-        :param salev: dict
-        :param linesv: list
-        :param partyv: dict
-        :param invoicev: dict
-        :param shipmentv: dict
+        :param sale_values: dict
+        :param lines_values: list
+        :param party_values: dict
+        :param invoice_values: dict
+        :param shipment_values: dict
         '''
         pool = Pool()
         Sale = pool.get('sale.sale')
@@ -70,8 +70,8 @@ class Sale:
 
         #Currency
         currencies = Currency.search([
-            ('code', '=', sale_values.get('currency')),
-            ], limit=1)
+                ('code', '=', sale_values.get('currency')),
+                ], limit=1)
         if currencies:
             sale_values['currency'] = currencies[0].id
         else:
@@ -80,18 +80,18 @@ class Sale:
         #Payment
         if sale_values.get('payment'):
             payments = eSalePayment.search([
-                ('code', '=', sale_values.get('payment')),
-                ('shop', '=', shop.id),
-                ], limit=1)
+                    ('code', '=', sale_values.get('payment')),
+                    ('shop', '=', shop.id),
+                    ], limit=1)
             if payments:
                 sale_values['payment_type'] = payments[0].payment_type
         del sale_values['payment']
 
         #Status
         status = eSaleStatus.search([
-            ('code', '=', sale_values.get('status')),
-            ('shop', '=', shop.id),
-            ], limit=1)
+                ('code', '=', sale_values.get('status')),
+                ('shop', '=', shop.id),
+                ], limit=1)
         if status:
             sale_status = status[0]
             sale_values['invoice_method'] = sale_status.invoice_method
@@ -122,13 +122,13 @@ class Sale:
             product_delivery = shop.esale_delivery_product
             shipment_description = product_delivery.name
         shipment_values = [{
-            'product': product_delivery.code or product_delivery.name,
-            'quantity': 1,
-            'description': shipment_description,
-            'unit_price': sale_values.get('shipping_price', 0),
-            'note': sale_values.get('shipping_note'),
-            'shipment_cost': sale_values.get('shipping_price', 0),
-            }]
+                'product': product_delivery.code or product_delivery.name,
+                'quantity': 1,
+                'description': shipment_description,
+                'unit_price': sale_values.get('shipping_price', 0),
+                'note': sale_values.get('shipping_note'),
+                'shipment_cost': sale_values.get('shipping_price', 0),
+                }]
         shipment_line = Line.esale_dict2lines(sale, line, shipment_values)[0]
         del sale_values['shipping_price']
         del sale_values['shipping_note']
@@ -137,11 +137,12 @@ class Sale:
         discount_line = None
         if sale_values.get('discount') != 0.0000:
             discount_values = [{
-                'product': shop.esale_discount_product.code or shop.esale_discount_product.name,
-                'quantity': 1,
-                'description': shop.esale_discount_product.name,
-                'unit_price': sale_values.get('discount', 0),
-                }]
+                    'product': shop.esale_discount_product.code or \
+                            shop.esale_discount_product.name,
+                    'quantity': 1,
+                    'description': shop.esale_discount_product.name,
+                    'unit_price': sale_values.get('discount', 0),
+                    }]
             discount_line = Line.esale_dict2lines(sale, line, discount_values)[0]
         del sale_values['discount']
 
@@ -166,7 +167,7 @@ class Sale:
 
         #Create Sale
         Transaction().cursor.commit() #TODO: Add because get error when save order: could not serialize access due to concurrent update
-        sale = Sale.create([sale_values])[0]
+        sale, = Sale.create([sale_values])
         logging.getLogger('esale').info(
             'Shop %s. Create sale %s' % (shop.name, sale.reference_external))
 
@@ -203,9 +204,9 @@ class SaleLine:
         for l in values:
             code = l.get('product')
             products = Product.search(['OR',
-                ('name', '=', code),
-                ('code', '=', code),
-                ], limit=1)
+                    ('name', '=', code),
+                    ('code', '=', code),
+                    ], limit=1)
             if products:
                 product = products[0]
             else:
