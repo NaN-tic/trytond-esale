@@ -54,13 +54,16 @@ class Template:
             shops = tvals.get('esale_saleshops')
         tvals['esale_saleshops'] = []
 
-        template = Template.create([tvals])[0]
-        Transaction().cursor.commit()
-        if shops:
-            Template.write([template], {'esale_saleshops': shops})
+        with Transaction().set_user(1, set_context=True): #TODO: force admin user create sale
+            template, = Template.create([tvals])
+            Transaction().cursor.commit()
+            if shops:
+                Template.write([template], {'esale_saleshops': shops})
+            product, = template.products
+
         logging.getLogger('esale').info(
-            'Shop %s. Create product %s' % (shop.name, pvals['code']))
-        return template.products[0]
+            'Shop %s. Create product %s' % (shop.name, product.rec_name))
+        return product
 
 
 class TemplateSaleShop(ModelSQL):
