@@ -30,7 +30,7 @@ class eSalePayment(ModelSQL, ModelView):
     _rec_name = 'code'
     code = fields.Char('Code', required=True)
     payment_type = fields.Many2One('account.payment.type', 'Payment Type',
-        required=True)
+        domain=[('kind', '=', 'receivable')], required=True)
     shop = fields.Many2One('sale.shop', 'Sale Shop', required=True)
 
 
