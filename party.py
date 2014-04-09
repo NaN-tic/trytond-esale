@@ -3,6 +3,7 @@
 #the full copyright notices and license terms.
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
+from trytond.transaction import Transaction
 
 import logging
 
@@ -18,7 +19,6 @@ __metaclass__ = PoolMeta
 
 
 class Party:
-    'Party'
     __name__ = 'party.party'
     esale_email = fields.Char('E-Mail')
 
@@ -63,8 +63,9 @@ class Party:
                 party = parties[0]
 
         if not party:
-            values['addresses'] = None
-            party = Party.create([values])[0]
-            logging.getLogger('eSale').info(
-                'Shop %s. Create party ID %s' % (shop.name, party.id))
+            with Transaction().set_user(1, set_context=True): #TODO: force admin user create party
+                values['addresses'] = None
+                party, = Party.create([values])
+                logging.getLogger('eSale').info(
+                    'Shop %s. Create party ID %s' % (shop.name, party.id))
         return party

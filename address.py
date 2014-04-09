@@ -2,6 +2,7 @@
 #The COPYRIGHT file at the top level of this repository contains 
 #the full copyright notices and license terms.
 from trytond.pool import Pool, PoolMeta
+from trytond.transaction import Transaction
 
 import logging
 
@@ -10,7 +11,6 @@ __metaclass__ = PoolMeta
 
 
 class Address:
-    "Address"
     __name__ = 'party.address'
 
     @classmethod
@@ -50,10 +50,11 @@ class Address:
             if(type == 'delivery' and not address.delivery):
                 delivery = True
             if(invoice or delivery):
-                Address.write([address], {
-                    'delivery': delivery,
-                    'invoice': invoice,
-                    })
+                with Transaction().set_user(1, set_context=True): #TODO: force admin user create adress
+                    Address.write([address], {
+                        'delivery': delivery,
+                        'invoice': invoice,
+                        })
         else:
             address_contacts = []
             if values.get('phone'):
@@ -82,15 +83,16 @@ class Address:
                 values['delivery'] = True
                 values['invoice'] = True
 
-            address = Address.create([values])[0]
-            logging.getLogger('eSale').info(
-                'Shop %s. Create address ID %s' % (shop.name, address.id))
+            with Transaction().set_user(1, set_context=True): #TODO: force admin user create adress
+                address, = Address.create([values])
+                logging.getLogger('eSale').info(
+                    'Shop %s. Create address ID %s' % (shop.name, address.id))
 
-            for contact in address_contacts:
-                ContactMechanism.create([{
-                    'party': party,
-                    'address': address,
-                    'type': contact['type'],
-                    'value': contact['value'],
-                    }])
+                for contact in address_contacts:
+                    ContactMechanism.create([{
+                        'party': party,
+                        'address': address,
+                        'type': contact['type'],
+                        'value': contact['value'],
+                        }])
         return address
