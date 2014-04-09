@@ -238,13 +238,13 @@ msgctxt "field:sale.configuration,sale_discount_product:"
 msgid "Discount Product"
 msgstr "Producte descompte"
 
-msgctxt "field:sale.configuration,sale_payment_type:"
-msgid "Default Payment Type"
-msgstr "Tipus de pagament per defecte"
-
 msgctxt "field:sale.configuration,sale_payment_term:"
 msgid "Default Payment Term"
 msgstr "Termini de pagament per defecte"
+
+msgctxt "field:sale.configuration,sale_payment_type:"
+msgid "Default Payment Type"
+msgstr "Tipus de pagament per defecte"
 
 msgctxt "field:sale.configuration,sale_price_list:"
 msgid "Default Price List"
@@ -321,14 +321,6 @@ msgstr "Idiomes"
 msgctxt "field:sale.shop,esale_last_state_orders:"
 msgid "Last State Orders"
 msgstr "Últims estats de les comandes"
-
-msgctxt "field:sale.shop,esale_last_status_orders:"
-msgid "Last Status Orders"
-msgstr "Últims estats comandes"
-
-msgctxt "field:sale.shop,esale_log:"
-msgid "Log"
-msgstr "Log"
 
 msgctxt "field:sale.shop,esale_payments:"
 msgid "Payments"
@@ -446,17 +438,13 @@ msgctxt "help:esale.status,confirm:"
 msgid "Sale change state draft to confirmed"
 msgstr "Canvia la comanda de venda d'esborrany a confirmat."
 
-msgctxt "help:product.template,esale_active:"
-msgid "If check this, this product can shop it"
-msgstr "Si el seleccioneu, aquest producte es podrà comprar."
-
 msgctxt "help:product.template,esale_available:"
 msgid ""
 "This product are available in your e-commerce. If you need not publish this "
 "product (despublish), unmark Active field in eSale section."
 msgstr ""
-"Aquest producte està disponible en el vostre e-commerce. Si necessiteu que no "
-"estigui disponible, desactiveu-lo."
+"Aquest producte està disponible en el vostre e-commerce. Si necessiteu que "
+"no estigui disponible, desactiveu-lo."
 
 msgctxt "help:product.template,esale_saleshops:"
 msgid "Select shops will be available this product"
@@ -497,20 +485,12 @@ msgstr "Si existeix un tercer amb el mateix CIF/NIF, no crea cap tercer."
 msgctxt "help:sale.shop,esale_lang:"
 msgid "Default language shop. If not select, use lang user"
 msgstr ""
-"Idioma per defecte de la botiga. Si no el seleccioneu, s'utilitza l'idioma de "
-"l'usuari."
+"Idioma per defecte de la botiga. Si no el seleccioneu, s'utilitza l'idioma "
+"de l'usuari."
 
 msgctxt "help:sale.shop,esale_last_state_orders:"
 msgid "This date is last export (filter)"
 msgstr "Aquesta és la data de l'última exportació (filtre)."
-
-msgctxt "help:sale.shop,esale_last_status_orders:"
-msgid "This date is last export (filter)"
-msgstr "Aquesta és la data de l'última exportació (filtre)."
-
-msgctxt "help:sale.shop,esale_log:"
-msgid "Days from delete logs to past"
-msgstr "Dies per eliminar logs antics."
 
 msgctxt "help:sale.shop,esale_scheduler:"
 msgid "Active by crons (import/export)"
@@ -612,9 +592,53 @@ msgctxt "selection:sale.shop,esale_price:"
 msgid "Sale Price"
 msgstr "Preu venda"
 
+msgctxt "view:esale.carrier:"
+msgid "eSale Carrier"
+msgstr "eSale Transportistes"
+
+msgctxt "view:esale.carrier:"
+msgid "eSale Carriers"
+msgstr "eSale Transportistes"
+
+msgctxt "view:esale.payment:"
+msgid "eSale Payment"
+msgstr "eSale Pagaments"
+
+msgctxt "view:esale.payment:"
+msgid "eSale Payments"
+msgstr "eSale Pagaments"
+
+msgctxt "view:esale.state:"
+msgid "eSale State"
+msgstr "Estat eSale"
+
+msgctxt "view:esale.status:"
+msgid "eSale Payment"
+msgstr "eSale Pagaments"
+
+msgctxt "view:esale.status:"
+msgid "eSale Payments"
+msgstr "eSale Pagaments"
+
+msgctxt "view:party.party:"
+msgid "eSale"
+msgstr "eSale"
+
+msgctxt "view:product.template:"
+msgid "Websites"
+msgstr "Botigues"
+
+msgctxt "view:sale.sale:"
+msgid "eSale"
+msgstr "eSale"
+
 msgctxt "view:sale.shop:"
 msgid "Actions"
 msgstr "Accions"
+
+msgctxt "view:sale.shop:"
+msgid "Carriers"
+msgstr "Transportistes"
 
 msgctxt "view:sale.shop:"
 msgid "Configuration"
@@ -629,16 +653,16 @@ msgid "Export State"
 msgstr "Exporta estat"
 
 msgctxt "view:sale.shop:"
-msgid "Export Status"
-msgstr "Exporta estat"
-
-msgctxt "view:sale.shop:"
 msgid "General"
 msgstr "General"
 
 msgctxt "view:sale.shop:"
 msgid "Import Orders"
 msgstr "Importa comandes"
+
+msgctxt "view:sale.shop:"
+msgid "In States"
+msgstr "Estats entrada"
 
 msgctxt "view:sale.shop:"
 msgid "Langs"
@@ -649,12 +673,12 @@ msgid "Orders"
 msgstr "Comandes"
 
 msgctxt "view:sale.shop:"
-msgid "States"
-msgstr "Estats"
+msgid "Out States"
+msgstr "Estats sortida"
 
 msgctxt "view:sale.shop:"
-msgid "Status"
-msgstr "Estats"
+msgid "Payments"
+msgstr "Pagaments"
 
 msgctxt "view:sale.shop:"
 msgid "eSale"

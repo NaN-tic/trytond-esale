@@ -238,13 +238,13 @@ msgctxt "field:sale.configuration,sale_discount_product:"
 msgid "Discount Product"
 msgstr "Producto descuento"
 
-msgctxt "field:sale.configuration,sale_payment_type:"
-msgid "Default Payment Type"
-msgstr "Tipo de pago por defecto"
-
 msgctxt "field:sale.configuration,sale_payment_term:"
 msgid "Default Payment Term"
 msgstr "Plazo de pago por defecto"
+
+msgctxt "field:sale.configuration,sale_payment_type:"
+msgid "Default Payment Type"
+msgstr "Tipo de pago por defecto"
 
 msgctxt "field:sale.configuration,sale_price_list:"
 msgid "Default Price List"
@@ -321,14 +321,6 @@ msgstr "Idiomas"
 msgctxt "field:sale.shop,esale_last_state_orders:"
 msgid "Last State Orders"
 msgstr "Últimos estados de los pedidos"
-
-msgctxt "field:sale.shop,esale_last_status_orders:"
-msgid "Last Status Orders"
-msgstr "Últimos estados pedidos"
-
-msgctxt "field:sale.shop,esale_log:"
-msgid "Log"
-msgstr "Log"
 
 msgctxt "field:sale.shop,esale_payments:"
 msgid "Payments"
@@ -446,10 +438,6 @@ msgctxt "help:esale.status,confirm:"
 msgid "Sale change state draft to confirmed"
 msgstr "El pedido de venta cambia de borrador a confirmado."
 
-msgctxt "help:product.template,esale_active:"
-msgid "If check this, this product can shop it"
-msgstr "Si está marcado, este producto se puede comprar."
-
 msgctxt "help:product.template,esale_available:"
 msgid ""
 "This product are available in your e-commerce. If you need not publish this "
@@ -503,14 +491,6 @@ msgstr ""
 msgctxt "help:sale.shop,esale_last_state_orders:"
 msgid "This date is last export (filter)"
 msgstr "Esta es la fecha de la última exportación (filtro)."
-
-msgctxt "help:sale.shop,esale_last_status_orders:"
-msgid "This date is last export (filter)"
-msgstr "Esta es la fecha de la última exportación (filtro)."
-
-msgctxt "help:sale.shop,esale_log:"
-msgid "Days from delete logs to past"
-msgstr "Días para eliminar logs antiguos."
 
 msgctxt "help:sale.shop,esale_scheduler:"
 msgid "Active by crons (import/export)"
@@ -612,9 +592,53 @@ msgctxt "selection:sale.shop,esale_price:"
 msgid "Sale Price"
 msgstr "Precio venta"
 
+msgctxt "view:esale.carrier:"
+msgid "eSale Carrier"
+msgstr "eSale Transportista"
+
+msgctxt "view:esale.carrier:"
+msgid "eSale Carriers"
+msgstr "eSale Transportistas"
+
+msgctxt "view:esale.payment:"
+msgid "eSale Payment"
+msgstr "eSale Tipos de pago"
+
+msgctxt "view:esale.payment:"
+msgid "eSale Payments"
+msgstr "eSale Pagos"
+
+msgctxt "view:esale.state:"
+msgid "eSale State"
+msgstr "eSale Estado "
+
+msgctxt "view:esale.status:"
+msgid "eSale Payment"
+msgstr "eSale Tipos de pago"
+
+msgctxt "view:esale.status:"
+msgid "eSale Payments"
+msgstr "eSale Pagos"
+
+msgctxt "view:party.party:"
+msgid "eSale"
+msgstr "eSale"
+
+msgctxt "view:product.template:"
+msgid "Websites"
+msgstr "Tiendas"
+
+msgctxt "view:sale.sale:"
+msgid "eSale"
+msgstr "eSale"
+
 msgctxt "view:sale.shop:"
 msgid "Actions"
 msgstr "Acciones"
+
+msgctxt "view:sale.shop:"
+msgid "Carriers"
+msgstr "Transportistas"
 
 msgctxt "view:sale.shop:"
 msgid "Configuration"
@@ -629,16 +653,16 @@ msgid "Export State"
 msgstr "Exportar estado"
 
 msgctxt "view:sale.shop:"
-msgid "Export Status"
-msgstr "Exportar estado"
-
-msgctxt "view:sale.shop:"
 msgid "General"
 msgstr "General"
 
 msgctxt "view:sale.shop:"
 msgid "Import Orders"
 msgstr "Importar pedidos"
+
+msgctxt "view:sale.shop:"
+msgid "In States"
+msgstr "Estados entrada"
 
 msgctxt "view:sale.shop:"
 msgid "Langs"
@@ -649,12 +673,12 @@ msgid "Orders"
 msgstr "Pedidos"
 
 msgctxt "view:sale.shop:"
-msgid "States"
-msgstr "Estados"
+msgid "Out States"
+msgstr "Estados salida"
 
 msgctxt "view:sale.shop:"
-msgid "Status"
-msgstr "Estados"
+msgid "Payments"
+msgstr "Pagos"
 
 msgctxt "view:sale.shop:"
 msgid "eSale"
