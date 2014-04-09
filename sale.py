@@ -1,6 +1,7 @@
 #This file is part esale module for Tryton.
 #The COPYRIGHT file at the top level of this repository contains 
 #the full copyright notices and license terms.
+from decimal import Decimal
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
@@ -133,6 +134,19 @@ class Sale:
         del sale_values['shipping_price']
         del sale_values['shipping_note']
 
+        # Surcharge
+        surchage_line = None
+        if sale_values.get('surcharge') != 0.0000:
+            surcharge_values = [{
+                    'product': shop.esale_surcharge_product.code or \
+                            shop.esale_surcharge_product.name,
+                    'quantity': 1,
+                    'description': shop.esale_surcharge_product.name,
+                    'unit_price': Decimal(sale_values.get('surcharge', 0)),
+                    }]
+            surchage_line = Line.esale_dict2lines(sale, line, surcharge_values)[0]
+        del sale_values['surcharge']
+
         #discount line
         discount_line = None
         if sale_values.get('discount') != 0.0000:
@@ -141,7 +155,7 @@ class Sale:
                             shop.esale_discount_product.name,
                     'quantity': 1,
                     'description': shop.esale_discount_product.name,
-                    'unit_price': sale_values.get('discount', 0),
+                    'unit_price': Decimal(sale_values.get('discount', 0)),
                     }]
             discount_line = Line.esale_dict2lines(sale, line, discount_values)[0]
         del sale_values['discount']
@@ -154,6 +168,8 @@ class Sale:
         lines.append(shipment_line)
         if discount_line:
             lines.append(discount_line)
+        if surchage_line:
+            lines.append(surchage_line)
         if extralines:
             lines = lines.copy()
             lines = lines + extralines

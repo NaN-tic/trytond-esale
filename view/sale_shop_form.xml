@@ -38,6 +38,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                         <field name="esale_delivery_product"/>
                         <label name="esale_discount_product"/>
                         <field name="esale_discount_product"/>
+                        <label name="esale_surcharge_product"/>
+                        <field name="esale_surcharge_product"/>
                         <label name="esale_uom_product"/>
                         <field name="esale_uom_product"/>
                         <label name="esale_category"/>
