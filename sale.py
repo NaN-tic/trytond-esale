@@ -183,8 +183,8 @@ class Sale:
                 logging.getLogger('esale').info(
                     'Cancel sale %s' % (sale.reference_external))
 
+
 class SaleLine:
-    'Sale Line'
     __name__ = 'sale.line'
 
     @classmethod
@@ -209,15 +209,17 @@ class SaleLine:
                     ('code', '=', code),
                     ], limit=1)
             if products:
-                product = products[0]
+                product, = products
             else:
                 product_esale = getattr(Product, 
                     'create_product_%s' % sale.shop.esale_shop_app,
                     default_create_product)
                 product = product_esale(sale.shop, code)
 
-            if product: #Find product
+            # exist product
+            if product:
                 l['product'] = product
+
                 line.product = product
                 line.unit = product.default_uom
                 line.quantity = l['quantity']
@@ -225,12 +227,17 @@ class SaleLine:
                 product_values = line.on_change_product()
 
                 if product_values.get('taxes'):
-                    l['taxes'] = [('add', product_values.get('taxes'))]
+                    taxes = product_values.get('taxes')
+                else:
+                    taxes = product.customer_taxes_used
+
+                l['taxes'] = [('add', taxes)]
                 l['unit'] = product.default_uom
                 for k, v in product_values.iteritems():
                     if k not in l:
                         l[k] = v
-            else: #Not product
+            # not exist product
+            else:
                 del l['product']
                 l['unit'] = sale.shop.esale_uom_product
             lines.append(l)
