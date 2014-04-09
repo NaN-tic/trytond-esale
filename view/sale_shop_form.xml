@@ -62,10 +62,10 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                     <page string="Payments" id="payments" col="2">
                         <field name="esale_payments"/>
                     </page>
-                    <page string="Status" id="status" col="2">
+                    <page string="In States" id="status" col="2">
                         <field name="esale_status"/>
                     </page>
-                    <page string="States" id="states" col="2">
+                    <page string="Out States" id="states" col="2">
                         <field name="esale_states"/>
                     </page>
                     </notebook>
