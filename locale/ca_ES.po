@@ -346,6 +346,10 @@ msgctxt "field:sale.shop,esale_status:"
 msgid "Status"
 msgstr "Estats"
 
+msgctxt "field:sale.shop,esale_surcharge_product:"
+msgid "Surcharge Product"
+msgstr "Producte recàrrec"
+
 msgctxt "field:sale.shop,esale_tax_include:"
 msgid "Tax Include"
 msgstr "Impostos inclosos"
