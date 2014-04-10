@@ -250,6 +250,10 @@ msgctxt "field:sale.configuration,sale_price_list:"
 msgid "Default Price List"
 msgstr "Tarifa por defecto"
 
+msgctxt "field:sale.configuration,sale_discount_product:"
+msgid "Surcharge Product"
+msgstr "Producto recargo"
+
 msgctxt "field:sale.configuration,sale_uom_product:"
 msgid "Default UOM"
 msgstr "UdM por defecto"
