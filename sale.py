@@ -156,7 +156,7 @@ class Sale:
                     'sequence': 9999,
                     }]
             surchage_line = Line.esale_dict2lines(sale, line, surcharge_values)[0]
-        del sale_values['surcharge']
+            del sale_values['surcharge']
 
         #Discount line
         discount_line = None
