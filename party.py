@@ -44,23 +44,41 @@ class Party:
         else:
             del values['vat_country']
 
-        #Search party by vat + esale email
+        #  Search party by:
+        #  - Vat country + vat number
+        #  - Vat number
+        #  - Party eSale Email
+        #  - Party Email
         party = None
-        if shop.esale_get_party_by_vat and values.get('vat_number') and \
-                    values.get('vat_country'):
-            parties = Party.search([
-                ('vat_country', '=', values.get('vat_country')),
-                ('vat_number', '=', values.get('vat_number')),
-                ], limit=1)
-            if parties:
-                party = parties[0]
+        if shop.esale_get_party_by_vat:
+            if values.get('vat_number') and values.get('vat_country'):
+                parties = Party.search([
+                    ('vat_country', '=', values.get('vat_country')),
+                    ('vat_number', '=', values.get('vat_number')),
+                    ], limit=1)
+                if parties:
+                    party, = parties
+
+            if values.get('vat_number') and not party:
+                parties = Party.search([
+                    ('vat_number', '=', values.get('vat_number')),
+                    ], limit=1)
+                if parties:
+                    party, = parties
 
         if not party:
             parties = Party.search([
                 ('esale_email', '=', values.get('esale_email')),
                 ], limit=1)
             if parties:
-                party = parties[0]
+                party, = parties
+
+        if not party:
+            parties = Party.search([
+                ('email', '=', values.get('esale_email')),
+                ], limit=1)
+            if parties:
+                party, = parties
 
         if not party:
             with Transaction().set_user(1, set_context=True): #TODO: force admin user create party
