@@ -350,6 +350,10 @@ msgctxt "field:sale.shop,esale_surcharge_product:"
 msgid "Surcharge Product"
 msgstr "Producto recargo"
 
+msgctxt "field:sale.shop,esale_surcharge_tax_include:"
+msgid "Surcharge Tax Include"
+msgstr "Impuestos incluidos en el recargo"
+
 msgctxt "field:sale.shop,esale_tax_include:"
 msgid "Tax Include"
 msgstr "Impuestos incluidos"
