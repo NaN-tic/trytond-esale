@@ -129,6 +129,7 @@ class Sale:
                 'unit_price': sale_values.get('shipping_price', 0),
                 'note': sale_values.get('shipping_note'),
                 'shipment_cost': sale_values.get('shipping_price', 0),
+                'sequence': 9999,
                 }]
         shipment_line = Line.esale_dict2lines(sale, line, shipment_values)[0]
         del sale_values['shipping_price']
@@ -136,26 +137,37 @@ class Sale:
 
         # Surcharge
         surchage_line = None
-        if sale_values.get('surcharge') != 0.0000:
+        if sale_values.get('surcharge') and sale_values.get('surcharge') != 0.0000:
+            surcharge_price = Decimal(sale_values.get('surcharge', 0))
+            if shop.esale_surcharge_tax_include:
+                for tax in shop.esale_surcharge_product.customer_taxes_used:
+                    if tax.type == 'fixed':
+                        surcharge_price = surcharge_price - tax.amount
+                    if tax.type == 'percentage':
+                        tax_price = surcharge_price-(surcharge_price/(1+(tax.rate)))
+                        surcharge_price = surcharge_price - tax_price
+                surcharge_price = Decimal('%.4f' % (surcharge_price))
             surcharge_values = [{
                     'product': shop.esale_surcharge_product.code or \
                             shop.esale_surcharge_product.name,
                     'quantity': 1,
                     'description': shop.esale_surcharge_product.name,
-                    'unit_price': Decimal(sale_values.get('surcharge', 0)),
+                    'unit_price': surcharge_price,
+                    'sequence': 9999,
                     }]
             surchage_line = Line.esale_dict2lines(sale, line, surcharge_values)[0]
         del sale_values['surcharge']
 
-        #discount line
+        #Discount line
         discount_line = None
-        if sale_values.get('discount') != 0.0000:
+        if sale_values.get('discount') and sale_values.get('discount') != 0.0000:
             discount_values = [{
                     'product': shop.esale_discount_product.code or \
                             shop.esale_discount_product.name,
                     'quantity': 1,
                     'description': shop.esale_discount_product.name,
                     'unit_price': Decimal(sale_values.get('discount', 0)),
+                    'sequence': 9999,
                     }]
             discount_line = Line.esale_dict2lines(sale, line, discount_values)[0]
         del sale_values['discount']
