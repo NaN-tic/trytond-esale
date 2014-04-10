@@ -127,6 +127,12 @@ class SaleShop:
         return config.sale_discount_product and config.sale_discount_product.id or None
 
     @staticmethod
+    def default_esale_surcharge_product():
+        Config = Pool().get('sale.configuration')
+        config = Config(1)
+        return config.sale_surcharge_product and config.sale_surcharge_product.id or None
+
+    @staticmethod
     def default_esale_uom_product():
         Config = Pool().get('sale.configuration')
         config = Config(1)

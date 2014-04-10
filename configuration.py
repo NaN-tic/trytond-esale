@@ -15,6 +15,8 @@ class Configuration:
         'Delivery Product', required=True)
     sale_discount_product = fields.Many2One('product.product',
         'Discount Product', required=True)
+    sale_surcharge_product = fields.Many2One('product.product',
+        'Surcharge Product', required=True)
     sale_uom_product = fields.Many2One('product.uom', 'Default UOM',
         required=True)
     sale_warehouse = fields.Many2One('stock.location', 'Default Warehouse',
