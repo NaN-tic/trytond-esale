@@ -3,13 +3,27 @@
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <data>
     <xpath expr="/form/notebook/page[@id=&quot;other&quot;]" position="after">
-        <page string="eSale" col="4" id="esale" states="{'invisible': ~Eval('reference_external')}">
+        <page string="eSale" col="6" id="esale" states="{'invisible': ~Eval('reference_external')}">
             <label name="reference_external"/>
             <field name="reference_external"/>
+            <newline/>
+            <group col="6" colspan="2" id="external_price" states="{'invisible': ~Eval('external_untaxed_amount')}">
+                <separator string="External Prices" id="external_price" colspan="6"/>
+                <label name="external_untaxed_amount"/>
+                <field name="external_untaxed_amount"/>
+                <label name="external_tax_amount"/>
+                <field name="external_tax_amount"/>
+                <label name="external_total_amount"/>
+                <field name="external_total_amount"/>
+                <label name="external_shipment_amount"/>
+                <field name="external_shipment_amount"/>
+            </group>
+            <separator name="status_history" colspan="6"/>
             <label name="status"/>
             <field name="status"/>
-            <separator name="status_history" colspan="4"/>
-            <field name="status_history" colspan="4"/>
+            <field name="status_history" colspan="6"/>
         </page>
+    </xpath>
+    <xpath expr="/form/notebook/page[@id=&quot;other&quot;]/group[@id=&quot;external_price&quot;]" position="replace">
     </xpath>
 </data>
