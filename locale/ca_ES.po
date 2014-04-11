@@ -236,7 +236,7 @@ msgstr "Producte enviament"
 
 msgctxt "field:sale.configuration,sale_discount_product:"
 msgid "Discount Product"
-msgstr "Producte descompte"
+msgstr "Producte recàrrec"
 
 msgctxt "field:sale.configuration,sale_payment_term:"
 msgid "Default Payment Term"
@@ -250,7 +250,7 @@ msgctxt "field:sale.configuration,sale_price_list:"
 msgid "Default Price List"
 msgstr "Tarifa per defecte"
 
-msgctxt "field:sale.configuration,sale_discount_product:"
+msgctxt "field:sale.configuration,sale_surcharge_product:"
 msgid "Surcharge Product"
 msgstr "Producte recàrrec"
 
@@ -268,7 +268,7 @@ msgstr "Referència externa"
 
 msgctxt "field:sale.sale,status:"
 msgid "Status"
-msgstr "Estats"
+msgstr "Estat"
 
 msgctxt "field:sale.sale,status_history:"
 msgid "Status history"
@@ -639,6 +639,10 @@ msgstr "eSale"
 msgctxt "view:product.template:"
 msgid "Websites"
 msgstr "Botigues"
+
+msgctxt "view:sale.sale:"
+msgid "External Prices"
+msgstr "Preus externs"
 
 msgctxt "view:sale.sale:"
 msgid "eSale"

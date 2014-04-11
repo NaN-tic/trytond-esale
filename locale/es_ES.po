@@ -236,7 +236,7 @@ msgstr "Producto envío"
 
 msgctxt "field:sale.configuration,sale_discount_product:"
 msgid "Discount Product"
-msgstr "Producto descuento"
+msgstr "Producto recargo"
 
 msgctxt "field:sale.configuration,sale_payment_term:"
 msgid "Default Payment Term"
@@ -250,7 +250,7 @@ msgctxt "field:sale.configuration,sale_price_list:"
 msgid "Default Price List"
 msgstr "Tarifa por defecto"
 
-msgctxt "field:sale.configuration,sale_discount_product:"
+msgctxt "field:sale.configuration,sale_surcharge_product:"
 msgid "Surcharge Product"
 msgstr "Producto recargo"
 
@@ -268,7 +268,7 @@ msgstr "Referencia externa"
 
 msgctxt "field:sale.sale,status:"
 msgid "Status"
-msgstr "Estados"
+msgstr "Estado"
 
 msgctxt "field:sale.sale,status_history:"
 msgid "Status history"
@@ -639,6 +639,10 @@ msgstr "eSale"
 msgctxt "view:product.template:"
 msgid "Websites"
 msgstr "Tiendas"
+
+msgctxt "view:sale.sale:"
+msgid "External Prices"
+msgstr "Precios externos"
 
 msgctxt "view:sale.sale:"
 msgid "eSale"
