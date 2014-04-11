@@ -132,6 +132,7 @@ class Sale:
                 'sequence': 9999,
                 }]
         shipment_line = Line.esale_dict2lines(sale, line, shipment_values)[0]
+        sale_values['shipment_cost_method'] = 'order' # force shipment invoice on order
         del sale_values['shipping_price']
         del sale_values['shipping_note']
 
@@ -254,9 +255,10 @@ class SaleLine:
                 line.description = product.name
                 product_values = line.on_change_product()
 
+                taxes = None
                 if product_values.get('taxes'):
                     taxes = product_values.get('taxes')
-                else:
+                if not taxes:
                     taxes = product.customer_taxes_used
 
                 l['taxes'] = [('add', taxes)]
