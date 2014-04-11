@@ -32,6 +32,7 @@ class Party:
         '''
         pool = Pool()
         Party = pool.get('party.party')
+        ContactMechanism = pool.get('party.contact_mechanism')
 
         #Validate VAT
         if values.get('vat_country') and values.get('vat_number') and HAS_VATNUMBER:
@@ -74,11 +75,13 @@ class Party:
                 party, = parties
 
         if not party:
-            parties = Party.search([
-                ('email', '=', values.get('esale_email')),
+            mechanisms = ContactMechanism.search([
+                ('type', '=', 'email'),
+                ('value', '=', values.get('esale_email')),
                 ], limit=1)
-            if parties:
-                party, = parties
+            if mechanisms:
+                mechanism, = mechanisms
+                party = mechanism.party
 
         if not party:
             with Transaction().set_user(1, set_context=True): #TODO: force admin user create party
