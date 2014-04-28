@@ -263,6 +263,7 @@ class SaleLine:
 
                 l['taxes'] = [('add', taxes)]
                 l['unit'] = product.default_uom
+                l['description'] = product.rec_name
                 for k, v in product_values.iteritems():
                     if k not in l:
                         l[k] = v
