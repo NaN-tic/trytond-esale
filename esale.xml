@@ -18,6 +18,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="name">Cron eSale</field>
             <field name="signature"></field>
             <field name="active" eval="False"/>
+            <field name="company">1</field>
+            <field name="main_company">1</field>
         </record>
         <record model="res.user-res.group" id="user_esale_admin_group">
             <field name="user" ref="user_esale"/>
