@@ -258,8 +258,6 @@ class SaleLine:
                 taxes = None
                 if product_values.get('taxes'):
                     taxes = product_values.get('taxes')
-                if not taxes:
-                    taxes = product.customer_taxes_used
 
                 l['taxes'] = [('add', taxes)]
                 l['unit'] = product.default_uom
