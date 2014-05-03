@@ -258,8 +258,9 @@ class SaleLine:
                 taxes = None
                 if product_values.get('taxes'):
                     taxes = product_values.get('taxes')
+                if taxes:
+                    l['taxes'] = [('add', taxes)]
 
-                l['taxes'] = [('add', taxes)]
                 l['unit'] = product.default_uom
                 l['description'] = product.rec_name
                 for k, v in product_values.iteritems():
