@@ -236,7 +236,7 @@ msgstr "Producte enviament"
 
 msgctxt "field:sale.configuration,sale_discount_product:"
 msgid "Discount Product"
-msgstr "Producte recàrrec"
+msgstr "Producte descompte"
 
 msgctxt "field:sale.configuration,sale_payment_term:"
 msgid "Default Payment Term"
@@ -460,7 +460,7 @@ msgstr ""
 
 msgctxt "help:product.template,esale_saleshops:"
 msgid "Select shops will be available this product"
-msgstr "Seleccioneu botigues on estarà disponible aquest producte."
+msgstr "Seleccioneu les botigues on estarà disponible aquest producte."
 
 msgctxt "help:sale.sale,status:"
 msgid "Last status import/export to e-commerce APP"

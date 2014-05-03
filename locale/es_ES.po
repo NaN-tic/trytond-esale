@@ -236,7 +236,7 @@ msgstr "Producto envío"
 
 msgctxt "field:sale.configuration,sale_discount_product:"
 msgid "Discount Product"
-msgstr "Producto recargo"
+msgstr "Producto descuento"
 
 msgctxt "field:sale.configuration,sale_payment_term:"
 msgid "Default Payment Term"
