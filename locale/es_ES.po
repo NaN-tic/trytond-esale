@@ -14,6 +14,54 @@ msgctxt "error:sale.shop:"
 msgid "Threre are not orders to import"
 msgstr "No hay pedidos a importar."
 
+msgctxt "field:esale.account.tax.rule,country:"
+msgid "Country"
+msgstr "País"
+
+msgctxt "field:esale.account.tax.rule,create_date:"
+msgid "Create Date"
+msgstr "Fecha creación"
+
+msgctxt "field:esale.account.tax.rule,create_uid:"
+msgid "Create User"
+msgstr "Usuario creación"
+
+msgctxt "field:esale.account.tax.rule,customer_tax_rule:"
+msgid "Customer Tax Rule"
+msgstr "Regla de impuesto de cliente"
+
+msgctxt "field:esale.account.tax.rule,end_zip:"
+msgid "End Zip"
+msgstr "Fin código postal"
+
+msgctxt "field:esale.account.tax.rule,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:esale.account.tax.rule,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:esale.account.tax.rule,start_zip:"
+msgid "Start Zip"
+msgstr "Inicio código postal"
+
+msgctxt "field:esale.account.tax.rule,subdivision:"
+msgid "Subdivision"
+msgstr "Subdivisión"
+
+msgctxt "field:esale.account.tax.rule,supplier_tax_rule:"
+msgid "Supplier Tax Rule"
+msgstr "Regla de impuesto de proveedor"
+
+msgctxt "field:esale.account.tax.rule,write_date:"
+msgid "Write Date"
+msgstr "Fecha modificación"
+
+msgctxt "field:esale.account.tax.rule,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
 msgctxt "field:esale.carrier,carrier:"
 msgid "Carrier"
 msgstr "Transportista"
@@ -434,6 +482,14 @@ msgctxt "field:sale.shop-ir.lang,write_uid:"
 msgid "Write User"
 msgstr "Usuario modificación"
 
+msgctxt "help:esale.account.tax.rule,end_zip:"
+msgid "Numeric Zip Code"
+msgstr "Código postal numérico"
+
+msgctxt "help:esale.account.tax.rule,start_zip:"
+msgid "Numeric Zip Code"
+msgstr "Código postal numérico"
+
 msgctxt "help:esale.state,code:"
 msgid "State APP code. Code state in your APP"
 msgstr "Código del estado APP."
@@ -512,6 +568,10 @@ msgctxt "help:sale.shop,esale_to_orders:"
 msgid "This date is to import (filter)"
 msgstr "Esta fecha es para importar (filtro)."
 
+msgctxt "model:esale.account.tax.rule,name:"
+msgid "eSale Tax Rule"
+msgstr "eSale Regla de impuesto"
+
 msgctxt "model:esale.carrier,name:"
 msgid "eSale Carrier"
 msgstr "eSale Transportista"
@@ -528,6 +588,10 @@ msgctxt "model:esale.status,name:"
 msgid "eSale Status"
 msgstr "eSale Estados"
 
+msgctxt "model:ir.action,name:act_esale_account_tax_rule"
+msgid "eSale Account Tax Rule"
+msgstr "eSale Regla de impuesto"
+
 msgctxt "model:ir.cron,name:cron_esale_export_state"
 msgid "eSale - Export State"
 msgstr "eSale - Exportar estado"
@@ -535,6 +599,10 @@ msgstr "eSale - Exportar estado"
 msgctxt "model:ir.cron,name:cron_esale_import_order"
 msgid "eSale - Import Orders"
 msgstr "eSale - Importar pedidos"
+
+msgctxt "model:ir.ui.menu,name:menu_esale_account_tax_rule"
+msgid "eSale Account Tax Rule"
+msgstr "eSale Regla de impuesto"
 
 msgctxt "model:product.template-sale.shop,name:"
 msgid "Product - Shop"
@@ -603,6 +671,14 @@ msgstr "Tarifa"
 msgctxt "selection:sale.shop,esale_price:"
 msgid "Sale Price"
 msgstr "Precio venta"
+
+msgctxt "view:esale.account.tax.rule:"
+msgid "Tax Rules"
+msgstr "Reglas de impuesto"
+
+msgctxt "view:esale.account.tax.rule:"
+msgid "eSale Account Tax Rule"
+msgstr "eSale Regla de impuesto"
 
 msgctxt "view:esale.carrier:"
 msgid "eSale Carrier"

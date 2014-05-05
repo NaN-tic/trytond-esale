@@ -81,7 +81,7 @@ class eSaleAccountTaxRule(ModelSQL, ModelView):
     start_zip = fields.Char('Start Zip', help='Numeric Zip Code')
     end_zip = fields.Char('End Zip', help='Numeric Zip Code')
     customer_tax_rule = fields.Many2One('account.tax.rule', 'Customer Tax Rule', required=True)
-    supplier_tax_rule = fields.Many2One('account.tax.rule', 'Customer Tax Rule', required=True)
+    supplier_tax_rule = fields.Many2One('account.tax.rule', 'Supplier Tax Rule', required=True)
 
     def on_change_country(self):
         if (self.subdivision
