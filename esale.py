@@ -2,9 +2,10 @@
 #The COPYRIGHT file at the top level of this repository contains 
 #the full copyright notices and license terms.
 from trytond.model import fields, ModelSQL, ModelView
+from trytond.pyson import Eval
 from trytond.pool import PoolMeta
 
-__all__ = ['eSaleCarrier', 'eSalePayment', 'eSaleStatus', 'eSaleSate']
+__all__ = ['eSaleCarrier', 'eSalePayment', 'eSaleStatus', 'eSaleSate', 'eSaleAccountTaxRule']
 __metaclass__ = PoolMeta
 
 SALE_STATES = [
@@ -66,3 +67,24 @@ class eSaleSate(ModelSQL, ModelView):
     notify = fields.Boolean('Notify',
         help='Active APP notification customer')
     shop = fields.Many2One('sale.shop', 'Sale Shop', required=True)
+
+
+class eSaleAccountTaxRule(ModelSQL, ModelView):
+    'eSale Tax Rule'
+    __name__ = 'esale.account.tax.rule'
+    _rec_name = 'tax_rule'
+    country = fields.Many2One('country.country', 'Country',
+        on_change=['country', 'subdivision'], required=True)
+    subdivision = fields.Many2One("country.subdivision",
+            'Subdivision', domain=[('country', '=', Eval('country'))],
+            depends=['country'], required=True)
+    start_zip = fields.Char('Start Zip', help='Numeric Zip Code')
+    end_zip = fields.Char('End Zip', help='Numeric Zip Code')
+    customer_tax_rule = fields.Many2One('account.tax.rule', 'Customer Tax Rule', required=True)
+    supplier_tax_rule = fields.Many2One('account.tax.rule', 'Customer Tax Rule', required=True)
+
+    def on_change_country(self):
+        if (self.subdivision
+                and self.subdivision.country != self.country):
+            return {'subdivision': None}
+        return {}

@@ -24,6 +24,7 @@ def register():
         eSalePayment,
         eSaleStatus,
         eSaleSate,
+        eSaleAccountTaxRule,
         Template,
         TemplateSaleShop,
         module='esale', type_='model')

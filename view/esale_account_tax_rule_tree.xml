@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- This file is part esale module for Tryton.
+The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
+<tree string="eSale Account Tax Rule">
+    <field name="country"/>
+    <field name="subdivision"/>
+    <field name="start_zip"/>
+    <field name="end_zip"/>
+    <field name="customer_tax_rule"/>
+    <field name="supplier_tax_rule"/>
+</tree>

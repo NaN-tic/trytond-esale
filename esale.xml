@@ -98,5 +98,34 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="type">tree</field>
             <field name="name">esale_state_tree</field>
         </record>
+
+        <!-- esale.account.tax.rule -->
+        <record model="ir.ui.view" id="esale_account_tax_rule_tree_view">
+            <field name="model">esale.account.tax.rule</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="30"/>
+            <field name="name">esale_account_tax_rule_tree</field>
+        </record>
+        <record model="ir.ui.view" id="esale_account_tax_rule_form_view">
+            <field name="model">esale.account.tax.rule</field>
+            <field name="type">form</field>
+            <field name="priority" eval="30"/>
+            <field name="name">esale_account_tax_rule_form</field>
+        </record>
+        <record model="ir.action.act_window" id="act_esale_account_tax_rule">
+            <field name="name">eSale Account Tax Rule</field>
+            <field name="res_model">esale.account.tax.rule</field>
+        </record>
+        <record model="ir.action.act_window.view" id="act_esale_account_tax_rule_tree">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="esale_account_tax_rule_tree_view"/>
+            <field name="act_window" ref="act_esale_account_tax_rule"/>
+        </record>
+        <record model="ir.action.act_window.view" id="act_esale_account_tax_rule_form">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="esale_account_tax_rule_form_view"/>
+            <field name="act_window" ref="act_esale_account_tax_rule"/>
+        </record>
+        <menuitem parent="sale.menu_configuration" action="act_esale_account_tax_rule" id="menu_esale_account_tax_rule" sequence="10"/>
     </data>
 </tryton>
