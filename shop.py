@@ -30,6 +30,8 @@ class SaleShop:
         help='If there is another party with same vat, not create party')
     esale_scheduler = fields.Boolean('Scheduler',
         help='Active by crons (import/export)')
+    esale_user = fields.Many2One('res.user', 'User',
+        help='Use other user when user is not active (cron).')
     esale_countrys = fields.Many2Many('sale.shop-country.country', 
         'shop', 'country', 'Countries')
     esale_delivery_product = fields.Many2One('product.product', 'Delivery Product',
