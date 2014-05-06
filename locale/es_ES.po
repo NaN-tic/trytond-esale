@@ -310,6 +310,10 @@ msgctxt "field:sale.configuration,sale_warehouse:"
 msgid "Default Warehouse"
 msgstr "Almacén por defecto"
 
+msgctxt "field:sale.sale,external_shipment_amount:"
+msgid "Shipment"
+msgstr "Envío"
+
 msgctxt "field:sale.sale,reference_external:"
 msgid "External Reference"
 msgstr "Referencia externa"
@@ -417,6 +421,10 @@ msgstr "A pedidos"
 msgctxt "field:sale.shop,esale_uom_product:"
 msgid "Default UOM"
 msgstr "UdM por defecto"
+
+msgctxt "field:sale.shop,esale_user:"
+msgid "User"
+msgstr "Usuario"
 
 msgctxt "field:sale.shop-country.country,country:"
 msgid "Country"
@@ -568,6 +576,10 @@ msgctxt "help:sale.shop,esale_to_orders:"
 msgid "This date is to import (filter)"
 msgstr "Esta fecha es para importar (filtro)."
 
+msgctxt "help:sale.shop,esale_user:"
+msgid "Use other user when user is not active (cron)."
+msgstr "Usar otro usuario cuando no esté activo (cron)."
+
 msgctxt "model:esale.account.tax.rule,name:"
 msgid "eSale Tax Rule"
 msgstr "eSale Regla de impuesto"
@@ -602,7 +614,7 @@ msgstr "eSale - Importar pedidos"
 
 msgctxt "model:ir.ui.menu,name:menu_esale_account_tax_rule"
 msgid "eSale Account Tax Rule"
-msgstr "eSale Regla de impuesto"
+msgstr "Reglas de impuesto"
 
 msgctxt "model:product.template-sale.shop,name:"
 msgid "Product - Shop"
