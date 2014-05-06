@@ -77,7 +77,7 @@ class eSaleAccountTaxRule(ModelSQL, ModelView):
         on_change=['country', 'subdivision'], required=True)
     subdivision = fields.Many2One("country.subdivision",
             'Subdivision', domain=[('country', '=', Eval('country'))],
-            depends=['country'], required=True)
+            depends=['country'])
     start_zip = fields.Char('Start Zip', help='Numeric Zip Code')
     end_zip = fields.Char('End Zip', help='Numeric Zip Code')
     customer_tax_rule = fields.Many2One('account.tax.rule', 'Customer Tax Rule', required=True)
