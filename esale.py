@@ -82,6 +82,16 @@ class eSaleAccountTaxRule(ModelSQL, ModelView):
     end_zip = fields.Char('End Zip', help='Numeric Zip Code')
     customer_tax_rule = fields.Many2One('account.tax.rule', 'Customer Tax Rule', required=True)
     supplier_tax_rule = fields.Many2One('account.tax.rule', 'Supplier Tax Rule', required=True)
+    sequence = fields.Integer('Sequence')
+
+    @classmethod
+    def __setup__(cls):
+        super(eSaleAccountTaxRule, cls).__setup__()
+        cls._order.insert(0, ('sequence', 'ASC'))
+
+    @staticmethod
+    def default_sequence():
+        return 1
 
     def on_change_country(self):
         if (self.subdivision
