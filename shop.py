@@ -65,9 +65,14 @@ class SaleShop:
     esale_price = fields.Selection([
             ('saleprice','Sale Price'),
             ('pricelist','Pricelist'),
-            ], 'Price', states={
-                'required': Eval('esale_available', True),
-            },)
+            ], 'Price',
+        states={
+            'required': Eval('esale_available', True),
+        },)
+    esale_price_party = fields.Many2One('party.party', 'Party', 
+        states={
+            'required': Eval('esale_price') == 'pricelist',
+        }, help='Select a party to compute a price from price list.')
     esale_from_orders = fields.DateTime('From Orders', 
         help='This date is last import (filter)')
     esale_to_orders = fields.DateTime('To Orders', 

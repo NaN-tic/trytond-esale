@@ -48,6 +48,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                         <field name="esale_category"/>
                         <label name="esale_price"/>
                         <field name="esale_price"/>
+                        <label name="esale_price_party"/>
+                        <field name="esale_price_party"/>
                         <label name="esale_scheduler"/>
                         <field name="esale_scheduler"/>
                         <label name="esale_user"/>
