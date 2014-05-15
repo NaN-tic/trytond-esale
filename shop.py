@@ -6,6 +6,7 @@ from trytond.transaction import Transaction
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Eval
 
+from decimal import Decimal
 import time
 
 __all__ = ['SaleShop', 'SaleShopCountry', 'SaleShopLang']
@@ -256,6 +257,23 @@ class SaleShop:
         """
         self.raise_user_error('orders_not_export')
 
+    @classmethod
+    def esale_price_w_taxes(self, product, price, quantity=1):
+        '''Get total price with taxes'''
+        pool = Pool()
+        ProductProduct = pool.get('product.product')
+        Tax = pool.get('account.tax')
+        Invoice = pool.get('account.invoice')
+
+        #compute price with taxes
+        customer_taxes = product.template.customer_taxes_used
+        tax_list = Tax.compute(customer_taxes, price, quantity)
+        tax_amount = Decimal('0.0')
+        for tax in tax_list:
+            _, val = Invoice._compute_tax(tax, 'out_invoice')
+            tax_amount += val.get('amount')
+        price = price + tax_amount
+        return price
 
 class SaleShopCountry(ModelSQL):
     'Shop - Country'
