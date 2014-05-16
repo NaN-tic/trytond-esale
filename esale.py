@@ -67,6 +67,7 @@ class eSaleSate(ModelSQL, ModelView):
     notify = fields.Boolean('Notify',
         help='Active APP notification customer')
     shop = fields.Many2One('sale.shop', 'Sale Shop', required=True)
+    message = fields.Text('Message', translate=True)
 
 
 class eSaleAccountTaxRule(ModelSQL, ModelView):

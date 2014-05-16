@@ -10,4 +10,6 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
     <field name="notify"/>
     <label name="shop"/>
     <field name="shop"/>
+    <separator string="Message" id="message" colspan="6"/>
+    <field name="message" colspan="6"/>
 </form>
