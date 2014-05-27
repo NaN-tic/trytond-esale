@@ -4,7 +4,7 @@
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.transaction import Transaction
 from trytond.pool import Pool, PoolMeta
-from trytond.pyson import Eval
+from trytond.pyson import And, Eval
 
 from decimal import Decimal
 import time
@@ -72,7 +72,7 @@ class SaleShop:
         },)
     esale_price_party = fields.Many2One('party.party', 'Party', 
         states={
-            'required': Eval('esale_price') == 'pricelist',
+            'required': And(Eval('esale_price') == 'pricelist', Eval('esale_available', True)),
         }, help='Select a party to compute a price from price list.')
     esale_from_orders = fields.DateTime('From Orders', 
         help='This date is last import (filter)')
@@ -261,7 +261,6 @@ class SaleShop:
     def esale_price_w_taxes(self, product, price, quantity=1):
         '''Get total price with taxes'''
         pool = Pool()
-        ProductProduct = pool.get('product.product')
         Tax = pool.get('account.tax')
         Invoice = pool.get('account.invoice')
 
