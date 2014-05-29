@@ -75,7 +75,7 @@ class eSaleAccountTaxRule(ModelSQL, ModelView):
     __name__ = 'esale.account.tax.rule'
     _rec_name = 'tax_rule'
     country = fields.Many2One('country.country', 'Country',
-        on_change=['country', 'subdivision'], required=True)
+        required=True)
     subdivision = fields.Many2One("country.subdivision",
             'Subdivision', domain=[('country', '=', Eval('country'))],
             depends=['country'])
@@ -94,6 +94,7 @@ class eSaleAccountTaxRule(ModelSQL, ModelView):
     def default_sequence():
         return 1
 
+    @fields.depends('country', 'subdivision')
     def on_change_country(self):
         if (self.subdivision
                 and self.subdivision.country != self.country):
