@@ -20,7 +20,7 @@ class Configuration:
     sale_uom_product = fields.Many2One('product.uom', 'Default UOM',
         required=True)
     sale_warehouse = fields.Many2One('stock.location', 'Default Warehouse',
-        required=True)
+        domain=[('type', '=', 'warehouse')], required=True)
     sale_payment_type = fields.Many2One('account.payment.type',
         'Default Payment Type', domain=[('kind', '=', 'receivable')], required=True)
     sale_payment_term = fields.Many2One('account.invoice.payment_term',
