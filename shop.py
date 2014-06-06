@@ -209,7 +209,7 @@ class SaleShop:
             self.raise_user_error('not_shop_user')
         for shop in shops:
             import_order = getattr(shop, 'import_orders_%s' % shop.esale_shop_app)
-            import_order(shop)
+            import_order()
 
     @classmethod
     def import_cron_orders(cls):
