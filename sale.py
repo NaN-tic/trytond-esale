@@ -126,9 +126,11 @@ class Sale:
                 'product': product_delivery.code or product_delivery.name,
                 'quantity': 1,
                 'description': shipment_description,
-                'unit_price': sale_values.get('shipping_price', 0),
+                'unit_price': sale_values.get('shipping_price', 0).quantize(
+                    Decimal('.01')),
                 'note': sale_values.get('shipping_note'),
-                'shipment_cost': sale_values.get('shipping_price', 0),
+                'shipment_cost': sale_values.get('shipping_price', 0).quantize(
+                    Decimal('.01')),
                 'sequence': 9999,
                 }]
         shipment_line = Line.esale_dict2lines(sale, line, shipment_values)[0]
