@@ -112,7 +112,7 @@ class SaleShop:
 
     @staticmethod
     def default_esale_price():
-        return 'pricelist'
+        return 'saleprice'
 
     @staticmethod
     def default_esale_log():
