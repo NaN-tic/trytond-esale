@@ -230,7 +230,7 @@ class SaleShop:
         """
         for shop in shops:
             export_state = getattr(shop, 'export_state_%s' % shop.esale_shop_app)
-            export_state(shop)
+            export_state()
 
     @classmethod
     def export_cron_state(cls):
