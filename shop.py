@@ -171,8 +171,7 @@ class SaleShop:
         res = [('','')]
         return res
 
-    @classmethod
-    def get_sales_from_date(self, shop, date):
+    def get_sales_from_date(self, date):
         '''Get Sales from a date to export
         :param shop: obj
         :param date: datetime
@@ -187,12 +186,12 @@ class SaleShop:
         # last import time.
         moves = Move.search([
             ('write_date', '>=', date),
-            ('sale.shop', '=', shop.id),
+            ('sale.shop', '=', self.id),
             ('shipment', 'like', 'stock.shipment.out%')
         ])
         sales_to_export = Sale.search(['OR', [
             ('write_date', '>=', date),
-            ('shop', '=', shop.id),
+            ('shop', '=', self.id),
         ], [
             ('id', 'in', map(int, [m.sale for m in moves]))
         ]])
