@@ -198,8 +198,7 @@ class Sale:
 
         #Create Sale
         Transaction().cursor.commit() #TODO: Add because get error when save order: could not serialize access due to concurrent update
-        with Transaction().set_user(1, set_context=True): #TODO: force admin user create sale
-            sale, = Sale.create([sale_values])
+        sale, = Sale.create([sale_values])
         logging.getLogger('esale').info(
             'Shop %s. Create sale %s' % (shop.name, sale.reference_external))
 

@@ -48,11 +48,10 @@ class Address:
             if(type == 'delivery' and not address.delivery):
                 delivery = True
             if(invoice or delivery):
-                with Transaction().set_user(1, set_context=True): #TODO: force admin user create adress
-                    Address.write([address], {
-                        'delivery': delivery,
-                        'invoice': invoice,
-                        })
+                Address.write([address], {
+                    'delivery': delivery,
+                    'invoice': invoice,
+                    })
         else:
             address_contacts = []
             if values.get('phone'):
@@ -79,16 +78,15 @@ class Address:
                 values['delivery'] = True
                 values['invoice'] = True
 
-            with Transaction().set_user(1, set_context=True): #TODO: force admin user create adress
-                address, = Address.create([values])
-                logging.getLogger('eSale').info(
-                    'Shop %s. Create address ID %s' % (shop.name, address.id))
+            address, = Address.create([values])
+            logging.getLogger('eSale').info(
+                'Shop %s. Create address ID %s' % (shop.name, address.id))
 
-                for contact in address_contacts:
-                    ContactMechanism.create([{
-                        'party': party,
-                        'address': address,
-                        'type': contact['type'],
-                        'value': contact['value'],
-                        }])
+            for contact in address_contacts:
+                ContactMechanism.create([{
+                    'party': party,
+                    'address': address,
+                    'type': contact['type'],
+                    'value': contact['value'],
+                    }])
         return address

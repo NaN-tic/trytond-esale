@@ -84,9 +84,8 @@ class Party:
                 party = mechanism.party
 
         if not party:
-            with Transaction().set_user(1, set_context=True): #TODO: force admin user create party
-                values['addresses'] = None
-                party, = Party.create([values])
-                logging.getLogger('eSale').info(
-                    'Shop %s. Create party ID %s' % (shop.name, party.id))
+            values['addresses'] = None
+            party, = Party.create([values])
+            logging.getLogger('eSale').info(
+                'Shop %s. Create party ID %s' % (shop.name, party.id))
         return party
