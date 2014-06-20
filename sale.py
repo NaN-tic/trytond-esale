@@ -155,7 +155,7 @@ class Sale:
                             shop.esale_surcharge_product.name,
                     'quantity': 1,
                     'description': shop.esale_surcharge_product.name,
-                    'unit_price': surcharge_price,
+                    'unit_price': surcharge_price.quantize(Decimal('.01')),
                     'sequence': 9999,
                     }]
             surchage_line = Line.esale_dict2lines(sale, line, surcharge_values)[0]
@@ -169,7 +169,8 @@ class Sale:
                             shop.esale_discount_product.name,
                     'quantity': 1,
                     'description': shop.esale_discount_product.name,
-                    'unit_price': Decimal(sale_values.get('discount', 0)),
+                    'unit_price': Decimal(sale_values.get(
+                        'discount', 0)).quantize(Decimal('.01')),
                     'sequence': 9999,
                     }]
             discount_line = Line.esale_dict2lines(sale, line, discount_values)[0]
