@@ -242,6 +242,10 @@ msgctxt "field:product.template,esale_available:"
 msgid "Available eSale"
 msgstr "Disponible en eSale"
 
+msgctxt "field:product.template,esale_price:"
+msgid "eSale Price"
+msgstr "Precio eSale"
+
 msgctxt "field:product.template,esale_saleshops:"
 msgid "Websites"
 msgstr "Tiendas"
