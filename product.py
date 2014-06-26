@@ -29,23 +29,32 @@ class Template:
         Product = pool.get('product.product')
         User = pool.get('res.user')
         Shop = pool.get('sale.shop')
+        Party = pool.get('party.party')
 
         def template_list_price():
             return {n: {t.id: t.list_price for t in templates} for n in names}
 
         def pricelist():
+            '''
+            Get prices from all products by sale price list
+            From all products, return price cheaper
+            '''
             products = [p for t in templates for p in t.products]
-            sale_prices = Product.get_sale_price(products
-                )
+            sale_prices = Product.get_sale_price(products) # get all product prices
+
             prices = {}
-            for price in sale_prices:
-                for template in templates:
-                    prices[template.id] = None
-                    for p in template.products:
-                        if (p.id == price and (
-                                not prices[template.id]
-                                or prices[template.id] > sale_prices[price])):
-                            prices[template.id] = sale_prices[price]
+            for template in templates:
+                products = [p.id for p in template.products]
+
+                product_prices = {}
+                for product in products:
+                    product_prices[product] = sale_prices[product]
+
+                prices_sorted = {}
+                for key, value in sorted(product_prices.iteritems(), key=lambda (k,v): (v,k)):
+                    prices_sorted[key] = value
+
+                prices[template.id] = prices_sorted.values()[0] #get cheaper price
             return {n: {t.id: prices[t.id] for t in templates} for n in names}
 
         def price_with_tax(result):
@@ -63,19 +72,27 @@ class Template:
         else:
             user = User(Transaction().user)
         shop = user.shop
-        if not shop:
+        if not shop or not shop.esale_available:
             logging.getLogger('esale').warning(
                 'User %s has not any shop associated.' % (user))
             return template_list_price()
-        context = {}
+
+        context = Transaction().context
         if shop.esale_price == 'pricelist':
-            context['price_list'] = shop.price_list.id
-        if shop.price_list:
-            context['customer'] = shop.esale_price_party.id
-        if shop.esale_price_party:
-            context['without_special_price'] = True
+            customer = shop.esale_price_party.id
+            price_list = shop.price_list.id
+
+            if context.get('customer'):
+                customer = context['customer']
+                party = Party(customer)
+                if party.sale_price_list:
+                    price_list = party.sale_price_list.id
+
+            context['customer'] = customer
+            context['price_list'] = price_list
+
         with Transaction().set_context(context):
-            if shop.esale_available and shop.esale_price == 'saleprice':
+            if shop.esale_price == 'saleprice':
                 result = template_list_price()
             else:
                 result = pricelist()
