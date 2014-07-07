@@ -97,7 +97,7 @@ class SaleShop:
         cls._error_messages.update({
             'orders_not_import': 'Threre are not orders to import',
             'orders_not_export': 'Threre are not orders to export',
-            'not_shop_user': 'Select a shop in preferences user',
+            'not_shop_user': 'Shop "%s" is not available in user preferences.',
         })
         cls._buttons.update({
                 'import_orders': {},
@@ -206,8 +206,12 @@ class SaleShop:
         Import Orders from External APP
         """
         user = Pool().get('res.user')(Transaction().user)
-        if not user.shops:
-            self.raise_user_error('not_shop_user')
+
+        for shop in shops:
+            if shop not in user.shops:
+                self.raise_user_error('not_shop_user', (
+                    shop.rec_name))
+
         for shop in shops:
             import_order = getattr(shop, 'import_orders_%s' % shop.esale_shop_app)
             import_order()
