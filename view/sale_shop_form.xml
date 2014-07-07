@@ -56,7 +56,10 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                         <field name="esale_user"/>
                     </page>
                     <page string="Countries" id="contries">
-                        <field name="esale_countrys"/>
+                        <label name="esale_country"/>
+                        <field name="esale_country"/>
+                        <separator name="esale_countrys" colspan="4"/>
+                        <field name="esale_countrys" colspan="4"/>
                     </page>
                     <page string="Langs" id="langs" col="2">
                         <label name="esale_lang"/>
