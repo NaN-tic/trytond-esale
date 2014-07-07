@@ -350,6 +350,10 @@ msgctxt "field:sale.shop,esale_category:"
 msgid "Default Category"
 msgstr "Categoría por defecto"
 
+msgctxt "field:sale.shop,esale_country:"
+msgid "Country"
+msgstr "País"
+
 msgctxt "field:sale.shop,esale_countrys:"
 msgid "Countries"
 msgstr "Países"
@@ -557,6 +561,10 @@ msgid ""
 msgstr ""
 "Categoría por defecto cuando se crea un nuevo producto. En esta categoría "
 "seleccione una cuenta a cobrar y pagar por defecto."
+
+msgctxt "help:sale.shop,esale_country:"
+msgid "Default country related in this shop."
+msgstr "País por defecto relacionado con esta tienda."
 
 msgctxt "help:sale.shop,esale_currency:"
 msgid "Default currency shop."
