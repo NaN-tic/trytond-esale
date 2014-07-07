@@ -54,6 +54,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                         <field name="esale_scheduler"/>
                         <label name="esale_user"/>
                         <field name="esale_user"/>
+                        <label name="esale_timezone"/>
+                        <field name="esale_timezone"/>
                     </page>
                     <page string="Countries" id="contries">
                         <label name="esale_country"/>

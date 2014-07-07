@@ -9,6 +9,13 @@ from trytond.pyson import And, Eval
 from decimal import Decimal
 import time
 
+try:
+    import pytz
+    TIMEZONES = [(x, x) for x in pytz.common_timezones]
+except ImportError:
+    TIMEZONES = []
+TIMEZONES += [(None, '')]
+
 __all__ = ['SaleShop', 'SaleShopCountry', 'SaleShopLang']
 __metaclass__ = PoolMeta
 
@@ -90,6 +97,8 @@ class SaleShop:
     esale_payments = fields.One2Many('esale.payment', 'shop', 'Payments')
     esale_status = fields.One2Many('esale.status', 'shop', 'Status')
     esale_states = fields.One2Many('esale.state', 'shop', 'State')
+    esale_timezone = fields.Selection(TIMEZONES, 'Timezone', translate=False,
+        help='Select an timezone when is different than company timezone.')
 
     @classmethod
     def __setup__(cls):
