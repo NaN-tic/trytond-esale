@@ -126,6 +126,10 @@ msgctxt "field:esale.payment,rec_name:"
 msgid "Name"
 msgstr "Nombre"
 
+msgctxt "field:esale.payment,sequence:"
+msgid "Sequence"
+msgstr "Secuencia"
+
 msgctxt "field:esale.payment,shop:"
 msgid "Sale Shop"
 msgstr "Tienda"
