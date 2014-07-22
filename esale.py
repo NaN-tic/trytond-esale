@@ -33,6 +33,17 @@ class eSalePayment(ModelSQL, ModelView):
     payment_type = fields.Many2One('account.payment.type', 'Payment Type',
         domain=[('kind', '=', 'receivable')], required=True)
     shop = fields.Many2One('sale.shop', 'Sale Shop', required=True)
+    sequence = fields.Integer('Sequence', required=True)
+
+    @classmethod
+    def __setup__(cls):
+        super(eSalePayment, cls).__setup__()
+        cls._order.insert(0, ('sequence', 'ASC'))
+        cls._order.insert(1, ('id', 'ASC'))
+
+    @staticmethod
+    def default_sequence():
+        return 1
 
 
 class eSaleStatus(ModelSQL, ModelView):
