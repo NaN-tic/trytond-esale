@@ -2,7 +2,6 @@
 #The COPYRIGHT file at the top level of this repository contains 
 #the full copyright notices and license terms.
 from trytond.pool import Pool, PoolMeta
-from trytond.transaction import Transaction
 
 import logging
 
@@ -27,11 +26,20 @@ class Address:
         ContactMechanism = pool.get('party.contact_mechanism')
         Country = pool.get('country.country')
 
-        countries = Country.search(['OR',
-            ('name', 'like', values.get('country')),
-            ('code', '=', values.get('country').upper()),
-            ], limit=1)
+        # Country
+        country = values.get('country')
+        if not isinstance(country, int):
+            countries = Country.search(['OR',
+                ('name', 'like', country),
+                ('code', '=', country.upper()),
+                ], limit=1)
+            if countries:
+                country, = countries
+                values['country'] = country
+            else:
+                del values['country']
 
+        # Address
         zip = values.get('zip')
         addresses = Address.search([
             ('party', '=', party),
@@ -67,11 +75,6 @@ class Address:
             del values['phone']
             del values['email']
             del values['fax']
-
-            if countries:
-                values['country'] = countries[0]
-            else:
-                del values['country']
 
             values['party'] = party
             if not type:
