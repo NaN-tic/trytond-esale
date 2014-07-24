@@ -219,6 +219,30 @@ class SaleLine:
     __name__ = 'sale.line'
 
     @classmethod
+    def get_shipment_line(self, product, price, sale=None):
+        '''Get shipment line
+        :param product: obj
+        :param price: Decimal
+        return obj
+        '''
+        SaleLine = Pool().get('sale.line')
+
+        shipment_line = SaleLine()
+        shipment_line.sale = sale
+        shipment_line.product = product
+        shipment_line.description = product.rec_name
+        shipment_line.quantity = 1
+        shipment_line.unit = product.sale_uom
+        shipment_line.unit_price = price
+        shipment_line.shipment_cost = price
+        shipment_line.amount = price
+        shipment_line.taxes = product.customer_taxes_used
+        shipment_line.sequence = 9999
+        shipment_line.on_change_product()
+
+        return shipment_line
+
+    @classmethod
     def esale_dict2lines(self, sale, line, values):
         '''
         Return list sale lines
