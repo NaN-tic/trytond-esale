@@ -239,6 +239,8 @@ class SaleLine:
         shipment_line.taxes = product.customer_taxes_used
         shipment_line.sequence = 9999
         shipment_line.on_change_product()
+        shipment_line.unit_price = price
+        shipment_line.shipment_cost = price
 
         return shipment_line
 
