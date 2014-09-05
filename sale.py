@@ -41,7 +41,13 @@ class Sale:
         eSaleStatus = pool.get('esale.status')
         Currency = Pool().get('currency.currency')
 
-        #Default Sale values
+        #Default sale values
+        sale_fields = Sale.fields_get()
+        for k, v in Sale.default_get(sale_fields, with_rec_name=False).iteritems():
+            if k not in sale_values:
+                sale_values[k] = v
+
+        #Set Sale values
         sale_values['shop'] = shop
         sale_values['warehouse'] = shop.warehouse
 
@@ -190,12 +196,6 @@ class Sale:
             lines = lines.copy()
             lines = lines + extralines
         sale_values['lines'] = [('create', lines)]
-
-        #Default sale values
-        sale_fields = Sale.fields_get()
-        for k, v in Sale.default_get(sale_fields, with_rec_name=False).iteritems():
-            if k not in sale_values:
-                sale_values[k] = v
 
         #Create Sale
         Transaction().cursor.commit() #TODO: Add because get error when save order: could not serialize access due to concurrent update
