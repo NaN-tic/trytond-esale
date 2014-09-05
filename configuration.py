@@ -12,11 +12,11 @@ class Configuration:
     'Sale Configuration'
     __name__ = 'sale.configuration'
     sale_delivery_product = fields.Property(fields.Many2One('product.product',
-        'Delivery Product', required=True))
+        'Delivery Product', domain=[('salable', '=', True)], required=True))
     sale_discount_product = fields.Property(fields.Many2One('product.product',
-        'Discount Product', required=True))
+        'Discount Product', domain=[('salable', '=', True)], required=True))
     sale_surcharge_product = fields.Property(fields.Many2One('product.product',
-        'Surcharge Product', required=True))
+        'Surcharge Product', domain=[('salable', '=', True)], required=True))
     sale_uom_product = fields.Property(fields.Many2One('product.uom',
         'Default UOM', required=True))
     sale_warehouse = fields.Property(fields.Many2One('stock.location',
