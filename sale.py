@@ -20,7 +20,7 @@ class Sale:
     status_history = fields.Text('Status history', readonly=True)
 
     @classmethod
-    def create_external_order(self, shop, sale_values, lines_values,
+    def create_external_order(cls, shop, sale_values, lines_values,
             extralines_values, party_values, invoice_values, shipment_values):
         '''
         Create external order in sale
@@ -227,7 +227,7 @@ class SaleLine:
     __name__ = 'sale.line'
 
     @classmethod
-    def get_shipment_line(self, product, price, sale=None):
+    def get_shipment_line(cls, product, price, sale=None):
         '''Get shipment line
         :param product: obj
         :param price: Decimal
@@ -253,7 +253,7 @@ class SaleLine:
         return shipment_line
 
     @classmethod
-    def esale_dict2lines(self, sale, line, values):
+    def esale_dict2lines(cls, sale, line, values):
         '''
         Return list sale lines
         :param sale: obj
