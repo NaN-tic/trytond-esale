@@ -74,7 +74,7 @@ class Template:
         shop = user.shop
         if not shop or not shop.esale_available:
             logging.getLogger('esale').warning(
-                'User %s has not any shop associated.' % (user))
+                'User %s has not eSale Main Shop in user preferences.' % (user))
             return template_list_price()
 
         context = Transaction().context
