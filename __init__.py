@@ -9,6 +9,7 @@ from .address import *
 from .shop import *
 from .sale import *
 from .product import *
+from .carrier import *
 
 def register():
     Pool.register(
@@ -27,4 +28,5 @@ def register():
         eSaleAccountTaxRule,
         Template,
         TemplateSaleShop,
+        Carrier,
         module='esale', type_='model')
