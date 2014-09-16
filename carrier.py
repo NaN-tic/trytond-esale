@@ -31,3 +31,19 @@ class Carrier:
         price = price + tax_amount
         price.quantize(Decimal(str(10.0 ** - DIGITS)))
         return price
+
+    @staticmethod
+    def get_products_stockable(products=[]):
+        '''
+        Return products are stockable
+        :param products: list ids
+        :return: True
+        '''
+        Product = Pool().get('product.product')
+
+        prods = Product.search_read([
+                ('id', 'in', products),
+                ], fields_names=['type'])
+        stockable = any(product['type'] in ('goods', 'assets')
+            for product in prods)
+        return stockable
