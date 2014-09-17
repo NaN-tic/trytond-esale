@@ -1,6 +1,7 @@
 #This file is part esale module for Tryton.
 #The COPYRIGHT file at the top level of this repository contains 
 #the full copyright notices and license terms.
+from decimal import Decimal
 from trytond.model import fields, ModelSQL
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
@@ -40,6 +41,9 @@ class Template:
             From all products, return price cheaper
             '''
             products = [p for t in templates for p in t.products]
+            if not products:
+                return {n: {t.id: Decimal(0) for t in templates} for n in names}
+
             sale_prices = Product.get_sale_price(products) # get all product prices
 
             prices = {}
