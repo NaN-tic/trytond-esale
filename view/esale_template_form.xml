@@ -3,7 +3,7 @@
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <data>
     <xpath expr="/form/notebook/page[@id=&quot;esale&quot;]/notebook/page[@id=&quot;crosssells&quot;]" position="after">
-        <page string="Websites" id="websites" states="{'invisible': Not(Bool(Eval('esale_available')))}">
+        <page string="Websites" id="websites">
             <label name="esale_price"/>
             <field name="esale_price"/>
             <newline/>
