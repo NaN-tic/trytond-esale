@@ -2,11 +2,12 @@
 <!-- This file is part esale module for Tryton.
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <data>
+    <xpath expr="/form/notebook/page[@id=&quot;prices&quot;]/field[@name=&quot;list_price&quot;]" position="after">
+        <label name="esale_price"/>
+        <field name="esale_price"/>
+    </xpath>
     <xpath expr="/form/notebook/page[@id=&quot;esale&quot;]/notebook/page[@id=&quot;crosssells&quot;]" position="after">
         <page string="Websites" id="websites">
-            <label name="esale_price"/>
-            <field name="esale_price"/>
-            <newline/>
             <field name="esale_saleshops" colspan="2"/>
         </page>
     </xpath>
