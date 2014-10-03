@@ -22,7 +22,10 @@ class Template:
             ],
             help='Select shops will be available this product')
     esale_price = fields.Function(fields.Numeric('eSale Price',
-            digits=(16, 4)), 'get_esale_price')
+            digits=(16, 4),
+            help='eSale price is calculated from shop in user '
+                'preferences and shop configuration',
+            ), 'get_esale_price')
 
     @classmethod
     def get_esale_price(cls, templates, names):
