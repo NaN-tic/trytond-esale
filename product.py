@@ -1,5 +1,5 @@
 #This file is part esale module for Tryton.
-#The COPYRIGHT file at the top level of this repository contains 
+#The COPYRIGHT file at the top level of this repository contains
 #the full copyright notices and license terms.
 from decimal import Decimal
 from trytond.model import fields, ModelSQL
@@ -15,7 +15,7 @@ __metaclass__ = PoolMeta
 
 class Template:
     __name__ = 'product.template'
-    esale_saleshops = fields.Many2Many('product.template-sale.shop', 
+    esale_saleshops = fields.Many2Many('product.template-sale.shop',
             'template', 'shop', 'Websites',
             domain=[
                 ('esale_available', '=', True)
@@ -45,9 +45,12 @@ class Template:
             '''
             products = [p for t in templates for p in t.products]
             if not products:
-                return {n: {t.id: Decimal(0) for t in templates} for n in names}
+                return {
+                        n: {t.id: Decimal(0) for t in templates} for n in names
+                    }
 
-            sale_prices = Product.get_sale_price(products) # get all product prices
+            # get all product prices
+            sale_prices = Product.get_sale_price(products)
 
             prices = {}
             for template in templates:
@@ -58,10 +61,12 @@ class Template:
                     product_prices[product] = sale_prices[product]
 
                 prices_sorted = {}
-                for key, value in sorted(product_prices.iteritems(), key=lambda (k,v): (v,k)):
+                for key, value in sorted(product_prices.iteritems(),
+                        key=lambda (k, v): (v, k)):
                     prices_sorted[key] = value
 
-                prices[template.id] = prices_sorted.values()[0] #get cheaper price
+                 # get cheaper price
+                prices[template.id] = prices_sorted.values()[0]
             return {n: {t.id: prices[t.id] for t in templates} for n in names}
 
         def price_with_tax(result):
@@ -81,7 +86,8 @@ class Template:
         shop = user.shop
         if not shop or not shop.esale_available:
             logging.getLogger('esale').warning(
-                'User %s has not eSale Main Shop in user preferences.' % (user))
+                'User %s has not eSale Main Shop in user preferences.' % (user)
+                )
             return template_list_price()
 
         context = Transaction().context
@@ -110,7 +116,7 @@ class Template:
     @staticmethod
     def default_esale_saleshops():
         Shop = Pool().get('sale.shop')
-        return [p.id for p in Shop.search([('esale_available','=',True)])]
+        return [p.id for p in Shop.search([('esale_available', '=', True)])]
 
     @classmethod
     def create_esale_product(self, shop, tvals, pvals):
@@ -155,7 +161,7 @@ class TemplateSaleShop(ModelSQL):
     'Product - Shop'
     __name__ = 'product.template-sale.shop'
     _table = 'product_template_sale_shop'
-    template = fields.Many2One('product.template', 'Template', ondelete='CASCADE',
-            select=True, required=True)
+    template = fields.Many2One('product.template', 'Template',
+        ondelete='CASCADE', select=True, required=True)
     shop = fields.Many2One('sale.shop', 'Shop', ondelete='RESTRICT',
-            select=True, required=True)
+        select=True, required=True)

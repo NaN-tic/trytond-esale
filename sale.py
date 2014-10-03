@@ -1,5 +1,5 @@
 #This file is part esale module for Tryton.
-#The COPYRIGHT file at the top level of this repository contains 
+#The COPYRIGHT file at the top level of this repository contains
 #the full copyright notices and license terms.
 from decimal import Decimal
 from trytond.model import fields
@@ -14,7 +14,8 @@ __metaclass__ = PoolMeta
 
 class Sale:
     __name__ = 'sale.sale'
-    reference_external = fields.Char('External Reference', readonly=True, select=True)
+    reference_external = fields.Char('External Reference', readonly=True,
+        select=True)
     status = fields.Char('Status', readonly=True,
         help='Last status import/export to e-commerce APP')
     status_history = fields.Text('Status history', readonly=True)
@@ -39,14 +40,15 @@ class Sale:
         eSaleCarrier = pool.get('esale.carrier')
         eSalePayment = pool.get('esale.payment')
         eSaleStatus = pool.get('esale.status')
-        Currency = Pool().get('currency.currency')
+        Currency = pool.get('currency.currency')
 
         sale = Sale()
         sale.shop = shop
 
         #Default sale values
         sale_fields = Sale.fields_get()
-        for k, v in Sale.default_get(sale_fields, with_rec_name=False).iteritems():
+        for k, v in Sale.default_get(sale_fields,
+                with_rec_name=False).iteritems():
             if k not in sale_values:
                 sale_values[k] = v
 
@@ -62,9 +64,9 @@ class Sale:
 
         #Create address
         invoice_address = None
-        if not ((invoice_values.get('street') == shipment_values.get('street')) and \
-                (invoice_values.get('zip') == shipment_values.get('zip'))):
-            invoice_address = Address.esale_create_address(shop, party, 
+        if not (invoice_values.get('street') == shipment_values.get('street')
+                and invoice_values.get('zip') == shipment_values.get('zip')):
+            invoice_address = Address.esale_create_address(shop, party,
                 invoice_values, type='invoice')
             shipment_address = Address.esale_create_address(shop, party,
                 shipment_values, type='delivery')
@@ -143,38 +145,43 @@ class Sale:
                 'sequence': 9999,
                 }]
         shipment_line = Line.esale_dict2lines(sale, line, shipment_values)[0]
-        sale_values['shipment_cost_method'] = 'order' # force shipment invoice on order
+        # force shipment invoice on order
+        sale_values['shipment_cost_method'] = 'order'
         del sale_values['shipping_price']
         del sale_values['shipping_note']
 
         # Surcharge
         surchage_line = None
-        if sale_values.get('surcharge') and sale_values.get('surcharge') != 0.0000:
+        if (sale_values.get('surcharge') and
+                sale_values.get('surcharge') != 0.0000):
             surcharge_price = Decimal(sale_values.get('surcharge', 0))
             if shop.esale_surcharge_tax_include:
                 for tax in shop.esale_surcharge_product.customer_taxes_used:
                     if tax.type == 'fixed':
                         surcharge_price = surcharge_price - tax.amount
                     if tax.type == 'percentage':
-                        tax_price = surcharge_price-(surcharge_price/(1+(tax.rate)))
+                        tax_price = surcharge_price - (surcharge_price /
+                            (1 + tax.rate))
                         surcharge_price = surcharge_price - tax_price
                 surcharge_price = Decimal('%.4f' % (surcharge_price))
             surcharge_values = [{
-                    'product': shop.esale_surcharge_product.code or \
+                    'product': shop.esale_surcharge_product.code or
                             shop.esale_surcharge_product.name,
                     'quantity': 1,
                     'description': shop.esale_surcharge_product.name,
                     'unit_price': surcharge_price.quantize(Decimal('.01')),
                     'sequence': 9999,
                     }]
-            surchage_line = Line.esale_dict2lines(sale, line, surcharge_values)[0]
+            surchage_line = Line.esale_dict2lines(sale, line,
+                surcharge_values)[0]
             del sale_values['surcharge']
 
         #Discount line
         discount_line = None
-        if sale_values.get('discount') and sale_values.get('discount') != 0.0000:
+        if (sale_values.get('discount') and
+                sale_values.get('discount') != 0.0000):
             discount_values = [{
-                    'product': shop.esale_discount_product.code or \
+                    'product': shop.esale_discount_product.code or
                             shop.esale_discount_product.name,
                     'quantity': 1,
                     'description': shop.esale_discount_product.name,
@@ -182,7 +189,8 @@ class Sale:
                         'discount', 0)).quantize(Decimal('.01')),
                     'sequence': 9999,
                     }]
-            discount_line = Line.esale_dict2lines(sale, line, discount_values)[0]
+            discount_line = Line.esale_dict2lines(sale, line,
+                discount_values)[0]
         del sale_values['discount']
 
         extralines = None
@@ -205,8 +213,10 @@ class Sale:
         for field in rm_fields:
             del sale_values[field]
 
-        #Create Sale
-        Transaction().cursor.commit() #TODO: Add because get error when save order: could not serialize access due to concurrent update
+        # Create Sale
+        # TODO: Add because get error when save order: could not serialize
+        # access due to concurrent update
+        Transaction().cursor.commit()
         sale, = Sale.create([sale_values])
         logging.getLogger('esale').info(
             'Shop %s. Create sale %s' % (shop.name, sale.reference_external))
@@ -276,12 +286,11 @@ class SaleLine:
             if products:
                 product, = products
             else:
-                product_esale = getattr(Product, 
+                product_esale = getattr(Product,
                     'create_product_%s' % sale.shop.esale_shop_app,
                     default_create_product)
                 product = product_esale(sale.shop, code)
 
-            # exist product
             if product:
                 l['product'] = product
 
@@ -302,7 +311,7 @@ class SaleLine:
                 for k, v in product_values.iteritems():
                     if k not in l:
                         l[k] = v
-            # not exist product
+
             else:
                 del l['product']
                 l['unit'] = sale.shop.esale_uom_product

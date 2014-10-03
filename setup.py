@@ -12,6 +12,7 @@ MODULE = 'esale'
 PREFIX = 'trytonzz'
 MODULE2PREFIX = {}
 
+
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
@@ -40,8 +41,8 @@ tests_require = ['proteus >= %s.%s, < %s.%s' %
 
 setup(name='%s_%s' % (PREFIX, MODULE),
     version=info.get('version', '0.0.1'),
-    description='Tryton module for ecommerce softwares (Magento, Prestashop, ' \
-        'Amazon, Drupal Commerce, Shopify...)',
+    description='Tryton module for ecommerce softwares (Magento, Prestashop, '
+    'Amazon, Drupal Commerce, Shopify...)',
     author='Zikzakmedia SL',
     author_email='zikzak@zikzakmedia.com',
     url='http://www.zikzakmedia.com',

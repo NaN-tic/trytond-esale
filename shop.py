@@ -1,5 +1,5 @@
 #This file is part esale module for Tryton.
-#The COPYRIGHT file at the top level of this repository contains 
+#The COPYRIGHT file at the top level of this repository contains
 #the full copyright notices and license terms.
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.transaction import Transaction
@@ -42,26 +42,29 @@ class SaleShop:
         help='Use other user when user is not active (cron).')
     esale_country = fields.Many2One('country.country', 'Country',
         help='Default country related in this shop.')
-    esale_countrys = fields.Many2Many('sale.shop-country.country', 
+    esale_countrys = fields.Many2Many('sale.shop-country.country',
         'shop', 'country', 'Countries')
-    esale_delivery_product = fields.Many2One('product.product', 'Delivery Product',
+    esale_delivery_product = fields.Many2One('product.product',
+        'Delivery Product',
         states={
             'required': Eval('esale_available', True),
         },)
-    esale_discount_product = fields.Many2One('product.product', 'Discount Product',
+    esale_discount_product = fields.Many2One('product.product',
+        'Discount Product',
         states={
             'required': Eval('esale_available', True),
         },)
-    esale_surcharge_product = fields.Many2One('product.product', 'Surcharge Product',
+    esale_surcharge_product = fields.Many2One('product.product',
+        'Surcharge Product',
         states={
             'required': Eval('esale_available', True),
         },)
     esale_surcharge_tax_include = fields.Boolean('Surcharge Tax Include')
-    esale_uom_product = fields.Many2One('product.uom', 'Default UOM', 
+    esale_uom_product = fields.Many2One('product.uom', 'Default UOM',
         states={
             'required': Eval('esale_available', True),
         },)
-    esale_category = fields.Many2One('product.category', 'Default Category', 
+    esale_category = fields.Many2One('product.category', 'Default Category',
         states={
             'required': Eval('esale_available', True),
         }, help='Default Category Product when create a new product. In this '
@@ -70,24 +73,25 @@ class SaleShop:
         states={
             'required': Eval('esale_available', True),
         }, help='Default language shop. If not select, use lang user')
-    esale_langs = fields.Many2Many('sale.shop-ir.lang', 
+    esale_langs = fields.Many2Many('sale.shop-ir.lang',
             'shop', 'lang', 'Langs')
     esale_price = fields.Selection([
-            ('saleprice','Sale Price'),
-            ('pricelist','Pricelist'),
+            ('saleprice', 'Sale Price'),
+            ('pricelist', 'Pricelist'),
             ], 'Price',
         states={
             'required': Eval('esale_available', True),
         },)
-    esale_price_party = fields.Many2One('party.party', 'Party', 
+    esale_price_party = fields.Many2One('party.party', 'Party',
         states={
-            'required': And(Eval('esale_price') == 'pricelist', Eval('esale_available', True)),
+            'required': And(Eval('esale_price') == 'pricelist',
+                Eval('esale_available', True)),
         }, help='Select a party to compute a price from price list.')
-    esale_from_orders = fields.DateTime('From Orders', 
+    esale_from_orders = fields.DateTime('From Orders',
         help='This date is last import (filter)')
-    esale_to_orders = fields.DateTime('To Orders', 
+    esale_to_orders = fields.DateTime('To Orders',
         help='This date is to import (filter)')
-    esale_last_state_orders = fields.DateTime('Last State Orders', 
+    esale_last_state_orders = fields.DateTime('Last State Orders',
         help='This date is last export (filter)')
     esale_currency = fields.Many2One('currency.currency', 'Default currency',
         states={
@@ -137,19 +141,22 @@ class SaleShop:
     def default_esale_delivery_product():
         Config = Pool().get('sale.configuration')
         config = Config(1)
-        return config.sale_delivery_product and config.sale_delivery_product.id or None
+        return (config.sale_delivery_product and
+            config.sale_delivery_product.id or None)
 
     @staticmethod
     def default_esale_discount_product():
         Config = Pool().get('sale.configuration')
         config = Config(1)
-        return config.sale_discount_product and config.sale_discount_product.id or None
+        return (config.sale_discount_product and
+            config.sale_discount_product.id or None)
 
     @staticmethod
     def default_esale_surcharge_product():
         Config = Pool().get('sale.configuration')
         config = Config(1)
-        return config.sale_surcharge_product and config.sale_surcharge_product.id or None
+        return (config.sale_surcharge_product and
+            config.sale_surcharge_product.id or None)
 
     @staticmethod
     def default_esale_uom_product():
@@ -162,7 +169,7 @@ class SaleShop:
         '''
         Convert UTC timezone
         :param date: datetime
-        :return str (yyyy-mm-dd hh:mm:ss)  
+        :return str (yyyy-mm-dd hh:mm:ss)
         '''
         return time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(time.mktime(
             time.strptime(date, "%Y-%m-%d %H:%M:%S"))))
@@ -172,14 +179,14 @@ class SaleShop:
         '''
         Convert datetime to str
         :param date: datetime
-        :return str (yyyy-mm-dd hh:mm:ss)  
+        :return str (yyyy-mm-dd hh:mm:ss)
         '''
         return date.strftime("%Y-%m-%d %H:%M:%S")
 
     @classmethod
     def get_shop_app(cls):
         '''Get Shop APP (magento, prestashop,...)'''
-        res = [('','')]
+        res = [('', '')]
         return res
 
     def get_sales_from_date(self, date):
@@ -192,9 +199,9 @@ class SaleShop:
         Sale = pool.get('sale.sale')
         Move = pool.get('stock.move')
 
-        # Sale might not get updated for state changes in the related shipments.
-        # So first get the moves for outgoing shipments which are executed after
-        # last import time.
+        # Sale might not get updated for state changes in the related shipments
+        # So first get the moves for outgoing shipments which are executed
+        # after last import time.
         moves = Move.search([
             ('write_date', '>=', date),
             ('sale.shop', '=', self.id),
@@ -222,7 +229,8 @@ class SaleShop:
                     shop.rec_name))
 
         for shop in shops:
-            import_order = getattr(shop, 'import_orders_%s' % shop.esale_shop_app)
+            import_order = getattr(shop, 'import_orders_%s' %
+                shop.esale_shop_app)
             import_order()
 
     @classmethod
@@ -244,7 +252,8 @@ class SaleShop:
         Export Orders to External APP
         """
         for shop in shops:
-            export_state = getattr(shop, 'export_state_%s' % shop.esale_shop_app)
+            export_state = getattr(shop, 'export_state_%s' %
+                shop.esale_shop_app)
             export_state()
 
     @classmethod
@@ -287,6 +296,7 @@ class SaleShop:
             tax_amount += val.get('amount')
         price = price + tax_amount
         return price
+
 
 class SaleShopCountry(ModelSQL):
     'Shop - Country'
