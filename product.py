@@ -6,6 +6,8 @@ from trytond.model import fields, ModelSQL
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 from trytond.modules.product_esale.tools import slugify
+from trytond.config import CONFIG
+DIGITS = int(CONFIG.get('unit_price_digits', 4))
 
 import logging
 
@@ -22,7 +24,7 @@ class Template:
             ],
             help='Select shops will be available this product')
     esale_price = fields.Function(fields.Numeric('eSale Price',
-            digits=(16, 4),
+            digits=(16, DIGITS),
             help='eSale price is calculated from shop in user '
                 'preferences and shop configuration',
             ), 'get_esale_price')

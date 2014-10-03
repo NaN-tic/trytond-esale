@@ -5,6 +5,8 @@ from decimal import Decimal
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
+from trytond.config import CONFIG
+DIGITS = int(CONFIG.get('unit_price_digits', 4))
 
 import logging
 
@@ -163,7 +165,7 @@ class Sale:
                         tax_price = surcharge_price - (surcharge_price /
                             (1 + tax.rate))
                         surcharge_price = surcharge_price - tax_price
-                surcharge_price = Decimal('%.4f' % (surcharge_price))
+                surcharge_price.quantize(Decimal(str(10.0 ** - DIGITS)))
             surcharge_values = [{
                     'product': shop.esale_surcharge_product.code or
                             shop.esale_surcharge_product.name,
