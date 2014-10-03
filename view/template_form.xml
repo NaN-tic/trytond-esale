@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!-- This file is part esale module for Tryton.
+The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
+<data>
+    <xpath expr="/form/notebook/page[@id=&quot;esale&quot;]/notebook/page[@id=&quot;crosssells&quot;]" position="after">
+        <page string="Websites" id="websites" states="{'invisible': Not(Bool(Eval('esale_available')))}">
+            <field name="esale_saleshops" colspan="2"/>
+        </page>
+    </xpath>
+</data>
