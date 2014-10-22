@@ -281,7 +281,7 @@ class SaleShop:
         self.raise_user_error('orders_not_export')
 
     @classmethod
-    def esale_price_w_taxes(self, product, price, quantity=1):
+    def esale_price_w_taxes(cls, product, price, quantity=1):
         '''Get total price with taxes'''
         pool = Pool()
         Tax = pool.get('account.tax')
