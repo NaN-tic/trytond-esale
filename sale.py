@@ -58,6 +58,7 @@ class Sale:
         sale_values['shop'] = shop
 
         #Update dict from on change shop
+        currency_code = sale_values.get('currency')
         sale_values.update(sale.on_change_shop())
 
         #Create party
@@ -87,7 +88,7 @@ class Sale:
 
         #Currency
         currencies = Currency.search([
-                ('code', '=', sale_values.get('currency')),
+                ('code', '=', currency_code),
                 ], limit=1)
         if currencies:
             sale_values['currency'] = currencies[0].id
