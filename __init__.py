@@ -11,7 +11,6 @@ from .sale import *
 from .product import *
 from .carrier import *
 
-
 def register():
     Pool.register(
         Configuration,
@@ -28,6 +27,7 @@ def register():
         eSaleSate,
         eSaleAccountTaxRule,
         Template,
+        Product,
         TemplateSaleShop,
         Carrier,
         module='esale', type_='model')

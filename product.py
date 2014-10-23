@@ -11,7 +11,7 @@ DIGITS = int(CONFIG.get('unit_price_digits', 4))
 
 import logging
 
-__all__ = ['Template', 'TemplateSaleShop']
+__all__ = ['Template', 'Product', 'TemplateSaleShop']
 __metaclass__ = PoolMeta
 
 
@@ -157,6 +157,26 @@ class Template:
         logging.getLogger('esale').info(
             'Shop %s. Create product %s' % (shop.name, product.rec_name))
         return product
+
+    @staticmethod
+    def esale_template_values():
+        '''Default values Product Template'''
+        tvals = {}
+        tvals['esale_available'] = True
+        tvals['esale_active'] = True
+        tvals['salable'] = True
+        tvals['account_category'] = True
+        tvals['type'] = 'goods'
+        return tvals
+
+
+class Product:
+    __name__ = 'product.product'
+    
+    @staticmethod
+    def esale_product_values():
+        '''Default values Product Product'''
+        return {}
 
 
 class TemplateSaleShop(ModelSQL):
