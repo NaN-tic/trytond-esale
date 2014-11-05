@@ -28,6 +28,11 @@ class Template:
             help='eSale price is calculated from shop in user '
                 'preferences and shop configuration',
             ), 'get_esale_price')
+    esale_special_price = fields.Function(fields.Numeric('eSale Special Price',
+            digits=(16, DIGITS),
+            help='eSale special price is calculated from shop in user '
+                'preferences and shop configuration',
+            ), 'get_esale_special_price')
 
     @classmethod
     def get_esale_price(cls, templates, names):
@@ -114,6 +119,12 @@ class Template:
             if shop.esale_tax_include:
                 result = price_with_tax(result)
             return result
+
+    @classmethod
+    def get_esale_special_price(cls, templates, names):
+        '''Call get_esale_price to calculate special price (configuration shop)'''
+        with Transaction().set_context(without_special_price=False):
+            return cls.get_esale_price(templates, names)
 
     @staticmethod
     def default_esale_saleshops():
