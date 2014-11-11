@@ -62,6 +62,9 @@ class Template:
             prices = {}
             for template in templates:
                 products = [p.id for p in template.products]
+                if not products:
+                    prices[template.id] = Decimal(0.0)
+                    continue
 
                 product_prices = {}
                 for product in products:
@@ -72,7 +75,7 @@ class Template:
                         key=lambda (k, v): (v, k)):
                     prices_sorted[key] = value
 
-                 # get cheaper price
+                # get cheaper price
                 prices[template.id] = prices_sorted.values()[0]
             return {n: {t.id: prices[t.id] for t in templates} for n in names}
 
