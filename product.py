@@ -33,6 +33,15 @@ class Template:
             help='eSale special price is calculated from shop in user '
                 'preferences and shop configuration',
             ), 'get_esale_special_price')
+    esale_relateds_by_shop = fields.Function(fields.Many2Many(
+        'product.template', None, None, 'Relateds by Shop'),
+        'get_esale_relateds_by_shop')
+    esale_upsells_by_shop = fields.Function(fields.Many2Many(
+        'product.template', None, None, 'Upsells by Shop'),
+        'get_esale_upsells_by_shop')
+    esale_crosssells_by_shop = fields.Function(fields.Many2Many(
+        'product.template', None, None, 'Crosssells by Shop'),
+        'get_esale_crosssells_by_shop')
 
     @classmethod
     def get_esale_price(cls, templates, names):
@@ -128,6 +137,75 @@ class Template:
         '''Call get_esale_price to calculate special price (configuration shop)'''
         with Transaction().set_context(without_special_price=False):
             return cls.get_esale_price(templates, names)
+
+    def get_esale_relateds_by_shop(self, name):
+        '''Get all relateds products by shop
+        (context or user shop preferences)'''
+        relateds = [] # ids
+        if not self.esale_relateds:
+            return relateds
+
+        User = Pool().get('res.user')
+        SaleShop = Pool().get('sale.shop')
+
+        user = User(Transaction().user)
+        if Transaction().context.get('shop'):
+            shop = SaleShop(Transaction().context.get('shop'))
+        else:
+            shop = user.shop
+        if not shop:
+            return relateds
+
+        for template in self.esale_relateds:
+            if shop in template.esale_saleshops:
+                relateds.append(template.id)
+        return relateds
+
+    def get_esale_upsells_by_shop(self, name):
+        '''Get all upsells products by shop
+        (context or user shop preferences)'''
+        upsells = [] # ids
+        if not self.esale_upsells:
+            return upsells
+
+        User = Pool().get('res.user')
+        SaleShop = Pool().get('sale.shop')
+
+        user = User(Transaction().user)
+        if Transaction().context.get('shop'):
+            shop = SaleShop(Transaction().context.get('shop'))
+        else:
+            shop = user.shop
+        if not shop:
+            return upsells
+
+        for template in self.esale_upsells:
+            if shop in template.esale_saleshops:
+                upsells.append(template.id)
+        return upsells
+
+    def get_esale_crosssells_by_shop(self, name):
+        '''Get all crosssells products by shop
+        (context or user shop preferences)'''
+        crosssells = [] # ids
+        if not self.esale_crosssells:
+            return crosssells
+
+        User = Pool().get('res.user')
+        SaleShop = Pool().get('sale.shop')
+
+        user = User(Transaction().user)
+        if Transaction().context.get('shop'):
+            shop = SaleShop(Transaction().context.get('shop'))
+        else:
+            shop = user.shop
+        if not shop:
+            return crosssells
+
+        for template in self.esale_crosssells:
+            if shop in template.esale_saleshops:
+                crosssells.append(template.id)
+        return crosssells
 
     @staticmethod
     def default_esale_saleshops():
