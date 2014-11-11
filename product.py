@@ -142,6 +142,8 @@ class Template:
         '''Get all relateds products by shop
         (context or user shop preferences)'''
         relateds = [] # ids
+        if not hasattr(self, 'esale_relateds'):
+            return relateds
         if not self.esale_relateds:
             return relateds
 
@@ -165,6 +167,8 @@ class Template:
         '''Get all upsells products by shop
         (context or user shop preferences)'''
         upsells = [] # ids
+        if not hasattr(self, 'esale_upsells'):
+            return upsells
         if not self.esale_upsells:
             return upsells
 
@@ -188,6 +192,8 @@ class Template:
         '''Get all crosssells products by shop
         (context or user shop preferences)'''
         crosssells = [] # ids
+        if not hasattr(self, 'esale_crosssells'):
+            return crosssells
         if not self.esale_crosssells:
             return crosssells
 
