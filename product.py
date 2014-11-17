@@ -6,8 +6,8 @@ from trytond.model import fields, ModelSQL
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 from trytond.modules.product_esale.tools import slugify
-from trytond.config import CONFIG
-DIGITS = int(CONFIG.get('unit_price_digits', 4))
+from trytond.config import config
+DIGITS = int(config.get('digits', 'unit_price_digits', 4))
 
 import logging
 
