@@ -183,13 +183,22 @@ class Sale:
         discount_line = None
         if (sale_values.get('discount') and
                 sale_values.get('discount') != 0.0000):
+            discount_price = Decimal(sale_values.get('discount', 0))
+            if shop.esale_discount_tax_include:
+                for tax in shop.esale_discount_product.customer_taxes_used:
+                    if tax.type == 'fixed':
+                        discount_price = discount_price - tax.amount
+                    if tax.type == 'percentage':
+                        tax_price = discount_price - (discount_price /
+                            (1 + tax.rate))
+                        discount_price = discount_price - tax_price
+                discount_price.quantize(Decimal(str(10.0 ** - DIGITS)))
             discount_values = [{
                     'product': shop.esale_discount_product.code or
                             shop.esale_discount_product.name,
                     'quantity': 1,
                     'description': shop.esale_discount_product.name,
-                    'unit_price': Decimal(sale_values.get(
-                        'discount', 0)).quantize(Decimal('.01')),
+                    'unit_price': discount_price.quantize(Decimal('.01')),
                     'sequence': 9999,
                     }]
             discount_line = Line.esale_dict2lines(sale, line,
