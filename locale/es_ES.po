@@ -382,6 +382,10 @@ msgctxt "field:sale.shop,esale_discount_product:"
 msgid "Discount Product"
 msgstr "Producto descuento"
 
+msgctxt "field:sale.shop,esale_discount_tax_include:"
+msgid "Discount Tax Include"
+msgstr "Descuentos. Impuestos incluidos"
+
 msgctxt "field:sale.shop,esale_ext_reference:"
 msgid "External Reference"
 msgstr "Referencia externa"
@@ -440,7 +444,7 @@ msgstr "Producto recargo"
 
 msgctxt "field:sale.shop,esale_surcharge_tax_include:"
 msgid "Surcharge Tax Include"
-msgstr "Impuestos incluidos en el recargo"
+msgstr "Recargo. Impuestos incluidos"
 
 msgctxt "field:sale.shop,esale_tax_include:"
 msgid "Tax Include"
