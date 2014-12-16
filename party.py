@@ -42,8 +42,11 @@ class Party:
             vat_number = '%s%s' % (vat_country.upper(), vat_number)
             if not vatnumber.check_vat(vat_number):
                 del values['vat_country']
-        else:
+        elif 'vat_country' in values:
             del values['vat_country']
+
+        if 'country' in values and not values.get('country'):
+            del values['country']
 
         #  Search party by:
         #  - Vat country + vat number
