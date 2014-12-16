@@ -28,7 +28,7 @@ class Address:
 
         # Country
         country = values.get('country')
-        if not isinstance(country, int):
+        if country and not isinstance(country, int):
             countries = Country.search(['OR',
                 ('name', 'like', country),
                 ('code', '=', country.upper()),
@@ -38,6 +38,8 @@ class Address:
                 values['country'] = country
             else:
                 del values['country']
+        elif 'country' in values and not country:
+            del values['country']
 
         # Address
         zip = values.get('zip')
@@ -72,9 +74,12 @@ class Address:
                 address_contacts.append(
                     {'type': 'fax', 'value': values['fax']})
 
-            del values['phone']
-            del values['email']
-            del values['fax']
+            if 'phone' in values:
+                del values['phone']
+            if 'email' in values:
+                del values['email']
+            if 'fax' in values:
+                del values['fax']
 
             values['party'] = party
             if not type:
