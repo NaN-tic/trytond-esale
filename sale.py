@@ -16,6 +16,7 @@ __metaclass__ = PoolMeta
 
 class Sale:
     __name__ = 'sale.sale'
+    esale = fields.Boolean('eSale')
     reference_external = fields.Char('External Reference', readonly=True,
         select=True)
     status = fields.Char('Status', readonly=True,
@@ -55,6 +56,7 @@ class Sale:
                 sale_values[k] = v
 
         #Set Sale values
+        sale_values['esale'] = True
         sale_values['shop'] = shop
 
         #Update dict from on change shop

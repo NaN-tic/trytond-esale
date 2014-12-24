@@ -4,6 +4,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
 <data>
     <xpath expr="/form/notebook/page[@id=&quot;other&quot;]" position="after">
         <page string="eSale" col="6" id="esale" states="{'invisible': ~Eval('reference_external')}">
+            <label name="esale"/>
+            <field name="esale"/>
             <label name="reference_external"/>
             <field name="reference_external"/>
             <newline/>
