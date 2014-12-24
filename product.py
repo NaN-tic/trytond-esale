@@ -5,7 +5,6 @@ from decimal import Decimal
 from trytond.model import fields, ModelSQL
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
-from trytond.modules.product_esale.tools import slugify
 from trytond.config import config
 DIGITS = int(config.get('digits', 'unit_price_digits', 4))
 
@@ -231,16 +230,12 @@ class Template:
         Template = Pool().get('product.template')
 
         #Default values
-        tvals['esale_available'] = True
-        tvals['esale_active'] = True
         tvals['default_uom'] = shop.esale_uom_product
         tvals['category'] = shop.esale_category
         tvals['salable'] = True
         tvals['sale_uom'] = shop.esale_uom_product
         tvals['account_category'] = True
         tvals['products'] = [('create', [pvals])]
-        if not tvals.get('esale_slug'):
-            tvals['esale_slug'] = slugify(tvals.get('name'))
 
         if tvals.get('esale_saleshops'):
             shops = tvals.get('esale_saleshops')
