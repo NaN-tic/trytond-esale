@@ -46,6 +46,11 @@ Para la exportación de stocks para tiendas externas (Magento, Prestashop...),
 dispone de botones para la exportación de precios productos según un intérvalo de fechas.
 Para la exportar los stocks accede a la tienda que desea exportar.
 
+En la tienda, es requerido relacionar con una ubicación (almacén). Si se desea obtener
+el stock en más de una ubicación, añade más de una ubicación en el campo "Almacenes".
+En caso contrario, usará el stock del almacén primario en el caso de gestionar
+el stock.
+
 .. inheritref:: esale/esale:section:productos
 
 Exportar productos
