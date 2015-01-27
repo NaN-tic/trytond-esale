@@ -912,5 +912,9 @@ msgid "Payments"
 msgstr "Pagaments"
 
 msgctxt "view:sale.shop:"
+msgid "Warehouses"
+msgstr "Magatzems"
+
+msgctxt "view:sale.shop:"
 msgid "eSale"
 msgstr "eSale"
