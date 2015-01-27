@@ -2,10 +2,6 @@
 <!-- This file is part esale module for Tryton.
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <data>
-    <xpath expr="/form/notebook/page/field[@name='warehouse']"
-            position="after">
-        <field name="warehouses" colspan="4"/>
-    </xpath>
     <xpath expr="/form/notebook/page[@id=&quot;general&quot;]" position="before">
         <page string="eSale" col="4" id="esale">
             <label name="esale_available"/>
@@ -62,6 +58,9 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                         <field name="esale_user"/>
                         <label name="esale_timezone"/>
                         <field name="esale_timezone"/>
+                    </page>
+                    <page string="Warehouses" id="warehouses">
+                        <field name="warehouses" colspan="4"/>
                     </page>
                     <page string="Countries" id="contries">
                         <label name="esale_country"/>
