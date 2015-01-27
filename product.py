@@ -280,7 +280,7 @@ class Product:
     esale_quantity = fields.Function(fields.Float('eSale Quantity'),
         'get_esale_quantity')
     esale_forecast_quantity = fields.Function(fields.Float(
-            'eSale Forecast Quantity'), 'get_esale_quantity')
+        'eSale Forecast Quantity'), 'get_esale_quantity')
 
     @classmethod
     def get_esale_quantity(cls, products, name):
