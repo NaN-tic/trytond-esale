@@ -240,19 +240,27 @@ msgstr "Correu electrònic"
 
 msgctxt "field:product.product,esale_forecast_quantity:"
 msgid "eSale Forecast Quantity"
-msgstr "eSale Quantitat prevista"
+msgstr "eSale quantitat prevista"
 
 msgctxt "field:product.product,esale_quantity:"
 msgid "eSale Quantity"
-msgstr "eSale Quantitat"
+msgstr "eSale quantitat"
 
 msgctxt "field:product.template,esale_crosssells_by_shop:"
 msgid "Crosssells by Shop"
 msgstr "Vendes creuades per botiga"
 
+msgctxt "field:product.template,esale_forecast_quantity:"
+msgid "eSale Forecast Quantity"
+msgstr "eSale quantitat prevista"
+
 msgctxt "field:product.template,esale_price:"
 msgid "eSale Price"
 msgstr "Preu eSale"
+
+msgctxt "field:product.template,esale_quantity:"
+msgid "eSale Quantity"
+msgstr "eSale quantitat"
 
 msgctxt "field:product.template,esale_relateds_by_shop:"
 msgid "Relateds by Shop"

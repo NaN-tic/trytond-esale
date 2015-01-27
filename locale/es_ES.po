@@ -244,15 +244,23 @@ msgstr "eSale cantidad prevista "
 
 msgctxt "field:product.product,esale_quantity:"
 msgid "eSale Quantity"
-msgstr "eSale Cantidad"
+msgstr "eSale cantidad"
 
 msgctxt "field:product.template,esale_crosssells_by_shop:"
 msgid "Crosssells by Shop"
 msgstr "Ventas cruzadas por tienda"
 
+msgctxt "field:product.template,esale_forecast_quantity:"
+msgid "eSale Forecast Quantity"
+msgstr "eSale cantidad prevista "
+
 msgctxt "field:product.template,esale_price:"
 msgid "eSale Price"
 msgstr "Precio eSale"
+
+msgctxt "field:product.template,esale_quantity:"
+msgid "eSale Quantity"
+msgstr "eSale cantidad"
 
 msgctxt "field:product.template,esale_relateds_by_shop:"
 msgid "Relateds by Shop"
