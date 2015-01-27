@@ -41,6 +41,15 @@ class Template:
     esale_crosssells_by_shop = fields.Function(fields.Many2Many(
         'product.template', None, None, 'Crosssells by Shop'),
         'get_esale_crosssells_by_shop')
+    esale_quantity = fields.Function(fields.Float('eSale Quantity'),
+        'sum_esale_product')
+    esale_forecast_quantity = fields.Function(fields.Float('eSale Forecast Quantity'),
+        'sum_esale_product')
+
+    @staticmethod
+    def default_esale_saleshops():
+        Shop = Pool().get('sale.shop')
+        return [p.id for p in Shop.search([('esale_available', '=', True)])]
 
     @classmethod
     def get_esale_price(cls, templates, names):
@@ -212,10 +221,13 @@ class Template:
                 crosssells.append(template.id)
         return crosssells
 
-    @staticmethod
-    def default_esale_saleshops():
-        Shop = Pool().get('sale.shop')
-        return [p.id for p in Shop.search([('esale_available', '=', True)])]
+    def sum_esale_product(self, name):
+        if name not in ('esale_quantity', 'esale_forecast_quantity'):
+            raise Exception('Bad argument')
+        sum_ = 0.
+        for product in self.products:
+            sum_ += getattr(product, name)
+        return sum_
 
     @classmethod
     def create_esale_product(self, shop, tvals, pvals):
