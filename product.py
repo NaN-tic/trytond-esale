@@ -265,7 +265,25 @@ class Template:
 
 class Product:
     __name__ = 'product.product'
-    
+    esale_quantity = fields.Function(fields.Float('eSale Quantity'),
+        'get_esale_quantity')
+    esale_forecast_quantity = fields.Function(fields.Float(
+            'eSale Forecast Quantity'), 'get_esale_quantity')
+
+    @classmethod
+    def get_esale_quantity(cls, products, name):
+        transaction = Transaction()
+        context = transaction.context
+        shop_id = context.get('shop', None)
+        if shop_id:
+            shop = Pool().get('sale.shop')(shop_id)
+            locations = (
+                [w.id if shop.warehouses else None for w in shop.warehouses] or
+                [shop.warehouse.id if shop.warehouse else None])
+            context['locations'] = locations
+        with transaction.set_context(context):
+            return cls.get_quantity(products, name[6:])
+
     @staticmethod
     def esale_product_values():
         '''Default values Product Product'''

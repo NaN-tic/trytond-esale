@@ -17,6 +17,7 @@ def register():
         Party,
         Address,
         SaleShop,
+        SaleShopWarehouse,
         SaleShopCountry,
         SaleShopLang,
         Sale,

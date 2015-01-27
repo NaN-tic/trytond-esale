@@ -16,7 +16,7 @@ except ImportError:
     TIMEZONES = []
 TIMEZONES += [(None, '')]
 
-__all__ = ['SaleShop', 'SaleShopCountry', 'SaleShopLang']
+__all__ = ['SaleShop', 'SaleShopWarehouse', 'SaleShopCountry', 'SaleShopLang']
 __metaclass__ = PoolMeta
 
 
@@ -104,6 +104,8 @@ class SaleShop:
     esale_states = fields.One2Many('esale.state', 'shop', 'State')
     esale_timezone = fields.Selection(TIMEZONES, 'Timezone', translate=False,
         help='Select an timezone when is different than company timezone.')
+    warehouses = fields.Many2Many('sale.shop-stock.location', 'shop',
+        'location', 'Warehouses')
 
     @classmethod
     def __setup__(cls):
@@ -297,6 +299,16 @@ class SaleShop:
             tax_amount += val.get('amount')
         price = price + tax_amount
         return price
+
+
+class SaleShopWarehouse(ModelSQL):
+    'Sale Shop - Warehouse'
+    __name__ = 'sale.shop-stock.location'
+    _table = 'sale_shop_stock_location_rel'
+    shop = fields.Many2One('sale.shop', 'Shop',
+        ondelete='CASCADE', select=True, required=True)
+    location = fields.Many2One('stock.location', 'Warehouse',
+        ondelete='RESTRICT', select=True, required=True)
 
 
 class SaleShopCountry(ModelSQL):
