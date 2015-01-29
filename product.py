@@ -155,12 +155,15 @@ class Template:
         if not self.esale_relateds:
             return relateds
 
-        User = Pool().get('res.user')
-        SaleShop = Pool().get('sale.shop')
+        pool = Pool()
+        transaction = Transaction()
 
-        user = User(Transaction().user)
+        User = pool.get('res.user')
+        SaleShop = pool.get('sale.shop')
+
+        user = User(transaction.user)
         if Transaction().context.get('shop'):
-            shop = SaleShop(Transaction().context.get('shop'))
+            shop = SaleShop(transaction.context.get('shop'))
         else:
             shop = user.shop
         if not shop:
@@ -180,12 +183,15 @@ class Template:
         if not self.esale_upsells:
             return upsells
 
-        User = Pool().get('res.user')
-        SaleShop = Pool().get('sale.shop')
+        pool = Pool()
+        transaction = Transaction()
 
-        user = User(Transaction().user)
+        User = pool.get('res.user')
+        SaleShop = pool.get('sale.shop')
+
+        user = User(transaction.user)
         if Transaction().context.get('shop'):
-            shop = SaleShop(Transaction().context.get('shop'))
+            shop = SaleShop(transaction.context.get('shop'))
         else:
             shop = user.shop
         if not shop:
@@ -205,12 +211,15 @@ class Template:
         if not self.esale_crosssells:
             return crosssells
 
-        User = Pool().get('res.user')
-        SaleShop = Pool().get('sale.shop')
+        pool = Pool()
+        transaction = Transaction()
 
-        user = User(Transaction().user)
+        User = pool.get('res.user')
+        SaleShop = pool.get('sale.shop')
+
+        user = User(transaction.user)
         if Transaction().context.get('shop'):
-            shop = SaleShop(Transaction().context.get('shop'))
+            shop = SaleShop(transaction.context.get('shop'))
         else:
             shop = user.shop
         if not shop:
