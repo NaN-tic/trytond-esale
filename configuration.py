@@ -9,7 +9,6 @@ __metaclass__ = PoolMeta
 
 
 class Configuration:
-    'Sale Configuration'
     __name__ = 'sale.configuration'
     sale_delivery_product = fields.Property(fields.Many2One('product.product',
         'Delivery Product', domain=[('salable', '=', True)], required=True))
