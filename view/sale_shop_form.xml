@@ -23,6 +23,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                         </page>
                     </notebook>
                 </page>
+                <page string="Catalog" id="catalog" col="6">
+                </page>
                 <page string="Configuration" id="configuration" states="{'invisible': Not(Bool(Eval('esale_available')))}">
                     <notebook>
                     <page string="General" id="general">
