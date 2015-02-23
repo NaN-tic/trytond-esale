@@ -5,6 +5,7 @@ from decimal import Decimal
 from trytond.model import fields, ModelSQL
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
+from trytond.pyson import Eval
 from trytond.config import config
 DIGITS = int(config.get('digits', 'unit_price_digits', 4))
 
@@ -16,6 +17,14 @@ __metaclass__ = PoolMeta
 
 class Template:
     __name__ = 'product.template'
+    esale_available = fields.Boolean('eSale',
+            states={
+                'readonly': Eval('esale_available', True),
+            },
+            help='This product are available in your e-commerce. ' \
+            'If you need not publish this product (despublish), ' \
+            'unmark Active field in eSale section.')
+    esale_active = fields.Boolean('Active eSale')
     esale_saleshops = fields.Many2Many('product.template-sale.shop',
             'template', 'shop', 'Websites',
             domain=[
@@ -45,6 +54,10 @@ class Template:
         'sum_esale_product')
     esale_forecast_quantity = fields.Function(fields.Float('eSale Forecast Quantity'),
         'sum_esale_product')
+
+    @staticmethod
+    def default_esale_active():
+        return True
 
     @staticmethod
     def default_esale_saleshops():
