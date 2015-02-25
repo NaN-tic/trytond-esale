@@ -3,7 +3,7 @@
 #the full copyright notices and license terms.
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
-
+from trytond.modules.esale.tools import is_a_vat
 import logging
 
 try:
@@ -55,15 +55,17 @@ class Party:
         #  - Party Email
         party = None
         if shop.esale_get_party_by_vat:
-            if values.get('vat_number') and values.get('vat_country'):
+            vat_number = values.get('vat_number')
+            print "aqui"
+            print is_a_vat(vat_number)
+            if vat_number and is_a_vat(vat_number) and values.get('vat_country'):
                 parties = Party.search([
                     ('vat_country', '=', values.get('vat_country')),
                     ('vat_number', '=', values.get('vat_number')),
                     ], limit=1)
                 if parties:
                     party, = parties
-
-            if values.get('vat_number') and not party:
+            if vat_number and is_a_vat(vat_number) and not party:
                 parties = Party.search([
                     ('vat_number', '=', values.get('vat_number')),
                     ], limit=1)
