@@ -56,8 +56,6 @@ class Party:
         party = None
         if shop.esale_get_party_by_vat:
             vat_number = values.get('vat_number')
-            print "aqui"
-            print is_a_vat(vat_number)
             if vat_number and is_a_vat(vat_number) and values.get('vat_country'):
                 parties = Party.search([
                     ('vat_country', '=', values.get('vat_country')),
