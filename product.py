@@ -1,6 +1,7 @@
 #This file is part esale module for Tryton.
 #The COPYRIGHT file at the top level of this repository contains
 #the full copyright notices and license terms.
+import datetime
 from decimal import Decimal
 from trytond.model import fields, ModelSQL
 from trytond.pool import Pool, PoolMeta
@@ -306,6 +307,8 @@ class Product:
 
     @classmethod
     def get_esale_quantity(cls, products, name):
+        Date = Pool().get('ir.date')
+
         transaction = Transaction()
         context = transaction.context
         shop_id = context.get('shop', None)
@@ -315,6 +318,11 @@ class Product:
                 [w.id if shop.warehouses else None for w in shop.warehouses] or
                 [shop.warehouse.id if shop.warehouse else None])
             context['locations'] = locations
+            if name[6:] == 'forecast_quantity':                
+                context['forecast'] = True
+                context['stock_date_end'] = datetime.date.max
+            else: # quantity
+                context['stock_date_end'] = Date.today()
         with transaction.set_context(context):
             return cls.get_quantity(products, name[6:])
 
