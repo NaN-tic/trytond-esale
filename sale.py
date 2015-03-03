@@ -231,7 +231,8 @@ class Sale:
         # TODO: Add because get error when save order: could not serialize
         # access due to concurrent update
         Transaction().cursor.commit()
-        sale, = Sale.create([sale_values])
+        with Transaction().set_context(company=sale_values['company']):
+            sale, = Sale.create([sale_values])
         logging.getLogger('esale').info(
             'Shop %s. Create sale %s' % (shop.name, sale.reference_external))
 
