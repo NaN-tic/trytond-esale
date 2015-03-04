@@ -246,6 +246,12 @@ class Sale:
                 logging.getLogger('esale').info(
                     'Cancel sale %s' % (sale.reference_external))
 
+    def set_shipment_cost(self):
+        '''When sale is an esale, not recalculate shipment cost'''
+        if self.esale:
+            return
+        return super(Sale, self).set_shipment_cost()
+
 
 class SaleLine:
     __name__ = 'sale.line'
