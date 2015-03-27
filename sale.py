@@ -313,6 +313,7 @@ class SaleLine:
                 product = product_esale(sale.shop, code)
 
             if product:
+                description = l.get('description')
                 l['product'] = product
 
                 line.product = product
@@ -328,7 +329,7 @@ class SaleLine:
                     l['taxes'] = [('add', taxes)]
 
                 l['unit'] = product.default_uom
-                l['description'] = product.rec_name
+                l['description'] = description if description else product.rec_name
                 for k, v in product_values.iteritems():
                     if k not in l:
                         l[k] = v
