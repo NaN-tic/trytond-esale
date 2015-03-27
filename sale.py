@@ -237,15 +237,29 @@ class Sale:
             'Shop %s. Create sale %s' % (shop.name, sale.reference_external))
 
         if status:
+            reference = sale.reference_external
             if sale_status.confirm:
-                Sale.quote([sale])
-                Sale.confirm([sale])
-                logging.getLogger('esale').info(
-                    'Confirm sale %s' % (sale.reference_external))
+                quoted = False
+                try:
+                    Sale.quote([sale])
+                    quoted = True
+                except:
+                    logging.getLogger('esale').info(
+                        'Can not quoted sale %s' % (reference))
+                if quoted:
+                    try:
+                        Sale.confirm([sale])
+                    except:
+                        logging.getLogger('esale').info(
+                            'Can not confirmed sale %s' % (reference))
+                    finally:
+                        logging.getLogger('esale').info(
+                            'Confirmed sale %s' % (reference))
+
             if sale_status.cancel:
                 Sale.cancel([sale])
                 logging.getLogger('esale').info(
-                    'Cancel sale %s' % (sale.reference_external))
+                    'Canceled sale %s' % (reference))
 
     def set_shipment_cost(self):
         '''When sale is an esale, not recalculate shipment cost'''
