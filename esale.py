@@ -68,6 +68,14 @@ class eSaleStatus(ModelSQL, ModelView):
     cancel = fields.Boolean('Cancel',
         help='Sale change state draft to cancel.')
 
+    @staticmethod
+    def default_invoice_method():
+        return 'order'
+
+    @staticmethod
+    def default_shipment_method():
+        return 'order'
+
 
 class eSaleSate(ModelSQL, ModelView):
     'eSale State'
