@@ -231,35 +231,26 @@ class Sale:
         # TODO: Add because get error when save order: could not serialize
         # access due to concurrent update
         Transaction().cursor.commit()
-        with Transaction().set_context(company=sale_values['company']):
+        with Transaction().set_context(
+                company=sale_values['company'],
+                without_warning=True,
+                ):
             sale, = Sale.create([sale_values])
-        logging.getLogger('esale').info(
-            'Shop %s. Create sale %s' % (shop.name, sale.reference_external))
+            logging.getLogger('esale').info(
+                'Shop %s. Create sale %s' % (shop.name, sale.reference_external))
 
-        if status:
-            reference = sale.reference_external
-            if sale_status.confirm:
-                quoted = False
-                try:
+            if status:
+                reference = sale.reference_external
+                if sale_status.confirm:
                     Sale.quote([sale])
-                    quoted = True
-                except:
+                    Sale.confirm([sale])
                     logging.getLogger('esale').info(
-                        'Can not quoted sale %s' % (reference))
-                if quoted:
-                    try:
-                        Sale.confirm([sale])
-                    except:
-                        logging.getLogger('esale').info(
-                            'Can not confirmed sale %s' % (reference))
-                    finally:
-                        logging.getLogger('esale').info(
-                            'Confirmed sale %s' % (reference))
+                        'Confirmed sale %s' % (reference))
 
-            if sale_status.cancel:
-                Sale.cancel([sale])
-                logging.getLogger('esale').info(
-                    'Canceled sale %s' % (reference))
+                if sale_status.cancel:
+                    Sale.cancel([sale])
+                    logging.getLogger('esale').info(
+                        'Canceled sale %s' % (reference))
 
     def set_shipment_cost(self):
         '''When sale is an esale, not recalculate shipment cost'''
