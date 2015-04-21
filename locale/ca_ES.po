@@ -2,11 +2,6 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-msgctxt "error:sale.sale:"
-msgid "A customer invoice/refund from sale device has not been created."
-msgstr ""
-"No s'ha creat una factura/abonament de client des del dispositiu de venda."
-
 msgctxt "error:sale.shop:"
 msgid "Shop \"%s\" is not available in user preferences."
 msgstr "La botiga \"%s\"no es troba disponible a les preferencies de l'usuari."
@@ -242,14 +237,6 @@ msgstr "Usuari modificació"
 msgctxt "field:party.party,esale_email:"
 msgid "E-Mail"
 msgstr "Correu electrònic"
-
-msgctxt "field:party.party,payable_lines:"
-msgid "Payable Lines"
-msgstr "Línies a pagar"
-
-msgctxt "field:party.party,receivable_lines:"
-msgid "Receivable Lines"
-msgstr "Línies a cobrar"
 
 msgctxt "field:product.product,esale_forecast_quantity:"
 msgid "eSale Forecast Quantity"
@@ -875,6 +862,10 @@ msgstr "eSale"
 msgctxt "view:product.template:"
 msgid "General"
 msgstr "General"
+
+msgctxt "view:product.template:"
+msgid "Websites"
+msgstr "Botigues"
 
 msgctxt "view:product.template:"
 msgid "eSale"
