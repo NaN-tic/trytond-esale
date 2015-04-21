@@ -29,6 +29,5 @@ def register():
         eSaleAccountTaxRule,
         Template,
         Product,
-        TemplateSaleShop,
         Carrier,
         module='esale', type_='model')

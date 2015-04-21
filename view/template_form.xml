@@ -11,9 +11,6 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                     <label name="esale_active"/>
                     <field name="esale_active"/>
                 </page>
-                <page string="Websites" id="websites" states="{'invisible': Not(Bool(Eval('esale_available')))}">
-                    <field name="esale_saleshops" colspan="2"/>
-                </page>
             </notebook>
         </page>
     </xpath>

@@ -8,7 +8,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
     </xpath>
     <xpath expr="/form/notebook/page[@id=&quot;esale&quot;]/notebook/page[@id=&quot;crosssells&quot;]" position="after">
         <page string="Websites" id="websites">
-            <field name="esale_saleshops" colspan="2"/>
+            <field name="shops" colspan="2"/>
         </page>
     </xpath>
 </data>

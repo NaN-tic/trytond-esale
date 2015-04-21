@@ -12,7 +12,7 @@ DIGITS = int(config.get('digits', 'unit_price_digits', 4))
 
 import logging
 
-__all__ = ['Template', 'Product', 'TemplateSaleShop']
+__all__ = ['Template', 'Product']
 __metaclass__ = PoolMeta
 
 
@@ -26,12 +26,6 @@ class Template:
             'If you need not publish this product (despublish), ' \
             'unmark Active field in eSale section.')
     esale_active = fields.Boolean('Active eSale')
-    esale_saleshops = fields.Many2Many('product.template-sale.shop',
-            'template', 'shop', 'Websites',
-            domain=[
-                ('esale_available', '=', True)
-            ],
-            help='Select shops will be available this product')
     esale_price = fields.Function(fields.Numeric('eSale Price',
             digits=(16, DIGITS),
             help='eSale price is calculated from shop in user '
@@ -61,7 +55,7 @@ class Template:
         return True
 
     @staticmethod
-    def default_esale_saleshops():
+    def default_shops():
         Shop = Pool().get('sale.shop')
         return [p.id for p in Shop.search([('esale_available', '=', True)])]
 
@@ -184,7 +178,7 @@ class Template:
             return relateds
 
         for template in self.esale_relateds:
-            if shop in template.esale_saleshops:
+            if shop in template.shops:
                 relateds.append(template.id)
         return relateds
 
@@ -212,7 +206,7 @@ class Template:
             return upsells
 
         for template in self.esale_upsells:
-            if shop in template.esale_saleshops:
+            if shop in template.shops:
                 upsells.append(template.id)
         return upsells
 
@@ -240,7 +234,7 @@ class Template:
             return crosssells
 
         for template in self.esale_crosssells:
-            if shop in template.esale_saleshops:
+            if shop in template.shops:
                 crosssells.append(template.id)
         return crosssells
 
@@ -272,14 +266,14 @@ class Template:
         tvals['account_category'] = True
         tvals['products'] = [('create', [pvals])]
 
-        if tvals.get('esale_saleshops'):
-            shops = tvals.get('esale_saleshops')
-        tvals['esale_saleshops'] = []
+        if tvals.get('shops'):
+            shops = tvals.get('shops')
+        tvals['shops'] = []
 
         template, = Template.create([tvals])
         Transaction().cursor.commit()
         if shops:
-            Template.write([template], {'esale_saleshops': shops})
+            Template.write([template], {'shops': shops})
         product, = template.products
 
         logging.getLogger('esale').info(
@@ -330,13 +324,3 @@ class Product:
     def esale_product_values():
         '''Default values Product Product'''
         return {}
-
-
-class TemplateSaleShop(ModelSQL):
-    'Product - Shop'
-    __name__ = 'product.template-sale.shop'
-    _table = 'product_template_sale_shop'
-    template = fields.Many2One('product.template', 'Template',
-        ondelete='CASCADE', select=True, required=True)
-    shop = fields.Many2One('sale.shop', 'Shop', ondelete='RESTRICT',
-        select=True, required=True)
