@@ -2,6 +2,11 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
+msgctxt "error:sale.sale:"
+msgid "A customer invoice/refund from sale device has not been created."
+msgstr ""
+"No se ha creado una factura/abono de cliente desde el dispositivo de venta."
+
 msgctxt "error:sale.shop:"
 msgid "Shop \"%s\" is not available in user preferences."
 msgstr "La tienda \"%s\" no se encuentra en las preferencias del usuario."
@@ -238,6 +243,14 @@ msgctxt "field:party.party,esale_email:"
 msgid "E-Mail"
 msgstr "Correo electrónico"
 
+msgctxt "field:party.party,payable_lines:"
+msgid "Payable Lines"
+msgstr "Líneas a pagar"
+
+msgctxt "field:party.party,receivable_lines:"
+msgid "Receivable Lines"
+msgstr "Líneas a cobrar"
+
 msgctxt "field:product.product,esale_forecast_quantity:"
 msgid "eSale Forecast Quantity"
 msgstr "eSale cantidad prevista "
@@ -273,10 +286,6 @@ msgstr "eSale cantidad"
 msgctxt "field:product.template,esale_relateds_by_shop:"
 msgid "Relateds by Shop"
 msgstr "Relacionados por tienda"
-
-msgctxt "field:product.template,esale_saleshops:"
-msgid "Websites"
-msgstr "Tiendas"
 
 msgctxt "field:product.template,esale_special_price:"
 msgid "eSale Special Price"
@@ -634,10 +643,6 @@ msgstr ""
 "El precio de eSale es calculado según la tienda de las preferencias del "
 "usuario y la configuración de la tienda"
 
-msgctxt "help:product.template,esale_saleshops:"
-msgid "Select shops will be available this product"
-msgstr "Seleccione las tiendas donde estará disponible este producto."
-
 msgctxt "help:product.template,esale_special_price:"
 msgid ""
 "eSale special price is calculated from shop in user preferences and shop "
@@ -869,10 +874,6 @@ msgstr "eSale"
 msgctxt "view:product.template:"
 msgid "General"
 msgstr "General"
-
-msgctxt "view:product.template:"
-msgid "Websites"
-msgstr "Tiendas"
 
 msgctxt "view:product.template:"
 msgid "eSale"
