@@ -3,7 +3,7 @@
 #the full copyright notices and license terms.
 import datetime
 from decimal import Decimal
-from trytond.model import fields, ModelSQL
+from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 from trytond.pyson import Eval
