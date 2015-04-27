@@ -330,6 +330,10 @@ msgctxt "field:sale.configuration,sale_discount_product:"
 msgid "Discount Product"
 msgstr "Producte descompte"
 
+msgctxt "field:sale.configuration,sale_fee_product:"
+msgid "Fee Product"
+msgstr "Producte servei pagament"
+
 msgctxt "field:sale.configuration,sale_payment_term:"
 msgid "Default Payment Term"
 msgstr "Termini de pagament per defecte"
@@ -413,6 +417,14 @@ msgstr "Descompte. Impostos inclòs"
 msgctxt "field:sale.shop,esale_ext_reference:"
 msgid "External Reference"
 msgstr "Referència externa"
+
+msgctxt "field:sale.shop,esale_fee_product:"
+msgid "Fee Product"
+msgstr "Producte servei pagament"
+
+msgctxt "field:sale.shop,esale_fee_tax_include:"
+msgid "Fee Tax Include"
+msgstr "Servei pagament. Impostos inclòs"
 
 msgctxt "field:sale.shop,esale_from_orders:"
 msgid "From Orders"
@@ -862,10 +874,6 @@ msgstr "eSale"
 msgctxt "view:product.template:"
 msgid "General"
 msgstr "General"
-
-msgctxt "view:product.template:"
-msgid "Websites"
-msgstr "Botigues"
 
 msgctxt "view:product.template:"
 msgid "eSale"
