@@ -45,27 +45,35 @@ class SaleShop:
     esale_countrys = fields.Many2Many('sale.shop-country.country',
         'shop', 'country', 'Countries')
     esale_delivery_product = fields.Many2One('product.product',
-        'Delivery Product',
-        states={
+        'Delivery Product', domain=[
+            ('salable', '=', True),
+            ('type', '=', 'service'),
+        ], states={
             'required': Eval('esale_available', True),
-        },)
+        })
     esale_discount_product = fields.Many2One('product.product',
-        'Discount Product',
-        states={
+        'Discount Product', domain=[
+            ('salable', '=', True),
+            ('type', '=', 'service'),
+        ], states={
             'required': Eval('esale_available', True),
-        },)
+        })
     esale_discount_tax_include = fields.Boolean('Discount Tax Include')
     esale_surcharge_product = fields.Many2One('product.product',
-        'Surcharge Product',
-        states={
+        'Surcharge Product', domain=[
+            ('salable', '=', True),
+            ('type', '=', 'service'),
+        ], states={
             'required': Eval('esale_available', True),
-        },)
+        })
     esale_surcharge_tax_include = fields.Boolean('Surcharge Tax Include')
     esale_fee_product = fields.Many2One('product.product',
-        'Fee Product',
-        states={
+        'Fee Product', domain=[
+            ('salable', '=', True),
+            ('type', '=', 'service'),
+        ], states={
             'required': Eval('esale_available', True),
-        },)
+        })
     esale_fee_tax_include = fields.Boolean('Fee Tax Include')
     esale_uom_product = fields.Many2One('product.uom', 'Default UOM',
         states={

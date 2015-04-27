@@ -11,13 +11,25 @@ __metaclass__ = PoolMeta
 class Configuration:
     __name__ = 'sale.configuration'
     sale_delivery_product = fields.Property(fields.Many2One('product.product',
-        'Delivery Product', domain=[('salable', '=', True)], required=True))
+        'Delivery Product', domain=[
+            ('salable', '=', True),
+            ('type', '=', 'service'),
+        ], required=True))
     sale_discount_product = fields.Property(fields.Many2One('product.product',
-        'Discount Product', domain=[('salable', '=', True)], required=True))
+        'Discount Product', domain=[
+            ('salable', '=', True),
+            ('type', '=', 'service'),
+        ], required=True))
     sale_surcharge_product = fields.Property(fields.Many2One('product.product',
-        'Surcharge Product', domain=[('salable', '=', True)], required=True))
+        'Surcharge Product', domain=[
+            ('salable', '=', True),
+            ('type', '=', 'service'),
+        ], required=True))
     sale_fee_product = fields.Property(fields.Many2One('product.product',
-        'Fee Product', domain=[('salable', '=', True)], required=True))
+        'Fee Product', domain=[
+            ('salable', '=', True),
+            ('type', '=', 'service'),
+        ], required=True))
     sale_uom_product = fields.Property(fields.Many2One('product.uom',
         'Default UOM', required=True))
     sale_warehouse = fields.Property(fields.Many2One('stock.location',
