@@ -61,6 +61,12 @@ class SaleShop:
             'required': Eval('esale_available', True),
         },)
     esale_surcharge_tax_include = fields.Boolean('Surcharge Tax Include')
+    esale_fee_product = fields.Many2One('product.product',
+        'Fee Product',
+        states={
+            'required': Eval('esale_available', True),
+        },)
+    esale_fee_tax_include = fields.Boolean('Fee Tax Include')
     esale_uom_product = fields.Many2One('product.uom', 'Default UOM',
         states={
             'required': Eval('esale_available', True),

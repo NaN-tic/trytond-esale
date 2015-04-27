@@ -155,6 +155,32 @@ class Sale:
         del sale_values['shipping_price']
         del sale_values['shipping_note']
 
+        # Fee - Payment service
+        fee_line = None
+        if (sale_values.get('fee') and
+                sale_values.get('fee') != 0.0000):
+            fee_price = Decimal(sale_values.get('fee', 0))
+            if shop.esale_fee_tax_include:
+                for tax in shop.esale_fee_product.customer_taxes_used:
+                    if tax.type == 'fixed':
+                        fee_price = fee_price - tax.amount
+                    if tax.type == 'percentage':
+                        tax_price = fee_price - (fee_price /
+                            (1 + tax.rate))
+                        fee_price = fee_price - tax_price
+                fee_price.quantize(Decimal(str(10.0 ** - DIGITS)))
+            fee_values = [{
+                    'product': shop.esale_fee_product.code or
+                            shop.esale_fee_product.name,
+                    'quantity': 1,
+                    'description': shop.esale_fee_product.rec_name,
+                    'unit_price': fee_price.quantize(Decimal('.01')),
+                    'sequence': 9999,
+                    }]
+            fee_line = Line.esale_dict2lines(sale, line,
+                fee_values)[0]
+            del sale_values['fee']
+    
         # Surcharge
         surchage_line = None
         if (sale_values.get('surcharge') and
@@ -173,7 +199,7 @@ class Sale:
                     'product': shop.esale_surcharge_product.code or
                             shop.esale_surcharge_product.name,
                     'quantity': 1,
-                    'description': shop.esale_surcharge_product.name,
+                    'description': shop.esale_surcharge_product.rec_name,
                     'unit_price': surcharge_price.quantize(Decimal('.01')),
                     'sequence': 9999,
                     }]
@@ -215,6 +241,8 @@ class Sale:
         lines.append(shipment_line)
         if discount_line:
             lines.append(discount_line)
+        if fee_line:
+            lines.append(fee_line)
         if surchage_line:
             lines.append(surchage_line)
         if extralines:

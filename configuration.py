@@ -16,6 +16,8 @@ class Configuration:
         'Discount Product', domain=[('salable', '=', True)], required=True))
     sale_surcharge_product = fields.Property(fields.Many2One('product.product',
         'Surcharge Product', domain=[('salable', '=', True)], required=True))
+    sale_fee_product = fields.Property(fields.Many2One('product.product',
+        'Fee Product', domain=[('salable', '=', True)], required=True))
     sale_uom_product = fields.Property(fields.Many2One('product.uom',
         'Default UOM', required=True))
     sale_warehouse = fields.Property(fields.Many2One('stock.location',
