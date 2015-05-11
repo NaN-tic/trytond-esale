@@ -308,6 +308,7 @@ class SaleLine:
             products = Product.search(['OR',
                     ('name', '=', code),
                     ('code', '=', code),
+                    ('codes', '=', code),
                     ], limit=1)
             if products:
                 product, = products
