@@ -330,6 +330,10 @@ msgctxt "field:sale.configuration,sale_discount_product:"
 msgid "Discount Product"
 msgstr "Producto descuento"
 
+msgctxt "field:sale.configuration,sale_fee_product:"
+msgid "Fee Product"
+msgstr "Producto servicio pago"
+
 msgctxt "field:sale.configuration,sale_payment_term:"
 msgid "Default Payment Term"
 msgstr "Plazo de pago por defecto"
@@ -413,6 +417,14 @@ msgstr "Descuentos. Impuestos incluidos"
 msgctxt "field:sale.shop,esale_ext_reference:"
 msgid "External Reference"
 msgstr "Referencia externa"
+
+msgctxt "field:sale.shop,esale_fee_product:"
+msgid "Fee Product"
+msgstr "Producto servicio pago"
+
+msgctxt "field:sale.shop,esale_fee_tax_include:"
+msgid "Fee Tax Include"
+msgstr "Servicio pago. Impuestos incluidos"
 
 msgctxt "field:sale.shop,esale_from_orders:"
 msgid "From Orders"
@@ -861,10 +873,6 @@ msgstr "eSale"
 msgctxt "view:product.template:"
 msgid "General"
 msgstr "General"
-
-msgctxt "view:product.template:"
-msgid "Websites"
-msgstr "Tiendas"
 
 msgctxt "view:product.template:"
 msgid "eSale"

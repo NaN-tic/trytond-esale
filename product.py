@@ -3,7 +3,7 @@
 #the full copyright notices and license terms.
 import datetime
 from decimal import Decimal
-from trytond.model import fields, ModelSQL
+from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 from trytond.pyson import Eval
@@ -19,23 +19,24 @@ __metaclass__ = PoolMeta
 class Template:
     __name__ = 'product.template'
     esale_available = fields.Boolean('eSale',
-            states={
-                'readonly': Eval('esale_available', True),
-            },
-            help='This product are available in your e-commerce. ' \
-            'If you need not publish this product (despublish), ' \
-            'unmark Active field in eSale section.')
+        states={
+            'readonly': Eval('esale_available', True),
+            'invisible': ~Eval('salable', False),
+        }, depends=['esale_available', 'salable'],
+        help='This product are available in your e-commerce. ' \
+        'If you need not publish this product (despublish), ' \
+        'unmark Active field in eSale section.')
     esale_active = fields.Boolean('Active eSale')
     esale_price = fields.Function(fields.Numeric('eSale Price',
-            digits=(16, DIGITS),
-            help='eSale price is calculated from shop in user '
-                'preferences and shop configuration',
-            ), 'get_esale_price')
+        digits=(16, DIGITS),
+        help='eSale price is calculated from shop in user '
+            'preferences and shop configuration',
+        ), 'get_esale_price')
     esale_special_price = fields.Function(fields.Numeric('eSale Special Price',
-            digits=(16, DIGITS),
-            help='eSale special price is calculated from shop in user '
-                'preferences and shop configuration',
-            ), 'get_esale_special_price')
+        digits=(16, DIGITS),
+        help='eSale special price is calculated from shop in user '
+            'preferences and shop configuration',
+        ), 'get_esale_special_price')
     esale_relateds_by_shop = fields.Function(fields.Many2Many(
         'product.template', None, None, 'Relateds by Shop'),
         'get_esale_relateds_by_shop')

@@ -9,6 +9,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <field name="sale_discount_product"/>
         <label name="sale_surcharge_product"/>
         <field name="sale_surcharge_product"/>
+        <label name="sale_fee_product"/>
+        <field name="sale_fee_product"/>
         <label name="sale_uom_product"/>
         <field name="sale_uom_product"/>
         <label name="sale_category"/>
