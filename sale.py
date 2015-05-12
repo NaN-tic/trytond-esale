@@ -325,7 +325,9 @@ class SaleLine:
         :param values: dict
         return list
         '''
-        Product = Pool().get('product.product')
+        pool = Pool()
+        Product = pool.get('product.product')
+        ProductCode = pool.get('product.code')
 
         def default_create_product(shop, code):
             return None
@@ -336,11 +338,18 @@ class SaleLine:
             products = Product.search(['OR',
                     ('name', '=', code),
                     ('code', '=', code),
-                    ('codes', '=', code),
                     ], limit=1)
             if products:
                 product, = products
             else:
+                product_codes = ProductCode.search([
+                        ('number', '=', code)
+                        ], limit=1)
+                if product_codes:
+                    product = product_codes[0].product
+                    products = [product]
+
+            if not products:
                 product_esale = getattr(Product,
                     'create_product_%s' % sale.shop.esale_shop_app,
                     default_create_product)
