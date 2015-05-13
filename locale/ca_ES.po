@@ -214,6 +214,10 @@ msgctxt "field:esale.status,invoice_method:"
 msgid "Sale Invoice Method"
 msgstr "Política de facturació"
 
+msgctxt "field:esale.status,process:"
+msgid "Process"
+msgstr "Processa"
+
 msgctxt "field:esale.status,rec_name:"
 msgid "Name"
 msgstr "Nom"
@@ -245,6 +249,10 @@ msgstr "eSale quantitat prevista"
 msgctxt "field:product.product,esale_quantity:"
 msgid "eSale Quantity"
 msgstr "eSale quantitat"
+
+msgctxt "field:product.product,variant_name:"
+msgid "Variant Name"
+msgstr "Nom variant"
 
 msgctxt "field:product.template,esale_active:"
 msgid "Active eSale"
@@ -626,6 +634,10 @@ msgctxt "help:esale.status,confirm:"
 msgid "Sale change state draft to confirmed"
 msgstr "Canvia la comanda de venda d'esborrany a confirmat."
 
+msgctxt "help:esale.status,process:"
+msgid "Sale change state confirme to processing"
+msgstr "Canvia la comanda de venda confirmat a en procés."
+
 msgctxt "help:product.template,esale_available:"
 msgid ""
 "This product are available in your e-commerce. If you need not publish this "
@@ -874,6 +886,10 @@ msgstr "eSale"
 msgctxt "view:product.template:"
 msgid "General"
 msgstr "General"
+
+msgctxt "view:product.template:"
+msgid "Websites"
+msgstr "Botigues"
 
 msgctxt "view:product.template:"
 msgid "eSale"
