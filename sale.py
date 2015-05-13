@@ -274,6 +274,10 @@ class Sale:
                     Sale.confirm([sale])
                     logging.getLogger('esale').info(
                         'Confirmed sale %s' % (reference))
+                    if sale_status.process:
+                        Sale.process([sale])
+                        logging.getLogger('esale').info(
+                            'Processing sale %s' % (reference))
 
                 if sale_status.cancel:
                     Sale.cancel([sale])

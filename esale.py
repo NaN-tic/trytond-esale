@@ -65,6 +65,8 @@ class eSaleStatus(ModelSQL, ModelView):
             ], 'Sale Shipment Method', required=True)
     confirm = fields.Boolean('Confirm',
         help='Sale change state draft to confirmed')
+    process = fields.Boolean('Process',
+        help='Sale change state confirme to processing')
     cancel = fields.Boolean('Cancel',
         help='Sale change state draft to cancel.')
 
