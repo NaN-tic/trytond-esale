@@ -118,7 +118,8 @@ class SaleShop:
     esale_states = fields.One2Many('esale.state', 'shop', 'State')
     esale_timezone = fields.Selection(TIMEZONES, 'Timezone', translate=False,
         help='Select an timezone when is different than company timezone.')
-    esale_import_delayed = fields.Integer('Total minutes delayed when import')
+    esale_import_delayed = fields.Integer('Delayed Import',
+        help='Total minutes delayed when import')
     warehouses = fields.Many2Many('sale.shop-stock.location', 'shop',
         'location', 'Warehouses')
 

@@ -250,10 +250,6 @@ msgctxt "field:product.product,esale_quantity:"
 msgid "eSale Quantity"
 msgstr "eSale quantitat"
 
-msgctxt "field:product.product,variant_name:"
-msgid "Variant Name"
-msgstr "Nom variant"
-
 msgctxt "field:product.template,esale_active:"
 msgid "Active eSale"
 msgstr "Actiu eSale"
@@ -441,6 +437,10 @@ msgstr "Des de comanda"
 msgctxt "field:sale.shop,esale_get_party_by_vat:"
 msgid "Get Party by Vat"
 msgstr "Cerca tercer per CIF/NIF"
+
+msgctxt "field:sale.shop,esale_import_delayed:"
+msgid "Delayed Import"
+msgstr "Importació retrad"
 
 msgctxt "field:sale.shop,esale_lang:"
 msgid "Default language"
@@ -698,6 +698,10 @@ msgctxt "help:sale.shop,esale_get_party_by_vat:"
 msgid "If there is another party with same vat, not create party"
 msgstr "Si existeix un tercer amb el mateix CIF/NIF, no crea cap tercer."
 
+msgctxt "help:sale.shop,esale_import_delayed:"
+msgid "Total minutes delayed when import"
+msgstr "Minuts totals de retard en la importació"
+
 msgctxt "help:sale.shop,esale_lang:"
 msgid "Default language shop. If not select, use lang user"
 msgstr ""
@@ -886,10 +890,6 @@ msgstr "eSale"
 msgctxt "view:product.template:"
 msgid "General"
 msgstr "General"
-
-msgctxt "view:product.template:"
-msgid "Websites"
-msgstr "Botigues"
 
 msgctxt "view:product.template:"
 msgid "eSale"
