@@ -24,6 +24,14 @@ class Sale:
     status_history = fields.Text('Status history', readonly=True)
 
     @classmethod
+    def copy(cls, sales, default=None):
+        if default is None:
+            default = {}
+        default = default.copy()
+        default['reference_external'] = None
+        return super(Sale, cls).copy(sales, default=default)
+
+    @classmethod
     def create_external_order(cls, shop, sale_values, lines_values,
             extralines_values, party_values, invoice_values, shipment_values):
         '''
