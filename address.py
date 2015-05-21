@@ -85,6 +85,10 @@ class Address:
             if not type:
                 values['delivery'] = True
                 values['invoice'] = True
+            if type == 'invoice':
+                values['invoice'] = True
+            if type == 'delivery':
+                values['delivery'] = True
 
             address, = Address.create([values])
             logging.getLogger('eSale').info(
