@@ -303,13 +303,24 @@ class SaleLine:
     __name__ = 'sale.line'
 
     @classmethod
-    def get_shipment_line(cls, product, price, sale=None):
+    def get_shipment_line(cls, product, price, sale=None, party=None):
         '''Get shipment line
         :param product: obj
         :param price: Decimal
         return obj
         '''
-        SaleLine = Pool().get('sale.line')
+        pool = Pool()
+        Tax = pool.get('account.tax')
+        SaleLine = pool.get('sale.line')
+
+        taxes = product.customer_taxes_used
+        if taxes and party and party.customer_tax_rule:
+            new_taxes = []
+            for tax in taxes:
+                tax_ids = party.customer_tax_rule.apply(tax, pattern={})
+                new_taxes = new_taxes + tax_ids
+            if new_taxes:
+                taxes = Tax.browse(new_taxes)
 
         shipment_line = SaleLine()
         shipment_line.sale = sale
@@ -320,7 +331,7 @@ class SaleLine:
         shipment_line.unit_price = price
         shipment_line.shipment_cost = price
         shipment_line.amount = price
-        shipment_line.taxes = product.customer_taxes_used
+        shipment_line.taxes = taxes
         shipment_line.sequence = 9999
         shipment_line.on_change_product()
         shipment_line.unit_price = price
