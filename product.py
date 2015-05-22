@@ -8,6 +8,7 @@ from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 from trytond.pyson import Eval
 from trytond.config import config
+from trytond.rpc import RPC
 DIGITS = int(config.get('digits', 'unit_price_digits', 4))
 
 import logging
@@ -299,6 +300,45 @@ class Product:
         'get_esale_quantity')
     esale_forecast_quantity = fields.Function(fields.Float(
         'eSale Forecast Quantity'), 'get_esale_quantity')
+
+    @classmethod
+    def __setup__(cls):
+        super(Product, cls).__setup__()
+        cls.__rpc__.update({
+                'get_esale_product_quantity': RPC(),
+                })
+
+    @staticmethod
+    def get_esale_product_quantity(codes, name='quantity'):
+        '''Get eSale Product Quantity
+        @param codes: list codes
+        @param type: quantity or forecast_quantity
+        '''
+        pool = Pool()
+        Product = pool.get('product.product')
+        ProductCode = pool.get('product.code')
+
+        products = []
+        for code in codes:
+            prods = Product.search(['OR',
+                    ('name', '=', code),
+                    ('code', '=', code),
+                    ], limit=1)
+            if prods:
+                prod, = prods
+            else:
+                product_codes = ProductCode.search([
+                        ('number', '=', code)
+                        ], limit=1)
+                if product_codes:
+                    prod = product_codes[0].product
+                else:
+                    continue
+            products.append(prod)
+
+        qties = Product.get_esale_quantity(products, name)
+        return [{'id': prod.id, 'code': prod.code, 'qty': qties[prod.id] or 0.0}
+                for prod in products if prod.id in qties]
 
     @classmethod
     def get_esale_quantity(cls, products, name):
