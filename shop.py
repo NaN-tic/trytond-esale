@@ -238,6 +238,22 @@ class SaleShop:
         ]])
         return sales_to_export
 
+    def get_shop_user(self):
+        '''
+        Get Shop User. When user is not active, return a user
+        :return user
+        '''
+        User = Pool().get('res.user')
+
+        user = User(Transaction().user)
+        if not user.active:
+            if self.esale_user:
+                user = self.esale_user
+            else:
+                logging.getLogger('eSale').info(
+                    'Add a default user in %s configuration.' % (self.name))
+        return user
+
     @classmethod
     @ModelView.button
     def import_orders(self, shops):
