@@ -214,7 +214,6 @@ class SaleShop:
 
     def get_sales_from_date(self, date):
         '''Get Sales from a date to export
-        :param shop: obj
         :param date: datetime
         retun list
         '''
