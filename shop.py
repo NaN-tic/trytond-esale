@@ -5,9 +5,9 @@ from trytond.model import ModelView, ModelSQL, fields
 from trytond.transaction import Transaction
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import And, Eval
-
 from decimal import Decimal
 import time
+import logging
 
 try:
     import pytz
@@ -228,13 +228,13 @@ class SaleShop:
             ('write_date', '>=', date),
             ('sale.shop', '=', self.id),
             ('shipment', 'like', 'stock.shipment.out%')
-        ])
+            ])
         sales_to_export = Sale.search(['OR', [
-            ('write_date', '>=', date),
-            ('shop', '=', self.id),
-        ], [
-            ('id', 'in', map(int, [m.sale for m in moves]))
-        ]])
+                ('write_date', '>=', date),
+                ('shop', '=', self.id),
+            ], [
+                ('id', 'in', map(int, [m.sale for m in moves]))
+            ]])
         return sales_to_export
 
     def get_shop_user(self):
