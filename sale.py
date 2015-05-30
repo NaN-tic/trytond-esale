@@ -291,6 +291,7 @@ class Sale:
                     Sale.cancel([sale])
                     logging.getLogger('esale').info(
                         'Canceled sale %s' % (reference))
+        Transaction().cursor.commit()
 
     def set_shipment_cost(self):
         '''When sale is an esale, not recalculate shipment cost'''
