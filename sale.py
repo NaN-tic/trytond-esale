@@ -264,9 +264,6 @@ class Sale:
             del sale_values[field]
 
         # Create Sale
-        # TODO: Add because get error when save order: could not serialize
-        # access due to concurrent update
-        Transaction().cursor.commit()
         with Transaction().set_context(
                 company=sale_values['company'],
                 without_warning=True,
