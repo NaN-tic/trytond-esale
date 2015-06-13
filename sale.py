@@ -3,6 +3,7 @@
 #the full copyright notices and license terms.
 from decimal import Decimal
 from trytond.model import fields
+from trytond.pyson import Eval
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 from trytond.config import config
@@ -16,7 +17,11 @@ __metaclass__ = PoolMeta
 
 class Sale:
     __name__ = 'sale.sale'
-    esale = fields.Boolean('eSale')
+    esale = fields.Boolean('eSale',
+        states={
+            'readonly': Eval('state') != 'draft',
+            },
+        depends=['state'])
     reference_external = fields.Char('External Reference', readonly=True,
         select=True)
     status = fields.Char('Status', readonly=True,
