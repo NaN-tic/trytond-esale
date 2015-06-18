@@ -375,12 +375,12 @@ msgid "External Reference"
 msgstr "Referència externa"
 
 msgctxt "field:sale.sale,status:"
-msgid "Status"
-msgstr "Estat"
+msgid "eSale Status"
+msgstr "eSale estat"
 
 msgctxt "field:sale.sale,status_history:"
-msgid "Status history"
-msgstr "Historial estat"
+msgid "eSale Status history"
+msgstr "eSale historial estat"
 
 msgctxt "field:sale.shop,esale_available:"
 msgid "eSale Shop"

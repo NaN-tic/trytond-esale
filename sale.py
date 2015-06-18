@@ -24,9 +24,9 @@ class Sale:
         depends=['state'])
     reference_external = fields.Char('External Reference', readonly=True,
         select=True)
-    status = fields.Char('Status', readonly=True,
+    status = fields.Char('eSale Status', readonly=True,
         help='Last status import/export to e-commerce APP')
-    status_history = fields.Text('Status history', readonly=True)
+    status_history = fields.Text('eSale Status history', readonly=True)
 
     @classmethod
     def copy(cls, sales, default=None):
