@@ -13,7 +13,7 @@ __metaclass__ = PoolMeta
 class Carrier:
     __name__ = 'carrier'
 
-    def get_sale_price_w_tax(self, price=Decimal('0.0')):
+    def get_sale_price_w_tax(self, price=Decimal('0.0'), party=None):
         '''
         Calculate price with taxes from carrier product
         '''
@@ -22,6 +22,14 @@ class Carrier:
         Invoice = pool.get('account.invoice')
 
         taxes = self.carrier_product.customer_taxes_used
+
+        if taxes and party and party.customer_tax_rule:
+            new_taxes = []
+            for tax in taxes:
+                tax_ids = party.customer_tax_rule.apply(tax, pattern={})
+                new_taxes = new_taxes + tax_ids
+            if new_taxes:
+                taxes = Tax.browse(new_taxes)
 
         tax_list = Tax.compute(taxes, price, 1)
         tax_amount = Decimal('0.0')
