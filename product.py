@@ -64,6 +64,7 @@ class Template:
     @classmethod
     def get_esale_price(cls, templates, names):
         pool = Pool()
+        Date = pool.get('ir.date')
         Product = pool.get('product.product')
         User = pool.get('res.user')
         Shop = pool.get('sale.shop')
@@ -71,6 +72,12 @@ class Template:
 
         def template_list_price():
             return {n: {t.id: t.list_price for t in templates} for n in names}
+
+        def template_special_price():
+            today = Date.today()
+            return {n: {t.id: t.special_price if t.special_price \
+                and (t.special_price_from <= today <= t.special_price_to) \
+                else t.list_price for t in templates} for n in names}
 
         def pricelist():
             '''
@@ -143,16 +150,20 @@ class Template:
 
         with Transaction().set_context(context):
             if shop.esale_price == 'saleprice':
-                result = template_list_price()
+                if shop.special_price and not context.get('without_special_price', True):
+                    result = template_special_price()
+                else:
+                    result = template_list_price()
             else:
                 result = pricelist()
+
             if shop.esale_tax_include:
                 result = price_with_tax(result)
             return result
 
     @classmethod
     def get_esale_special_price(cls, templates, names):
-        '''Call get_esale_price to calculate special price (configuration shop)'''
+        '''Call get_esale_price to calculate special price'''
         with Transaction().set_context(without_special_price=False):
             return cls.get_esale_price(templates, names)
 
