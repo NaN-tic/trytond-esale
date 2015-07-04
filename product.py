@@ -335,8 +335,8 @@ class Product:
             products.append(prod)
 
         qties = Product.get_esale_quantity(products, name)
-        return [{'id': prod.id, 'code': prod.code, 'qty': qties[prod.id] or 0.0}
-                for prod in products if prod.id in qties]
+        return [{'id': p.id, 'code': p.code, 'qty': qties[p.id] or 0.0}
+                for p in products if p.id in qties]
 
     @classmethod
     def get_esale_quantity(cls, products, name):
