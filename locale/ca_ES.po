@@ -892,6 +892,10 @@ msgid "General"
 msgstr "General"
 
 msgctxt "view:product.template:"
+msgid "Websites"
+msgstr "Websites"
+
+msgctxt "view:product.template:"
 msgid "eSale"
 msgstr "eSale"
 
