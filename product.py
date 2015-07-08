@@ -268,7 +268,7 @@ class Template:
 
         if tvals.get('shops'):
             shops = tvals.get('shops')
-        tvals['shops'] = []
+            del tvals['shops']
 
         template, = Template.create([tvals])
         Transaction().cursor.commit()
