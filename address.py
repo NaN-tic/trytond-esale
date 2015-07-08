@@ -90,6 +90,17 @@ class Address:
             if type == 'delivery':
                 values['delivery'] = True
 
+            # calculate subdivision/city from zip+country
+            if values.get('zip') and values.get('country'):
+                address = Address()
+                address.zip = values.get('zip')
+                address.country = values.get('country')
+                z = address.on_change_zip()
+                if not values.get('city'):
+                    values['city'] = z.get('city')
+                if not values.get('subdivision'):
+                    values['subdivision'] = z.get('subdivision')
+
             address, = Address.create([values])
             logging.getLogger('eSale').info(
                 'Shop %s. Create address ID %s' % (shop.name, address.id))
