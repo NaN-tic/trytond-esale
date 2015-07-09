@@ -263,13 +263,16 @@ class SaleShop:
 
         for shop in shops:
             if shop not in user.shops:
-                self.raise_user_error('not_shop_user', (
-                    shop.rec_name))
-
-        for shop in shops:
-            import_order = getattr(shop, 'import_orders_%s' %
-                shop.esale_shop_app)
-            import_order()
+                logging.getLogger('eSale').warning(
+                    'Shop "%s" is not available in "%s" user preferences.' % (
+                        shop.rec_name,
+                        user.rec_name,
+                        ))
+                continue
+            with Transaction().set_context(sale_discount=False):
+                import_order = getattr(shop, 'import_orders_%s' %
+                    shop.esale_shop_app)
+                import_order()
 
     @classmethod
     def import_cron_orders(cls):
