@@ -8,6 +8,7 @@ from .party import *
 from .address import *
 from .shop import *
 from .sale import *
+from .stock import *
 from .product import *
 from .carrier import *
 
@@ -22,6 +23,7 @@ def register():
         SaleShopLang,
         Sale,
         SaleLine,
+        ShipmentOut,
         eSaleCarrier,
         eSalePayment,
         eSaleStatus,
