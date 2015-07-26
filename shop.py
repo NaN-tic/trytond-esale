@@ -269,6 +269,8 @@ class SaleShop:
                         user.rec_name,
                         ))
                 continue
+            if not shop.esale_shop_app:
+                continue
             with Transaction().set_context(sale_discount=False):
                 import_order = getattr(shop, 'import_orders_%s' %
                     shop.esale_shop_app)
