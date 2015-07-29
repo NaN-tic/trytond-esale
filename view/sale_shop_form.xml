@@ -64,6 +64,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                         <field name="esale_timezone"/>
                         <label name="esale_import_delayed"/>
                         <field name="esale_import_delayed"/>
+                        <label name="esale_import_states"/>
+                        <field name="esale_import_states"/>
                     </page>
                     <page string="Warehouses" id="warehouses">
                         <field name="warehouses" colspan="4"/>
