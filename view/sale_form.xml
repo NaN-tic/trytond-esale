@@ -10,6 +10,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <page string="eSale" col="6" id="esale" states="{'invisible': ~Eval('esale')}">
             <label name="reference_external"/>
             <field name="reference_external"/>
+            <label name="esale_coupon"/>
+            <field name="esale_coupon"/>
             <newline/>
             <group col="6" colspan="2" id="external_price" states="{'invisible': ~Eval('external_untaxed_amount')}">
                 <separator string="External Prices" id="external_price" colspan="6"/>

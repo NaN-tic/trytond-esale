@@ -24,6 +24,7 @@ class Sale:
         depends=['state'])
     reference_external = fields.Char('External Reference', readonly=True,
         select=True)
+    esale_coupon = fields.Char('eSale Coupon', readonly=True)
     status = fields.Char('eSale Status', readonly=True,
         help='Last status import/export to e-commerce APP')
     status_history = fields.Text('eSale Status history', readonly=True)
@@ -234,17 +235,32 @@ class Sale:
                             (1 + tax.rate))
                         discount_price = discount_price - tax_price
                 discount_price.quantize(Decimal(str(10.0 ** - DIGITS)))
+
+            description = shop.esale_discount_product.name
+            if sale_values.get('discount_description'):
+                description = sale_values.get('discount_description')
+            if sale_values.get('coupon_code'):
+                description += ' (%s)' % sale_values.get('coupon_code')
+
+            if sale_values.get('coupon_description') and sale_values.get('coupon_code'):
+                sale_values['esale_coupon'] = '[%s] %s' % (sale_values['coupon_code'],
+                        sale_values['coupon_description'])
+            elif sale_values.get('coupon_code'):
+                sale_values['esale_coupon'] = '%s' % (sale_values['coupon_code'])
+
             discount_values = [{
                     'product': shop.esale_discount_product.code or
                             shop.esale_discount_product.name,
                     'quantity': 1,
-                    'description': shop.esale_discount_product.name,
+                    'description': description,
                     'unit_price': discount_price.quantize(Decimal('.01')),
                     'sequence': 9999,
                     }]
-            discount_line = Line.esale_dict2lines(sale, line,
-                discount_values)[0]
+            discount_line = Line.esale_dict2lines(sale, line, discount_values)[0]
         del sale_values['discount']
+        del sale_values['discount_description']
+        del sale_values['coupon_code']
+        del sale_values['coupon_description']
 
         extralines = None
         if extralines_values:
