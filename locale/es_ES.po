@@ -366,6 +366,10 @@ msgctxt "field:sale.sale,esale:"
 msgid "eSale"
 msgstr "eSale"
 
+msgctxt "field:sale.sale,esale_coupon:"
+msgid "eSale Coupon"
+msgstr "eSale Cupón"
+
 msgctxt "field:sale.sale,external_shipment_amount:"
 msgid "Shipment"
 msgstr "Envío"
