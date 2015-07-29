@@ -13,7 +13,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <label name="esale_coupon"/>
             <field name="esale_coupon"/>
             <newline/>
-            <group col="6" colspan="2" id="external_price" states="{'invisible': ~Eval('external_untaxed_amount')}">
+            <group col="4" colspan="6" id="external_price" states="{'invisible': ~Eval('external_untaxed_amount')}">
                 <separator string="External Prices" id="external_price" colspan="6"/>
                 <label name="external_untaxed_amount"/>
                 <field name="external_untaxed_amount"/>
