@@ -30,6 +30,15 @@ class Sale:
     status_history = fields.Text('eSale Status history', readonly=True)
 
     @classmethod
+    def __setup__(cls):
+        super(Sale, cls).__setup__()
+        cls._sql_constraints.extend([
+            ('reference_external_uniq', 'UNIQUE(shop, reference_external)',
+             'There is another sale with the same reference external.\n'
+             'The reference external of the sale must be unique!')
+        ])
+
+    @classmethod
     def copy(cls, sales, default=None):
         if default is None:
             default = {}
