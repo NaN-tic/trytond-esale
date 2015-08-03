@@ -2,6 +2,14 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
+msgctxt "error:sale.sale:"
+msgid ""
+"There is another sale with the same reference external.\n"
+"The reference external of the sale must be unique!"
+msgstr ""
+"Hi ha una altra comanda de venda amb la mateixa referencia externa.\\n\"\n"
+"La referencia externa ha de ser única per botiga."
+
 msgctxt "error:sale.shop:"
 msgid "Shop \"%s\" is not available in user preferences."
 msgstr "La botiga \"%s\"no es troba disponible a les preferencies de l'usuari."
