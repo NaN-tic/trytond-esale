@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- This file is part esale module for Tryton.
+The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
+<data>
+    <xpath expr="/form/notebook/page[@id=&quot;sale&quot;]/field[@name=&quot;currency&quot;]" position="after">
+        <field name="esale" invisible="1"/>
+    </xpath>
+    <xpath expr="/form/notebook/page[@id=&quot;shipments&quot;]" position="after">
+        <page string="eSale" col="6" id="esale" states="{'invisible': ~Eval('esale')}">
+            <label name="reference_external"/>
+            <field name="reference_external"/>
+            <label name="esale_coupon"/>
+            <field name="esale_coupon"/>
+            <newline/>
+            <group col="4" colspan="6" id="external_price" states="{'invisible': ~Eval('external_untaxed_amount')}">
+                <separator string="External Prices" id="external_price" colspan="6"/>
+                <label name="external_untaxed_amount"/>
+                <field name="external_untaxed_amount"/>
+                <label name="external_tax_amount"/>
+                <field name="external_tax_amount"/>
+                <label name="external_total_amount"/>
+                <field name="external_total_amount"/>
+                <label name="external_shipment_amount"/>
+                <field name="external_shipment_amount"/>
+            </group>
+            <separator name="status_history" colspan="6"/>
+            <label name="status"/>
+            <field name="status"/>
+            <field name="status_history" colspan="6"/>
+        </page>
+    </xpath>
+</data>
