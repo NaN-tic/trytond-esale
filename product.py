@@ -7,15 +7,14 @@ from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 from trytond.pyson import Eval
-from trytond.config import config
+from trytond.config import config as config_
 from trytond.rpc import RPC
-DIGITS = int(config.get('digits', 'unit_price_digits', 4))
-
 import logging
 
 __all__ = ['Template', 'Product']
 __metaclass__ = PoolMeta
 
+DIGITS = config_.getint('product', 'price_decimal', default=4)
 
 class Template:
     __name__ = 'product.template'

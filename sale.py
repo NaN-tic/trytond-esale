@@ -6,13 +6,13 @@ from trytond.model import fields
 from trytond.pyson import Eval
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
-from trytond.config import config
-DIGITS = int(config.get('digits', 'unit_price_digits', 4))
-
+from trytond.config import config as config_
 import logging
 
 __all__ = ['Sale', 'SaleLine']
 __metaclass__ = PoolMeta
+
+DIGITS = config_.getint('product', 'price_decimal', default=4)
 
 
 class Sale:
