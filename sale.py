@@ -13,6 +13,7 @@ __all__ = ['Sale', 'SaleLine']
 __metaclass__ = PoolMeta
 
 DIGITS = config_.getint('product', 'price_decimal', default=4)
+logger = logging.getLogger(__name__)
 
 
 class Sale:
@@ -299,25 +300,22 @@ class Sale:
                 without_warning=True,
                 ):
             sale, = Sale.create([sale_values])
-            logging.getLogger('esale').info(
-                'Shop %s. Create sale %s' % (shop.name, sale.reference_external))
+            logger.info('Shop %s. Create sale %s' % (
+                shop.name, sale.reference_external))
 
             if status:
                 reference = sale.reference_external
                 if sale_status.confirm:
                     Sale.quote([sale])
                     Sale.confirm([sale])
-                    logging.getLogger('esale').info(
-                        'Confirmed sale %s' % (reference))
+                    logger.info('Confirmed sale %s' % (reference))
                     if sale_status.process:
                         Sale.process([sale])
-                        logging.getLogger('esale').info(
-                            'Processing sale %s' % (reference))
+                        logger.info('Processing sale %s' % (reference))
 
                 if sale_status.cancel:
                     Sale.cancel([sale])
-                    logging.getLogger('esale').info(
-                        'Canceled sale %s' % (reference))
+                    logger.info('Canceled sale %s' % (reference))
         Transaction().cursor.commit()
 
     def set_shipment_cost(self):

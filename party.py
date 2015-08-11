@@ -6,11 +6,13 @@ from trytond.pool import Pool, PoolMeta
 from trytond.modules.esale.tools import is_a_vat
 import logging
 
+logger = logging.getLogger(__name__)
+
 try:
     import vatnumber
     HAS_VATNUMBER = True
 except ImportError:
-    logging.getLogger('esale').warning(
+    logger.warning(
             'Unable to import vatnumber. VAT number validation disabled.')
 
 __all__ = ['Party']
@@ -89,6 +91,6 @@ class Party:
         if not party:
             values['addresses'] = None
             party, = Party.create([values])
-            logging.getLogger('eSale').info(
-                'Shop %s. Create party ID %s' % (shop.name, party.id))
+            logger.info('Shop %s. Create party ID %s' % (
+                shop.name, party.id))
         return party

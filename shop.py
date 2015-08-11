@@ -19,6 +19,8 @@ TIMEZONES += [(None, '')]
 __all__ = ['SaleShop', 'SaleShopWarehouse', 'SaleShopCountry', 'SaleShopLang']
 __metaclass__ = PoolMeta
 
+logger = logging.getLogger(__name__)
+
 
 class SaleShop:
     __name__ = 'sale.shop'
@@ -253,8 +255,8 @@ class SaleShop:
             if self.esale_user:
                 user = self.esale_user
             else:
-                logging.getLogger('eSale').info(
-                    'Add a default user in %s configuration.' % (self.name))
+                logger.info('Add a default user in %s configuration.' % (
+                    self.name))
         return user
 
     @classmethod
@@ -267,7 +269,7 @@ class SaleShop:
 
         for shop in shops:
             if shop not in user.shops:
-                logging.getLogger('eSale').warning(
+                logger.warning(
                     'Shop "%s" is not available in "%s" user preferences.' % (
                         shop.rec_name,
                         user.rec_name,

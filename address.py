@@ -2,11 +2,12 @@
 #The COPYRIGHT file at the top level of this repository contains
 #the full copyright notices and license terms.
 from trytond.pool import Pool, PoolMeta
-
 import logging
 
 __all__ = ['Address']
 __metaclass__ = PoolMeta
+
+logger = logging.getLogger(__name__)
 
 
 class Address:
@@ -102,8 +103,8 @@ class Address:
                     values['subdivision'] = z.get('subdivision')
 
             address, = Address.create([values])
-            logging.getLogger('eSale').info(
-                'Shop %s. Create address ID %s' % (shop.name, address.id))
+            logger.info('Shop %s. Create address ID %s' % (
+                shop.name, address.id))
 
             for contact in address_contacts:
                 ContactMechanism.create([{

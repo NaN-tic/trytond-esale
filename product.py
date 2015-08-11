@@ -15,6 +15,8 @@ __all__ = ['Template', 'Product']
 __metaclass__ = PoolMeta
 
 DIGITS = config_.getint('product', 'price_decimal', default=4)
+logger = logging.getLogger(__name__)
+
 
 class Template:
     __name__ = 'product.template'
@@ -121,7 +123,7 @@ class Template:
             user = User(Transaction().user)
         shop = user.shop
         if not shop or not shop.esale_available:
-            logging.getLogger('esale').warning(
+            logger.warning(
                 'User %s has not eSale Main Shop in user preferences.' % (user)
                 )
             return template_list_price()
@@ -275,8 +277,8 @@ class Template:
             Template.write([template], {'shops': shops})
         product, = template.products
 
-        logging.getLogger('esale').info(
-            'Shop %s. Create product %s' % (shop.name, product.rec_name))
+        logger.info('Shop %s. Create product %s' % (
+            shop.name, product.rec_name))
         return product
 
     @staticmethod
