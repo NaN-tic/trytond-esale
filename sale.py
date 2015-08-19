@@ -48,6 +48,17 @@ class Sale:
         return super(Sale, cls).copy(sales, default=default)
 
     @classmethod
+    def view_attributes(cls):
+        return super(Sale, cls).view_attributes() + [
+            ('//page[@id="esale"]', 'states', {
+                    'invisible': ~Eval('esale'),
+                    }),
+            ('//page[@id="esale"]/group[@id="external_price"]', 'states', {
+                    'invisible': ~Eval('external_untaxed_amount'),
+                    }),
+            ]
+
+    @classmethod
     def create_external_order(cls, shop, sale_values, lines_values,
             extralines_values, party_values, invoice_values, shipment_values):
         '''

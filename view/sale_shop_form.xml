@@ -9,7 +9,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <label name="esale_shop_app"/>
             <field name="esale_shop_app"/>
             <notebook>
-                <page string="Actions" id="actions" states="{'invisible': Not(Bool(Eval('esale_available')))}">
+                <page string="Actions" id="actions">
                     <notebook>
                         <page string="Orders" id="orders" col="6">
                             <button name="import_orders" string="Import Orders"/>
@@ -23,7 +23,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                         </page>
                     </notebook>
                 </page>
-                <page string="Configuration" id="configuration" states="{'invisible': Not(Bool(Eval('esale_available')))}">
+                <page string="Configuration" id="configuration">
                     <notebook>
                     <page string="General" id="general">
                         <label name="esale_ext_reference"/>

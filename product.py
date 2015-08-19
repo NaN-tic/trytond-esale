@@ -6,7 +6,7 @@ from decimal import Decimal
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
-from trytond.pyson import Eval
+from trytond.pyson import Eval, Or, Not, Bool, Id
 from trytond.config import config as config_
 from trytond.rpc import RPC
 import logging
@@ -61,6 +61,18 @@ class Template:
     def default_shops():
         Shop = Pool().get('sale.shop')
         return [p.id for p in Shop.search([('esale_available', '=', True)])]
+
+    @classmethod
+    def view_attributes(cls):
+        return super(Template, cls).view_attributes() + [
+            ('//page[@id="esale"]', 'states', {
+                    'invisible': Or(Not(Bool(Eval('salable', False))),
+                        Not(Bool(Eval('groups', []).contains(Id('esale', 'group_esale'))))),
+                    }),
+            ('//page[@id="esale"]/notebook/page[@id="general"]', 'states', {
+                    'invisible': Not(Bool(Eval('esale_available'))),
+                    }),
+            ]
 
     @classmethod
     def get_esale_price(cls, templates, names):

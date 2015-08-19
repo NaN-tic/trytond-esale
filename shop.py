@@ -4,7 +4,7 @@
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.transaction import Transaction
 from trytond.pool import Pool, PoolMeta
-from trytond.pyson import And, Eval
+from trytond.pyson import And, Eval, Not, Bool
 from decimal import Decimal
 import time
 import logging
@@ -192,6 +192,17 @@ class SaleShop:
     @staticmethod
     def default_esale_import_delayed():
         return 0
+
+    @classmethod
+    def view_attributes(cls):
+        return super(SaleShop, cls).view_attributes() + [
+            ('//page[@id="esale"]/notebook/page[@id="actions"]', 'states', {
+                    'invisible': Not(Bool(Eval('esale_available'))),
+                    }),
+            ('//page[@id="esale"]/notebook/page[@id="configuration"]', 'states', {
+                    'invisible': Not(Bool(Eval('esale_available'))),
+                    }),
+            ]
 
     @staticmethod
     def datetime_to_gmtime(date):

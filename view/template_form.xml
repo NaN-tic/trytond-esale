@@ -3,11 +3,11 @@
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <data>
     <xpath expr="/form/notebook" position="inside">
-        <page string="eSale" col="4" id="esale" states="{'invisible': Or(Not(Bool(Eval('salable', False))), Not(Bool(Eval('groups', []).contains(Id('esale', 'group_esale')))))}">
+        <page string="eSale" col="4" id="esale">
             <label name="esale_available"/>
             <field name="esale_available"/>
             <notebook colspan="6">
-                <page string="General" id="general" states="{'invisible': Not(Bool(Eval('esale_available')))}">
+                <page string="General" id="general">
                     <label name="esale_active"/>
                     <field name="esale_active"/>
                 </page>

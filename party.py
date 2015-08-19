@@ -3,6 +3,7 @@
 #the full copyright notices and license terms.
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
+from trytond.pyson import Eval
 from trytond.modules.esale.tools import is_a_vat
 import logging
 
@@ -22,6 +23,13 @@ __metaclass__ = PoolMeta
 class Party:
     __name__ = 'party.party'
     esale_email = fields.Char('E-Mail')
+
+    @classmethod
+    def view_attributes(cls):
+        return super(Party, cls).view_attributes() + [
+            ('//page[@id="esale"]', 'states', {
+                    'invisible': ~Eval('esale_email'),
+                    })]
 
     @classmethod
     def esale_create_party(self, shop, values):

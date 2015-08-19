@@ -3,7 +3,7 @@
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <data>
     <xpath expr="/form/notebook/page[@id=&quot;accounting&quot;]" position="after">
-        <page string="eSale" col="4" id="esale" states="{'invisible': ~Eval('esale_email')}">
+        <page string="eSale" col="4" id="esale">
             <label name="esale_email"/>
             <field name="esale_email"/>
         </page>
