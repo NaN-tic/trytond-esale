@@ -13,6 +13,7 @@ __all__ = ['Sale', 'SaleLine']
 __metaclass__ = PoolMeta
 
 DIGITS = config_.getint('product', 'price_decimal', default=4)
+PRECISION = Decimal(str(10.0 ** - DIGITS))
 logger = logging.getLogger(__name__)
 
 
@@ -173,15 +174,16 @@ class Sale:
             del sale_values['carrier']
             product_delivery = shop.esale_delivery_product
             shipment_description = product_delivery.name
+        shipment_cost_digits = Line.shipment_cost.digits
         shipment_values = [{
                 'product': product_delivery.code or product_delivery.name,
                 'quantity': 1,
                 'description': shipment_description,
                 'unit_price': sale_values.get('shipping_price', 0).quantize(
-                    Decimal('.01')),
+                    PRECISION),
                 'note': sale_values.get('shipping_note'),
                 'shipment_cost': sale_values.get('shipping_price', 0).quantize(
-                    Decimal('.01')),
+                    Decimal(str(10.0 ** -shipment_cost_digits[1]))),
                 'sequence': 9999,
                 }]
         shipment_line = Line.esale_dict2lines(sale, line, shipment_values)[0]
@@ -203,13 +205,13 @@ class Sale:
                         tax_price = fee_price - (fee_price /
                             (1 + tax.rate))
                         fee_price = fee_price - tax_price
-                fee_price.quantize(Decimal(str(10.0 ** - DIGITS)))
+                fee_price.quantize(PRECISION)
             fee_values = [{
                     'product': shop.esale_fee_product.code or
                             shop.esale_fee_product.name,
                     'quantity': 1,
                     'description': shop.esale_fee_product.rec_name,
-                    'unit_price': fee_price.quantize(Decimal('.01')),
+                    'unit_price': fee_price.quantize(PRECISION),
                     'sequence': 9999,
                     }]
             fee_line = Line.esale_dict2lines(sale, line,
@@ -229,13 +231,13 @@ class Sale:
                         tax_price = surcharge_price - (surcharge_price /
                             (1 + tax.rate))
                         surcharge_price = surcharge_price - tax_price
-                surcharge_price.quantize(Decimal(str(10.0 ** - DIGITS)))
+                surcharge_price.quantize(PRECISION)
             surcharge_values = [{
                     'product': shop.esale_surcharge_product.code or
                             shop.esale_surcharge_product.name,
                     'quantity': 1,
                     'description': shop.esale_surcharge_product.rec_name,
-                    'unit_price': surcharge_price.quantize(Decimal('.01')),
+                    'unit_price': surcharge_price.quantize(PRECISION),
                     'sequence': 9999,
                     }]
             surchage_line = Line.esale_dict2lines(sale, line,
@@ -255,7 +257,7 @@ class Sale:
                         tax_price = discount_price - (discount_price /
                             (1 + tax.rate))
                         discount_price = discount_price - tax_price
-                discount_price.quantize(Decimal(str(10.0 ** - DIGITS)))
+                discount_price.quantize(PRECISION)
 
             description = shop.esale_discount_product.name
             if sale_values.get('discount_description'):
@@ -274,7 +276,7 @@ class Sale:
                             shop.esale_discount_product.name,
                     'quantity': 1,
                     'description': description,
-                    'unit_price': discount_price.quantize(Decimal('.01')),
+                    'unit_price': discount_price.quantize(PRECISION),
                     'sequence': 9999,
                     }]
             discount_line = Line.esale_dict2lines(sale, line, discount_values)[0]
