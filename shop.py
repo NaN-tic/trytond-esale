@@ -1,6 +1,6 @@
-#This file is part esale module for Tryton.
-#The COPYRIGHT file at the top level of this repository contains
-#the full copyright notices and license terms.
+# This file is part esale module for Tryton.
+# The COPYRIGHT file at the top level of this repository contains
+# the full copyright notices and license terms.
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.transaction import Transaction
 from trytond.pool import Pool, PoolMeta
@@ -123,9 +123,9 @@ class SaleShop:
     esale_import_delayed = fields.Integer('eSale Delayed Import',
         help='Total minutes delayed when import')
     esale_import_states = fields.Char('eSale Import States',
-        help='If is empty, import all sales (not filter).' \
-            ' Code states separated by comma and without space '\
-            ' (processing,complete,...).')
+        help='If is empty, import all sales (not filter). '
+            'Code states separated by comma and without space '
+            '(processing,complete,...).')
     warehouses = fields.Many2Many('sale.shop-stock.location', 'shop',
         'location', 'Warehouses')
 
@@ -199,7 +199,8 @@ class SaleShop:
             ('//page[@id="esale"]/notebook/page[@id="actions"]', 'states', {
                     'invisible': Not(Bool(Eval('esale_available'))),
                     }),
-            ('//page[@id="esale"]/notebook/page[@id="configuration"]', 'states', {
+            ('//page[@id="esale"]/notebook/page[@id="configuration"]',
+                'states', {
                     'invisible': Not(Bool(Eval('esale_available'))),
                     }),
             ]
@@ -247,11 +248,11 @@ class SaleShop:
             ('shipment', 'like', 'stock.shipment.out%')
             ])
         sales_to_export = Sale.search(['OR', [
-                ('write_date', '>=', date),
-                ('shop', '=', self.id),
-            ], [
-                ('id', 'in', map(int, [m.sale for m in moves]))
-            ]])
+                    ('write_date', '>=', date),
+                    ('shop', '=', self.id),
+                ], [
+                    ('id', 'in', map(int, [m.sale for m in moves]))
+                ]])
         return sales_to_export
 
     def get_shop_user(self):
@@ -347,7 +348,7 @@ class SaleShop:
         Tax = pool.get('account.tax')
         Invoice = pool.get('account.invoice')
 
-        #compute price with taxes
+        # compute price with taxes
         customer_taxes = product.template.customer_taxes_used
         tax_list = Tax.compute(customer_taxes, price, quantity)
         tax_amount = Decimal('0.0')

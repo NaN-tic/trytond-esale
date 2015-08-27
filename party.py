@@ -1,6 +1,6 @@
-#This file is part esale module for Tryton.
-#The COPYRIGHT file at the top level of this repository contains
-#the full copyright notices and license terms.
+# This file is part esale module for Tryton.
+# The COPYRIGHT file at the top level of this repository contains
+# the full copyright notices and license terms.
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Eval
@@ -43,7 +43,7 @@ class Party:
         Party = pool.get('party.party')
         ContactMechanism = pool.get('party.contact_mechanism')
 
-        #Validate VAT
+        # Validate VAT
         if (values.get('vat_country') and values.get('vat_number') and
                 HAS_VATNUMBER):
             vat_number = values.get('vat_number')
@@ -66,7 +66,8 @@ class Party:
         party = None
         if shop.esale_get_party_by_vat:
             vat_number = values.get('vat_number')
-            if vat_number and is_a_vat(vat_number) and values.get('vat_country'):
+            if (vat_number and is_a_vat(vat_number) and
+                    values.get('vat_country')):
                 parties = Party.search([
                     ('vat_country', '=', values.get('vat_country')),
                     ('vat_number', '=', values.get('vat_number')),

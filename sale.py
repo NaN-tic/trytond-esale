@@ -1,6 +1,6 @@
-#This file is part esale module for Tryton.
-#The COPYRIGHT file at the top level of this repository contains
-#the full copyright notices and license terms.
+# This file is part esale module for Tryton.
+# The COPYRIGHT file at the top level of this repository contains
+# the full copyright notices and license terms.
 from decimal import Decimal
 from trytond.model import fields
 from trytond.pyson import Eval
@@ -84,26 +84,26 @@ class Sale:
         sale = Sale()
         sale.shop = shop
 
-        #Default sale values
+        # Default sale values
         sale_fields = Sale.fields_get()
         for k, v in Sale.default_get(sale_fields,
                 with_rec_name=False).iteritems():
             if k not in sale_values:
                 sale_values[k] = v
 
-        #Set Sale values
+        # Set Sale values
         sale_values['esale'] = True
         sale_values['shop'] = shop
 
-        #Update dict from on change shop
+        # Update dict from on change shop
         currency_code = sale_values.get('currency')
         sale_values.update(sale.on_change_shop())
 
-        #Create party
+        # Create party
         party = Party.esale_create_party(shop, party_values)
         sale.party = party
 
-        #Create address
+        # Create address
         invoice_address = None
         if not (invoice_values.get('street') == shipment_values.get('street')
                 and invoice_values.get('zip') == shipment_values.get('zip')):
@@ -115,16 +115,16 @@ class Sale:
             shipment_address = Address.esale_create_address(shop, party,
                 shipment_values)
 
-        #Party - Address
+        # Party - Address
         sale_values['party'] = party
         sale_values['invoice_address'] = invoice_address or shipment_address
         sale_values['shipment_address'] = shipment_address
 
-        #Order reference
+        # Order reference
         if shop.esale_ext_reference:
             sale_values['reference'] = sale_values.get('reference_external')
 
-        #Currency
+        # Currency
         currencies = Currency.search([
                 ('code', '=', currency_code),
                 ], limit=1)
@@ -133,7 +133,7 @@ class Sale:
         else:
             sale_values['currency'] = shop.esale_currency.id
 
-        #Payment
+        # Payment
         if sale_values.get('payment'):
             payments = eSalePayment.search([
                     ('code', '=', sale_values.get('payment')),
@@ -143,7 +143,7 @@ class Sale:
                 sale_values['payment_type'] = payments[0].payment_type
         del sale_values['payment']
 
-        #Status
+        # Status
         status = eSaleStatus.search([
                 ('code', '=', sale_values.get('status')),
                 ('shop', '=', shop.id),
@@ -153,14 +153,14 @@ class Sale:
             sale_values['invoice_method'] = sale_status.invoice_method
             sale_values['shipment_method'] = sale_status.shipment_method
 
-        #Lines
+        # Lines
         sale.currency = sale_values.get('currency')
         line = Line()
         line.party = party
         line.sale = sale
         lines = Line.esale_dict2lines(sale, line, lines_values)
 
-        #Carrier + delivery line
+        # Carrier + delivery line
         carriers = eSaleCarrier.search([
             ('code', '=', sale_values.get('carrier')),
             ('shop', '=', shop.id),
@@ -208,7 +208,7 @@ class Sale:
                 fee_price.quantize(PRECISION)
             fee_values = [{
                     'product': shop.esale_fee_product.code or
-                            shop.esale_fee_product.name,
+                        shop.esale_fee_product.name,
                     'quantity': 1,
                     'description': shop.esale_fee_product.rec_name,
                     'unit_price': fee_price.quantize(PRECISION),
@@ -217,7 +217,7 @@ class Sale:
             fee_line = Line.esale_dict2lines(sale, line,
                 fee_values)[0]
             del sale_values['fee']
-    
+
         # Surcharge
         surchage_line = None
         if (sale_values.get('surcharge') and
@@ -244,7 +244,7 @@ class Sale:
                 surcharge_values)[0]
             del sale_values['surcharge']
 
-        #Discount line
+        # Discount line
         discount_line = None
         if (sale_values.get('discount') and
                 sale_values.get('discount') != 0.0000):
@@ -265,11 +265,14 @@ class Sale:
             if sale_values.get('coupon_code'):
                 description += ' (%s)' % sale_values.get('coupon_code')
 
-            if sale_values.get('coupon_description') and sale_values.get('coupon_code'):
-                sale_values['esale_coupon'] = '[%s] %s' % (sale_values['coupon_code'],
-                        sale_values['coupon_description'])
+            if (sale_values.get('coupon_description') and
+                    sale_values.get('coupon_code')):
+                sale_values['esale_coupon'] = '[%s] %s' % (
+                    sale_values['coupon_code'],
+                    sale_values['coupon_description'])
             elif sale_values.get('coupon_code'):
-                sale_values['esale_coupon'] = '%s' % (sale_values['coupon_code'])
+                sale_values['esale_coupon'] = '%s' % (
+                    sale_values['coupon_code'])
 
             discount_values = [{
                     'product': shop.esale_discount_product.code or
@@ -279,7 +282,8 @@ class Sale:
                     'unit_price': discount_price.quantize(PRECISION),
                     'sequence': 9999,
                     }]
-            discount_line = Line.esale_dict2lines(sale, line, discount_values)[0]
+            discount_line = Line.esale_dict2lines(sale, line,
+                discount_values)[0]
         del sale_values['discount']
         del sale_values['discount_description']
         del sale_values['coupon_code']
@@ -289,7 +293,7 @@ class Sale:
         if extralines_values:
             extralines = Line.esale_dict2lines(sale, line, extralines_values)
 
-        #Add lines
+        # Add lines
         lines.append(shipment_line)
         if discount_line:
             lines.append(discount_line)
@@ -302,7 +306,7 @@ class Sale:
             lines = lines + extralines
         sale_values['lines'] = [('create', lines)]
 
-        #Remove rec_name fields
+        # Remove rec_name fields
         rm_fields = [val for val in sale_values if 'rec_name' in val]
         for field in rm_fields:
             del sale_values[field]
@@ -434,7 +438,8 @@ class SaleLine:
                     l['taxes'] = [('add', taxes)]
 
                 l['unit'] = product.default_uom
-                l['description'] = description if description else product.rec_name
+                l['description'] = (description if description
+                    else product.rec_name)
                 for k, v in product_values.iteritems():
                     if k not in l:
                         l[k] = v
