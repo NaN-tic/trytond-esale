@@ -1,6 +1,6 @@
-#This file is part esale module for Tryton.
-#The COPYRIGHT file at the top level of this repository contains
-#the full copyright notices and license terms.
+# This file is part esale module for Tryton.
+# The COPYRIGHT file at the top level of this repository contains
+# the full copyright notices and license terms.
 from decimal import Decimal
 from trytond.pool import Pool, PoolMeta
 from trytond.config import config

@@ -1,6 +1,6 @@
-#This file is part esale module for Tryton.
-#The COPYRIGHT file at the top level of this repository contains
-#the full copyright notices and license terms.
+# This file is part esale module for Tryton.
+# The COPYRIGHT file at the top level of this repository contains
+# the full copyright notices and license terms.
 import datetime
 from decimal import Decimal
 from trytond.model import fields
@@ -24,19 +24,19 @@ class Template:
             'readonly': Eval('esale_available', True),
             'invisible': ~Eval('salable', False),
         }, depends=['esale_available', 'salable'],
-        help='This product are available in your e-commerce. ' \
-        'If you need not publish this product (despublish), ' \
+        help='This product are available in your e-commerce. '
+        'If you need not publish this product (despublish), '
         'unmark Active field in eSale section.')
     esale_active = fields.Boolean('Active eSale')
     esale_price = fields.Function(fields.Numeric('eSale Price',
         digits=(16, DIGITS),
         help='eSale price is calculated from shop in user '
-            'preferences and shop configuration',
+        'preferences and shop configuration',
         ), 'get_esale_price')
     esale_special_price = fields.Function(fields.Numeric('eSale Special Price',
         digits=(16, DIGITS),
         help='eSale special price is calculated from shop in user '
-            'preferences and shop configuration',
+        'preferences and shop configuration',
         ), 'get_esale_special_price')
     esale_relateds_by_shop = fields.Function(fields.Many2Many(
         'product.template', None, None, 'Relateds by Shop'),
@@ -49,8 +49,8 @@ class Template:
         'get_esale_crosssells_by_shop')
     esale_quantity = fields.Function(fields.Float('eSale Quantity'),
         'sum_esale_product')
-    esale_forecast_quantity = fields.Function(fields.Float('eSale Forecast Quantity'),
-        'sum_esale_product')
+    esale_forecast_quantity = fields.Function(fields.Float(
+        'eSale Forecast Quantity'), 'sum_esale_product')
 
     @staticmethod
     def default_esale_active():
@@ -80,8 +80,8 @@ class Template:
             products = [p for t in templates for p in t.products]
             if not products:
                 return {
-                        n: {t.id: Decimal(0) for t in templates} for n in names
-                    }
+                    n: {t.id: Decimal(0) for t in templates} for n in names
+                }
 
             # get all product prices
             sale_prices = Product.get_sale_price(products)
@@ -157,7 +157,7 @@ class Template:
     def get_esale_relateds_by_shop(self, name):
         '''Get all relateds products by shop
         (context or user shop preferences)'''
-        relateds = [] # ids
+        relateds = []  # ids
         if not hasattr(self, 'esale_relateds'):
             return relateds
         if not self.esale_relateds:
@@ -185,7 +185,7 @@ class Template:
     def get_esale_upsells_by_shop(self, name):
         '''Get all upsells products by shop
         (context or user shop preferences)'''
-        upsells = [] # ids
+        upsells = []  # ids
         if not hasattr(self, 'esale_upsells'):
             return upsells
         if not self.esale_upsells:
@@ -213,7 +213,7 @@ class Template:
     def get_esale_crosssells_by_shop(self, name):
         '''Get all crosssells products by shop
         (context or user shop preferences)'''
-        crosssells = [] # ids
+        crosssells = []  # ids
         if not hasattr(self, 'esale_crosssells'):
             return crosssells
         if not self.esale_crosssells:
@@ -258,7 +258,7 @@ class Template:
         shops = None
         Template = Pool().get('product.template')
 
-        #Default values
+        # Default values
         tvals['default_uom'] = shop.esale_uom_product
         tvals['category'] = shop.esale_category
         tvals['salable'] = True
@@ -351,10 +351,10 @@ class Product:
                 [w.id if shop.warehouses else None for w in shop.warehouses] or
                 [shop.warehouse.id if shop.warehouse else None])
             context['locations'] = locations
-            if name[6:] == 'forecast_quantity':                
+            if name[6:] == 'forecast_quantity':
                 context['forecast'] = True
                 context['stock_date_end'] = datetime.date.max
-            else: # quantity
+            else:  # quantity
                 context['stock_date_end'] = Date.today()
         with transaction.set_context(context):
             return cls.get_quantity(products, name[6:])
