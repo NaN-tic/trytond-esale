@@ -117,9 +117,11 @@ class Sale:
                 ('code', '=', currency_code),
                 ], limit=1)
         if currencies:
-            sale_values['currency'] = currencies[0].id
+            currency = currencies[0]
+            sale_values['currency'] = currency.id
         else:
-            sale_values['currency'] = shop.esale_currency.id
+            currency = shop.esale_currency
+            sale_values['currency'] = currency.id
 
         # Payment
         if sale_values.get('payment'):
@@ -162,7 +164,6 @@ class Sale:
             del sale_values['carrier']
             product_delivery = shop.esale_delivery_product
             shipment_description = product_delivery.name
-        shipment_cost_digits = Line.shipment_cost.digits
         shipment_values = [{
                 'product': product_delivery.code or product_delivery.name,
                 'quantity': 1,
@@ -171,7 +172,7 @@ class Sale:
                     PRECISION),
                 'note': sale_values.get('shipping_note'),
                 'shipment_cost': sale_values.get('shipping_price', 0).quantize(
-                    Decimal(str(10.0 ** -shipment_cost_digits[1]))),
+                    Decimal(str(10.0 ** -currency.digits))),
                 'sequence': 9999,
                 }]
         shipment_line = Line.esale_dict2lines(sale, line, shipment_values)[0]
