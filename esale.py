@@ -120,7 +120,5 @@ class eSaleAccountTaxRule(ModelSQL, ModelView):
 
     @fields.depends('country', 'subdivision')
     def on_change_country(self):
-        if (self.subdivision
-                and self.subdivision.country != self.country):
-            return {'subdivision': None}
-        return {}
+        if not self.country:
+            self.subdivision = None

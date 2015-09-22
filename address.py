@@ -98,9 +98,9 @@ class Address:
                 address.country = values.get('country')
                 z = address.on_change_zip()
                 if not values.get('city'):
-                    values['city'] = z.get('city')
+                    values['city'] = z.city
                 if not values.get('subdivision'):
-                    values['subdivision'] = z.get('subdivision')
+                    values['subdivision'] = z.subdivision
 
             address, = Address.create([values])
             logger.info('Shop %s. Create address ID %s' % (
