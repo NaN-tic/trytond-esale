@@ -351,9 +351,11 @@ class SaleShop:
 
         # compute price with taxes
         customer_taxes = product.template.customer_taxes_used
-        tax_lists = Tax.compute(customer_taxes, price, quantity)
-        if tax_lists:
-            price = price + tax_lists[0]['amount']
+        taxes = Tax.compute(customer_taxes, price, quantity)
+        tax_amount = 0
+        for tax in taxes:
+            tax_amount += tax['amount']
+        price = price + tax_amount
         price.quantize(Decimal(str(10.0 ** - DIGITS)))
         return price
 

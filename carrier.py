@@ -30,9 +30,11 @@ class Carrier:
             if new_taxes:
                 taxes = Tax.browse(new_taxes)
 
-        tax_lists = Tax.compute(taxes, price, 1)
-        if tax_lists:
-            price = price + tax_lists[0]['amount']
+        taxes = Tax.compute(taxes, price, 1)
+        tax_amount = 0
+        for tax in taxes:
+            tax_amount += tax['amount']
+        price = price + tax_amount
         price.quantize(Decimal(str(10.0 ** - DIGITS)))
         return price
 
