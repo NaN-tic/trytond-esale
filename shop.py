@@ -269,6 +269,7 @@ class SaleShop:
             else:
                 logger.info('Add a default user in %s configuration.' % (
                     self.name))
+                return
         return user
 
     @classmethod
