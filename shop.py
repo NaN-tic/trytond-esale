@@ -5,6 +5,7 @@ from trytond.model import ModelView, ModelSQL, fields
 from trytond.transaction import Transaction
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import And, Eval, Not, Bool
+from trytond.config import config as config_
 from decimal import Decimal
 import time
 import logging
@@ -20,6 +21,7 @@ __all__ = ['SaleShop', 'SaleShopWarehouse', 'SaleShopCountry', 'SaleShopLang']
 __metaclass__ = PoolMeta
 
 logger = logging.getLogger(__name__)
+DIGITS = config_.getint('product', 'price_decimal', default=4)
 
 
 class SaleShop:
@@ -345,18 +347,14 @@ class SaleShop:
     @classmethod
     def esale_price_w_taxes(cls, product, price, quantity=1):
         '''Get total price with taxes'''
-        pool = Pool()
-        Tax = pool.get('account.tax')
-        Invoice = pool.get('account.invoice')
+        Tax = Pool().get('account.tax')
 
         # compute price with taxes
         customer_taxes = product.template.customer_taxes_used
-        tax_list = Tax.compute(customer_taxes, price, quantity)
-        tax_amount = Decimal('0.0')
-        for tax in tax_list:
-            _, val = Invoice._compute_tax(tax, 'out_invoice')
-            tax_amount += val.get('amount')
-        price = price + tax_amount
+        tax_lists = Tax.compute(customer_taxes, price, quantity)
+        if tax_lists:
+            price = price + tax_lists[0]['amount']
+        price.quantize(Decimal(str(10.0 ** - DIGITS)))
         return price
 
 

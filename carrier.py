@@ -18,9 +18,7 @@ class Carrier:
         '''
         Calculate price with taxes from carrier product
         '''
-        pool = Pool()
-        Tax = pool.get('account.tax')
-        Invoice = pool.get('account.invoice')
+        Tax = Pool().get('account.tax')
 
         taxes = self.carrier_product.customer_taxes_used
 
@@ -32,12 +30,9 @@ class Carrier:
             if new_taxes:
                 taxes = Tax.browse(new_taxes)
 
-        tax_list = Tax.compute(taxes, price, 1)
-        tax_amount = Decimal('0.0')
-        for tax in tax_list:
-            _, val = Invoice._compute_tax(tax, 'out_invoice')
-            tax_amount += val.get('amount')
-        price = price + tax_amount
+        tax_lists = Tax.compute(taxes, price, 1)
+        if tax_lists:
+            price = price + tax_lists[0]['amount']
         price.quantize(Decimal(str(10.0 ** - DIGITS)))
         return price
 
