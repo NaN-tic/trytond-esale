@@ -2,7 +2,7 @@
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
 from decimal import Decimal
-from trytond.model import fields
+from trytond.model import fields, Unique
 from trytond.pyson import Eval
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
@@ -37,8 +37,9 @@ class Sale:
     @classmethod
     def __setup__(cls):
         super(Sale, cls).__setup__()
+        t = cls.__table__()
         cls._sql_constraints.extend([
-            ('reference_external_uniq', 'UNIQUE(shop, reference_external)',
+            ('reference_external_uniq', Unique(t, t.shop, t.reference_external),
              'There is another sale with the same reference external.\n'
              'The reference external of the sale must be unique!')
         ])
