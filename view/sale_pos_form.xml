@@ -6,7 +6,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <field name="esale" invisible="1"/>
     </xpath>
     <xpath expr="/form/notebook/page[@id=&quot;shipments&quot;]" position="after">
-        <page string="eSale" col="6" id="esale" states="{'invisible': ~Eval('esale')}">
+        <page string="eSale" col="2" id="esale" states="{'invisible': ~Eval('esale')}">
             <label name="reference_external"/>
             <field name="reference_external"/>
             <label name="esale_coupon"/>
