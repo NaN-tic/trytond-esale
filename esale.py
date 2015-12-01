@@ -95,7 +95,7 @@ class eSaleSate(ModelSQL, ModelView):
 class eSaleAccountTaxRule(ModelSQL, ModelView):
     'eSale Tax Rule'
     __name__ = 'esale.account.tax.rule'
-    _rec_name = 'tax_rule'
+    _rec_name = 'customer_tax_rule'
     country = fields.Many2One('country.country', 'Country',
         required=True)
     subdivision = fields.Many2One("country.subdivision",
