@@ -157,10 +157,6 @@ class SaleShop:
         return 'saleprice'
 
     @staticmethod
-    def default_esale_log():
-        return '7'
-
-    @staticmethod
     def default_esale_lang():
         return Pool().get('res.user')(Transaction().user).language.id
 
