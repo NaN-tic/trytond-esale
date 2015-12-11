@@ -361,10 +361,18 @@ class Product:
         shop_id = context.get('shop', None)
         if shop_id:
             shop = Pool().get('sale.shop')(shop_id)
-            locations = (
-                [w.id if shop.warehouses else None for w in shop.warehouses] or
-                [shop.warehouse.id if shop.warehouse else None])
+
+            # storage and input location in warehouse
+            locations = []
+            if shop.warehouses:
+                for w in shop.warehouses:
+                    locations.append(w.storage_location.id)
+                    locations.append(w.input_location.id)
+            elif shop.warehouse:
+                locations.append(shop.warehouse.storage_location.id)
+                locations.append(shop.warehouse.input_location.id)
             context['locations'] = locations
+
             if name[6:] == 'forecast_quantity':
                 context['forecast'] = True
                 context['stock_date_end'] = datetime.date.max
