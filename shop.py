@@ -79,6 +79,8 @@ class SaleShop:
             'required': Eval('esale_available', True),
         })
     esale_fee_tax_include = fields.Boolean('Fee Tax Include')
+    esale_explode_kit = fields.Boolean('Explode Kits',
+        help='Explode kits when create sales (sale kit).')
     esale_uom_product = fields.Many2One('product.uom', 'Default UOM',
         states={
             'required': Eval('esale_available', True),
