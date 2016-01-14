@@ -274,7 +274,6 @@ class Sale:
         if surchage_line:
             lines.append(surchage_line)
         if extralines:
-            lines = [l.copy() for l in lines]
             lines = lines + extralines
         sale.lines = lines
 
