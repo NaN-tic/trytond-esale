@@ -390,6 +390,8 @@ class SaleLine:
                 line = Line.get_sale_line_data(sale, product, quantity)
                 if l.get('unit_price'):
                     line.unit_price = l['unit_price']
+                    if hasattr(line, 'gross_unit_price'):
+                        line.gross_unit_price = l['unit_price']
                 if l.get('description'):
                     line.description = l['description']
                 if l.get('note'):
