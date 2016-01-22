@@ -388,7 +388,7 @@ class SaleLine:
             if product:
                 quantity = l['quantity']
                 line = Line.get_sale_line_data(sale, product, quantity)
-                if l.get('unit_price'):
+                if l.get('unit_price') or l.get('unit_price') == Decimal('0.0'):
                     line.unit_price = l['unit_price']
                     if hasattr(line, 'gross_unit_price'):
                         line.gross_unit_price = l['unit_price']
