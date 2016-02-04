@@ -162,13 +162,12 @@ class Sale:
         shipment_values = [{
                 'product': product_delivery.code or product_delivery.name,
                 'quantity': 1,
+                'unit_price': sale_values.get('shipping_price', 0).quantize(PRECISION),
                 'description': shipment_description,
                 'note': sale_values.get('shipping_note'),
                 'sequence': 9999,
                 }]
         shipment_line, = Line.esale_dict2lines(sale, shipment_values)
-        shipment_line.unit_price = sale_values.get('shipping_price', 0).quantize(
-                    PRECISION)
         shipment_line.shipment_cost = sale_values.get('shipping_price', 0).quantize(
                     Decimal(str(10.0 ** -currency.digits)))
         sale.shipment_cost_method = 'order' # force shipment invoice on order
@@ -191,11 +190,11 @@ class Sale:
                     'product': shop.esale_fee_product.code or
                         shop.esale_fee_product.name,
                     'quantity': 1,
+                    'unit_price': fee_price.quantize(PRECISION),
                     'description': shop.esale_fee_product.rec_name,
                     'sequence': 9999,
                     }]
             fee_line, = Line.esale_dict2lines(sale, fee_values)
-            fee_line.unit_price = fee_price.quantize(PRECISION)
 
         # Surcharge
         surchage_line = None
@@ -215,11 +214,11 @@ class Sale:
                     'product': shop.esale_surcharge_product.code or
                             shop.esale_surcharge_product.name,
                     'quantity': 1,
+                    'unit_price': surcharge_price.quantize(PRECISION),
                     'description': shop.esale_surcharge_product.rec_name,
                     'sequence': 9999,
                     }]
             surchage_line, = Line.esale_dict2lines(sale, surcharge_values)
-            surchage_line.unit_price = surcharge_price.quantize(PRECISION)
 
         # Discount line
         discount_line = None
@@ -255,11 +254,11 @@ class Sale:
                     'product': shop.esale_discount_product.code or
                             shop.esale_discount_product.name,
                     'quantity': 1,
+                    'unit_price': discount_price.quantize(PRECISION),
                     'description': description,
                     'sequence': 9999,
                     }]
             discount_line, = Line.esale_dict2lines(sale, discount_values)
-            discount_line.unit_price = discount_price.quantize(PRECISION)
 
         extralines = None
         if extralines_values:
