@@ -261,33 +261,23 @@ class Template:
         return sum_
 
     @classmethod
-    def create_esale_product(self, shop, tvals, pvals):
+    def create_esale_product(cls, shop, vals):
         '''
-        Get product values and create
+        Create a product from eSale dict values
         :param shop: obj
-        :param tvals: dict template values
-        :param pvals: dict product values
+        :param vals: dict product values (template + products)
         return obj
         '''
-        shops = None
-        Template = Pool().get('product.template')
 
         # Default values
-        tvals['default_uom'] = shop.esale_uom_product
-        tvals['category'] = shop.esale_category
-        tvals['salable'] = True
-        tvals['sale_uom'] = shop.esale_uom_product
-        tvals['account_category'] = True
-        tvals['products'] = [('create', [pvals])]
+        vals['default_uom'] = shop.esale_uom_product
+        vals['category'] = shop.esale_category
+        vals['salable'] = True
+        vals['sale_uom'] = shop.esale_uom_product
+        vals['account_category'] = True
 
-        if tvals.get('shops'):
-            shops = tvals.get('shops')
-            del tvals['shops']
-
-        template, = Template.create([tvals])
+        template, = cls.create([vals])
         Transaction().cursor.commit()
-        if shops:
-            Template.write([template], {'shops': shops})
         product, = template.products
 
         logger.info('Shop %s. Create product %s' % (
