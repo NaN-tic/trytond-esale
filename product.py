@@ -277,7 +277,7 @@ class Template:
         vals['account_category'] = True
 
         template, = cls.create([vals])
-        Transaction().cursor.commit()
+        Transaction().commit()
         product, = template.products
 
         logger.info('Shop %s. Create product %s' % (

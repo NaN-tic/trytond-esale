@@ -296,7 +296,7 @@ class Sale:
                 if sale_status.cancel:
                     Sale.cancel([sale])
                     logger.info('Canceled sale %s' % (reference))
-        Transaction().cursor.commit()
+        Transaction().commit()
 
     def set_shipment_cost(self):
         '''When sale is an esale, not recalculate shipment cost'''
