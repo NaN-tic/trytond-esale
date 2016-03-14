@@ -330,6 +330,7 @@ class SaleLine:
 
         shipment_line = SaleLine()
         shipment_line.sale = sale
+        shipment_line.type = 'line'
         shipment_line.product = product
         shipment_line.description = product.rec_name
         shipment_line.quantity = 1
