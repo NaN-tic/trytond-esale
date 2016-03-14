@@ -343,6 +343,7 @@ class SaleLine:
         shipment_line.on_change_product()
         shipment_line.unit_price = price
         shipment_line.shipment_cost = price
+        shipment_line.amount = price
         # compatibility with sale_discount
         if hasattr(SaleLine, 'gross_unit_price'):
             shipment_line.gross_unit_price = price
