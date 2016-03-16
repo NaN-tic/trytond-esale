@@ -309,48 +309,6 @@ class SaleLine:
     __name__ = 'sale.line'
 
     @classmethod
-    def get_shipment_line(cls, product, price, sale=None, party=None):
-        '''Get shipment line
-        :param product: obj
-        :param price: Decimal
-        return obj
-        '''
-        pool = Pool()
-        Tax = pool.get('account.tax')
-        SaleLine = pool.get('sale.line')
-
-        taxes = product.customer_taxes_used
-        if taxes and party and party.customer_tax_rule:
-            new_taxes = []
-            for tax in taxes:
-                tax_ids = party.customer_tax_rule.apply(tax, pattern={})
-                new_taxes = new_taxes + tax_ids
-            if new_taxes:
-                taxes = Tax.browse(new_taxes)
-
-        shipment_line = SaleLine()
-        shipment_line.sale = sale
-        shipment_line.type = 'line'
-        shipment_line.product = product
-        shipment_line.description = product.rec_name
-        shipment_line.quantity = 1
-        shipment_line.unit = product.sale_uom
-        shipment_line.unit_price = price
-        shipment_line.shipment_cost = price
-        shipment_line.amount = price
-        shipment_line.taxes = taxes
-        shipment_line.sequence = 9999
-        shipment_line.on_change_product()
-        shipment_line.unit_price = price
-        shipment_line.shipment_cost = price
-        shipment_line.amount = price
-        # compatibility with sale_discount
-        if hasattr(SaleLine, 'gross_unit_price'):
-            shipment_line.gross_unit_price = price
-            shipment_line.update_prices()
-        return shipment_line
-
-    @classmethod
     def esale_dict2lines(cls, sale, values):
         '''
         Return list sale lines
