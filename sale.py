@@ -10,7 +10,6 @@ from trytond.config import config as config_
 import logging
 
 __all__ = ['Sale', 'SaleLine']
-__metaclass__ = PoolMeta
 
 DIGITS = config_.getint('product', 'price_decimal', default=4)
 PRECISION = Decimal(str(10.0 ** - DIGITS))
@@ -21,6 +20,7 @@ _ESALE_SALE_EXCLUDE_FIELDS = ['shipping_price', 'shipping_note', 'discount',
 
 
 class Sale:
+    __metaclass__ = PoolMeta
     __name__ = 'sale.sale'
     esale = fields.Boolean('eSale',
         states={
@@ -306,6 +306,7 @@ class Sale:
 
 
 class SaleLine:
+    __metaclass__ = PoolMeta
     __name__ = 'sale.line'
 
     @classmethod

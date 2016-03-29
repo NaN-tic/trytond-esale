@@ -18,13 +18,13 @@ except ImportError:
 TIMEZONES += [(None, '')]
 
 __all__ = ['SaleShop', 'SaleShopWarehouse', 'SaleShopCountry', 'SaleShopLang']
-__metaclass__ = PoolMeta
 
 logger = logging.getLogger(__name__)
 DIGITS = config_.getint('product', 'price_decimal', default=4)
 
 
 class SaleShop:
+    __metaclass__ = PoolMeta
     __name__ = 'sale.shop'
     esale_available = fields.Boolean('eSale Shop',
         states={

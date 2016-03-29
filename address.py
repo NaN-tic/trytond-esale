@@ -5,12 +5,12 @@ from trytond.pool import Pool, PoolMeta
 import logging
 
 __all__ = ['Address']
-__metaclass__ = PoolMeta
 
 logger = logging.getLogger(__name__)
 
 
 class Address:
+    __metaclass__ = PoolMeta
     __name__ = 'party.address'
 
     @classmethod
