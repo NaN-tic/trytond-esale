@@ -1,6 +1,7 @@
 # This file is part esale module for Tryton.
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
+from trytond import backend
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.transaction import Transaction
 from trytond.pool import Pool, PoolMeta
@@ -85,7 +86,7 @@ class SaleShop:
         states={
             'required': Eval('esale_available', True),
         },)
-    esale_category = fields.Many2One('product.category', 'Default Category',
+    esale_account_category = fields.Many2One('product.category', 'Default Account Category',
         states={
             'required': Eval('esale_available', True),
         }, help='Default Category Product when create a new product. In this '
@@ -145,6 +146,19 @@ class SaleShop:
                 'import_orders': {},
                 'export_state': {},
                 })
+
+    @classmethod
+    def __register__(cls, module_name):
+        TableHandler = backend.get('TableHandler')
+
+        table = TableHandler(cls, module_name)
+
+        # Migration from 3.8: rename esale_category into esale_account_category
+        if (table.column_exist('esale_category')
+                and not table.column_exist('esale_account_category')):
+            table.column_rename('esale_category', 'esale_account_category')
+
+        super(SaleShop, cls).__register__(module_name)
 
     @staticmethod
     def default_esale_ext_reference():

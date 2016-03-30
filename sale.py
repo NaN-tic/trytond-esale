@@ -2,6 +2,7 @@
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
 from decimal import Decimal
+from trytond import backend
 from trytond.model import fields, Unique
 from trytond.pyson import Eval
 from trytond.pool import Pool, PoolMeta
@@ -27,7 +28,7 @@ class Sale:
             'readonly': Eval('state') != 'draft',
             },
         depends=['state'])
-    reference_external = fields.Char('External Reference', readonly=True,
+    number_external = fields.Char('External Number', readonly=True,
         select=True)
     esale_coupon = fields.Char('eSale Coupon', readonly=True)
     status = fields.Char('eSale Status', readonly=True,
@@ -39,17 +40,30 @@ class Sale:
         super(Sale, cls).__setup__()
         t = cls.__table__()
         cls._sql_constraints.extend([
-            ('reference_external_uniq', Unique(t, t.shop, t.reference_external),
-             'There is another sale with the same reference external.\n'
-             'The reference external of the sale must be unique!')
+            ('number_external_uniq', Unique(t, t.shop, t.number_external),
+             'There is another sale with the same number external.\n'
+             'The number external of the sale must be unique!')
         ])
+
+    @classmethod
+    def __register__(cls, module_name):
+        TableHandler = backend.get('TableHandler')
+
+        table = TableHandler(cls, module_name)
+
+        # Migration from 3.8: rename reference_external into number_external
+        if (table.column_exist('reference_external')
+                and not table.column_exist('number_external')):
+            table.column_rename('reference_external', 'number_external')
+
+        super(Sale, cls).__register__(module_name)
 
     @classmethod
     def copy(cls, sales, default=None):
         if default is None:
             default = {}
         default = default.copy()
-        default['reference_external'] = None
+        default['number_external'] = None
         return super(Sale, cls).copy(sales, default=default)
 
     @classmethod
@@ -111,7 +125,7 @@ class Sale:
 
         # Order reference
         if shop.esale_ext_reference:
-            sale.reference = sale_values.get('reference_external')
+            sale.number = sale_values.get('number_external')
 
         # Currency
         currencies = Currency.search([
@@ -282,20 +296,20 @@ class Sale:
                 ):
             sale.save()
             logger.info('Shop %s. Saved sale %s' % (
-                shop.name, sale.reference_external))
+                shop.name, sale.number))
 
             if status:
-                reference = sale.reference_external
+                number = sale.number_external
                 if sale_status.process and not sale_status.confirm:
                     Sale.quote([sale])
-                    logger.info('Quotation sale %s' % (reference))
+                    logger.info('Quotation sale %s' % (number))
                 if sale_status.confirm:
                     Sale.quote([sale])
                     Sale.confirm([sale])
-                    logger.info('Confirmed sale %s' % (reference))
+                    logger.info('Confirmed sale %s' % (number))
                 if sale_status.cancel:
                     Sale.cancel([sale])
-                    logger.info('Canceled sale %s' % (reference))
+                    logger.info('Canceled sale %s' % (number))
         Transaction().commit()
 
     def set_shipment_cost(self):

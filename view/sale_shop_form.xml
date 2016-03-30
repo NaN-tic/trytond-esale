@@ -52,8 +52,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                         <field name="esale_explode_kit"/>
                         <label name="esale_uom_product"/>
                         <field name="esale_uom_product"/>
-                        <label name="esale_category"/>
-                        <field name="esale_category"/>
+                        <label name="esale_account_category"/>
+                        <field name="esale_account_category"/>
                         <label name="esale_price"/>
                         <field name="esale_price"/>
                         <label name="esale_price_party"/>

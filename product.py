@@ -271,10 +271,10 @@ class Template:
 
         # Default values
         vals['default_uom'] = shop.esale_uom_product
-        vals['category'] = shop.esale_category
         vals['salable'] = True
         vals['sale_uom'] = shop.esale_uom_product
-        vals['account_category'] = True
+        vals['account_category'] = shop.esale_account_category
+        vals['accounts_category'] = True
 
         template, = cls.create([vals])
         Transaction().commit()

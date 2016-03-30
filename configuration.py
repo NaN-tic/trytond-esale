@@ -36,8 +36,9 @@ class Configuration:
         'Default Warehouse', domain=[('type', '=', 'warehouse')],
         required=True))
     sale_payment_type = fields.Property(fields.Many2One('account.payment.type',
-        'Default Payment Type', domain=[('kind', '=', 'receivable')],
-        required=True))
+        'Default Payment Type', domain=[
+            ('kind', '=', 'receivable'),
+        ], required=True))
     sale_payment_term = fields.Property(
         fields.Many2One('account.invoice.payment_term',
         'Default Payment Term', required=True))
@@ -45,5 +46,7 @@ class Configuration:
         'Default Price List', required=True))
     sale_currency = fields.Property(fields.Many2One('currency.currency',
         'Currency', required=True))
-    sale_category = fields.Property(fields.Many2One('product.category',
-        'Product Category', required=True))
+    sale_account_category = fields.Property(fields.Many2One('product.category',
+        'Account Category', domain=[
+            ('accounting', '=', True),
+        ], required=True))
