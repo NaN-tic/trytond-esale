@@ -122,7 +122,7 @@ class SaleShop:
     esale_payments = fields.One2Many('esale.payment', 'shop', 'Payments')
     esale_status = fields.One2Many('esale.status', 'shop', 'Status')
     esale_states = fields.One2Many('esale.state', 'shop', 'State')
-    esale_timezone = fields.Selection(TIMEZONES, 'Timezone', translate=False,
+    esale_timezone = fields.Selection(TIMEZONES, 'Timezone',
         help='Select an timezone when is different than company timezone.')
     esale_import_delayed = fields.Integer('eSale Delayed Import',
         help='Total minutes delayed when import')
