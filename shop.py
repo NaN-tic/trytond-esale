@@ -354,8 +354,7 @@ class SaleShop:
         for tax in taxes:
             tax_amount += tax['amount']
         price = price + tax_amount
-        price.quantize(Decimal(str(10.0 ** - DIGITS)))
-        return price
+        return price.quantize(Decimal(str(10.0 ** - DIGITS)))
 
 
 class SaleShopWarehouse(ModelSQL):
