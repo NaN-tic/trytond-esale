@@ -7,13 +7,12 @@ from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 from trytond.pyson import Eval, Or, Not, Bool, Id
-from trytond.config import config as config_
 from trytond.rpc import RPC
+from trytond.modules.product import price_digits
 import logging
 
 __all__ = ['Template', 'Product']
 
-DIGITS = config_.getint('product', 'price_decimal', default=4)
 logger = logging.getLogger(__name__)
 
 
@@ -30,12 +29,12 @@ class Template:
         'unmark Active field in eSale section.')
     esale_active = fields.Boolean('Active eSale')
     esale_price = fields.Function(fields.Numeric('eSale Price',
-        digits=(16, DIGITS),
+        digits=price_digits,
         help='eSale price is calculated from shop in user '
         'preferences and shop configuration',
         ), 'get_esale_price')
     esale_special_price = fields.Function(fields.Numeric('eSale Special Price',
-        digits=(16, DIGITS),
+        digits=price_digits,
         help='eSale special price is calculated from shop in user '
         'preferences and shop configuration',
         ), 'get_esale_special_price')
