@@ -313,10 +313,27 @@ class Sale:
         Transaction().commit()
 
     def set_shipment_cost(self):
-        '''When sale is an esale, not recalculate shipment cost'''
+        # not set shipment cost when sale is generated from eSale
         if self.esale:
             return
         return super(Sale, self).set_shipment_cost()
+
+    def get_shipment_cost_line(self, cost):
+        Line = Pool().get('sale.line')
+
+        cost_line = super(Sale, self).get_shipment_cost_line(cost)
+
+        sale_fields = Line._fields.keys()
+        # add default values in cost line
+        default_values = Line.default_get(sale_fields, with_rec_name=False)
+        for k in default_values:
+            if not hasattr(cost_line, k):
+                setattr(cost_line, k, default_values[k])
+        # add all sale line fields in cost line
+        for k in sale_fields:
+            if not hasattr(cost_line, k):
+                setattr(cost_line, k, None)
+        return cost_line
 
 
 class SaleLine:
