@@ -296,21 +296,20 @@ class Sale:
                 ):
             sale.save()
             logger.info('Shop %s. Saved sale %s' % (
-                shop.name, sale.number))
+                shop.name, sale.reference_external))
 
             if status:
-                number = sale.number_external
-                if sale_status.process and not sale_status.confirm:
+                reference = sale.reference_external
+                if sale_status.quote:
                     Sale.quote([sale])
-                    logger.info('Quotation sale %s' % (number))
-                if sale_status.confirm:
-                    Sale.quote([sale])
-                    Sale.confirm([sale])
-                    logger.info('Confirmed sale %s' % (number))
+                    if sale_status.confirm:
+                        Sale.confirm([sale])
+                        if sale_status.process:
+                            Sale.process([sale])
                 if sale_status.cancel:
                     Sale.cancel([sale])
-                    logger.info('Canceled sale %s' % (number))
-        Transaction().commit()
+                logger.info('Sale %s: %s' % (reference, sale.state))
+        Transaction().cursor.commit()
 
     def set_shipment_cost(self):
         # not set shipment cost when sale is generated from eSale
