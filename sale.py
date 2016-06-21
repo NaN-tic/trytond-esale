@@ -286,16 +286,15 @@ class Sale:
 
             if status:
                 reference = sale.reference_external
-                if sale_status.process and not sale_status.confirm:
+                if sale_status.quote:
                     Sale.quote([sale])
-                    logger.info('Quotation sale %s' % (reference))
-                if sale_status.confirm:
-                    Sale.quote([sale])
-                    Sale.confirm([sale])
-                    logger.info('Confirmed sale %s' % (reference))
+                    if sale_status.confirm:
+                        Sale.confirm([sale])
+                        if sale_status.process:
+                            Sale.process([sale])
                 if sale_status.cancel:
                     Sale.cancel([sale])
-                    logger.info('Canceled sale %s' % (reference))
+                logger.info('Sale %s: %s' % (reference, sale.state))
         Transaction().cursor.commit()
 
     def set_shipment_cost(self):

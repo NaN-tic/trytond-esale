@@ -1,4 +1,4 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
@@ -226,6 +226,10 @@ msgctxt "field:esale.status,process:"
 msgid "Process"
 msgstr "Procesar"
 
+msgctxt "field:esale.status,quote:"
+msgid "Quote"
+msgstr "Presupuesto"
+
 msgctxt "field:esale.status,rec_name:"
 msgid "Name"
 msgstr "Nombre"
@@ -429,6 +433,10 @@ msgstr "Producto descuento"
 msgctxt "field:sale.shop,esale_discount_tax_include:"
 msgid "Discount Tax Include"
 msgstr "Descuentos. Impuestos incluidos"
+
+msgctxt "field:sale.shop,esale_explode_kit:"
+msgid "Explode Kits"
+msgstr "Expandir kits"
 
 msgctxt "field:sale.shop,esale_ext_reference:"
 msgid "External Reference"
@@ -643,16 +651,20 @@ msgid "Active APP notification customer"
 msgstr "Activa la notificación del cliente."
 
 msgctxt "help:esale.status,cancel:"
-msgid "Sale change state draft to cancel."
+msgid "Sale change state draft to cancel"
 msgstr "El pedido de venta cambia de borrador a cancelado."
 
 msgctxt "help:esale.status,confirm:"
-msgid "Sale change state draft to confirmed"
-msgstr "El pedido de venta cambia de borrador a confirmado."
+msgid "Sale change state quotation to confirmed"
+msgstr "El pedido de venta cambia de presupuesto a confirmado."
 
 msgctxt "help:esale.status,process:"
-msgid "Sale change state confirme to processing"
+msgid "Sale change state confirmed to processing"
 msgstr "El pedido de venta cambia de confirmado a en proceso."
+
+msgctxt "help:esale.status,quote:"
+msgid "Sale change state draft to quotation"
+msgstr "El pedido cambia de borrador a presupuesto."
 
 msgctxt "help:product.template,esale_available:"
 msgid ""
@@ -701,6 +713,10 @@ msgstr "País por defecto relacionado con esta tienda."
 msgctxt "help:sale.shop,esale_currency:"
 msgid "Default currency shop."
 msgstr "Moneda por defecto en la tienda."
+
+msgctxt "help:sale.shop,esale_explode_kit:"
+msgid "Explode kits when create sales (sale kit)."
+msgstr "Expandir kits cuando se crean los pedidos (sale kit)."
 
 msgctxt "help:sale.shop,esale_ext_reference:"
 msgid "Use external reference (Increment) in sale name"

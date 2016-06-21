@@ -63,12 +63,14 @@ class eSaleStatus(ModelSQL, ModelView):
             ('order', 'On Order Processed'),
             ('invoice', 'On Invoice Paid'),
             ], 'Sale Shipment Method', required=True)
+    quote = fields.Boolean('Quote',
+        help='Sale change state draft to quotation')
     confirm = fields.Boolean('Confirm',
-        help='Sale change state draft to confirmed')
+        help='Sale change state quotation to confirmed')
     process = fields.Boolean('Process',
-        help='Sale change state confirme to processing')
+        help='Sale change state confirmed to processing')
     cancel = fields.Boolean('Cancel',
-        help='Sale change state draft to cancel.')
+        help='Sale change state draft to cancel')
 
     @staticmethod
     def default_invoice_method():

@@ -1,4 +1,4 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
@@ -226,6 +226,10 @@ msgctxt "field:esale.status,process:"
 msgid "Process"
 msgstr "Processa"
 
+msgctxt "field:esale.status,quote:"
+msgid "Quote"
+msgstr "Pressupost"
+
 msgctxt "field:esale.status,rec_name:"
 msgid "Name"
 msgstr "Nom"
@@ -429,6 +433,10 @@ msgstr "Producte descompte"
 msgctxt "field:sale.shop,esale_discount_tax_include:"
 msgid "Discount Tax Include"
 msgstr "Descompte. Impostos inclòs"
+
+msgctxt "field:sale.shop,esale_explode_kit:"
+msgid "Explode Kits"
+msgstr "Expandeix kits"
 
 msgctxt "field:sale.shop,esale_ext_reference:"
 msgid "External Reference"
@@ -643,16 +651,20 @@ msgid "Active APP notification customer"
 msgstr "Activa la notificació del client."
 
 msgctxt "help:esale.status,cancel:"
-msgid "Sale change state draft to cancel."
+msgid "Sale change state draft to cancel"
 msgstr "Canvia la comanda de venda d'esborrany a cancel·lat."
 
 msgctxt "help:esale.status,confirm:"
-msgid "Sale change state draft to confirmed"
+msgid "Sale change state quotation to confirmed"
 msgstr "Canvia la comanda de venda d'esborrany a confirmat."
 
 msgctxt "help:esale.status,process:"
-msgid "Sale change state confirme to processing"
+msgid "Sale change state confirmed to processing"
 msgstr "Canvia la comanda de venda confirmat a en procés."
+
+msgctxt "help:esale.status,quote:"
+msgid "Sale change state draft to quotation"
+msgstr "La venda cambia de borrador a pressupost."
 
 msgctxt "help:product.template,esale_available:"
 msgid ""
@@ -701,6 +713,10 @@ msgstr "País per defecte relacionat amb aquesta botiga."
 msgctxt "help:sale.shop,esale_currency:"
 msgid "Default currency shop."
 msgstr "Moneda per defecte de la botiga."
+
+msgctxt "help:sale.shop,esale_explode_kit:"
+msgid "Explode kits when create sales (sale kit)."
+msgstr "Expandeix kits al crear la venda (sale kit)."
 
 msgctxt "help:sale.shop,esale_ext_reference:"
 msgid "Use external reference (Increment) in sale name"
