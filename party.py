@@ -92,8 +92,7 @@ class Party:
             if vat_code:
                 identifier = Identifier()
                 identifier.code = vat_code
-                if is_vat:
-                    identifier.type = 'eu_vat'
+                identifier.type = 'eu_vat' if is_vat else None
                 party.identifiers = [identifier]
             party.save()
 
