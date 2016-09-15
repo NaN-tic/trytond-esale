@@ -14,23 +14,4 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <field name="inherit" ref="product.template_view_form"/>
         <field name="name">template_form</field>
     </record>
-
-    <data depends="product_esale">
-        <record model="ir.ui.view" id="template_esale_view_form">
-            <field name="model">product.template</field>
-            <field name="inherit" ref="product.template_view_form"/>
-            <field name="name">template_esale_form</field>
-            <field name="priority" eval="20"/>
-        </record>
-        <record model="ir.ui.view" id="esale_template_view_tree">
-            <field name="model">product.template</field>
-            <field name="inherit" ref="product_esale.esale_template_view_tree"/>
-            <field name="name">esale_template_tree</field>
-        </record>
-        <record model="ir.ui.view" id="esale_template_view_form">
-            <field name="model">product.template</field>
-            <field name="inherit" ref="product_esale.esale_template_view_form"/>
-            <field name="name">esale_template_form</field>
-        </record>
-    </data>
 </tryton>
