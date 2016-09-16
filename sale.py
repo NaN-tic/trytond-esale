@@ -334,6 +334,12 @@ class Sale:
                 setattr(cost_line, k, None)
         return cost_line
 
+    @classmethod
+    def _check_stock_quantity(cls, sales):
+        # Not check stock quantity (user warning) according the context
+        if not Transaction().context.get('without_warning', False):
+            super(Sale, cls)._check_stock_quantity(sales)
+
 
 class SaleLine:
     __metaclass__ = PoolMeta
