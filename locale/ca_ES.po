@@ -15,11 +15,11 @@ msgid "Shop \"%s\" is not available in user preferences."
 msgstr "La botiga \"%s\"no es troba disponible a les preferencies de l'usuari."
 
 msgctxt "error:sale.shop:"
-msgid "Threre are not orders to export"
+msgid "There are not orders to export"
 msgstr "No hi ha comandes per exportar."
 
 msgctxt "error:sale.shop:"
-msgid "Threre are not orders to import"
+msgid "There are not orders to import"
 msgstr "No hi ha comandes a importar."
 
 msgctxt "field:esale.account.tax.rule,country:"
