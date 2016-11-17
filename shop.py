@@ -137,8 +137,8 @@ class SaleShop:
     def __setup__(cls):
         super(SaleShop, cls).__setup__()
         cls._error_messages.update({
-            'orders_not_import': 'Threre are not orders to import',
-            'orders_not_export': 'Threre are not orders to export',
+            'orders_not_import': 'There are not orders to import',
+            'orders_not_export': 'There are not orders to export',
             'not_shop_user': 'Shop "%s" is not available in user preferences.',
         })
         cls._buttons.update({
