@@ -7,7 +7,7 @@ from trytond.tests.test_tryton import ModuleTestCase
 
 
 class EsaleTestCase(ModuleTestCase):
-    'Test Esale module'
+    'Test eSale module'
     module = 'esale'
 
 

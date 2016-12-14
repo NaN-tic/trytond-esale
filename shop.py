@@ -2,13 +2,18 @@
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
 from trytond.model import ModelView, ModelSQL, fields
+from trytond.wizard import Wizard, StateTransition, StateView, Button
 from trytond.transaction import Transaction
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import And, Eval, Not, Bool
 from trytond.config import config as config_
+from trytond.modules.product_esale.tools import slugify
+from io import BytesIO
 from decimal import Decimal
+import datetime
 import time
 import logging
+import unicodecsv
 
 try:
     import pytz
@@ -17,7 +22,8 @@ except ImportError:
     TIMEZONES = []
 TIMEZONES += [(None, '')]
 
-__all__ = ['SaleShop', 'SaleShopWarehouse', 'SaleShopCountry', 'SaleShopLang']
+__all__ = ['SaleShop', 'SaleShopWarehouse', 'SaleShopCountry', 'SaleShopLang',
+    'EsaleSaleExportCSVStart', 'EsaleSaleExportCSVResult', 'EsaleSaleExportCSV']
 __metaclass__ = PoolMeta
 
 logger = logging.getLogger(__name__)
@@ -226,7 +232,7 @@ class SaleShop:
 
     @classmethod
     def get_shop_app(cls):
-        '''Get Shop APP (magento, prestashop,...)'''
+        'Get Shop APP (magento, prestashop,...)'
         res = [('', '')]
         return res
 
@@ -275,9 +281,7 @@ class SaleShop:
     @classmethod
     @ModelView.button
     def import_orders(self, shops):
-        """
-        Import Orders from External APP
-        """
+        'Import Orders from External APP'
         user = Pool().get('res.user')(Transaction().user)
 
         for shop in shops:
@@ -297,9 +301,7 @@ class SaleShop:
 
     @classmethod
     def import_cron_orders(cls):
-        """
-        Cron import orders:
-        """
+        'Cron import orders'
         shops = cls.search([
             ('esale_available', '=', True),
             ('esale_scheduler', '=', True),
@@ -310,9 +312,7 @@ class SaleShop:
     @classmethod
     @ModelView.button
     def export_state(self, shops):
-        """
-        Export Orders to External APP
-        """
+        'Export Orders to External APP'
         for shop in shops:
             export_state = getattr(shop, 'export_state_%s' %
                 shop.esale_shop_app)
@@ -320,9 +320,7 @@ class SaleShop:
 
     @classmethod
     def export_cron_state(cls):
-        """
-        Cron export state:
-        """
+        'Cron export state'
         shops = cls.search([
             ('esale_available', '=', True),
             ('esale_scheduler', '=', True),
@@ -344,7 +342,7 @@ class SaleShop:
 
     @classmethod
     def esale_price_w_taxes(cls, product, price, quantity=1):
-        '''Get total price with taxes'''
+        'Get total price with taxes'
         Tax = Pool().get('account.tax')
 
         # compute price with taxes
@@ -355,6 +353,31 @@ class SaleShop:
             tax_amount += tax['amount']
         price = price + tax_amount
         return price.quantize(Decimal(str(10.0 ** - DIGITS)))
+
+    def esale_sale_export_csv(self, from_date):
+        'eSale Sale Export CSV (filename)'
+        now = datetime.datetime.now()
+        date = self.esale_last_state_orders or now
+
+        sales = self.get_sales_from_date(date)
+
+        #~ Update date last import
+        self.write([self], {'esale_last_state_orders': now})
+        Transaction().cursor.commit()
+
+        values, keys = [], set()
+        for sale in sales:
+            vals = sale.esale_sale_export_csv()
+            for k in vals.keys():
+                keys.add(k)
+            values.append(vals)
+
+        output = BytesIO()
+        wr = unicodecsv.DictWriter(output, sorted(list(keys)),
+            quoting=unicodecsv.QUOTE_ALL, encoding='utf-8')
+        wr.writeheader()
+        wr.writerows(values)
+        return output
 
 
 class SaleShopWarehouse(ModelSQL):
@@ -387,3 +410,70 @@ class SaleShopLang(ModelSQL):
             select=True, required=True)
     lang = fields.Many2One('ir.lang', 'Lang', ondelete='CASCADE',
             select=True, required=True)
+
+
+class EsaleSaleExportCSVStart(ModelView):
+    'eSale Sale Export CSV Start'
+    __name__ = 'esale.sale.export.csv.start'
+    shop = fields.Many2One('sale.shop', 'Shop', required=True,
+        domain=[('esale_available', '=', True)])
+    from_date = fields.DateTime('From Date',
+        help='Filter products create/write from this date. '
+        'An empty value are all catalog product.')
+
+    @staticmethod
+    def default_shop():
+        User = Pool().get('res.user')
+        user = User(Transaction().user)
+        return user.shop.id if user.shop else None
+
+    @staticmethod
+    def default_from_date():
+        User = Pool().get('res.user')
+        user = User(Transaction().user)
+        if user.shop and user.shop.esale_last_state_orders:
+            return user.shop.esale_last_state_orders
+
+
+class EsaleSaleExportCSVResult(ModelView):
+    'eSale Sale Export CSV Result'
+    __name__ = 'esale.sale.export.csv.result'
+    csv_file = fields.Binary('CSV', filename='file_name')
+    file_name = fields.Text('File Name')
+
+
+class EsaleSaleExportCSV(Wizard):
+    'eSale Sale Export CSV'
+    __name__ = "esale.sale.export.csv"
+    start = StateView('esale.sale.export.csv.start',
+        'esale.esale_sale_export_csv_start', [
+            Button('Cancel', 'end', 'tryton-cancel'),
+            Button('Export', 'export', 'tryton-ok', default=True),
+            ])
+    export = StateTransition()
+    result = StateView('esale.sale.export.csv.result',
+        'esale.esale_sale_export_csv_result', [
+            Button('Close', 'end', 'tryton-close'),
+            ])
+
+    def transition_export(self):
+        pool = Pool()
+        Shop = pool.get('sale.shop')
+        Date = pool.get('ir.date')
+
+        shop = self.start.shop
+        from_date = self.start.from_date
+
+        output = Shop.esale_sale_export_csv(shop, from_date)
+
+        self.result.csv_file = fields.Binary.cast(output.getvalue())
+        self.result.file_name = '%s-sales-%s.csv' % (
+            slugify(shop.name.replace('.', '-')),
+            Date.today())
+        return 'result'
+
+    def default_result(self, fields):
+        return {
+            'csv_file': self.result.csv_file,
+            'file_name': self.result.file_name,
+            }
