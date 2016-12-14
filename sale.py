@@ -34,6 +34,10 @@ class Sale:
     status = fields.Char('eSale Status', readonly=True,
         help='Last status import/export to e-commerce APP')
     status_history = fields.Text('eSale Status history', readonly=True)
+    carrier_tracking_ref = fields.Function(fields.Char('Carrier Tracking Ref'),
+        'get_carrier_tracking_ref')
+    number_packages = fields.Function(fields.Integer('Number of Packages'),
+        'get_number_packages')
 
     @classmethod
     def __setup__(cls):
@@ -334,11 +338,40 @@ class Sale:
                 setattr(cost_line, k, None)
         return cost_line
 
+    def get_carrier_tracking_ref(self, name):
+        refs = []
+        for shipment in self.shipments:
+            if not hasattr(shipment, 'carrier_tracking_ref'):
+                return
+            if shipment.carrier_tracking_ref:
+                refs.append(shipment.carrier_tracking_ref)
+        if refs:
+            return ','.join(refs)
+
+    def get_number_packages(self, name):
+        packages = 0
+        for shipment in self.shipments:
+            if not hasattr(shipment, 'number_packages'):
+                return
+            if shipment.number_packages:
+                packages += shipment.number_packages
+        return packages
+
     @classmethod
     def _check_stock_quantity(cls, sales):
         # Not check stock quantity (user warning) according the context
         if not Transaction().context.get('without_warning', False):
             super(Sale, cls)._check_stock_quantity(sales)
+
+    def esale_sale_export_csv(self):
+        vals = {}
+        if self.shop.esale_ext_reference:
+            reference = self.reference_external or self.reference
+        else:
+            reference = self.reference
+        vals['reference'] = reference
+        vals['state'] = self.state
+        return vals
 
 
 class SaleLine:
