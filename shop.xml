@@ -8,5 +8,32 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="inherit" ref="sale_shop.sale_shop_view_form"/>
             <field name="name">sale_shop_form</field>
         </record>
+
+        <!-- Export eSale Sale CSV -->
+        <record model="ir.ui.view" id="esale_sale_export_csv_start">
+            <field name="model">esale.sale.export.csv.start</field>
+            <field name="type">form</field>
+            <field name="name">esale_sale_export_csv_start</field>
+        </record>
+        <record model="ir.ui.view" id="esale_sale_export_csv_result">
+            <field name="model">esale.sale.export.csv.result</field>
+            <field name="type">form</field>
+            <field name="name">esale_sale_export_csv_result</field>
+        </record>
+
+        <record model="ir.action.wizard" id="wizard_esale_sale_export_csv">
+            <field name="name">Export eSale Sale CSV</field>
+            <field name="wiz_name">esale.sale.export.csv</field>
+        </record>
+
+        <menuitem name="Export eSale Sale CSV"
+            parent="sale.menu_sale_form"
+            action="wizard_esale_sale_export_csv"
+            id="menu_esale_sale_export_csv"
+            sequence="20"/>
+        <record model="ir.ui.menu-res.group" id="menu_esale_sale_export_csv_group_esale">
+            <field name="menu" ref="menu_esale_sale_export_csv"/>
+            <field name="group" ref="group_esale"/>
+        </record>
     </data>
 </tryton>
