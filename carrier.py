@@ -6,12 +6,12 @@ from trytond.pool import Pool, PoolMeta
 from trytond.config import config as config_
 
 __all__ = ['Carrier']
-__metaclass__ = PoolMeta
 
 DIGITS = config_.getint('product', 'price_decimal', default=4)
 
 
 class Carrier:
+    __metaclass__ = PoolMeta
     __name__ = 'carrier'
 
     def get_sale_price_w_tax(self, price=Decimal('0.0'), party=None):

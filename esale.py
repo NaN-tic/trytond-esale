@@ -3,11 +3,9 @@
 # the full copyright notices and license terms.
 from trytond.model import fields, ModelSQL, ModelView
 from trytond.pyson import Eval
-from trytond.pool import PoolMeta
 
 __all__ = ['eSaleCarrier', 'eSalePayment', 'eSaleStatus', 'eSaleSate',
     'eSaleAccountTaxRule']
-__metaclass__ = PoolMeta
 
 SALE_STATES = [
     ('paid', 'Paid'),

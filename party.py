@@ -8,13 +8,13 @@ import stdnum.eu.vat as vat
 import logging
 
 __all__ = ['Party']
-__metaclass__ = PoolMeta
 
 logger = logging.getLogger(__name__)
 _ESALE_PARTY_EXCLUDE_FIELDS = ['vat_country', 'vat_code']
 
 
 class Party:
+    __metaclass__ = PoolMeta
     __name__ = 'party.party'
     esale_email = fields.Char('E-Mail')
 

@@ -12,12 +12,12 @@ from trytond.modules.product import price_digits
 import logging
 
 __all__ = ['Template', 'Product']
-__metaclass__ = PoolMeta
 
 logger = logging.getLogger(__name__)
 
 
 class Template:
+    __metaclass__ = PoolMeta
     __name__ = 'product.template'
     esale_available = fields.Boolean('eSale',
         states={
@@ -296,6 +296,7 @@ class Template:
 
 
 class Product:
+    __metaclass__ = PoolMeta
     __name__ = 'product.product'
     esale_quantity = fields.Function(fields.Float('eSale Quantity'),
         'get_esale_quantity')
