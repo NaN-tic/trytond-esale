@@ -363,11 +363,14 @@ class Product:
                 locations.append(shop.warehouse.input_location.id)
             context['locations'] = locations
 
-            if name[6:] == 'forecast_quantity':
-                context['forecast'] = True
-                context['stock_date_end'] = datetime.date.max
-            else:  # quantity
-                context['stock_date_end'] = Date.today()
+        if name[6:] == 'forecast_quantity':
+            context['forecast'] = True
+            context['stock_date_end'] = datetime.date.max
+        else:
+            context['forecast'] = False
+            context['stock_date_end'] = Date.today()
+        context['stock_assign'] = True
+
         with transaction.set_context(context):
             return cls.get_quantity(products, name[6:])
 
