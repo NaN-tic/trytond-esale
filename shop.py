@@ -354,16 +354,12 @@ class SaleShop:
         price = price + tax_amount
         return price.quantize(Decimal(str(10.0 ** - DIGITS)))
 
-    def esale_sale_export_csv(self, from_date):
+    def esale_sale_export_csv(self, from_date=None):
         'eSale Sale Export CSV (filename)'
         now = datetime.datetime.now()
-        date = self.esale_last_state_orders or now
+        date = from_date or self.esale_last_state_orders or now
 
         sales = self.get_sales_from_date(date)
-
-        #~ Update date last import
-        self.write([self], {'esale_last_state_orders': now})
-        Transaction().cursor.commit()
 
         values, keys = [], set()
         for sale in sales:
@@ -425,7 +421,7 @@ class EsaleSaleExportCSVStart(ModelView):
     def default_shop():
         User = Pool().get('res.user')
         user = User(Transaction().user)
-        return user.shop.id if user.shop else None
+        return user.shop.id if (user.shop and user.shop.esale_available) else None
 
     @staticmethod
     def default_from_date():
@@ -464,7 +460,10 @@ class EsaleSaleExportCSV(Wizard):
         shop = self.start.shop
         from_date = self.start.from_date
 
-        output = Shop.esale_sale_export_csv(shop, from_date)
+        output = shop.esale_sale_export_csv(from_date)
+
+        # Update date last import
+        Shop.write([shop], {'esale_last_state_orders': from_date})
 
         self.result.csv_file = fields.Binary.cast(output.getvalue())
         self.result.file_name = '%s-sales-%s.csv' % (
