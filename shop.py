@@ -10,6 +10,7 @@ from trytond.config import config as config_
 from trytond.modules.product_esale.tools import slugify
 from io import BytesIO
 from decimal import Decimal
+from simpleeval import simple_eval
 import datetime
 import time
 import logging
@@ -138,6 +139,9 @@ class SaleShop:
             '(processing,complete,...).')
     warehouses = fields.Many2Many('sale.shop-stock.location', 'shop',
         'location', 'Warehouses')
+    esale_export_sale_filename = fields.Char('eSale Export Sales Filename',
+        help='Python expression that will be evaluated to generate the filename.\n'
+            'If is empty, export the filename as <shopname>-sales.csv.')
 
     @classmethod
     def __setup__(cls):
@@ -375,6 +379,23 @@ class SaleShop:
         wr.writerows(values)
         return output
 
+    def get_export_csv_context_formula(self, lang=None):
+        Date = Pool().get('ir.date')
+
+        lang = lang if lang else Transaction().language
+        return {
+            'names': {
+                'shop': self,
+                'today': Date.today(),
+                # TODO 4.2 no split locale code
+                'lang': lang.split('_')[0],
+                },
+            'functions': {
+                'datetime': datetime,
+                'slugify': slugify,
+                }
+            }
+
 
 class SaleShopWarehouse(ModelSQL):
     'Sale Shop - Warehouse'
@@ -455,7 +476,6 @@ class EsaleSaleExportCSV(Wizard):
     def transition_export(self):
         pool = Pool()
         Shop = pool.get('sale.shop')
-        Date = pool.get('ir.date')
 
         shop = self.start.shop
         from_date = self.start.from_date
@@ -466,9 +486,13 @@ class EsaleSaleExportCSV(Wizard):
         Shop.write([shop], {'esale_last_state_orders': from_date})
 
         self.result.csv_file = fields.Binary.cast(output.getvalue())
-        self.result.file_name = '%s-sales-%s.csv' % (
-            slugify(shop.name.replace('.', '-')),
-            Date.today())
+        if shop.esale_export_sale_filename:
+            context = shop.get_export_csv_context_formula()
+            filename = simple_eval(shop.esale_export_sale_filename, **context)
+        else:
+            filename = '%s-sales.csv' % (slugify(shop.name.replace('.', '-')))
+        self.result.file_name = filename
+
         return 'result'
 
     def default_result(self, fields):
