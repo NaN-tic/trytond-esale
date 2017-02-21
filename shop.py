@@ -121,10 +121,6 @@ class SaleShop:
         help='This date is to import (filter)')
     esale_last_state_orders = fields.DateTime('Last State Orders',
         help='This date is last export (filter)')
-    esale_currency = fields.Many2One('currency.currency', 'Default currency',
-        states={
-            'required': Eval('esale_available', True),
-        }, help='Default currency shop.')
     esale_carriers = fields.One2Many('esale.carrier', 'shop', 'Carriers')
     esale_payments = fields.One2Many('esale.payment', 'shop', 'Payments')
     esale_status = fields.One2Many('esale.status', 'shop', 'Status')

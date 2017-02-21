@@ -16,7 +16,8 @@ PRECISION = Decimal(str(10.0 ** - DIGITS))
 logger = logging.getLogger(__name__)
 _ESALE_SALE_EXCLUDE_FIELDS = ['shipping_price', 'shipping_note', 'discount',
     'discount_description', 'coupon_code', 'coupon_description', 'carrier',
-    'currency', 'payment']
+    'currency', 'payment', 'external_untaxed_amount', 'external_tax_amount',
+    'external_total_amount', 'external_shipment_amount']
 
 
 class Sale:
@@ -68,8 +69,9 @@ class Sale:
             ]
 
     @classmethod
-    def create_external_order(cls, shop, sale_values, lines_values,
-            extralines_values, party_values, invoice_values, shipment_values):
+    def create_external_order(cls, shop, sale_values={}, lines_values=[],
+            extralines_values=[], party_values={}, invoice_values={},
+            shipment_values={}):
         '''
         Create external order in sale
         :param shop: obj
@@ -125,7 +127,7 @@ class Sale:
             currency, = currencies
             sale.currency = currency
         else:
-            currency = shop.esale_currency
+            currency = shop.currency
             sale.currency = currency
 
         # Payment Type
@@ -163,16 +165,17 @@ class Sale:
         else:
             product_delivery = shop.esale_delivery_product
             shipment_description = product_delivery.name
+        shipment_price = Decimal(sale_values.get('shipping_price', 0))
         shipment_values = [{
                 'product': product_delivery.code or product_delivery.name,
                 'quantity': 1,
-                'unit_price': sale_values.get('shipping_price', 0).quantize(PRECISION),
+                'unit_price': shipment_price.quantize(PRECISION),
                 'description': shipment_description,
                 'note': sale_values.get('shipping_note'),
                 'sequence': 9999,
                 }]
         shipment_line, = Line.esale_dict2lines(sale, shipment_values)
-        shipment_line.shipment_cost = sale_values.get('shipping_price', 0).quantize(
+        shipment_line.shipment_cost = shipment_price.quantize(
                     Decimal(str(10.0 ** -currency.digits)))
         sale.shipment_cost_method = 'order' # force shipment invoice on order
 
