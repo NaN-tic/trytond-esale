@@ -450,10 +450,6 @@ msgctxt "field:sale.shop,esale_countrys:"
 msgid "Countries"
 msgstr "Països"
 
-msgctxt "field:sale.shop,esale_currency:"
-msgid "Default currency"
-msgstr "Moneda per defecte"
-
 msgctxt "field:sale.shop,esale_delivery_product:"
 msgid "Delivery Product"
 msgstr "Producte enviament"

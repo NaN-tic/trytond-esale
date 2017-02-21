@@ -92,6 +92,10 @@ class Address:
                 values['delivery'] = True
 
             # calculate subdivision/city from zip+country
+            # TODO support get subdivision from dict values
+            # At the moment, get subdivision from zip + country
+            if values.get('subdivision') == '':
+                del values['subdivision']
             if values.get('zip') and values.get('country'):
                 address = Address()
                 address.zip = values.get('zip')

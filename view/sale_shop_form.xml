@@ -32,8 +32,6 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                         <field name="esale_tax_include"/>
                         <label name="esale_get_party_by_vat"/>
                         <field name="esale_get_party_by_vat"/>
-                        <label name="esale_currency"/>
-                        <field name="esale_currency"/>
                         <label name="esale_delivery_product"/>
                         <field name="esale_delivery_product"/>
                         <label name="esale_discount_product"/>
