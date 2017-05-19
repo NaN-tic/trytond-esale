@@ -166,7 +166,8 @@ class SaleShop:
 
     @staticmethod
     def default_esale_lang():
-        return Pool().get('res.user')(Transaction().user).language.id
+        user = Pool().get('res.user')(Transaction().user)
+        return user.language.id if user.language else None
 
     @staticmethod
     def default_esale_delivery_product():
