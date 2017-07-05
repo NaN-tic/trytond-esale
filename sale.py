@@ -16,8 +16,7 @@ PRECISION = Decimal(str(10.0 ** - DIGITS))
 logger = logging.getLogger(__name__)
 _ESALE_SALE_EXCLUDE_FIELDS = ['shipping_price', 'shipping_note', 'discount',
     'discount_description', 'coupon_code', 'coupon_description', 'carrier',
-    'currency', 'payment', 'external_untaxed_amount', 'external_tax_amount',
-    'external_total_amount', 'external_shipment_amount']
+    'currency', 'payment']
 
 
 class Sale:
