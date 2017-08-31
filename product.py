@@ -370,6 +370,7 @@ class Product:
             context['forecast'] = False
             context['stock_date_end'] = Date.today()
         context['stock_assign'] = True
+        context['with_childs'] = True
 
         with transaction.set_context(context):
             return cls.get_quantity(products, name[6:])
