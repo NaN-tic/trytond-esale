@@ -66,6 +66,21 @@ class EsaleTestCase(ModuleTestCase):
             self.assertEqual(sale.comment, u'Example Sale Order')
             self.assertEqual(sale.total_amount, Decimal('10.00'))
 
+            # discount new line
+            sale_data = sale_values(reference='S0002')
+            sale_data['discount'] = Decimal('-6')
+
+            Sale.create_external_order(shop,
+                sale_values=sale_data,
+                lines_values=[lines_values(code='P0001')],
+                party_values=party_values(),
+                invoice_values=invoice_values(),
+                shipment_values=shipment_values())
+
+            sale, = Sale.search([('reference', '=', 'S0002')], limit=1)
+            self.assertEqual(sale.total_amount, Decimal('4.00'))
+            self.assertEqual(len(sale.lines), 2)
+
             # TODO
             # - carrier
             # - payment
