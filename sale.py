@@ -118,6 +118,10 @@ class Sale:
         if shop.esale_ext_reference:
             sale.reference = sale_values.get('reference_external')
 
+        # esale coupon code
+        if sale_values.get('coupon_code'):
+            sale.esale_coupon = sale_values['coupon_code']
+
         # Currency
         currencies = Currency.search([
                 ('code', '=', sale_values.get('currency')),
