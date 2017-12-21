@@ -4,8 +4,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
 <tree string="eSale Account Tax Rule" sequence="sequence">
     <field name="country"/>
     <field name="subdivision"/>
-    <field name="start_zip"/>
-    <field name="end_zip"/>
+    <field name="zip"/>
     <field name="customer_tax_rule"/>
     <field name="supplier_tax_rule"/>
     <field name="sequence"/>
