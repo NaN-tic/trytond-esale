@@ -1,8 +1,10 @@
 # This file is part esale module for Tryton.
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
-from trytond.model import fields, ModelSQL, ModelView
+from trytond.model import fields, ModelSQL, ModelView, MatchMixin
 from trytond.pyson import Eval
+from trytond.transaction import Transaction
+from trytond import backend
 
 __all__ = ['eSaleCarrier', 'eSalePayment', 'eSaleStatus', 'eSaleSate',
     'eSaleAccountTaxRule']
@@ -92,7 +94,7 @@ class eSaleSate(ModelSQL, ModelView):
     message = fields.Text('Message', translate=True)
 
 
-class eSaleAccountTaxRule(ModelSQL, ModelView):
+class eSaleAccountTaxRule(ModelSQL, ModelView, MatchMixin):
     'eSale Tax Rule'
     __name__ = 'esale.account.tax.rule'
     _rec_name = 'customer_tax_rule'
@@ -101,8 +103,7 @@ class eSaleAccountTaxRule(ModelSQL, ModelView):
     subdivision = fields.Many2One("country.subdivision",
             'Subdivision', domain=[('country', '=', Eval('country'))],
             depends=['country'])
-    start_zip = fields.Char('Start Zip', help='Numeric Zip Code')
-    end_zip = fields.Char('End Zip', help='Numeric Zip Code')
+    zip = fields.Char('Zip')
     customer_tax_rule = fields.Many2One('account.tax.rule',
         'Customer Tax Rule', required=True)
     supplier_tax_rule = fields.Many2One('account.tax.rule',
@@ -114,6 +115,17 @@ class eSaleAccountTaxRule(ModelSQL, ModelView):
         super(eSaleAccountTaxRule, cls).__setup__()
         cls._order.insert(0, ('sequence', 'ASC'))
 
+    @classmethod
+    def __register__(cls, module_name):
+        TableHandler = backend.get('TableHandler')
+        cursor = Transaction().cursor
+        table_h = TableHandler(cursor, cls, module_name)
+
+        if table_h.column_exist('start_zip'):
+            table_h.column_rename('start_zip', 'zip')
+
+        super(eSaleAccountTaxRule, cls).__register__(module_name)
+
     @staticmethod
     def default_sequence():
         return 1
@@ -122,3 +134,23 @@ class eSaleAccountTaxRule(ModelSQL, ModelView):
     def on_change_country(self):
         if not self.country:
             self.subdivision = None
+
+    @classmethod
+    def compute(cls, country, subdivision, zip, pattern=None):
+        'Compute esale account tax rule based on party address'
+        etax_rules = cls.search([
+            ('country', '=', country),
+            ('subdivision', '=', subdivision),
+            ])
+        if pattern is None:
+            pattern = {}
+
+        pattern = pattern.copy()
+        pattern['country'] = country and country.id or None
+        pattern['subdivision'] = subdivision and subdivision.id or None
+        pattern['zip'] = zip
+
+        for etax_rule in etax_rules:
+            if etax_rule.match(pattern):
+                return etax_rule
+        return
