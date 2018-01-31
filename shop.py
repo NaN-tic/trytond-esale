@@ -237,30 +237,21 @@ class SaleShop:
         res = [('', '')]
         return res
 
+    def sales_from_date_domain(self, date):
+        return [
+            ('write_date', '>=', date),
+            ('shop', '=', self.id),
+            ]
+
     def get_sales_from_date(self, date):
         '''Get Sales from a date to export
         :param date: datetime
-        retun list
+        return list
         '''
-        pool = Pool()
-        Sale = pool.get('sale.sale')
-        Move = pool.get('stock.move')
+        Sale = Pool().get('sale.sale')
 
-        # Sale might not get updated for state changes in the related shipments
-        # So first get the moves for outgoing shipments which are executed
-        # after last import time.
-        moves = Move.search([
-            ('write_date', '>=', date),
-            ('sale.shop', '=', self.id),
-            ('shipment', 'like', 'stock.shipment.out%')
-            ])
-        sales_to_export = Sale.search(['OR', [
-                    ('write_date', '>=', date),
-                    ('shop', '=', self.id),
-                ], [
-                    ('id', 'in', map(int, [m.sale for m in moves]))
-                ]])
-        return sales_to_export
+        domain = self.sales_from_date_domain(date)
+        return Sale.search(domain)
 
     def get_shop_user(self):
         '''
