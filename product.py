@@ -349,11 +349,12 @@ class Product:
         transaction = Transaction()
         context = transaction.context
         shop_id = context.get('shop', None)
+
+        locations = []
         if shop_id:
             shop = Pool().get('sale.shop')(shop_id)
 
             # storage and input location in warehouse
-            locations = []
             if shop.warehouses:
                 for w in shop.warehouses:
                     locations.append(w.storage_location.id)
@@ -361,7 +362,7 @@ class Product:
             elif shop.warehouse:
                 locations.append(shop.warehouse.storage_location.id)
                 locations.append(shop.warehouse.input_location.id)
-            context['locations'] = locations
+        context['locations'] = locations
 
         if name[6:] == 'forecast_quantity':
             context['forecast'] = True
