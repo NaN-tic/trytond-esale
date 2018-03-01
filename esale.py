@@ -136,12 +136,12 @@ class eSaleAccountTaxRule(ModelSQL, ModelView, MatchMixin):
             self.subdivision = None
 
     @classmethod
-    def compute(cls, country, subdivision, zip, pattern=None):
+    def compute(cls, country, subdivision=None, zip=None, pattern=None):
         'Compute esale account tax rule based on party address'
-        etax_rules = cls.search([
-            ('country', '=', country),
-            ('subdivision', '=', subdivision),
-            ])
+        domain = [('country', '=', country)]
+        if subdivision:
+            domain.append(('subdivision', '=', subdivision))
+        etax_rules = cls.search(domain)
         if pattern is None:
             pattern = {}
 
