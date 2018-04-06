@@ -53,7 +53,7 @@ class Party:
         #  - VAT code
         #  - Party eSale Email
         #  - Party Email
-        party = None
+
         # search by VAT
         if shop.esale_get_party_by_vat and vat_code:
             parties = Party.search([
@@ -65,37 +65,38 @@ class Party:
                     ], limit=1)
             if parties:
                 party, = parties
+                return party
+
         # search by esale email
-        if not party:
+        if values.get('esale_email'):
             parties = Party.search([
                 ('esale_email', '=', values.get('esale_email')),
                 ], limit=1)
             if parties:
                 party, = parties
-        # search by mechanism email
-        if not party:
+                return party
+
+            # search by mechanism email
             mechanisms = ContactMechanism.search([
                 ('type', '=', 'email'),
                 ('value', '=', values.get('esale_email')),
                 ], limit=1)
             if mechanisms:
                 mechanism, = mechanisms
-                party = mechanism.party
+                return mechanism.party
 
         # not found, create
-        if not party:
-            party = Party()
-            for k, v in values.iteritems():
-                if k not in _ESALE_PARTY_EXCLUDE_FIELDS:
-                    setattr(party, k, v)
-            party.addresses = None
-            if vat_code:
-                identifier = Identifier()
-                identifier.code = vat_code
-                identifier.type = 'eu_vat' if is_vat else None
-                party.identifiers = [identifier]
-            party.save()
-
-            logger.info('Shop %s. Created party ID %s' % (
-                shop.name, party.id))
+        party = Party()
+        for k, v in values.iteritems():
+            if k not in _ESALE_PARTY_EXCLUDE_FIELDS:
+                setattr(party, k, v)
+        party.addresses = None
+        if vat_code:
+            identifier = Identifier()
+            identifier.code = vat_code
+            identifier.type = 'eu_vat' if is_vat else None
+            party.identifiers = [identifier]
+        party.save()
+        logger.info('Shop %s. Created party ID %s' % (
+            shop.name, party.id))
         return party

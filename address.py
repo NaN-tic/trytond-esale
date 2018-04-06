@@ -64,15 +64,15 @@ class Address:
                     'invoice': invoice,
                     })
         else:
-            address_contacts = []
+            cmechanisms = []
             if values.get('phone'):
-                address_contacts.append(
+                cmechanisms.append(
                     {'type': 'phone', 'value': values['phone']})
             if values.get('email'):
-                address_contacts.append(
+                cmechanisms.append(
                     {'type': 'email', 'value': values['email']})
             if values.get('fax'):
-                address_contacts.append(
+                cmechanisms.append(
                     {'type': 'fax', 'value': values['fax']})
 
             if 'phone' in values:
@@ -110,11 +110,16 @@ class Address:
             logger.info('Shop %s. Create address ID %s' % (
                 shop.name, address.id))
 
-            for contact in address_contacts:
-                ContactMechanism.create([{
-                    'party': party,
-                    'address': address,
-                    'type': contact['type'],
-                    'value': contact['value'],
-                    }])
+            contact_mechanisms = []
+            for contact in cmechanisms:
+                cmechanism = ContactMechanism()
+                cmechanism.party = party
+                cmechanism.address = address
+                cmechanism.type = contact['type']
+                cmechanism.value = contact['value']
+                cmechanism.on_change_value()
+                contact_mechanisms.append(cmechanism)
+            if contact_mechanisms:
+                ContactMechanism.create(
+                    [cm._save_values for cm in contact_mechanisms])
         return address
