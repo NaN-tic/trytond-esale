@@ -118,6 +118,10 @@ class Sale:
         if shop.esale_ext_reference:
             sale.reference = sale_values.get('reference_external')
 
+        # esale coupon code
+        if sale_values.get('coupon_code'):
+            sale.esale_coupon = sale_values['coupon_code']
+
         # Currency
         currencies = Currency.search([
                 ('code', '=', sale_values.get('currency')),
@@ -285,6 +289,7 @@ class Sale:
         # Create Sale
         with Transaction().set_context(
                 without_warning=True,
+                apply_discount_to_lines=False,
                 ):
             sale.save()
             logger.info('Shop %s. Saved sale %s' % (
@@ -412,6 +417,10 @@ class SaleLine:
                     line.unit_price = l['unit_price']
                     if hasattr(line, 'gross_unit_price'):
                         line.gross_unit_price = l['unit_price']
+                if l.get('discount_percent'):
+                    line.discount = l['discount_percent']
+                if l.get('gross_unit_price'):
+                    line.gross_unit_price = l['gross_unit_price']
                 if l.get('description'):
                     line.description = l['description']
                 if l.get('note'):

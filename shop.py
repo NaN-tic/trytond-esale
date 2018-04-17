@@ -70,6 +70,9 @@ class SaleShop:
             'required': Eval('esale_available', True),
         })
     esale_discount_tax_include = fields.Boolean('Discount Tax Include')
+    esale_discount_new_line = fields.Boolean('Discount New Line',
+        help='Install sale discount module in case you like add discount '
+            'in sale line')
     esale_surcharge_product = fields.Many2One('product.product',
         'Surcharge Product', domain=[
             ('salable', '=', True),
@@ -182,6 +185,10 @@ class SaleShop:
         config = Config(1)
         return (config.sale_discount_product and
             config.sale_discount_product.id or None)
+
+    @staticmethod
+    def default_esale_discount_new_line():
+        return True
 
     @staticmethod
     def default_esale_surcharge_product():
