@@ -12,12 +12,12 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                 <page string="Actions" id="actions">
                     <notebook>
                         <page string="Orders" id="orders" col="6">
-                            <button name="import_orders" string="Import Orders"/>
+                            <button name="import_orders"/>
                             <label name="esale_from_orders"/>
                             <field name="esale_from_orders"/>
                             <label name="esale_to_orders"/>
                             <field name="esale_to_orders"/><newline/>
-                            <button name="export_state" string="Export State"/>
+                            <button name="export_state"/>
                             <label name="esale_last_state_orders"/>
                             <field name="esale_last_state_orders"/>
                         </page>

@@ -35,5 +35,17 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="menu" ref="menu_esale_sale_export_csv"/>
             <field name="group" ref="group_esale"/>
         </record>
+
+        <!-- buttons -->
+        <record model="ir.model.button" id="import_orders_button">
+            <field name="name">import_orders</field>
+            <field name="string">Import Sales</field>
+            <field name="model" search="[('model', '=', 'sale.shop')]"/>
+        </record>
+        <record model="ir.model.button" id="export_state_button">
+            <field name="name">export_state</field>
+            <field name="string">Export State</field>
+            <field name="model" search="[('model', '=', 'sale.shop')]"/>
+        </record>
     </data>
 </tryton>

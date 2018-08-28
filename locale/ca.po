@@ -879,7 +879,7 @@ msgid "eSale - Export State"
 msgstr "eSale - Exporta estat"
 
 msgctxt "model:ir.cron,name:cron_esale_import_order"
-msgid "eSale - Import Orders"
+msgid "eSale - Import Sales"
 msgstr "eSale - Importa comandes"
 
 msgctxt "model:ir.ui.menu,name:menu_esale_account_tax_rule"
@@ -1063,7 +1063,7 @@ msgid "General"
 msgstr "General"
 
 msgctxt "view:sale.shop:"
-msgid "Import Orders"
+msgid "Import Sales"
 msgstr "Importa comandes"
 
 msgctxt "view:sale.shop:"
