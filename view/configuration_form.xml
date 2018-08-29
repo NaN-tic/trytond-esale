@@ -2,7 +2,7 @@
 <!-- This file is part esale module for Tryton.
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <data>
-    <xpath expr="/form/field[@name=&quot;sale_shipment_method&quot;]" position="after">
+    <xpath expr="/form/field[@name='sale_shipment_method']" position="after">
         <label name="sale_delivery_product"/>
         <field name="sale_delivery_product"/>
         <label name="sale_discount_product"/>
@@ -21,8 +21,6 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <field name="sale_payment_type"/>
         <label name="sale_payment_term"/>
         <field name="sale_payment_term"/>
-        <label name="sale_price_list"/>
-        <field name="sale_price_list"/>
         <label name="sale_currency"/>
         <field name="sale_currency"/>
     </xpath>

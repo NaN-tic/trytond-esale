@@ -84,7 +84,7 @@ class eSaleStatus(ModelSQL, ModelView):
 class eSaleSate(ModelSQL, ModelView):
     'eSale State'
     __name__ = 'esale.state'
-    _rec_name = 'state'
+    _rec_name = 'code'
     state = fields.Selection(SALE_STATES, 'Sale State', required=True)
     code = fields.Char('State APP Code', required=True,
         help='State APP code. Code state in your APP')
@@ -97,7 +97,6 @@ class eSaleSate(ModelSQL, ModelView):
 class eSaleAccountTaxRule(ModelSQL, ModelView, MatchMixin):
     'eSale Tax Rule'
     __name__ = 'esale.account.tax.rule'
-    _rec_name = 'customer_tax_rule'
     country = fields.Many2One('country.country', 'Country',
         required=True)
     subdivision = fields.Many2One("country.subdivision",
@@ -118,17 +117,19 @@ class eSaleAccountTaxRule(ModelSQL, ModelView, MatchMixin):
     @classmethod
     def __register__(cls, module_name):
         TableHandler = backend.get('TableHandler')
-        cursor = Transaction().cursor
-        table_h = TableHandler(cursor, cls, module_name)
+        table = TableHandler(cls, module_name)
 
-        if table_h.column_exist('start_zip'):
-            table_h.column_rename('start_zip', 'zip')
+        if table.column_exist('start_zip'):
+            table.column_rename('start_zip', 'zip')
 
         super(eSaleAccountTaxRule, cls).__register__(module_name)
 
     @staticmethod
     def default_sequence():
         return 1
+
+    def get_rec_name(self, name):
+        return self.customer_tax_rule.name
 
     @fields.depends('country', 'subdivision')
     def on_change_country(self):

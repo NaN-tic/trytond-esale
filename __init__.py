@@ -16,6 +16,7 @@ def register():
     Pool.register(
         carrier.Carrier,
         configuration.Configuration,
+        configuration.ConfigurationSaleEsale,
         party.Party,
         address.Address,
         shop.EsaleSaleExportCSVStart,
