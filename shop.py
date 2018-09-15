@@ -30,8 +30,7 @@ logger = logging.getLogger(__name__)
 DIGITS = config_.getint('product', 'price_decimal', default=4)
 
 
-class SaleShop:
-    __metaclass__ = PoolMeta
+class SaleShop(metaclass=PoolMeta):
     __name__ = 'sale.shop'
     esale_available = fields.Boolean('eSale Shop',
         states={

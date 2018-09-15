@@ -13,8 +13,7 @@ logger = logging.getLogger(__name__)
 _ESALE_PARTY_EXCLUDE_FIELDS = ['vat_country', 'vat_code']
 
 
-class Party:
-    __metaclass__ = PoolMeta
+class Party(metaclass=PoolMeta):
     __name__ = 'party.party'
     esale_email = fields.Char('E-Mail')
 
@@ -87,7 +86,7 @@ class Party:
 
         # not found, create
         party = Party()
-        for k, v in values.iteritems():
+        for k, v in values.items():
             if k not in _ESALE_PARTY_EXCLUDE_FIELDS:
                 setattr(party, k, v)
         party.addresses = None

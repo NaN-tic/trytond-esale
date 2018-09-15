@@ -9,8 +9,7 @@ __all__ = ['Address']
 logger = logging.getLogger(__name__)
 
 
-class Address:
-    __metaclass__ = PoolMeta
+class Address(metaclass=PoolMeta):
     __name__ = 'party.address'
 
     @classmethod

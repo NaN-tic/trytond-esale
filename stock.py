@@ -6,8 +6,7 @@ from trytond.pool import PoolMeta
 __all__ = ['ShipmentOut']
 
 
-class ShipmentOut:
-    __metaclass__ = PoolMeta
+class ShipmentOut(metaclass=PoolMeta):
     __name__ = 'stock.shipment.out'
 
     def get_cost_invoice_line(self, invoice):

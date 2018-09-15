@@ -16,8 +16,7 @@ __all__ = ['Template', 'Product']
 logger = logging.getLogger(__name__)
 
 
-class Template:
-    __metaclass__ = PoolMeta
+class Template(metaclass=PoolMeta):
     __name__ = 'product.template'
     esale_available = fields.Boolean('eSale',
         states={
@@ -111,8 +110,8 @@ class Template:
                     product_prices[product] = sale_prices[product]
 
                 prices_sorted = {}
-                for key, value in sorted(product_prices.iteritems(),
-                        key=lambda (k, v): (v, k)):
+                for key, value in sorted(product_prices.items(),
+                        key=lambda kv: (kv[1], kv[0])):
                     prices_sorted[key] = value
 
                 # get cheaper price
@@ -295,8 +294,7 @@ class Template:
         return tvals
 
 
-class Product:
-    __metaclass__ = PoolMeta
+class Product(metaclass=PoolMeta):
     __name__ = 'product.product'
     esale_quantity = fields.Function(fields.Float('eSale Quantity'),
         'get_esale_quantity')

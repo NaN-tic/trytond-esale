@@ -10,8 +10,7 @@ __all__ = ['Carrier']
 DIGITS = config_.getint('product', 'price_decimal', default=4)
 
 
-class Carrier:
-    __metaclass__ = PoolMeta
+class Carrier(metaclass=PoolMeta):
     __name__ = 'carrier'
 
     def get_sale_price_w_tax(self, price=Decimal('0.0'), party=None):

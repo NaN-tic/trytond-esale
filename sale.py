@@ -20,8 +20,7 @@ _ESALE_SALE_EXCLUDE_FIELDS = ['shipping_price', 'shipping_note', 'discount',
     'currency', 'payment']
 
 
-class Sale:
-    __metaclass__ = PoolMeta
+class Sale(metaclass=PoolMeta):
     __name__ = 'sale.sale'
     esale = fields.Boolean('eSale',
         states={
@@ -108,7 +107,7 @@ class Sale:
         party = Party.esale_create_party(shop, party_values)
 
         sale = Sale.get_sale_data(party)
-        for k, v in sale_values.iteritems():
+        for k, v in sale_values.items():
             if k not in _ESALE_SALE_EXCLUDE_FIELDS:
                 setattr(sale, k, v)
         sale.shop = shop # force shop; not user context
@@ -381,8 +380,7 @@ class Sale:
         return vals
 
 
-class SaleLine:
-    __metaclass__ = PoolMeta
+class SaleLine(metaclass=PoolMeta):
     __name__ = 'sale.line'
 
     @classmethod

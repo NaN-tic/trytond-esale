@@ -47,8 +47,7 @@ sale_warehouse = fields.Many2One('stock.location',
     ])
 
 
-class Configuration:
-    __metaclass__ = PoolMeta
+class Configuration(metaclass=PoolMeta):
     __name__ = 'sale.configuration'
     sale_delivery_product = fields.MultiValue(sale_delivery_product)
     sale_discount_product = fields.MultiValue(sale_discount_product)
