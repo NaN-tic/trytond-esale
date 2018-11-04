@@ -341,11 +341,33 @@ class SaleShop(metaclass=PoolMeta):
     @classmethod
     def esale_price_w_taxes(cls, product, price, quantity=1):
         'Get total price with taxes'
-        Tax = Pool().get('account.tax')
+        pool = Pool()
+        Tax = pool.get('account.tax')
+        Party = pool.get('party.party')
 
         # compute price with taxes
-        customer_taxes = product.template.customer_taxes_used
+        product_customer_taxes = product.template.customer_taxes_used
+        customer = Transaction().context.get('customer', None)
+        customer = Party(customer) if customer else None
+
+        party_taxes = []
+        pattern = {}
+        for tax in product_customer_taxes:
+            if customer and customer.customer_tax_rule:
+                tax_ids = customer.customer_tax_rule.apply(tax, pattern)
+                if tax_ids:
+                    party_taxes.extend(tax_ids)
+                continue
+            party_taxes.append(tax.id)
+        if customer and customer.customer_tax_rule:
+            tax_ids = customer.customer_tax_rule.apply(None, pattern)
+            if tax_ids:
+                party_taxes.extend(tax_ids)
+        customer_taxes = Tax.browse(party_taxes) if party_taxes else []
+        if not customer_taxes:
+            customer_taxes = product_customer_taxes
         taxes = Tax.compute(customer_taxes, price, quantity)
+
         tax_amount = 0
         for tax in taxes:
             tax_amount += tax['amount']
