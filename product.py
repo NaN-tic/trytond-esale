@@ -66,8 +66,8 @@ class Template:
         return super(Template, cls).view_attributes() + [
             ('//page[@id="esale"]', 'states', {
                     'invisible': Or(Not(Bool(Eval('salable', False))),
-                        Not(Bool(Eval('groups', []).contains(
-                            Id('esale', 'group_esale'))))),
+                        ~Eval('context', {}).get('groups', []).contains(
+                                Id('esale', 'group_esale'))),
                     }),
             ('//page[@id="esale"]/notebook/page[@id="general"]', 'states', {
                     'invisible': Not(Bool(Eval('esale_available'))),
