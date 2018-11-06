@@ -325,7 +325,7 @@ class Sale:
     def set_shipment_cost(self):
         # not set shipment cost when sale is generated from eSale
         if self.esale:
-            return
+            return []
         return super(Sale, self).set_shipment_cost()
 
     def get_shipment_cost_line(self, cost):
