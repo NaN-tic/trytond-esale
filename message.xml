@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data group="1">
+      <record model="ir.message" id="orders_not_import">
+          <field name="text">There are not orders to import</field>
+      </record>
+      <record model="ir.message" id="orders_not_export">
+          <field name="text">There are not orders to export</field>
+      </record>
+      <record model="ir.message" id="not_shop_user">
+          <field name="text">Shop "%(shop)s" is not available in user preferences.</field>
+      </record>
+    </data>
+</tryton>

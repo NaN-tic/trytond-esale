@@ -15,6 +15,8 @@ import datetime
 import time
 import logging
 import unicodecsv
+from trytond.i18n import gettext
+from trytond.exceptions import UserError
 
 try:
     import pytz
@@ -144,11 +146,6 @@ class SaleShop(metaclass=PoolMeta):
     @classmethod
     def __setup__(cls):
         super(SaleShop, cls).__setup__()
-        cls._error_messages.update({
-            'orders_not_import': 'There are not orders to import',
-            'orders_not_export': 'There are not orders to export',
-            'not_shop_user': 'Shop "%s" is not available in user preferences.',
-        })
         cls._buttons.update({
                 'import_orders': {},
                 'export_state': {},
@@ -330,13 +327,13 @@ class SaleShop(metaclass=PoolMeta):
         """Import Orders whitout app don't available
         :param shop: Obj
         """
-        self.raise_user_error('orders_not_import')
+        raise UserError(gettext('esale.orders_not_import'))
 
     def export_state_(self, shop):
         """Export State Sale whitout app don't available
         :param shop: Obj
         """
-        self.raise_user_error('orders_not_export')
+        raise UserError(gettext('esale.orders_not_export'))
 
     @classmethod
     def esale_price_w_taxes(cls, product, price, quantity=1):
