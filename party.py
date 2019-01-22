@@ -7,7 +7,7 @@ from trytond.pyson import Eval
 import stdnum.eu.vat as vat
 import logging
 
-__all__ = ['Party']
+__all__ = ['Party', 'PartyReplace']
 
 logger = logging.getLogger(__name__)
 _ESALE_PARTY_EXCLUDE_FIELDS = ['vat_country', 'vat_code']
@@ -99,3 +99,13 @@ class Party(metaclass=PoolMeta):
         logger.info('Shop %s. Created party ID %s' % (
             shop.name, party.id))
         return party
+
+
+class PartyReplace(metaclass=PoolMeta):
+    __name__ = 'party.replace'
+
+    @classmethod
+    def fields_to_replace(cls):
+        return super(PartyReplace, cls).fields_to_replace() + [
+            ('sale.shop', 'esale_price_party'),
+            ]
