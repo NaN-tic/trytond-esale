@@ -439,5 +439,10 @@ class SaleLine(metaclass=PoolMeta):
                     line.note = l['note']
                 if l.get('sequence'):
                     line.sequence = l['sequence']
+                if l.get('discount_amount'):
+                    line.discount_amount = l['discount_amount']
+                if hasattr(line, 'gross_unit_price_wo_round'):
+                    line.update_prices()
+                line.amount = line.on_change_with_amount()
                 lines.append(line)
         return lines
