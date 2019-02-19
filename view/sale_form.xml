@@ -23,6 +23,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                 <field name="external_total_amount"/>
                 <label name="external_shipment_amount"/>
                 <field name="external_shipment_amount"/>
+                <label name="external_discount"/>
+                <field name="external_discount"/>
             </group>
             <separator name="status_history" colspan="6"/>
             <label name="status"/>
