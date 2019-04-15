@@ -7,7 +7,6 @@ from trytond.transaction import Transaction
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import And, Eval, Not, Bool
 from trytond.config import config as config_
-from trytond.modules.product_esale.tools import slugify
 from io import BytesIO
 from decimal import Decimal
 from simpleeval import simple_eval
@@ -17,6 +16,7 @@ import logging
 import unicodecsv
 from trytond.i18n import gettext
 from trytond.exceptions import UserError
+import slug
 
 try:
     import pytz
@@ -30,6 +30,11 @@ __all__ = ['SaleShop', 'SaleShopWarehouse', 'SaleShopCountry', 'SaleShopLang',
 
 logger = logging.getLogger(__name__)
 DIGITS = config_.getint('product', 'price_decimal', default=4)
+
+
+def slugify(value):
+    """Convert value to slug: az09 and replace spaces by -"""
+    return slug.slug(value)
 
 
 class SaleShop(metaclass=PoolMeta):

@@ -10,7 +10,7 @@ from trytond.transaction import Transaction
 from trytond.config import config as config_
 import logging
 
-__all__ = ['Sale', 'SaleLine']
+__all__ = ['Sale', 'SaleLine', 'Cron']
 
 DIGITS = config_.getint('product', 'price_decimal', default=4)
 PRECISION = Decimal(str(10.0 ** - DIGITS))
@@ -18,6 +18,18 @@ logger = logging.getLogger(__name__)
 _ESALE_SALE_EXCLUDE_FIELDS = ['shipping_price', 'shipping_note', 'discount',
     'discount_description', 'coupon_code', 'coupon_description', 'carrier',
     'currency', 'payment']
+
+
+class Cron(metaclass=PoolMeta):
+    __name__ = 'ir.cron'
+
+    @classmethod
+    def __setup__(cls):
+        super(Cron, cls).__setup__()
+        cls.method.selection.extend([
+            ('sale.shop|import_cron_orders', "eSale - Import Sales"),
+            ('sale.shop|export_cron_state', "eSale - Export State"),
+        ])
 
 
 class Sale(metaclass=PoolMeta):

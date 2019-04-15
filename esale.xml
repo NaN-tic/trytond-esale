@@ -30,28 +30,16 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
 
         <!-- esale.cron -->
         <record model="ir.cron" id="cron_esale_import_order">
-            <field name="name">eSale - Import Sales</field>
-            <field name="request_user" ref="res.user_admin"/>
-            <field name="user" ref="user_esale"/>
             <field name="active" eval="True"/>
             <field name="interval_number">1</field>
             <field name="interval_type">days</field>
-            <field name="number_calls">-1</field>
-            <field name="repeat_missed" eval="False"/>
-            <field name="model">sale.shop</field>
-            <field name="function">import_cron_orders</field>
+            <field name="method">sale.shop|import_cron_orders</field>
         </record>
         <record model="ir.cron" id="cron_esale_export_state">
-            <field name="name">eSale - Export State</field>
-            <field name="request_user" ref="res.user_admin"/>
-            <field name="user" ref="user_esale"/>
             <field name="active" eval="True"/>
             <field name="interval_number">1</field>
             <field name="interval_type">days</field>
-            <field name="number_calls">-1</field>
-            <field name="repeat_missed" eval="False"/>
-            <field name="model">sale.shop</field>
-            <field name="function">export_cron_state</field>
+            <field name="method">sale.shop|export_cron_state</field>
         </record>
 
         <!-- views -->

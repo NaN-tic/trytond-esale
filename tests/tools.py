@@ -27,7 +27,7 @@ def sale_configuration():
     unit, = Uom.search([('name', '=', 'Unit')])
     warehouse, = Location.search([('type', '=', 'warehouse')])
     currency, = Currency.search([], limit=1)
-    account_expense, = Account.search([('kind', '=', 'expense')])
+    account_expense, = Account.search([('type.expense', '=', True)])
 
     # category
     category = Category()

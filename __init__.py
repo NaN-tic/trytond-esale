@@ -25,6 +25,7 @@ def register():
         shop.SaleShopWarehouse,
         shop.SaleShopCountry,
         shop.SaleShopLang,
+        sale.Cron,
         sale.Sale,
         sale.SaleLine,
         stock.ShipmentOut,
