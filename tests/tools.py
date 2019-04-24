@@ -147,7 +147,7 @@ def invoice_values():
         'city': 'Barcelona',
         'subdivision': '',
         'country': 'ES',
-        'phone': '0034890',
+        'phone': '+34 93 553 18 03',
         'email': 'email@domain.com',
         'fax': '',
         }
@@ -161,7 +161,7 @@ def shipment_values():
         'city': 'Barcelona',
         'subdivision': '',
         'country': 'ES',
-        'phone': '0034890',
+        'phone': '+34 93 553 18 03',
         'email': 'email@domain.com',
         'fax': '',
         }
