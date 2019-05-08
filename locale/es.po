@@ -518,10 +518,6 @@ msgctxt "field:sale.shop,esale_price:"
 msgid "Price"
 msgstr "Precio"
 
-msgctxt "field:sale.shop,esale_price_party:"
-msgid "Party"
-msgstr "Tercero"
-
 msgctxt "field:sale.shop,esale_scheduler:"
 msgid "Scheduler"
 msgstr "Planificador de tareas"
@@ -794,10 +790,6 @@ msgstr ""
 msgctxt "help:sale.shop,esale_last_state_orders:"
 msgid "This date is last export (filter)"
 msgstr "Esta es la fecha de la última exportación (filtro)."
-
-msgctxt "help:sale.shop,esale_price_party:"
-msgid "Select a party to compute a price from price list."
-msgstr "Selecciona un tercero para calcular el precio desde una tarifa"
 
 msgctxt "help:sale.shop,esale_scheduler:"
 msgid "Active by crons (import/export)"

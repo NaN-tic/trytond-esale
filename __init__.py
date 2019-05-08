@@ -38,6 +38,5 @@ def register():
         product.Product,
         module='esale', type_='model')
     Pool.register(
-        party.PartyReplace,
         shop.EsaleSaleExportCSV,
         module='esale', type_='wizard')
