@@ -113,9 +113,8 @@ class Template(metaclass=PoolMeta):
                 for key, value in sorted(product_prices.items(),
                         key=lambda kv: (kv[1], kv[0])):
                     prices_sorted[key] = value
-
-                # get cheaper price
-                prices[template.id] = prices_sorted.values()[0]
+                prices_values = [p for p in prices_sorted.values()]
+                prices[template.id] = prices_values[0] if prices_values else None
             return {n: {t.id: prices[t.id] for t in templates} for n in names}
 
         def price_with_tax(result):
