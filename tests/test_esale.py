@@ -83,8 +83,4 @@ def suite():
     suite = trytond.tests.test_tryton.suite()
     suite.addTests(unittest.TestLoader().loadTestsFromTestCase(
         EsaleTestCase))
-    suite.addTests(doctest.DocFileSuite('scenario_party_replace.rst',
-            tearDown=doctest_teardown, encoding='utf-8',
-            optionflags=doctest.REPORT_ONLY_FIRST_FAILURE,
-            checker=doctest_checker))
     return suite

@@ -140,7 +140,6 @@ class Template(metaclass=PoolMeta):
 
         context = Transaction().context
         if shop.esale_price == 'pricelist':
-            customer = shop.esale_price_party.id
             price_list = shop.price_list.id
 
             if context.get('customer'):
@@ -149,7 +148,6 @@ class Template(metaclass=PoolMeta):
                 if party.sale_price_list:
                     price_list = party.sale_price_list.id
 
-            context['customer'] = customer
             context['price_list'] = price_list
 
         with Transaction().set_context(context):
