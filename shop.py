@@ -5,7 +5,7 @@ from trytond.model import ModelView, ModelSQL, fields
 from trytond.wizard import Wizard, StateTransition, StateView, Button
 from trytond.transaction import Transaction
 from trytond.pool import Pool, PoolMeta
-from trytond.pyson import And, Eval, Not, Bool
+from trytond.pyson import Eval, Not, Bool
 from trytond.config import config as config_
 from io import BytesIO
 from decimal import Decimal
@@ -119,11 +119,6 @@ class SaleShop(metaclass=PoolMeta):
         states={
             'required': Eval('esale_available', True),
         },)
-    esale_price_party = fields.Many2One('party.party', 'Party',
-        states={
-            'required': And(Eval('esale_price') == 'pricelist',
-                Eval('esale_available', True)),
-        }, help='Select a party to compute a price from price list.')
     esale_from_orders = fields.DateTime('From Orders',
         help='This date is last import (filter)')
     esale_to_orders = fields.DateTime('To Orders',
