@@ -31,13 +31,13 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <!-- esale.cron -->
         <record model="ir.cron" id="cron_esale_import_order">
             <field name="active" eval="True"/>
-            <field name="interval_number">1</field>
+            <field name="interval_number" eval="1"/>
             <field name="interval_type">days</field>
             <field name="method">sale.shop|import_cron_orders</field>
         </record>
         <record model="ir.cron" id="cron_esale_export_state">
             <field name="active" eval="True"/>
-            <field name="interval_number">1</field>
+            <field name="interval_number" eval="1"/>
             <field name="interval_type">days</field>
             <field name="method">sale.shop|export_cron_state</field>
         </record>
