@@ -34,7 +34,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="request_user" ref="res.user_admin"/>
             <field name="user" ref="user_esale"/>
             <field name="active" eval="True"/>
-            <field name="interval_number">1</field>
+            <field name="interval_number" eval="1"/>
             <field name="interval_type">days</field>
             <field name="number_calls">-1</field>
             <field name="repeat_missed" eval="False"/>
@@ -46,7 +46,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="request_user" ref="res.user_admin"/>
             <field name="user" ref="user_esale"/>
             <field name="active" eval="True"/>
-            <field name="interval_number">1</field>
+            <field name="interval_number" eval="1"/>
             <field name="interval_type">days</field>
             <field name="number_calls">-1</field>
             <field name="repeat_missed" eval="False"/>
