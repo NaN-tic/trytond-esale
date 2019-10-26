@@ -146,8 +146,10 @@ class eSaleAccountTaxRule(ModelSQL, ModelView, MatchMixin):
 
         pattern = pattern.copy()
         pattern['country'] = country and country.id or None
-        pattern['subdivision'] = subdivision and subdivision.id or None
-        pattern['zip'] = zip
+        if subdivision:
+            pattern['subdivision'] = subdivision.id
+        if zip:
+            pattern['zip'] = zip
 
         for etax_rule in etax_rules:
             if etax_rule.match(pattern):
