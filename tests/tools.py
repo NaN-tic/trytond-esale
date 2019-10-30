@@ -43,13 +43,11 @@ def sale_configuration():
         ts.name = ptype.title()
         ts.type = 'service'
         ts.salable = True
-        ts.category = category
         ts.list_price = Decimal('0.0')
         ts.cost_price = Decimal('0.0')
         ts.default_uom = unit
         ts.sale_uom = unit
         ts.account_category = True
-        ts.taxes_category = True
         ps = Product()
         ps.code = ptype[:3].upper()
         ts.products = [ps]
