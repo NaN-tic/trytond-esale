@@ -113,7 +113,6 @@ class Address(metaclass=PoolMeta):
             for contact in cmechanisms:
                 cmechanism = ContactMechanism()
                 cmechanism.party = party
-                cmechanism.address = address
                 cmechanism.type = contact['type']
                 cmechanism.value = contact['value']
                 cmechanism.on_change_value()
