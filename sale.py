@@ -62,9 +62,7 @@ class Sale(metaclass=PoolMeta):
 
     @classmethod
     def __register__(cls, module_name):
-        TableHandler = backend.get('TableHandler')
-
-        table = TableHandler(cls, module_name)
+        table = backend.TableHandler(cls, module_name)
 
         # Migration from 3.8: rename reference_external into number_external
         if (table.column_exist('reference_external')
