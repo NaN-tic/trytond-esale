@@ -343,6 +343,10 @@ class Product:
                 for p in products if p.id in qties]
 
     @classmethod
+    def get_locations(cls):
+        return []
+
+    @classmethod
     def get_esale_quantity(cls, products, name):
         Date = Pool().get('ir.date')
 
@@ -350,18 +354,19 @@ class Product:
         context = transaction.context
         shop_id = context.get('shop', None)
 
-        locations = []
-        if shop_id:
-            shop = Pool().get('sale.shop')(shop_id)
+        locations = cls.get_locations()
+        if not locations:
+            if shop_id:
+                shop = Pool().get('sale.shop')(shop_id)
 
-            # storage and input location in warehouse
-            if shop.warehouses:
-                for w in shop.warehouses:
-                    locations.append(w.storage_location.id)
-                    locations.append(w.input_location.id)
-            elif shop.warehouse:
-                locations.append(shop.warehouse.storage_location.id)
-                locations.append(shop.warehouse.input_location.id)
+                # storage and input location in warehouse
+                if shop.warehouses:
+                    for w in shop.warehouses:
+                        locations.append(w.storage_location.id)
+                        locations.append(w.input_location.id)
+                elif shop.warehouse:
+                    locations.append(shop.warehouse.storage_location.id)
+                    locations.append(shop.warehouse.input_location.id)
         context['locations'] = locations
 
         if name[6:] == 'forecast_quantity':
