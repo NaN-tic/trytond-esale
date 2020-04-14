@@ -343,7 +343,7 @@ class Product:
                 for p in products if p.id in qties]
 
     @classmethod
-    def get_locations(cls):
+    def get_stock_locations(cls):
         return []
 
     @classmethod
@@ -354,7 +354,7 @@ class Product:
         context = transaction.context
         shop_id = context.get('shop', None)
 
-        locations = cls.get_locations()
+        locations = cls.get_stock_locations()
         if not locations:
             if shop_id:
                 shop = Pool().get('sale.shop')(shop_id)
