@@ -1089,8 +1089,12 @@ msgid "Export eSale sales to CSV file."
 msgstr "Exporta les vendes eSale a fitxer CSV."
 
 msgctxt "view:esale.sale.export.csv.start:"
-msgid "Note that this operation may take a few minutes."
-msgstr "Tingueu en compte que aquesta operació pot trigar uns minuts."
+msgid "Note that this operation may "
+msgstr "Tingueu en compte que aquesta operació pot "
+
+msgctxt "view:esale.sale.export.csv.start:"
+msgid "take a few minutes."
+msgstr "trigar uns minuts."
 
 msgctxt "view:esale.state:"
 msgid "Message"
