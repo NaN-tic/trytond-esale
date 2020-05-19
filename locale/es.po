@@ -1087,8 +1087,12 @@ msgid "Export eSale sales to CSV file."
 msgstr "Exportar eSale ventas a fichero CSV"
 
 msgctxt "view:esale.sale.export.csv.start:"
-msgid "Note that this operation may take a few minutes."
-msgstr "Tenga en cuenta que esta operación puede tardar unos minutos."
+msgid "Note that this operation may "
+msgstr "Tenga en cuenta que esta operación puede "
+
+msgctxt "view:esale.sale.export.csv.start:"
+msgid "take a few minutes."
+msgstr "tardar unos minutos."
 
 msgctxt "view:esale.state:"
 msgid "Message"
