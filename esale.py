@@ -2,19 +2,13 @@
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
 from trytond.model import fields, ModelSQL, ModelView, MatchMixin
+from trytond.pool import Pool
 from trytond.pyson import Eval
 from trytond.transaction import Transaction
 from trytond import backend
 
 __all__ = ['eSaleCarrier', 'eSalePayment', 'eSaleStatus', 'eSaleSate',
     'eSaleAccountTaxRule']
-
-SALE_STATES = [
-    ('paid', 'Paid'),
-    ('shipment', 'Delivery'),
-    ('paid-shipment', 'Paid/Delivery'),
-    ('cancel', 'Cancel'),
-    ]
 
 
 class eSaleCarrier(ModelSQL, ModelView):
@@ -85,13 +79,28 @@ class eSaleSate(ModelSQL, ModelView):
     'eSale State'
     __name__ = 'esale.state'
     _rec_name = 'state'
-    state = fields.Selection(SALE_STATES, 'Sale State', required=True)
+    state = fields.Selection([], 'Sale State', required=True)
     code = fields.Char('State APP Code', required=True,
         help='State APP code. Code state in your APP')
     notify = fields.Boolean('Notify',
         help='Active APP notification customer')
     shop = fields.Many2One('sale.shop', 'Sale Shop', required=True)
     message = fields.Text('Message', translate=True)
+    cancel = fields.Boolean('Cancel')
+
+    @classmethod
+    def __setup__(cls):
+        Sale = Pool().get('sale.sale')
+        super(eSaleSate, cls).__setup__()
+        states = Sale.state.selection
+        for state in [
+                    ('paid', 'Paid'),
+                    ('shipment', 'Delivery'),
+                    ('paid-shipment', 'Paid/Delivery'),
+                    ]:
+            if state not in states:
+                states.append(state)
+        cls.state.selection = states
 
 
 class eSaleAccountTaxRule(ModelSQL, ModelView, MatchMixin):
