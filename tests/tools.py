@@ -47,9 +47,9 @@ def sale_configuration():
         ts.cost_price = Decimal('0.0')
         ts.default_uom = unit
         ts.sale_uom = unit
-        ts.account_category = True
+        ts.account_category = category
         ps = Product()
-        ps.code = ptype[:3].upper()
+        ps.suffix_code = ptype[:3].upper()
         ts.products = [ps]
         ts.save()
 
