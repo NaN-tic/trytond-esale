@@ -469,7 +469,7 @@ class EsaleSaleExportCSVResult(ModelView):
     'eSale Sale Export CSV Result'
     __name__ = 'esale.sale.export.csv.result'
     csv_file = fields.Binary('CSV', filename='file_name')
-    file_name = fields.Text('File Name')
+    file_name = fields.Char('File Name')
 
 
 class EsaleSaleExportCSV(Wizard):
