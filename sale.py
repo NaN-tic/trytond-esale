@@ -51,16 +51,6 @@ class Sale(metaclass=PoolMeta):
         'get_number_packages')
 
     @classmethod
-    def __setup__(cls):
-        super(Sale, cls).__setup__()
-        t = cls.__table__()
-        cls._sql_constraints.extend([
-            ('number_external_uniq', Unique(t, t.shop, t.number_external),
-             'There is another sale with the same number external.\n'
-             'The number external of the sale must be unique!')
-        ])
-
-    @classmethod
     def __register__(cls, module_name):
         TableHandler = backend.get('TableHandler')
 
@@ -69,9 +59,13 @@ class Sale(metaclass=PoolMeta):
         # Migration from 3.8: rename reference_external into number_external
         if (table.column_exist('reference_external')
                 and not table.column_exist('number_external')):
+            table.drop_constraint('reference_external_uniq')
             table.column_rename('reference_external', 'number_external')
 
         super(Sale, cls).__register__(module_name)
+
+        # Migration from 5.4: remove number_external_uniq
+        table.drop_constraint('number_external_uniq')
 
     @classmethod
     def copy(cls, sales, default=None):
