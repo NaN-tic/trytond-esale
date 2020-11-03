@@ -81,6 +81,20 @@ class Template(metaclass=PoolMeta):
         Shop = pool.get('sale.shop')
         Party = pool.get('party.party')
 
+        has_kit = hasattr(Product, 'kit')
+        if has_kit:
+            kit_products = set()
+            for template in templates:
+                for product in template.products:
+                    if not product.kit:
+                        continue
+
+                    kit_lines = list(product.kit_lines)
+                    while kit_lines:
+                        kit_line = kit_lines.pop(0)
+                        kit_products.add(kit_line.product.template)
+            templates = list(set(templates + list(kit_products)))
+
         def template_list_price():
             return {n: {t.id: t.list_price for t in templates} for n in names}
 
@@ -155,6 +169,22 @@ class Template(metaclass=PoolMeta):
 
             if shop.esale_tax_include:
                 result = price_with_tax(result)
+
+            if has_kit:
+                for name in names:
+                    for template in templates:
+                        product_kits = [product for product in template.products
+                            if product.kit and not product.kit_fixed_list_price]
+                        if not product_kits:
+                            continue
+                        # get first product has kit
+                        product = product_kits[0]
+                        kit_lines = list(product.kit_lines)
+                        while kit_lines:
+                            kit_line = kit_lines.pop(0)
+                            result[name][template.id] += result[name][
+                                    kit_line.product.template.id]
+
             return result
 
     @classmethod
