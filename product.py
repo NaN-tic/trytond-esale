@@ -182,8 +182,8 @@ class Template(metaclass=PoolMeta):
                         kit_lines = list(product.kit_lines)
                         while kit_lines:
                             kit_line = kit_lines.pop(0)
-                            result[name][template.id] += result[name][
-                                    kit_line.product.template.id]
+                            price = result[name][kit_line.product.template.id]
+                            result[name][template.id] += (price * Decimal(kit_line.quantity))
 
             return result
 
