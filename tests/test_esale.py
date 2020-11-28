@@ -62,12 +62,13 @@ class EsaleTestCase(ModuleTestCase):
             user.shop = shop
             user.save()
 
-            Sale.create_external_order(shop,
-                sale_values=sale_values(number='S0001'),
-                lines_values=[lines_values(code='P0001')],
-                party_values=party_values(),
-                invoice_values=invoice_values(),
-                shipment_values=shipment_values())
+            with Transaction().set_context(shops=[shop.id], shop=shop.id):
+                Sale.create_external_order(shop,
+                    sale_values=sale_values(number='S0001'),
+                    lines_values=[lines_values(code='P0001')],
+                    party_values=party_values(),
+                    invoice_values=invoice_values(),
+                    shipment_values=shipment_values())
 
             sale, = Sale.search([('number', '=', 'S0001')], limit=1)
             self.assertEqual(sale.number, 'S0001')
