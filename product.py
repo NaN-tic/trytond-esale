@@ -277,13 +277,22 @@ class Template(metaclass=PoolMeta):
                 crosssells.append(template.id)
         return crosssells
 
-    def sum_esale_product(self, name):
-        if name not in ('esale_quantity', 'esale_forecast_quantity'):
-            raise Exception('Bad argument')
-        sum_ = 0.
-        for product in self.products:
-            sum_ += getattr(product, name)
-        return sum_
+    @classmethod
+    def sum_esale_product(self, templates, names):
+        Product = Pool().get('product.product')
+
+        res = {n: {t.id: 0. for t in templates} for n in names}
+
+        products = []
+        for template in templates:
+            products += list(template.products)
+
+        for name in names:
+            qties = Product.get_esale_quantity(products, name)
+            for product in products:
+                res[name][product.template.id] += qties[product.id]
+
+        return res
 
     @classmethod
     def create_esale_product(cls, shop, vals):
