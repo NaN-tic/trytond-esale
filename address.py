@@ -4,8 +4,6 @@
 from trytond.pool import Pool, PoolMeta
 import logging
 
-__all__ = ['Address']
-
 logger = logging.getLogger(__name__)
 
 

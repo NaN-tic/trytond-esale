@@ -25,12 +25,8 @@ except ImportError:
     TIMEZONES = []
 TIMEZONES += [(None, '')]
 
-__all__ = ['SaleShop', 'SaleShopWarehouse', 'SaleShopCountry', 'SaleShopLang',
-    'EsaleSaleExportCSVStart', 'EsaleSaleExportCSVResult', 'EsaleSaleExportCSV']
-
 logger = logging.getLogger(__name__)
 DIGITS = config_.getint('product', 'price_decimal', default=4)
-
 
 def slugify(value):
     """Convert value to slug: az09 and replace spaces by -"""

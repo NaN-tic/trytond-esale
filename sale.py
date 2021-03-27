@@ -3,14 +3,12 @@
 # the full copyright notices and license terms.
 from decimal import Decimal
 from trytond import backend
-from trytond.model import fields, Unique
+from trytond.model import fields
 from trytond.pyson import Eval
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 from trytond.config import config as config_
 import logging
-
-__all__ = ['Sale', 'SaleLine', 'Cron']
 
 DIGITS = config_.getint('product', 'price_decimal', default=4)
 PRECISION = Decimal(str(10.0 ** - DIGITS))

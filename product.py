@@ -11,8 +11,6 @@ from trytond.rpc import RPC
 from trytond.modules.product import price_digits
 import logging
 
-__all__ = ['Template', 'Product']
-
 logger = logging.getLogger(__name__)
 
 

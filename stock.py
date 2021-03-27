@@ -3,8 +3,6 @@
 # the full copyright notices and license terms.
 from trytond.pool import PoolMeta
 
-__all__ = ['ShipmentOut']
-
 
 class ShipmentOut(metaclass=PoolMeta):
     __name__ = 'stock.shipment.out'

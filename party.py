@@ -7,8 +7,6 @@ from trytond.pyson import Eval
 import stdnum.eu.vat as vat
 import logging
 
-__all__ = ['Party']
-
 logger = logging.getLogger(__name__)
 _ESALE_PARTY_EXCLUDE_FIELDS = ['vat_country', 'vat_code']
 

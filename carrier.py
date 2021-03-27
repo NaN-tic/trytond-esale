@@ -5,8 +5,6 @@ from decimal import Decimal
 from trytond.pool import Pool, PoolMeta
 from trytond.config import config as config_
 
-__all__ = ['Carrier']
-
 DIGITS = config_.getint('product', 'price_decimal', default=4)
 
 

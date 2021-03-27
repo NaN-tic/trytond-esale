@@ -4,11 +4,7 @@
 from trytond.model import fields, ModelSQL, ModelView, MatchMixin
 from trytond.pool import Pool
 from trytond.pyson import Eval
-from trytond.transaction import Transaction
 from trytond import backend
-
-__all__ = ['eSaleCarrier', 'eSalePayment', 'eSaleStatus', 'eSaleSate',
-    'eSaleAccountTaxRule']
 
 
 class eSaleCarrier(ModelSQL, ModelView):
