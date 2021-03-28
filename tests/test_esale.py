@@ -40,7 +40,8 @@ class EsaleTestCase(ModuleTestCase):
             product_price_list, = PriceList.search([], limit=1)
             warehouse, = Location.search([('type', '=', 'warehouse')], limit=1)
             currency, = Currency.search([], limit=1)
-            sequence, = Sequence.search([('code', '=', 'sale.sale')], limit=1)
+            sequence, = Sequence.search([('sequence_type.name', '=', 'Sale')],
+                limit=1)
 
             shop = Shop()
             shop.name = 'Shop test'
