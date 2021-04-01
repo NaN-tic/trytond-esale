@@ -40,11 +40,11 @@ class Address(metaclass=PoolMeta):
             del values['country']
 
         # Address
-        zip = values.get('zip')
+        postal_code = values.get('postal_code')
         addresses = Address.search([
             ('party', '=', party),
             ('street', '=', values.get('street')),
-            ('zip', '=', zip),
+            ('postal_code', '=', postal_code),
             ], limit=1)
         if addresses:
             address = addresses[0]
@@ -88,14 +88,14 @@ class Address(metaclass=PoolMeta):
             if type == 'delivery':
                 values['delivery'] = True
 
-            # calculate subdivision/city from zip+country
+            # calculate subdivision/city from postal_code+country
             # TODO support get subdivision from dict values
-            # At the moment, get subdivision from zip + country
+            # At the moment, get subdivision from postal_code + country
             if values.get('subdivision') == '':
                 del values['subdivision']
-            if values.get('zip') and values.get('country'):
+            if values.get('postal_code') and values.get('country'):
                 address = Address()
-                address.zip = values.get('zip')
+                address.postal_code = values.get('postal_code')
                 address.country = values.get('country')
 
             address, = Address.create([values])

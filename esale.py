@@ -107,7 +107,7 @@ class eSaleAccountTaxRule(ModelSQL, ModelView, MatchMixin):
     subdivision = fields.Many2One("country.subdivision",
             'Subdivision', domain=[('country', '=', Eval('country'))],
             depends=['country'])
-    zip = fields.Char('Zip')
+    postal_code = fields.Char('Postal Code')
     customer_tax_rule = fields.Many2One('account.tax.rule',
         'Customer Tax Rule', required=True)
     supplier_tax_rule = fields.Many2One('account.tax.rule',
@@ -126,7 +126,10 @@ class eSaleAccountTaxRule(ModelSQL, ModelView, MatchMixin):
         if table.column_exist('start_zip'):
             table.column_rename('start_zip', 'zip')
 
-        super(eSaleAccountTaxRule, cls).__register__(module_name)
+        # Migration from 5.8: rename country_zip to location
+        table.column_rename('zip', 'postal_code')
+
+        super().__register__(module_name)
 
     @staticmethod
     def default_sequence():
@@ -141,7 +144,7 @@ class eSaleAccountTaxRule(ModelSQL, ModelView, MatchMixin):
             self.subdivision = None
 
     @classmethod
-    def compute(cls, country, subdivision=None, zip=None, pattern=None):
+    def compute(cls, country, subdivision=None, postal_code=None, pattern=None):
         'Compute esale account tax rule based on party address'
         domain = [('country', '=', country)]
         etax_rules = cls.search(domain, order=[('sequence', 'ASC')])
@@ -152,8 +155,8 @@ class eSaleAccountTaxRule(ModelSQL, ModelView, MatchMixin):
         pattern['country'] = country and country.id or None
         if subdivision:
             pattern['subdivision'] = subdivision.id
-        if zip:
-            pattern['zip'] = zip
+        if postal_code:
+            pattern['postal_code'] = postal_code
 
         for etax_rule in etax_rules:
             if etax_rule.match(pattern):

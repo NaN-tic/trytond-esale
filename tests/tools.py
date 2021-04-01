@@ -141,7 +141,7 @@ def invoice_values():
     vals = {
         'name': 'Invoice Address',
         'street': 'Durruti',
-        'zip': '08000',
+        'postal_code': '08000',
         'city': 'Barcelona',
         'subdivision': '',
         'country': 'ES',
@@ -155,7 +155,7 @@ def shipment_values():
     vals = {
         'name': 'Delivery Address',
         'street': 'Ovidi Montllor',
-        'zip': '08000',
+        'postal_code': '08000',
         'city': 'Barcelona',
         'subdivision': '',
         'country': 'ES',

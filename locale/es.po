@@ -46,8 +46,8 @@ msgctxt "field:esale.account.tax.rule,write_uid:"
 msgid "Write User"
 msgstr "Usuario de modificación"
 
-msgctxt "field:esale.account.tax.rule,zip:"
-msgid "Zip"
+msgctxt "field:esale.account.tax.rule,postal_code:"
+msgid "Postal Code"
 msgstr "Código postal"
 
 msgctxt "field:esale.carrier,carrier:"

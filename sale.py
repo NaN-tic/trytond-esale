@@ -118,7 +118,8 @@ class Sale(metaclass=PoolMeta):
         # Create address
         invoice_address = None
         if not (invoice_values.get('street') == shipment_values.get('street')
-                and invoice_values.get('zip') == shipment_values.get('zip')):
+                and (invoice_values.get('postal_code') ==
+                    shipment_values.get('postal_code'))):
             invoice_address = Address.esale_create_address(shop, party,
                 invoice_values, type='invoice')
             shipment_address = Address.esale_create_address(shop, party,
