@@ -100,6 +100,10 @@ class Address(metaclass=PoolMeta):
                 address.zip = values.get('zip')
                 address.country = values.get('country')
 
+            if values.get('name') and not values.get('party_name'):
+                values['party_name'] = values['name']
+                del values['name']
+
             address, = Address.create([values])
             logger.info('Shop %s. Create address ID %s' % (
                 shop.name, address.id))
