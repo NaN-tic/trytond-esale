@@ -396,7 +396,7 @@ class SaleLine(metaclass=PoolMeta):
         '''
         pool = Pool()
         Product = pool.get('product.product')
-        ProductCode = pool.get('product.code')
+        ProductIdentifier = pool.get('product.identifier')
         Line = pool.get('sale.line')
 
         def default_create_product(shop, code):
@@ -412,8 +412,8 @@ class SaleLine(metaclass=PoolMeta):
             if products:
                 product, = products
             else:
-                product_codes = ProductCode.search([
-                        ('number', '=', code)
+                product_codes = ProductIdentifier.search([
+                        ('code', '=', code)
                         ], limit=1)
                 if product_codes:
                     product = product_codes[0].product
