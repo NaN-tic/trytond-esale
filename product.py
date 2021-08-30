@@ -351,7 +351,7 @@ class Product(metaclass=PoolMeta):
         '''
         pool = Pool()
         Product = pool.get('product.product')
-        ProductCode = pool.get('product.code')
+        ProductIdentifier = pool.get('product.identifier')
 
         products = []
         for code in codes:
@@ -362,8 +362,8 @@ class Product(metaclass=PoolMeta):
             if prods:
                 prod, = prods
             else:
-                product_codes = ProductCode.search([
-                        ('number', '=', code)
+                product_codes = ProductIdentifier.search([
+                        ('code', '=', code)
                         ], limit=1)
                 if product_codes:
                     prod = product_codes[0].product
