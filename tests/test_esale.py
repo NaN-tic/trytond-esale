@@ -12,9 +12,10 @@ from trytond.modules.company.tests import create_company, set_company
 from trytond.modules.account.tests import create_chart
 from trytond.modules.esale.tests.tools import sale_values, lines_values, \
     party_values, invoice_values, shipment_values
+from trytond.modules.company.tests import CompanyTestMixin
 
 
-class EsaleTestCase(ModuleTestCase):
+class EsaleTestCase(CompanyTestMixin, ModuleTestCase):
     'Test eSale module'
     module = 'esale'
 

@@ -63,14 +63,20 @@ class SaleShop(metaclass=PoolMeta):
             ('type', '=', 'service'),
         ], states={
             'required': Eval('esale_available', True),
-        })
+        },
+        context={
+            'company': Eval('company'),
+        }, depends=['company'])
     esale_discount_product = fields.Many2One('product.product',
         'Discount Product', domain=[
             ('salable', '=', True),
             ('type', '=', 'service'),
         ], states={
             'required': Eval('esale_available', True),
-        })
+        },
+        context={
+            'company': Eval('company'),
+        }, depends=['company'])
     esale_discount_tax_include = fields.Boolean('Discount Tax Include')
     esale_discount_new_line = fields.Boolean('Discount New Line',
         help='Install sale discount module in case you like add discount '
@@ -81,7 +87,10 @@ class SaleShop(metaclass=PoolMeta):
             ('type', '=', 'service'),
         ], states={
             'required': Eval('esale_available', True),
-        })
+        },
+        context={
+            'company': Eval('company'),
+        }, depends=['company'])
     esale_surcharge_tax_include = fields.Boolean('Surcharge Tax Include')
     esale_fee_product = fields.Many2One('product.product',
         'Fee Product', domain=[
@@ -89,7 +98,10 @@ class SaleShop(metaclass=PoolMeta):
             ('type', '=', 'service'),
         ], states={
             'required': Eval('esale_available', True),
-        })
+        },
+        context={
+            'company': Eval('company'),
+        }, depends=['company'])
     esale_fee_tax_include = fields.Boolean('Fee Tax Include')
     esale_explode_kit = fields.Boolean('Explode Kits',
         help='Explode kits when create sales (sale kit).')
@@ -98,9 +110,16 @@ class SaleShop(metaclass=PoolMeta):
             'required': Eval('esale_available', True),
         },)
     esale_account_category = fields.Many2One('product.category', 'Default Account Category',
-        domain=[('accounting', '=', True)], states={
+        domain=[
+            ('accounting', '=', True),
+        ],
+        states={
             'required': Eval('esale_available', True),
-        }, help='Default Category Product when create a new product. In this '
+        },
+        context={
+            'company': Eval('company'),
+        }, depends=['company'],
+        help='Default Category Product when create a new product. In this '
         'category, select an Account Revenue and an Account Expense',)
     esale_lang = fields.Many2One('ir.lang', 'Default language',
         states={
