@@ -3,14 +3,14 @@
 # the full copyright notices and license terms.
 from decimal import Decimal
 from trytond import backend
-from trytond.model import fields, Unique
+from trytond.model import fields
 from trytond.pyson import Eval
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 from trytond.config import config as config_
 import logging
 
-__all__ = ['Sale', 'SaleLine', 'Cron']
+__all__ = ['Sale']
 
 DIGITS = config_.getint('product', 'price_decimal', default=4)
 PRECISION = Decimal(str(10.0 ** - DIGITS))
@@ -20,18 +20,6 @@ _ESALE_SALE_EXCLUDE_FIELDS = ['shipping_price', 'shipping_note', 'discount',
     'currency', 'payment']
 
 
-class Cron(metaclass=PoolMeta):
-    __name__ = 'ir.cron'
-
-    @classmethod
-    def __setup__(cls):
-        super(Cron, cls).__setup__()
-        cls.method.selection.extend([
-            ('sale.shop|import_cron_orders', "eSale - Import Sales"),
-            ('sale.shop|export_cron_state', "eSale - Export State"),
-        ])
-
-
 class Sale(metaclass=PoolMeta):
     __name__ = 'sale.sale'
     esale = fields.Boolean('eSale',
@@ -39,12 +27,6 @@ class Sale(metaclass=PoolMeta):
             'readonly': Eval('state') != 'draft',
             },
         depends=['state'])
-    number_external = fields.Char('External Number', readonly=True,
-        select=True)
-    esale_coupon = fields.Char('eSale Coupon', readonly=True)
-    status = fields.Char('eSale Status', readonly=True,
-        help='Last status import/export to e-commerce APP')
-    status_history = fields.Text('eSale Status history', readonly=True)
     carrier_tracking_ref = fields.Function(fields.Char('Carrier Tracking Ref'),
         'get_carrier_tracking_ref')
     number_packages = fields.Function(fields.Integer('Number of Packages'),
@@ -133,13 +115,3 @@ class Sale(metaclass=PoolMeta):
         # Not check stock quantity (user warning) according the context
         if not Transaction().context.get('without_warning', False):
             super(Sale, cls)._check_stock_quantity(sales)
-
-    def esale_sale_export_csv(self):
-        vals = {}
-        if self.shop.esale_ext_reference:
-            number = self.reference_external or self.number
-        else:
-            number = self.number
-        vals['number'] = number
-        vals['state'] = self.state
-        return vals
