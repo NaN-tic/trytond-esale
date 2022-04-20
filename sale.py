@@ -33,28 +33,11 @@ class Sale(metaclass=PoolMeta):
         'get_number_packages')
 
     @classmethod
-    def __register__(cls, module_name):
-        TableHandler = backend.get('TableHandler')
-
-        table = TableHandler(cls, module_name)
-
-        # Migration from 3.8: rename reference_external into number_external
-        if (table.column_exist('reference_external')
-                and not table.column_exist('number_external')):
-            table.drop_constraint('reference_external_uniq')
-            table.column_rename('reference_external', 'number_external')
-
-        super(Sale, cls).__register__(module_name)
-
-        # Migration from 5.4: remove number_external_uniq
-        table.drop_constraint('number_external_uniq')
-
-    @classmethod
     def copy(cls, sales, default=None):
         if default is None:
             default = {}
         default = default.copy()
-        default['number_external'] = None
+        default['esale'] = False
         return super(Sale, cls).copy(sales, default=default)
 
     @classmethod
@@ -62,9 +45,6 @@ class Sale(metaclass=PoolMeta):
         return super(Sale, cls).view_attributes() + [
             ('//page[@id="esale"]', 'states', {
                     'invisible': ~Eval('esale'),
-                    }),
-            ('//page[@id="esale"]/group[@id="external_price"]', 'states', {
-                    'invisible': ~Eval('external_untaxed_amount'),
                     }),
             ]
 
