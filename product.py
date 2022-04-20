@@ -161,6 +161,8 @@ class Template(metaclass=PoolMeta):
                     price_list = party.sale_price_list.id
 
             context['price_list'] = price_list
+        if shop.currency:
+            context['currency'] = shop.currency.id
 
         with Transaction().set_context(context):
             result = pricelist()
