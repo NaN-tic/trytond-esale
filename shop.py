@@ -61,42 +61,6 @@ class SaleShop(metaclass=PoolMeta):
         help='Default country related in this shop.')
     esale_countrys = fields.Many2Many('sale.shop-country.country',
         'shop', 'country', 'Countries')
-    esale_delivery_product = fields.Many2One('product.product',
-        'Delivery Product', domain=[
-            ('salable', '=', True),
-            ('type', '=', 'service'),
-        ], states={
-            'required': Eval('esale_available', True),
-        })
-    esale_discount_product = fields.Many2One('product.product',
-        'Discount Product', domain=[
-            ('salable', '=', True),
-            ('type', '=', 'service'),
-        ], states={
-            'required': Eval('esale_available', True),
-        })
-    esale_discount_tax_include = fields.Boolean('Discount Tax Include')
-    esale_discount_new_line = fields.Boolean('Discount New Line',
-        help='Install sale discount module in case you like add discount '
-            'in sale line')
-    esale_surcharge_product = fields.Many2One('product.product',
-        'Surcharge Product', domain=[
-            ('salable', '=', True),
-            ('type', '=', 'service'),
-        ], states={
-            'required': Eval('esale_available', True),
-        })
-    esale_surcharge_tax_include = fields.Boolean('Surcharge Tax Include')
-    esale_fee_product = fields.Many2One('product.product',
-        'Fee Product', domain=[
-            ('salable', '=', True),
-            ('type', '=', 'service'),
-        ], states={
-            'required': Eval('esale_available', True),
-        })
-    esale_fee_tax_include = fields.Boolean('Fee Tax Include')
-    esale_explode_kit = fields.Boolean('Explode Kits',
-        help='Explode kits when create sales (sale kit).')
     esale_uom_product = fields.Many2One('product.uom', 'Default UOM',
         states={
             'required': Eval('esale_available', True),

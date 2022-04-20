@@ -5,7 +5,6 @@ from trytond.pool import Pool
 from . import configuration
 from . import esale
 from . import party
-from . import address
 from . import shop
 from . import sale
 from . import stock
@@ -18,7 +17,6 @@ def register():
         configuration.Configuration,
         configuration.ConfigurationSaleEsale,
         party.Party,
-        address.Address,
         shop.EsaleSaleExportCSVStart,
         shop.EsaleSaleExportCSVResult,
         shop.SaleShop,
@@ -27,7 +25,6 @@ def register():
         shop.SaleShopLang,
         sale.Cron,
         sale.Sale,
-        sale.SaleLine,
         stock.ShipmentOut,
         esale.eSaleCarrier,
         esale.eSalePayment,
