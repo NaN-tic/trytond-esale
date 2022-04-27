@@ -2,103 +2,39 @@
 <!-- This file is part esale module for Tryton.
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <data>
-    <xpath expr="/form/notebook/page[@id=&quot;general&quot;]" position="before">
-        <page string="eSale" col="4" id="esale">
-            <label name="esale_available"/>
-            <field name="esale_available"/>
-            <label name="esale_shop_app"/>
-            <field name="esale_shop_app"/>
-            <notebook>
-                <page string="Actions" id="actions">
-                    <notebook>
-                        <page string="Orders" id="orders" col="6">
-                            <button name="import_orders"/>
-                            <label name="esale_from_orders"/>
-                            <field name="esale_from_orders"/>
-                            <label name="esale_to_orders"/>
-                            <field name="esale_to_orders"/><newline/>
-                            <button name="export_state"/>
-                            <label name="esale_last_state_orders"/>
-                            <field name="esale_last_state_orders"/>
-                        </page>
-                    </notebook>
-                </page>
-                <page string="Configuration" id="configuration">
-                    <notebook>
-                    <page string="General" id="general">
-                        <label name="esale_ext_reference"/>
-                        <field name="esale_ext_reference"/>
-                        <label name="esale_tax_include"/>
-                        <field name="esale_tax_include"/>
-                        <label name="esale_get_party_by_vat"/>
-                        <field name="esale_get_party_by_vat"/>
-                        <label name="esale_delivery_product"/>
-                        <field name="esale_delivery_product"/>
-                        <label name="esale_discount_product"/>
-                        <field name="esale_discount_product"/>
-                        <label name="esale_discount_new_line"/>
-                        <field name="esale_discount_new_line"/>
-                        <label name="esale_discount_tax_include"/>
-                        <field name="esale_discount_tax_include"/>
-                        <label name="esale_surcharge_product"/>
-                        <field name="esale_surcharge_product"/>
-                        <label name="esale_surcharge_tax_include"/>
-                        <field name="esale_surcharge_tax_include"/>
-                        <label name="esale_fee_product"/>
-                        <field name="esale_fee_product"/>
-                        <label name="esale_fee_tax_include"/>
-                        <field name="esale_fee_tax_include"/>
-                        <label name="esale_explode_kit"/>
-                        <field name="esale_explode_kit"/>
-                        <label name="esale_uom_product"/>
-                        <field name="esale_uom_product"/>
-                        <label name="esale_account_category"/>
-                        <field name="esale_account_category"/>
-                        <label name="esale_price"/>
-                        <field name="esale_price"/>
-                        <label name="esale_scheduler"/>
-                        <field name="esale_scheduler"/>
-                        <label name="esale_user"/>
-                        <field name="esale_user"/>
-                        <label name="esale_timezone"/>
-                        <field name="esale_timezone"/>
-                        <label name="esale_import_delayed"/>
-                        <field name="esale_import_delayed"/>
-                        <label name="esale_import_states"/>
-                        <field name="esale_import_states"/>
-                        <label name="esale_export_sale_filename"/>
-                        <field name="esale_export_sale_filename"/>
-                    </page>
-                    <page string="Warehouses" id="warehouses">
-                        <field name="warehouses" colspan="4"/>
-                    </page>
-                    <page string="Countries" id="contries">
-                        <label name="esale_country"/>
-                        <field name="esale_country"/>
-                        <separator name="esale_countrys" colspan="4"/>
-                        <field name="esale_countrys" colspan="4"/>
-                    </page>
-                    <page string="Langs" id="langs" col="2">
-                        <label name="esale_lang"/>
-                        <field name="esale_lang"/>
-                        <separator name="esale_langs" colspan="2"/>
-                        <field name="esale_langs" colspan="2"/>
-                    </page>
-                    <page string="Carriers" id="carriers" col="2">
-                        <field name="esale_carriers"/>
-                    </page>
-                    <page string="Payments" id="payments" col="2">
-                        <field name="esale_payments"/>
-                    </page>
-                    <page string="In States" id="status" col="2">
-                        <field name="esale_status"/>
-                    </page>
-                    <page string="Out States" id="states" col="2">
-                        <field name="esale_states"/>
-                    </page>
-                    </notebook>
-                </page>
-            </notebook>
-        </page>
+    <xpath expr="/form/notebook/page[@id='general']" position="after">
+      <page string="eSale" col="4" id="esale">
+        <notebook>
+            <page string="General" id="general">
+              <label name="esale_available"/>
+              <field name="esale_available"/>
+              <label name="esale_tax_include"/>
+              <field name="esale_tax_include"/>
+              <label name="esale_price"/>
+              <field name="esale_price"/>
+            </page>
+            <page string="Warehouses" id="warehouses">
+              <field name="warehouses" colspan="4"/>
+            </page>
+            <page string="Countries" id="contries">
+              <label name="esale_country"/>
+              <field name="esale_country"/>
+              <separator name="esale_countrys" colspan="4"/>
+              <field name="esale_countrys" colspan="4"/>
+            </page>
+            <page string="Langs" id="langs" col="2">
+              <label name="esale_lang"/>
+              <field name="esale_lang"/>
+              <separator name="esale_langs" colspan="2"/>
+              <field name="esale_langs" colspan="2"/>
+            </page>
+            <page string="Carriers" id="carriers" col="2">
+              <field name="esale_carriers"/>
+            </page>
+            <page string="Payments" id="payments" col="2">
+              <field name="esale_payments"/>
+            </page>
+          </notebook>
+      </page>
     </xpath>
 </data>

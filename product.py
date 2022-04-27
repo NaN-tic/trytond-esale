@@ -294,39 +294,6 @@ class Template(metaclass=PoolMeta):
 
         return res
 
-    @classmethod
-    def create_esale_product(cls, shop, vals):
-        '''
-        Create a product from eSale dict values
-        :param shop: obj
-        :param vals: dict product values (template + products)
-        return obj
-        '''
-
-        # Default values
-        vals['default_uom'] = shop.esale_uom_product
-        vals['salable'] = True
-        vals['sale_uom'] = shop.esale_uom_product
-        vals['account_category'] = shop.esale_account_category
-
-        template, = cls.create([vals])
-        Transaction().commit()
-        product, = template.products
-
-        logger.info('Shop %s. Create product %s' % (
-            shop.name, product.rec_name))
-        return product
-
-    @staticmethod
-    def esale_template_values():
-        '''Default values Product Template'''
-        tvals = {}
-        tvals['esale_available'] = True
-        tvals['esale_active'] = True
-        tvals['salable'] = True
-        tvals['account_category'] = True
-        tvals['type'] = 'goods'
-        return tvals
 
 
 class Product(metaclass=PoolMeta):
@@ -408,8 +375,3 @@ class Product(metaclass=PoolMeta):
 
         with transaction.set_context(context):
             return cls.get_quantity(products, name[6:])
-
-    @staticmethod
-    def esale_product_values():
-        '''Default values Product Product'''
-        return {}
