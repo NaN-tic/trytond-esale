@@ -6,32 +6,4 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <label name="esale"/>
         <field name="esale"/>
     </xpath>
-    <xpath expr="/form/notebook/page[@id=&quot;other&quot;]" position="after">
-        <page string="eSale" col="6" id="esale">
-            <label name="number_external"/>
-            <field name="number_external"/>
-            <label name="esale_coupon"/>
-            <field name="esale_coupon"/>
-            <newline/>
-            <group col="4" colspan="6" id="external_price">
-                <separator string="External Prices" id="external_price" colspan="6"/>
-                <label name="external_untaxed_amount"/>
-                <field name="external_untaxed_amount"/>
-                <label name="external_tax_amount"/>
-                <field name="external_tax_amount"/>
-                <label name="external_total_amount"/>
-                <field name="external_total_amount"/>
-                <label name="external_shipment_amount"/>
-                <field name="external_shipment_amount"/>
-                <label name="external_discount"/>
-                <field name="external_discount"/>
-            </group>
-            <separator name="status_history" colspan="6"/>
-            <label name="status"/>
-            <field name="status"/>
-            <field name="status_history" colspan="6"/>
-        </page>
-    </xpath>
-    <xpath expr="/form/notebook/page[@id=&quot;other&quot;]/group[@id=&quot;external_price&quot;]" position="replace">
-    </xpath>
 </data>
