@@ -12,36 +12,6 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="group" ref="group_esale"/>
         </record>
 
-        <!-- esale.user -->
-        <record model="res.user" id="user_esale">
-            <field name="login">user_cron_internal_esale</field>
-            <field name="name">Cron eSale</field>
-            <field name="signature"></field>
-            <field name="active" eval="False"/>
-        </record>
-        <record model="res.user-res.group" id="user_esale_admin_group">
-            <field name="user" ref="user_esale"/>
-            <field name="group" ref="group_esale"/>
-        </record>
-        <record model="res.user-res.group" id="user_esale_sale_admin_group">
-            <field name="user" ref="user_esale"/>
-            <field name="group" ref="sale.group_sale_admin"/>
-        </record>
-
-        <!-- esale.cron -->
-        <record model="ir.cron" id="cron_esale_import_order">
-            <field name="active" eval="True"/>
-            <field name="interval_number" eval="1"/>
-            <field name="interval_type">days</field>
-            <field name="method">sale.shop|import_cron_orders</field>
-        </record>
-        <record model="ir.cron" id="cron_esale_export_state">
-            <field name="active" eval="True"/>
-            <field name="interval_number" eval="1"/>
-            <field name="interval_type">days</field>
-            <field name="method">sale.shop|export_cron_state</field>
-        </record>
-
         <!-- views -->
         <record model="ir.ui.view" id="esale_carrier_view_form">
             <field name="model">esale.carrier</field>
@@ -64,56 +34,5 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
             <field name="type">tree</field>
             <field name="name">esale_payment_tree</field>
         </record>
-
-        <record model="ir.ui.view" id="esale_status_view_form">
-            <field name="model">esale.status</field>
-            <field name="type">form</field>
-            <field name="name">esale_status_form</field>
-        </record>
-        <record model="ir.ui.view" id="esale_status_view_tree">
-            <field name="model">esale.status</field>
-            <field name="type">tree</field>
-            <field name="name">esale_status_tree</field>
-        </record>
-
-        <record model="ir.ui.view" id="esale_state_view_form">
-            <field name="model">esale.state</field>
-            <field name="type">form</field>
-            <field name="name">esale_state_form</field>
-        </record>
-        <record model="ir.ui.view" id="esale_state_view_tree">
-            <field name="model">esale.state</field>
-            <field name="type">tree</field>
-            <field name="name">esale_state_tree</field>
-        </record>
-
-        <!-- esale.account.tax.rule -->
-        <record model="ir.ui.view" id="esale_account_tax_rule_tree_view">
-            <field name="model">esale.account.tax.rule</field>
-            <field name="type">tree</field>
-            <field name="priority" eval="30"/>
-            <field name="name">esale_account_tax_rule_tree</field>
-        </record>
-        <record model="ir.ui.view" id="esale_account_tax_rule_form_view">
-            <field name="model">esale.account.tax.rule</field>
-            <field name="type">form</field>
-            <field name="priority" eval="30"/>
-            <field name="name">esale_account_tax_rule_form</field>
-        </record>
-        <record model="ir.action.act_window" id="act_esale_account_tax_rule">
-            <field name="name">eSale Account Tax Rule</field>
-            <field name="res_model">esale.account.tax.rule</field>
-        </record>
-        <record model="ir.action.act_window.view" id="act_esale_account_tax_rule_tree">
-            <field name="sequence" eval="10"/>
-            <field name="view" ref="esale_account_tax_rule_tree_view"/>
-            <field name="act_window" ref="act_esale_account_tax_rule"/>
-        </record>
-        <record model="ir.action.act_window.view" id="act_esale_account_tax_rule_form">
-            <field name="sequence" eval="20"/>
-            <field name="view" ref="esale_account_tax_rule_form_view"/>
-            <field name="act_window" ref="act_esale_account_tax_rule"/>
-        </record>
-        <menuitem parent="sale.menu_configuration" action="act_esale_account_tax_rule" id="menu_esale_account_tax_rule" sequence="10"/>
     </data>
 </tryton>
