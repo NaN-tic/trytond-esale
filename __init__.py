@@ -14,6 +14,7 @@ def register():
     Pool.register(
         carrier.Carrier,
         party.Party,
+        party.Address,
         shop.SaleShop,
         shop.SaleShopWarehouse,
         shop.SaleShopCountry,
