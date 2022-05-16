@@ -8,10 +8,10 @@ from trytond.tests.test_tryton import ModuleTestCase, with_transaction
 from trytond.pool import Pool
 from trytond.transaction import Transaction
 from trytond.modules.company.tests import create_company, set_company
-from trytond.modules.company.tests import CompanyTestMixin
+from trytond.modules.sale_shop.tests import SaleShopCompanyTestMixin
 
 
-class EsaleTestCase(CompanyTestMixin, ModuleTestCase):
+class EsaleTestCase(SaleShopCompanyTestMixin, ModuleTestCase):
     'Test eSale module'
     module = 'esale'
 
