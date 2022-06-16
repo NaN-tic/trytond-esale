@@ -15,7 +15,9 @@ class Carrier(metaclass=PoolMeta):
         '''
         Calculate price with taxes from carrier product
         '''
-        Tax = Pool().get('account.tax')
+        pool = Pool()
+        Tax = pool.get('account.tax')
+        Date = pool.get('ir.date')
 
         taxes = self.carrier_product.customer_taxes_used
 
@@ -27,7 +29,7 @@ class Carrier(metaclass=PoolMeta):
             if new_taxes:
                 taxes = Tax.browse(new_taxes)
 
-        taxes = Tax.compute(taxes, price, 1)
+        taxes = Tax.compute(taxes, price, 1, Date.today())
         tax_amount = 0
         for tax in taxes:
             tax_amount += tax['amount']
