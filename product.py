@@ -150,7 +150,8 @@ class Template(metaclass=PoolMeta):
                 )
             return template_list_price()
 
-        context = Transaction().context
+        context = Transaction().context.copy()
+
         if shop.esale_price == 'pricelist':
             price_list = shop.price_list.id
 
@@ -347,7 +348,7 @@ class Product(metaclass=PoolMeta):
         Date = Pool().get('ir.date')
 
         transaction = Transaction()
-        context = transaction.context
+        context = transaction.context.copy()
         shop_id = context.get('shop', None)
 
         locations = []
