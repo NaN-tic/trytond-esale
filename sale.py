@@ -54,10 +54,10 @@ class Sale(metaclass=PoolMeta):
             return []
         return super(Sale, self).set_shipment_cost()
 
-    def get_shipment_cost_line(self, cost, unit_price=None):
+    def get_shipment_cost_line(self, carrier, cost, unit_price=None):
         Line = Pool().get('sale.line')
 
-        cost_line = super(Sale, self).get_shipment_cost_line(cost, unit_price)
+        cost_line = super(Sale, self).get_shipment_cost_line(carrier, cost, unit_price)
 
         sale_fields = Line._fields.keys()
         # add default values in cost line
