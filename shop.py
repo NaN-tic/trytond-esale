@@ -1,17 +1,14 @@
 # This file is part esale module for Tryton.
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
+import slug
 from trytond.model import ModelSQL, fields
 from trytond.transaction import Transaction
 from trytond.pool import Pool, PoolMeta
-from trytond.pyson import Eval, Not, Bool
-from trytond.config import config as config_
-from decimal import Decimal
-import slug
+from trytond.pyson import Eval
+from trytond.modules.product import round_price
 
 __all__ = ['SaleShop', 'SaleShopWarehouse', 'SaleShopCountry', 'SaleShopLang']
-
-DIGITS = config_.getint('product', 'price_decimal', default=4)
 
 def slugify(value):
     """Convert value to slug: az09 and replace spaces by -"""
@@ -90,8 +87,7 @@ class SaleShop(metaclass=PoolMeta):
         tax_amount = 0
         for tax in taxes:
             tax_amount += tax['amount']
-        price = price + tax_amount
-        return price.quantize(Decimal(str(10.0 ** - DIGITS)))
+        return round_price(price + tax_amount)
 
 
 class SaleShopWarehouse(ModelSQL):

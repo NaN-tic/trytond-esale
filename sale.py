@@ -1,19 +1,14 @@
 # This file is part esale module for Tryton.
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
-from decimal import Decimal
-from trytond import backend
 from trytond.model import fields
 from trytond.pyson import Eval
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
-from trytond.config import config as config_
 import logging
 
 __all__ = ['Sale']
 
-DIGITS = config_.getint('product', 'price_decimal', default=4)
-PRECISION = Decimal(str(10.0 ** - DIGITS))
 logger = logging.getLogger(__name__)
 _ESALE_SALE_EXCLUDE_FIELDS = ['shipping_price', 'shipping_note', 'discount',
     'discount_description', 'coupon_code', 'coupon_description', 'carrier',
