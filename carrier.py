@@ -3,9 +3,7 @@
 # the full copyright notices and license terms.
 from decimal import Decimal
 from trytond.pool import Pool, PoolMeta
-from trytond.config import config as config_
-
-DIGITS = config_.getint('product', 'price_decimal', default=4)
+from trytond.modules.product import round_price
 
 
 class Carrier(metaclass=PoolMeta):
@@ -33,9 +31,7 @@ class Carrier(metaclass=PoolMeta):
         tax_amount = 0
         for tax in taxes:
             tax_amount += tax['amount']
-        price = price + tax_amount
-        price.quantize(Decimal(str(10.0 ** - DIGITS)))
-        return price
+        return round_price(price + tax_amount)
 
     @staticmethod
     def get_products_stockable(products=[]):
