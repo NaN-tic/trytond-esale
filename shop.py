@@ -95,9 +95,9 @@ class SaleShopWarehouse(ModelSQL):
     __name__ = 'sale.shop-stock.location'
     _table = 'sale_shop_stock_location_rel'
     shop = fields.Many2One('sale.shop', 'Shop',
-        ondelete='CASCADE', select=True, required=True)
+        ondelete='CASCADE', required=True)
     location = fields.Many2One('stock.location', 'Warehouse',
-        ondelete='RESTRICT', select=True, required=True)
+        ondelete='RESTRICT', required=True)
 
 
 class SaleShopCountry(ModelSQL):
@@ -106,9 +106,9 @@ class SaleShopCountry(ModelSQL):
     _table = 'sale_shop_country_country'
 
     shop = fields.Many2One('sale.shop', 'Shop', ondelete='RESTRICT',
-            select=True, required=True)
+        required=True)
     country = fields.Many2One('country.country', 'Country', ondelete='CASCADE',
-            select=True, required=True)
+        required=True)
 
 
 class SaleShopLang(ModelSQL):
@@ -117,6 +117,6 @@ class SaleShopLang(ModelSQL):
     _table = 'sale_shop_ir_lang'
 
     shop = fields.Many2One('sale.shop', 'Shop', ondelete='RESTRICT',
-            select=True, required=True)
+        required=True)
     lang = fields.Many2One('ir.lang', 'Lang', ondelete='CASCADE',
-            select=True, required=True)
+        required=True)
