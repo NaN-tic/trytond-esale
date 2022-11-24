@@ -132,11 +132,11 @@ class Address(metaclass=PoolMeta):
             del values['country']
 
         # Address
-        zip = values.get('zip')
+        postal_code = values.get('postal_code')
         addresses = Address.search([
             ('party', '=', party),
             ('street', '=', values.get('street')),
-            ('zip', '=', zip),
+            ('postal_code', '=', postal_code),
             ], limit=1)
         if addresses:
             address = addresses[0]
@@ -185,9 +185,9 @@ class Address(metaclass=PoolMeta):
             # At the moment, get subdivision from zip + country
             if values.get('subdivision') == '':
                 del values['subdivision']
-            if values.get('zip') and values.get('country'):
+            if values.get('postal_code') and values.get('country'):
                 address = Address()
-                address.zip = values.get('zip')
+                address.postal_code = values.get('postal_code')
                 address.country = values.get('country')
 
             if values.get('name') and not values.get('party_name'):
