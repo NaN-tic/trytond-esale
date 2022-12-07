@@ -60,6 +60,7 @@ class SaleShop(metaclass=PoolMeta):
         pool = Pool()
         Tax = pool.get('account.tax')
         Party = pool.get('party.party')
+        Date = pool.get('ir.date')
 
         # compute price with taxes
         product_customer_taxes = product.template.customer_taxes_used
@@ -82,7 +83,7 @@ class SaleShop(metaclass=PoolMeta):
         customer_taxes = Tax.browse(party_taxes) if party_taxes else []
         if not customer_taxes:
             customer_taxes = product_customer_taxes
-        taxes = Tax.compute(customer_taxes, price, quantity)
+        taxes = Tax.compute(customer_taxes, price, quantity, Date.today())
 
         tax_amount = 0
         for tax in taxes:
