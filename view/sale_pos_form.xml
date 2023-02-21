@@ -2,7 +2,7 @@
 <!-- This file is part esale module for Tryton.
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <data>
-    <xpath expr="/form/notebook/page[@id=&quot;sale&quot;]/field[@name=&quot;currency&quot;]" position="after">
+    <xpath expr="/form/notebook/page[@id='other']/field[@name='currency']" position="after">
         <field name="esale" invisible="1"/>
     </xpath>
 </data>
