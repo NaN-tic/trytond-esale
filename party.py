@@ -54,7 +54,7 @@ class Party(metaclass=PoolMeta):
         #  - Party Email
 
         # search by VAT
-        if shop.esale_get_party_by_vat and vat_code:
+        if vat_code:
             parties = Party.search([
                 ('identifier_code', '=', vat_code),
                 ], limit=1)
