@@ -22,6 +22,6 @@ class ShipmentOut(metaclass=PoolMeta):
                                 break
 
         invoice_line = super(ShipmentOut, self).get_cost_invoice_line(invoice)
-        if cost:
+        if invoice_line and cost:
             invoice_line.unit_price = cost
         return invoice_line
