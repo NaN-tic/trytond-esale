@@ -4,7 +4,6 @@
 from trytond import backend
 from trytond.model import ModelSQL, ValueMixin, fields
 from trytond.pool import Pool, PoolMeta
-from trytond.tools.multivalue import migrate_property
 
 sale_delivery_product = fields.Many2One('product.product',
     'Delivery Product', domain=[
@@ -83,26 +82,3 @@ class ConfigurationSaleEsale(ModelSQL, ValueMixin):
     sale_currency = sale_currency
     sale_account_category = sale_account_category
     sale_warehouse = sale_warehouse
-
-    @classmethod
-    def __register__(cls, module_name):
-        exist = backend.TableHandler.table_exist(cls._table)
-
-        super(ConfigurationSaleEsale, cls).__register__(module_name)
-
-        if not exist:
-            cls._migrate_property([], [], [])
-
-    @classmethod
-    def _migrate_property(cls, field_names, value_names, fields):
-        field_names.extend(['sale_delivery_product', 'sale_discount_product',
-                'sale_surcharge_product', 'sale_fee_product',
-                'sale_uom_product', 'sale_payment_type', 'sale_payment_term',
-                'sale_currency', 'sale_account_category', 'sale_warehouse'])
-        value_names.extend(['sale_delivery_product', 'sale_discount_product',
-                'sale_surcharge_product', 'sale_fee_product',
-                'sale_uom_product', 'sale_payment_type', 'sale_payment_term',
-                'sale_currency', 'sale_account_category', 'sale_warehouse'])
-        migrate_property(
-            'sale.configuration', field_names, cls, value_names,
-            fields=fields)
