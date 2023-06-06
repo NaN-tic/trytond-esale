@@ -90,6 +90,16 @@ class SaleShop(metaclass=PoolMeta):
             tax_amount += tax['amount']
         return round_price(price + tax_amount)
 
+    def get_esale_payments(self, party):
+        payment_types = [payment.payment_type for payment in self.esale_payments]
+        default_payment_type = payment_types[0]
+        if party and hasattr(party, 'customer_payment_type'):
+            customer_payment = party.customer_payment_type
+            if customer_payment and not customer_payment in payment_types:
+                payment_types.append(customer_payment)
+                default_payment_type = party.customer_payment_type
+        return payment_types, default_payment_type
+
 
 class SaleShopWarehouse(ModelSQL):
     'Sale Shop - Warehouse'
