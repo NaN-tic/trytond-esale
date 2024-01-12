@@ -20,8 +20,7 @@ class Template(metaclass=PoolMeta):
         states={
             'readonly': Eval('esale_available', True),
             'invisible': ~Eval('salable', False),
-        }, depends=['esale_available', 'salable'],
-        help='This product are available in your e-commerce. '
+        }, help='This product are available in your e-commerce. '
         'If you need not publish this product (despublish), '
         'unmark Active field in eSale section.')
     esale_active = fields.Boolean('Active eSale')

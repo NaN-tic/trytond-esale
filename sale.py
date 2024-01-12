@@ -20,8 +20,7 @@ class Sale(metaclass=PoolMeta):
     esale = fields.Boolean('eSale',
         states={
             'readonly': Eval('state') != 'draft',
-            },
-        depends=['state'])
+            })
     carrier_tracking_ref = fields.Function(fields.Char('Carrier Tracking Ref'),
         'get_carrier_tracking_ref')
     number_packages = fields.Function(fields.Integer('Number of Packages'),
