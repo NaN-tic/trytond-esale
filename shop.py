@@ -24,7 +24,9 @@ class SaleShop(metaclass=PoolMeta):
         help='This is e-commerce shop.')
     esale_tax_include = fields.Boolean('Tax Include')
     esale_country = fields.Many2One('country.country', 'Country',
-        help='Default country related in this shop.')
+        states={
+            'required': Eval('esale_available', True),
+        }, help='Default country related in this shop.')
     esale_countrys = fields.Many2Many('sale.shop-country.country',
         'shop', 'country', 'Countries')
     esale_lang = fields.Many2One('ir.lang', 'Default language',
