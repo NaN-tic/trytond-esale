@@ -7,8 +7,7 @@ from trytond.pool import PoolMeta
 class ShipmentOut(metaclass=PoolMeta):
     __name__ = 'stock.shipment.out'
 
-    def get_cost_invoice_line(self, invoice, origin=None):
-        '''Get Cost Delivery from eSale'''
+    def get_cost_invoice_line(self, invoice):
         cost = None
 
         if hasattr(self, 'origin'):
@@ -21,7 +20,7 @@ class ShipmentOut(metaclass=PoolMeta):
                                 cost = line.unit_price # not shipment_cost
                                 break
 
-        invoice_line = super(ShipmentOut, self).get_cost_invoice_line(invoice, origin)
+        invoice_line = super(ShipmentOut, self).get_cost_invoice_line(invoice)
         if invoice_line and cost:
             invoice_line.unit_price = cost
         return invoice_line
