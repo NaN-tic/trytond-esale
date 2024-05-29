@@ -113,7 +113,7 @@ class Template(metaclass=PoolMeta):
             for template in templates:
                 products = [p.id for p in template.products]
                 if not products:
-                    prices[template.id] = Decimal(0.0)
+                    prices[template.id] = Decimal(0)
                     continue
 
                 product_prices = {}

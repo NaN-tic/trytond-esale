@@ -9,7 +9,7 @@ from trytond.modules.product import round_price
 class Carrier(metaclass=PoolMeta):
     __name__ = 'carrier'
 
-    def get_sale_price_w_tax(self, price=Decimal('0.0'), party=None):
+    def get_sale_price_w_tax(self, price=Decimal(0), party=None):
         '''
         Calculate price with taxes from carrier product
         '''
