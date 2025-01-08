@@ -116,5 +116,5 @@ class Address(metaclass=PoolMeta):
                 contact_mechanisms.append(cmechanism)
             if contact_mechanisms:
                 ContactMechanism.create(
-                    [cm._save_values for cm in contact_mechanisms])
+                    [cm._save_values() for cm in contact_mechanisms])
         return address
