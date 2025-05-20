@@ -1,18 +1,11 @@
 # This file is part esale module for Tryton.
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
-import slug
 from trytond.model import ModelSQL, fields
 from trytond.transaction import Transaction
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Eval
 from trytond.modules.product import round_price
-
-__all__ = ['SaleShop', 'SaleShopWarehouse', 'SaleShopCountry', 'SaleShopLang']
-
-def slugify(value):
-    """Convert value to slug: az09 and replace spaces by -"""
-    return slug.slug(value)
 
 
 class SaleShop(metaclass=PoolMeta):
