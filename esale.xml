@@ -7,10 +7,6 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <record model="res.group" id="group_esale">
             <field name="name">eSale</field>
         </record>
-        <record model="res.user-res.group" id="user_admin_group_esale">
-            <field name="user" ref="res.user_admin"/>
-            <field name="group" ref="group_esale"/>
-        </record>
 
         <!-- views -->
         <record model="ir.ui.view" id="esale_carrier_view_form">
