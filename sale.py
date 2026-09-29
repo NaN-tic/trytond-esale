@@ -55,7 +55,10 @@ class Sale(metaclass=PoolMeta):
 
         sale_fields = Line._fields.keys()
         # add default values in cost line
-        default_values = Line.default_get(sale_fields, with_rec_name=False)
+        default_values = Line.default_get([
+                name for name, field in Line._fields.items()
+                if not field.readonly
+                ], with_rec_name=False)
         for k in default_values:
             if not hasattr(cost_line, k):
                 setattr(cost_line, k, default_values[k])
