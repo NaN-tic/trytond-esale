@@ -12,11 +12,11 @@ class ShipmentOut(metaclass=PoolMeta):
         cost = None
 
         if hasattr(self, 'origin'):
-            if self.origin:
-                origin = self.origin
-                if origin.__name__ == 'sale.sale':
-                    if origin.esale:
-                        for line in origin.lines:
+            shipment_origin = self.origin
+            if shipment_origin:
+                if shipment_origin.__name__ == 'sale.sale':
+                    if shipment_origin.esale:
+                        for line in shipment_origin.lines:
                             if line.shipment_cost:
                                 cost = line.unit_price # not shipment_cost
                                 break
